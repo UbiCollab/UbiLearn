@@ -2,6 +2,9 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.Locale;
 
+import no.ntnu.stud.ubilearn.fragments.TestFragment0;
+import no.ntnu.stud.ubilearn.fragments.TestFragment1;
+import no.ntnu.stud.ubilearn.fragments.TestFragmentDefault;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -60,13 +63,27 @@ public class MainActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView parent, View view, int position, long id) {
 			selectItem(position);
-			
 		}
 		
 	}
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
+		Fragment fragment;// = new TestFragment0();
 		
+		switch (position) {
+		case 0: fragment = new TestFragment0();
+			break;
+		case 1: fragment = new TestFragment1();
+			break;
+		default: fragment = new TestFragmentDefault(); 
+		}
+		
+		
+		FragmentManager manager = getFragmentManager();
+		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		
+		menuList.setItemChecked(position, true);
+		setTitle(menuOptions[position]);
 		
 	}
 
