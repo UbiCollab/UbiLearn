@@ -1,5 +1,9 @@
-package no.ntnu.stud.ubilearn;
+package no.ntnu.stud.ubilearn.fragments;
 
+import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.R.drawable;
+import no.ntnu.stud.ubilearn.R.id;
+import no.ntnu.stud.ubilearn.R.layout;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
