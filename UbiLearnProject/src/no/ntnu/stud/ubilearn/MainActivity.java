@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	private DrawerLayout menuDrawer;
 	private ListView menuList;
 	private ActionBarDrawerToggle drawerToggle;
+	private CharSequence mTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class MainActivity extends Activity {
 		menuOptions = getResources().getStringArray(R.array.menu_options);
 		menuDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		menuList = (ListView) findViewById(R.id.left_drawer);
-		
 		// set the adapter for the listview
 		menuList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, menuOptions));
 		
@@ -66,8 +66,14 @@ public class MainActivity extends Activity {
 	}
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
+		Fragment fragmentTest = new Fragment();
 		
+		//FragmentManager fragmentManager = getFragmentManager();
+		//fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentTest).commit();
+		
+		menuList.setItemChecked(position, true);
+		setTitle(menuOptions[position]);
+		menuDrawer.closeDrawer(menuList);
 		
 	}
-
 }
