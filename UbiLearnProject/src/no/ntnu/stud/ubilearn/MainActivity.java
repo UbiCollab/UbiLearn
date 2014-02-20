@@ -47,7 +47,38 @@ public class MainActivity extends Activity {
 		
 		// set the lists click listener
 		menuList.setOnItemClickListener(new DrawerItemClickListener());
+		
+	       drawerToggle = new ActionBarDrawerToggle(this, menuDrawer, R.drawable.ic_drawer,
+	    		   R.string.drawer_open, R.string.drawer_close);
+	        
+	        menuDrawer.setDrawerListener(drawerToggle);
+
+	        getActionBar().setDisplayHomeAsUpEnabled(true);
+	        getActionBar().setHomeButtonEnabled(true);
 	}
+	
+	 @Override
+	    protected void onPostCreate(Bundle savedInstanceState) {
+	        super.onPostCreate(savedInstanceState);
+	        // Sync the toggle state after onRestoreInstanceState has occurred.
+	        drawerToggle.syncState();
+	    }
+
+	    @Override
+	    public void onConfigurationChanged(Configuration newConfig) {
+	        super.onConfigurationChanged(newConfig);
+	        drawerToggle.onConfigurationChanged(newConfig);
+	    }
+
+	    @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	        // Pass the event to ActionBarDrawerToggle, if it returns
+	        if (drawerToggle.onOptionsItemSelected(item)) {
+	          return true;
+	        }
+	        // Handle your other action bar items...
+	        return super.onOptionsItemSelected(item);
+	    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
