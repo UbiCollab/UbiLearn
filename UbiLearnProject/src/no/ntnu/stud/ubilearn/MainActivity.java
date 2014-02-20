@@ -2,9 +2,7 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.Locale;
 
-import no.ntnu.stud.ubilearn.fragments.TestFragment0;
-import no.ntnu.stud.ubilearn.fragments.TestFragment1;
-import no.ntnu.stud.ubilearn.fragments.TestFragmentDefault;
+import no.ntnu.stud.ubilearn.fragments.*;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -71,9 +69,9 @@ public class MainActivity extends Activity {
 		Fragment fragment;// = new TestFragment0();
 		
 		switch (position) {
-		case 0: fragment = new TestFragment0();
+		case 0: fragment = new Training();
 			break;
-		case 1: fragment = new TestFragment1();
+		case 1: fragment = new TestFragment0();
 			break;
 		default: fragment = new TestFragmentDefault(); 
 		}
