@@ -78,12 +78,12 @@ public class MainActivity extends Activity {
 		default: fragment = new TestFragmentDefault(); 
 		}
 		
-		
 		FragmentManager manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		
 		menuList.setItemChecked(position, true);
 		setTitle(menuOptions[position]);
+		menuDrawer.closeDrawer(menuList);
 		
 	}
 
