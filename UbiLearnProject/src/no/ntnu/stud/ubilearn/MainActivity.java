@@ -66,7 +66,14 @@ public class MainActivity extends Activity {
 	}
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
+	Fragment fragmentTest = new Fragment();
 		
+		//FragmentManager fragmentManager = getFragmentManager();
+		//fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentTest).commit();
+		
+		menuList.setItemChecked(position, true);
+		setTitle(menuOptions[position]);
+		menuDrawer.closeDrawer(menuList);
 		
 	}
 
