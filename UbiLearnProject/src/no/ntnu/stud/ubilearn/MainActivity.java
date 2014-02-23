@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -44,17 +45,21 @@ public class MainActivity extends Activity {
 		menuList = (ListView) findViewById(R.id.left_drawer);
 		// set the adapter for the listview
 		menuList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, menuOptions));
+//		menuList.setAdapter(new HeaderViewListAdapter(headerViewInfos, footerViewInfos, adapter));
 		
 		// set the lists click listener
 		menuList.setOnItemClickListener(new DrawerItemClickListener());
 		
-	       drawerToggle = new ActionBarDrawerToggle(this, menuDrawer, R.drawable.ic_drawer,
-	    		   R.string.drawer_open, R.string.drawer_close);
+		drawerToggle = new ActionBarDrawerToggle(this, menuDrawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+    	menuDrawer.setDrawerListener(drawerToggle);
+    	getActionBar().setDisplayHomeAsUpEnabled(true);
+    	getActionBar().setHomeButtonEnabled(true);
+    	
+//    	LayoutInflater inflater = getLayoutInflater();
+//    	ViewGroup mTop = (ViewGroup) inflater.inflate(R.layout.header_listview_menu, menuList, false);
+//    	menuList.addHeaderView(mTop, null,false);
 	        
-	        menuDrawer.setDrawerListener(drawerToggle);
-
-	        getActionBar().setDisplayHomeAsUpEnabled(true);
-	        getActionBar().setHomeButtonEnabled(true);
+	        
 	}
 	
 	 @Override
