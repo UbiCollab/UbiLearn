@@ -104,17 +104,18 @@ public class MainActivity extends Activity {
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
 		
-		Fragment fragment;// = new TestFragment0();
+		Fragment fragment;
 		
 		switch (position) {
-		case 0: fragment = new Training();
+		case 0: fragment = new HomeFragment();
 			break;
-		case 1: fragment = new TestFragment0();
+		case 1: fragment = new Training();
 			break;
-		case 2: fragment = new TestFragmentDefault();
+		case 2: fragment = new TestFragment0();
 			break;
-		//default: fragment = new TestFragmentDefault();
-		default: fragment = new TestFragmentHome(); 
+		case 3: fragment = new TestFragment1();
+			break;
+		default: fragment = new TestFragmentDefault(); 
 		}
 		
 		
