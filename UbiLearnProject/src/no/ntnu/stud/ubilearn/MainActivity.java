@@ -105,7 +105,10 @@ public class MainActivity extends Activity {
 			break;
 		case 1: fragment = new TestFragment0();
 			break;
-		default: fragment = new TestFragmentDefault(); 
+		case 2: fragment = new TestFragmentDefault();
+			break;
+		//default: fragment = new TestFragmentDefault();
+		default: fragment = new TestFragmentHome(); 
 		}
 		
 		FragmentManager manager = getFragmentManager();

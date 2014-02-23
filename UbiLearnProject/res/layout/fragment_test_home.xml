@@ -16,6 +16,7 @@
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:inputType="none"
             android:text="Bruker:" >
 
             <requestFocus />
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="Status:" />
 
         <EditText
@@ -83,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="Prestasjoner:" />
 
         <EditText
@@ -104,6 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="# Ulåste case:" />
 
         <EditText
@@ -125,6 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="# Låste case:" />
 
         <EditText
@@ -146,6 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="Case #1:" />
 
         <EditText
@@ -167,6 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:inputType="none"
             android:text="Case #2:" />
 
         <EditText

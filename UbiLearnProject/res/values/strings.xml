@@ -9,6 +9,7 @@
         <item>Opplæring</item>
         <item>test 0</item>
         <item>test 1</item>
+        <item >test home</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
