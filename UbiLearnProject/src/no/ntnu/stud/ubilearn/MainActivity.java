@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	private ListView menuList;
 	private ActionBarDrawerToggle drawerToggle;
 	private CharSequence mTitle;
+	private Fragment visibleFrag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +111,24 @@ public class MainActivity extends Activity {
 			break;
 		case 1: fragment = new TestFragment0();
 			break;
-		default: fragment = new TestFragmentDefault(); 
+		case 2: fragment = new TestFragmentDefault();
+			break;
+		//default: fragment = new TestFragmentDefault();
+		default: fragment = new TestFragmentHome(); 
 		}
+		
 		
 		FragmentManager manager = getFragmentManager();
 		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		visibleFrag = fragment;
 		
 		menuList.setItemChecked(position, true);
 		setTitle(menuOptions[position]);
 		menuDrawer.closeDrawer(menuList);
 		
+	}
+	
+	public void houseClick(View v){
+		((Training) visibleFrag).houseClick(v);
 	}
 }

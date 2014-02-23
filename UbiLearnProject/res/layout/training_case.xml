@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/case_PatientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:text="Tore På Sporet"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textSize="30dp" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/case_patientAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alder: 50"
+        android:textSize="20dp"
+        android:layout_margin="8dp" />
+
+    <TextView
+        android:id="@+id/case_patientGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kjønn: Mann"
+        android:textSize="20dp"
+        android:layout_margin="8dp" />
+
+    <TextView
+        android:id="@+id/case_patientInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pasient info:"
+        android:textSize="20dp"
+        android:layout_margin="8dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.92"
+        android:layout_margin="8dp"
+   
+        android:background="@android:color/black"
+         >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0.5dp"
+            android:background="@android:color/white" >
+
+            <TextView
+                android:id="@+id/case_patientInfoField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

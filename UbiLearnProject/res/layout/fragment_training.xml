@@ -2,13 +2,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:id="@+id/training_scroll"
     tools:context=".Training" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world"
-        android:id="@+id/training_scroll"
-        android:background="@drawable/bakgrunn" />
+        android:id="@+id/training_rel"
+        android:background="@drawable/bakgrunn" >
+
+        <ImageView
+            android:id="@+id/training_hus1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="46dp"
+            android:src="@drawable/hus1"
+            android:contentDescription="1"
+            android:onClick="houseClick"/>
+
+        <ImageView
+            android:id="@+id/training_hus2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/training_hus1"
+            android:layout_marginTop="94dp"
+            android:src="@drawable/hus2"
+            android:contentDescription="2"
+            android:onClick="houseClick" />
+
+        <ImageView
+            android:id="@+id/training_hus3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/training_hus2"
+            android:layout_marginTop="66dp"
+            android:src="@drawable/hus2"
+            android:contentDescription="3"
+            android:onClick="houseClick" />
+        
+
+        <ImageView
+            android:id="@+id/training_hus4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/training_hus3"
+            android:layout_marginTop="71dp"
+            android:src="@drawable/hus3"
+            android:contentDescription="4"
+            android:onClick="houseClick" />
+
+        <ImageView
+            android:id="@+id/training_hus5"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/training_hus4"
+            android:layout_marginTop="68dp"
+            android:src="@drawable/hus1" 
+            android:contentDescription="5"
+            android:onClick="houseClick"/>
+
+        <ImageView
+            android:id="@+id/training_hus6"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/training_hus5"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/hus2"
+            android:contentDescription="6"
+            android:onClick="houseClick" />
+
+        <ImageView
+            android:id="@+id/training_hus7"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/training_hus6"
+            android:layout_marginTop="52dp"
+            android:src="@drawable/hus3" 
+            android:contentDescription="7"
+            android:onClick="houseClick"/>
+
+        <ImageView
+            android:id="@+id/training_hus8"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/training_hus7"
+            android:layout_marginTop="75dp"
+            android:src="@drawable/hus1" 
+            android:contentDescription="8"
+            android:onClick="houseClick"/>
+
+        <ImageView
+            android:id="@+id/training_hus9"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/training_hus8"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/hus2"
+            android:contentDescription="9" 
+            android:onClick="houseClick"/>
+
+        <ImageView
+            android:id="@+id/training_hus10"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/training_hus9"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/hus3"
+            android:contentDescription="10"
+            android:onClick="houseClick" />
+
+        <ImageView
+            android:id="@+id/training_hus11"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/training_hus10"
+            android:layout_marginTop="71dp"
+            android:src="@drawable/hus1"
+            android:contentDescription="11"
+            android:onClick="houseClick" />
+
+        <ImageView
+            android:id="@+id/training_hus12"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignLeft="@+id/training_hus3"
+            android:layout_below="@+id/training_hus1"
+            android:clickable="true"
+            android:onClick="houseClick"
+            android:src="@drawable/hus3"
+            android:contentDescription="12" />
+
+    </RelativeLayout>
 
 </ScrollView>
