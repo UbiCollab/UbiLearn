@@ -38,6 +38,17 @@ public class PatientCaseFragment extends Fragment{
 		TextView pasientInfo = (TextView) rootView.findViewById(R.id.case_patientInfoField);
 		pasientInfo.setText(_pasientInfo);
 		
+		Button next = (Button)rootView.findViewById(R.id.training_case_next);
+		
+		next.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new QuizFragment();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
+			}
+		});
+		
 		Button back = (Button)rootView.findViewById(R.id.training_case_back);
 		
 		back.setOnClickListener(new OnClickListener() {
