@@ -19,5 +19,12 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="exercises">Øvelser</string>
+    <string name="patients">Pasienter</string>
+    <string name="exercise1">Armer opp</string>
+    <string name="exercise2">Armer ned</string>
+    <string name="exercise3">På huk</string>
+    <string name="exercise4">På hodet</string>
+    <string name="choose_exercise">Velg øvelse</string>
     
 </resources>
