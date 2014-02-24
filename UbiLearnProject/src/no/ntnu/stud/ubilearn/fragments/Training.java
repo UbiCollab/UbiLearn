@@ -143,31 +143,13 @@ public class Training extends Fragment {
 				Fragment patient = new PatientCaseFragment();
 				patient.setArguments(data);
 				
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, patient).commit();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, patient).addToBackStack("training").commit();
 				dialog.dismiss();
 			}
 		});
 		
 		dialog.setTitle("Tore sitt hus");
 		dialog.show();
-	}
-	public void backClick(View v){
-		final View house = v;
-		final Dialog dialog = new Dialog(getActivity());
-		dialog.setContentView(R.layout.training_case);
-		
-		Button back = (Button) dialog.findViewById(R.id.training_case_back);
-		
-		back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Dialog dialog = new Dialog(getActivity());
-				dialog.setContentView(R.layout.training_case);
-			}
-		});
-		
-	}
-	
+	}	
 
 }

@@ -6,7 +6,9 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class PatientCaseFragment extends Fragment{
@@ -35,6 +37,17 @@ public class PatientCaseFragment extends Fragment{
 		gender.setText(_gender);
 		TextView pasientInfo = (TextView) rootView.findViewById(R.id.case_patientInfoField);
 		pasientInfo.setText(_pasientInfo);
+		
+		Button back = (Button)rootView.findViewById(R.id.training_case_back);
+		
+		back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				getFragmentManager().popBackStack();
+			}
+		});
 		
 		return rootView;
 	}
