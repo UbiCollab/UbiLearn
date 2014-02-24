@@ -18,7 +18,7 @@
      
      <!-- text -->
     <TextView
-         android:id="@+id/item_title"
+         android:id="@+id/item_text"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_toRightOf="@+id/item_icon"
