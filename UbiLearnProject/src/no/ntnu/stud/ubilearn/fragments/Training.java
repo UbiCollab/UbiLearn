@@ -7,6 +7,7 @@ import no.ntnu.stud.ubilearn.R.layout;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -149,6 +150,23 @@ public class Training extends Fragment {
 		
 		dialog.setTitle("Tore sitt hus");
 		dialog.show();
+	}
+	public void backClick(View v){
+		final View house = v;
+		final Dialog dialog = new Dialog(getActivity());
+		dialog.setContentView(R.layout.training_case);
+		
+		Button back = (Button) dialog.findViewById(R.id.training_case_back);
+		
+		back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Dialog dialog = new Dialog(getActivity());
+				dialog.setContentView(R.layout.training_case);
+			}
+		});
+		
 	}
 	
 

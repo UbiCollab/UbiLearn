@@ -44,8 +44,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.92"
-        android:layout_margin="8dp"
-   
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+   		android:layout_marginBottom="50dp"
         android:background="@android:color/black"
          >
 
@@ -53,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="0.5dp"
-            android:background="@android:color/white" >
+            android:background="@android:color/white"
+            android:layout_marginBottom="150dp" >
 
             <TextView
                 android:id="@+id/case_patientInfoField"
@@ -64,5 +66,35 @@
         </FrameLayout>
 
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+         >
+
+        <Button
+            android:id="@+id/training_case_back"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Tilbake"
+            android:layout_margin="20dp"
+            android:onClick="backClick" />
+
+        <Button
+            android:id="@+id/training_case_next"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Neste" 
+            android:layout_margin="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.26"
+        android:orientation="vertical" >
+
+    </LinearLayout>
 
 </LinearLayout>
