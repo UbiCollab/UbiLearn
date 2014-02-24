@@ -111,10 +111,6 @@ public class MainActivity extends Activity {
 			break;
 		case 1: fragment = new Training();
 			break;
-		case 2: fragment = new TestFragment0();
-			break;
-		case 3: fragment = new TestFragment1();
-			break;
 		default: fragment = new TestFragmentDefault(); 
 		}
 		
