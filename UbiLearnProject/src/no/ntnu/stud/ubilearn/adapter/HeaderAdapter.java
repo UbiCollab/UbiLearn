@@ -12,13 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class headerAdapter extends ArrayAdapter<Model>{
+public class HeaderAdapter extends ArrayAdapter<Model>{
 
 	
 	private final Context context;
 	private final ArrayList<Model> modelsArrayList;
 
-	public headerAdapter(Context context, ArrayList<Model> modelsArrayList){
+	public HeaderAdapter(Context context, ArrayList<Model> modelsArrayList){
 		super(context, R.layout.target_item, modelsArrayList);
 		 
         this.context = context;
@@ -27,19 +27,15 @@ public class headerAdapter extends ArrayAdapter<Model>{
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
-		
 		// creates inflater
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
 		//get rowView from inflater
 		View rowView = null;
 		if(!modelsArrayList.get(position).isGroupHeader()){
 			rowView = inflater.inflate(R.layout.target_item, parent,false);
-			
 			//get icon and text
 			ImageView imgView = (ImageView) rowView.findViewById(R.id.item_icon);
 			TextView txtView = (TextView) rowView.findViewById(R.id.item_text);
-			
 			//set the text for textView
             imgView.setImageResource(modelsArrayList.get(position).getIcon());
             txtView.setText(modelsArrayList.get(position).getTitle());
@@ -49,6 +45,6 @@ public class headerAdapter extends ArrayAdapter<Model>{
                 TextView titleView = (TextView) rowView.findViewById(R.id.header);
                 titleView.setText(modelsArrayList.get(position).getTitle());
         }
-		return parent;
+		return rowView;
 	}
 }

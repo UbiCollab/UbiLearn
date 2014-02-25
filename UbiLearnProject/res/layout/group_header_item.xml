@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp" 
-    android:background="#F3F3F3" >
+    android:background="#111" >
     
     <!-- title -->
     <TextView
@@ -13,7 +13,8 @@
          android:textSize="16dp"
          android:layout_marginLeft="12dp"
          android:layout_marginBottom="4dp"
-         android:layout_alignParentBottom="true" />
+         android:layout_alignParentBottom="true"
+         android:textColor="#DADADC" />
  
     <!--  divider -->
     <View
