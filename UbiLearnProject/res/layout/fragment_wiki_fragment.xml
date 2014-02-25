@@ -1,41 +1,21 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/wikiScroll"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/wikiRelativeLayout"
+    <SearchView
+        android:id="@+id/searchView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/wiki_vertical_margin"
-        android:paddingLeft="@dimen/wiki_horizontal_margin"
-        android:paddingRight="@dimen/wiki_horizontal_margin"
-        android:paddingTop="@dimen/wiki_vertical_margin"
-        tools:context=".WikiFragment" >
+        android:layout_height="wrap_content" >
+    </SearchView>
 
-        <LinearLayout
-            android:id="@+id/wikiLinearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+    <ListView
+        android:id="@+id/wikiListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </ListView>
 
-            <SearchView
-                android:id="@+id/searchView1"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" >
-            </SearchView>
-
-            <ListView
-                android:id="@+id/wikiListView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-            </ListView>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-</ScrollView>
+</LinearLayout>
