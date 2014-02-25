@@ -243,7 +243,9 @@
             android:layout_alignBottom="@+id/training_hus7"
             android:layout_alignLeft="@+id/imageView8"
             android:layout_marginBottom="23dp"
-            android:src="@drawable/tree" />
+            android:src="@drawable/tree" 
+            android:focusable="true"
+			android:focusableInTouchMode="true"/>
 
         <ImageView
             android:id="@+id/imageView12"
@@ -312,6 +314,92 @@
             android:layout_below="@+id/training_hus2"
             android:layout_toLeftOf="@+id/imageView1"
             android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView18"
+            android:layout_marginTop="28dp"
+            android:layout_toRightOf="@+id/imageView14"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/training_hus2"
+            android:layout_alignRight="@+id/imageView1"
+            android:layout_marginBottom="46dp"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView14"
+            android:layout_below="@+id/imageView19"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView5"
+            android:layout_alignLeft="@+id/imageView19"
+            android:layout_marginBottom="48dp"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView15"
+            android:layout_marginTop="48dp"
+            android:layout_toRightOf="@+id/imageView15"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView24"
+            android:layout_alignTop="@+id/training_hus7"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView12"
+            android:layout_alignLeft="@+id/imageView7"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView1"
+            android:layout_alignLeft="@+id/imageView22"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView9"
+            android:layout_below="@+id/imageView13"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imageView6"
+            android:layout_below="@+id/training_hus9"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/busk" />
 
     </RelativeLayout>
 

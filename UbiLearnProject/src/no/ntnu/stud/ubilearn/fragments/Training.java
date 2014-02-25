@@ -37,18 +37,21 @@ public class Training extends Fragment {
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 		
-		sv.setScrollX(sv.getMaxScrollAmount());
 		
 		sv.post(new Runnable() {            
 		    @Override
 		    public void run() {
-		           sv.fullScroll(View.FOCUS_DOWN);              
+		          // sv.fullScroll(View.FOCUS_DOWN); 
+		    	sv.scrollTo(0, sv.getBottom());
 		    }
 		});
 		
 		
 		return root;
 	}
+	
+
+	
 	public void houseClick(View v){
 		final View house = v;
 		final Dialog dialog = new Dialog(getActivity());
