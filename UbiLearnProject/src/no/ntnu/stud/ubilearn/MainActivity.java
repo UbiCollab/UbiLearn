@@ -111,6 +111,8 @@ public class MainActivity extends Activity {
 			break;
 		case 1: fragment = new Training();
 			break;
+		case 2: fragment = new WikiFragment();
+		break;
 		default: fragment = new TestFragmentDefault(); 
 		}
 		

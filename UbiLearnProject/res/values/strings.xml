@@ -8,9 +8,10 @@
     <string-array name="menu_options">
         <item>Hjem</item>
         <item>Opplæring</item>
-        <item>test 0</item>
+        <item>Wiki</item>
         <item>test 1</item>
     </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
@@ -22,5 +23,6 @@
     <string name="exercise3">På huk</string>
     <string name="exercise4">På hodet</string>
     <string name="choose_exercise">Velg øvelse</string>
-    
+    <string name="title_activity_wiki_fragment">WikiFragment</string>
+
 </resources>

@@ -39,7 +39,7 @@
         android:layout_height="match_parent" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/wikiSearchButton"
             android:layout_width="170dp"
             android:layout_height="130dp"
             android:layout_alignParentLeft="true"
@@ -62,8 +62,8 @@
             android:id="@+id/button3"
             android:layout_width="170dp"
             android:layout_height="130dp"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_below="@+id/button1"
+            android:layout_alignLeft="@+id/wikiSearchButton"
+            android:layout_below="@+id/wikiSearchButton"
             android:layout_marginTop="14dp"
             android:text="Kanskje"
             android:background="@android:color/holo_blue_bright" />
