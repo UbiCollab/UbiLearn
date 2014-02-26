@@ -1,69 +1,73 @@
 package no.ntnu.stud.ubilearn;
 
-import java.util.Locale;
+import java.util.ArrayList;
 
+import no.ntnu.stud.ubilearn.adapter.Model;
+import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.HeaderViewListAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	private String[] menuOptions;
-	private DrawerLayout menuDrawer;
-	private ListView menuList;
+	private ArrayList<Model> drawerModels;
+	private DrawerLayout activityView;
+	private ListView drawerView;
 	private ActionBarDrawerToggle drawerToggle;
-	private CharSequence mTitle;
 	private Fragment visibleFrag;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawerView = (ListView) findViewById(R.id.left_drawer);
 		
-		menuOptions = getResources().getStringArray(R.array.menu_options);
-		menuDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		menuList = (ListView) findViewById(R.id.left_drawer);
+		//generates models that represent titles and text in the drawer
+		drawerModels = new ArrayList<Model>();
+		generateModels(getResources().getStringArray(R.array.menu_options));
+		
 		// set the adapter for the listview
-		menuList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, menuOptions));
-//		menuList.setAdapter(new HeaderViewListAdapter(headerViewInfos, footerViewInfos, adapter));
-		
+		HeaderAdapter adapter = new HeaderAdapter(this, drawerModels);
+		drawerView.setAdapter(adapter);
+
 		// set the lists click listener
-		menuList.setOnItemClickListener(new DrawerItemClickListener());
-		
-		drawerToggle = new ActionBarDrawerToggle(this, menuDrawer, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
-    	menuDrawer.setDrawerListener(drawerToggle);
+		drawerView.setOnItemClickListener(new DrawerItemClickListener());
+
+		drawerToggle = new ActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+    	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
-    	
-//    	LayoutInflater inflater = getLayoutInflater();
-//    	ViewGroup mTop = (ViewGroup) inflater.inflate(R.layout.header_listview_menu, menuList, false);
-//    	menuList.addHeaderView(mTop, null,false);
-	        
-	        
+	    
 	}
-	
-	 @Override
+	//parses an array of strings and creates header and text models of it
+	 private void generateModels(String[] menuOptions) {
+		
+		 for (int i = 0; i < menuOptions.length; i++) {
+			 String s = menuOptions[i];
+			 char type = s.charAt(1);
+			if(type == 'h')//header
+				drawerModels.add(new Model(s.substring(3)));
+			else if(type == 't')//text
+				drawerModels.add(new Model(R.drawable.ic_launcher, s.substring(3)));
+			else
+				throw new IllegalArgumentException("couldnt identiy menu options tag");
+		}
+	}
+
+	@Override
 	    protected void onPostCreate(Bundle savedInstanceState) {
 	        super.onPostCreate(savedInstanceState);
 	        // Sync the toggle state after onRestoreInstanceState has occurred.
@@ -104,14 +108,22 @@ public class MainActivity extends Activity {
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
 		
+		Model selected = drawerModels.get(position);
+		
 		Fragment fragment;
 		
 		switch (position) {
-		case 0: fragment = new HomeFragment();
+		case 1: fragment = new HomeFragment();
 			break;
-		case 1: fragment = new Training();
+		case 3: fragment = new Training();
 			break;
-		default: fragment = new TestFragmentDefault(); 
+		case 4: fragment = new Practise();
+			break;
+		case 6: fragment = new DummyFragment();
+			break;
+		case 7: fragment = new DummyFragment();
+			break;
+		default: return; //when a field is pushed that does not link to a fragment. e.g a header
 		}
 		
 		
@@ -119,9 +131,9 @@ public class MainActivity extends Activity {
 		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		visibleFrag = fragment;
 		
-		menuList.setItemChecked(position, true);
-		setTitle(menuOptions[position]);
-		menuDrawer.closeDrawer(menuList);
+		drawerView.setItemChecked(position, true);
+		setTitle(selected.getTitle());
+		activityView.closeDrawer(drawerView);
 		
 	}
 	
