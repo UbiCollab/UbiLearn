@@ -12,6 +12,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,10 +48,16 @@ public class MainActivity extends Activity {
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
 
 		drawerToggle = new ActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
-    	activityView.setDrawerListener(drawerToggle);
+    	activityView.setDrawerListener(new MyDrawerListener());
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
 	    
+	}
+	@Override
+	protected void onResume(){
+		super.onResume();
+		//sets the home fragment as the start up screen everytime the main activity resumes.
+		getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	}
 	//parses an array of strings and creates header and text models of it
 	 private void generateModels(String[] menuOptions) {
@@ -133,11 +140,37 @@ public class MainActivity extends Activity {
 		
 		drawerView.setItemChecked(position, true);
 		setTitle(selected.getTitle());
-		activityView.closeDrawer(drawerView);
-		
+		activityView.closeDrawer(drawerView);		
 	}
 	
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);
+	}
+	public class MyDrawerListener implements DrawerListener{
+
+		@Override
+		public void onDrawerClosed(View arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onDrawerOpened(View arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onDrawerSlide(View arg0, float arg1) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onDrawerStateChanged(int arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }
