@@ -5,11 +5,16 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <!-- [h] == header, [t] == text -->
     <string-array name="menu_options">
-        <item>Hjem</item>
-        <item>Opplæring</item>
-        <item>Wiki</item>
-        <item>test 1</item>
+        <item>[h]UbiLEarn</item>
+        <item>[t]Hjem</item>
+        <item>[h]Trening</item>
+        <item>[t]Opplæring</item>
+        <item>[t]Praksis</item>
+        <item>[h]Lesestoff</item>
+        <item>[t]Wiki</item>
+        <item>[t]Førstehjelp</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
@@ -24,5 +29,4 @@
     <string name="exercise4">På hodet</string>
     <string name="choose_exercise">Velg øvelse</string>
     <string name="title_activity_wiki_fragment">WikiFragment</string>
-
 </resources>

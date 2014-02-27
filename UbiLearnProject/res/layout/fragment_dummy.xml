@@ -34,8 +34,8 @@ limitations under the License.
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:ems="10"
-		    android:inputType="text"
-		    android:text="Test Fragment Default" >
+		    android:inputType="textMultiLine"
+		    android:text="This is just a dummy fragment, placed here holding the spot for a real one, which is in the making :) Come back later and maybe you will see something pretty ;)" >
 
 		    <requestFocus />
 		</EditText>
