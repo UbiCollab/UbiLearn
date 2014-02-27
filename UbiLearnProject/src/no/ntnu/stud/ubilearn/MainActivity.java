@@ -8,6 +8,7 @@ import no.ntnu.stud.ubilearn.fragments.*;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -130,6 +131,8 @@ public class MainActivity extends Activity {
 			break;
 		case 7: fragment = new DummyFragment();
 			break;
+		case 9: logout();
+			return;
 		default: return; //when a field is pushed that does not link to a fragment. e.g a header
 		}
 		
@@ -144,6 +147,10 @@ public class MainActivity extends Activity {
 		activityView.closeDrawer(drawerView);
 	}
 	
+	private void logout() {
+		Intent intent = new Intent(this, LoginActivity.class);
+	    startActivity(intent);
+	}
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);
 	}
