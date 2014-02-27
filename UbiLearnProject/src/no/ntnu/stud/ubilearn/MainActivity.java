@@ -12,7 +12,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -148,8 +147,9 @@ public class MainActivity extends Activity {
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);
 	}
+	
+	//creates own version of this to reach the method that listens on the drawer close event
 	public class MyActionBarDrawerToggle extends ActionBarDrawerToggle{
-
 		public MyActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
 			super(activity, drawerLayout, drawerImageRes, openDrawerContentDescRes, closeDrawerContentDescRes);
 		}
