@@ -16,6 +16,30 @@
         <item>[t]Wiki</item>
         <item>[t]Førstehjelp</item>
     </string-array>
+    
+	<string-array name="wiki_main_options">
+        <item>Symptomer</item>
+        <item>Skader</item>
+        <item>Sykdom</item>
+        <item>Annet</item>
+        <item>Symptomer</item>
+        <item>Skader</item>
+        <item>Sykdom</item>
+        <item>Annet</item>
+        <item>Symptomer</item>
+        <item>Skader</item>
+        <item>Sykdom</item>
+        <item>Annet</item>
+    </string-array>
+    
+	<string-array name="wiki_Symptomer_options">
+        <item>Feber symptomer</item>
+        <item>Smerte</item>
+        <item>Kvalme</item>
+        <item>Annet</item>
+    </string-array>
+    
+	
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

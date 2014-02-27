@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -19,16 +20,27 @@ public class WikiFragment extends Fragment {
 	private View root;
 	private ListView categoryListView;
 	private String[] categories;
+	private Fragment pointerHax = this;
 	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
-		categories= getResources().getStringArray(R.array.menu_options);
+		categories= getResources().getStringArray(R.array.wiki_main_options);
 		
-		root = inflater.inflate(R.layout.fragment_wiki_fragment, null);
+		root = inflater.inflate(R.layout.fragment_wiki, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
-		categoryListView.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.drawer_list_item, categories));
+		categoryListView.setAdapter(new ArrayAdapter<String>(this.getActivity(), R.layout.wiki_list_item, categories));
 		
+		categoryListView.setClickable(true);
+		categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
+				categories = getResources().getStringArray(R.array.wiki_Symptomer_options);
+				categoryListView.setAdapter(new ArrayAdapter<String>(pointerHax.getActivity(), R.layout.wiki_list_item, categories));
+			}
+			
+		});
 		return root;
 	}
 }
