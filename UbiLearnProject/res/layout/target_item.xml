@@ -17,13 +17,26 @@
          />-->
      
      <!-- text -->
-    <TextView
+    <!--  TextView
          android:id="@+id/item_text"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_toRightOf="@+id/item_icon"
          android:textSize="18dp"
-         android:textColor="#DADADC" />
+         android:textColor="#DADADC" /-->
     
 
+<!--/RelativeLayout-->
+<TextView
+    android:id="@+id/item_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:gravity="center_vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:textColor="#fff"
+    android:layout_toRightOf="@+id/item_icon"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"/>
 </RelativeLayout>

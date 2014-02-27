@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 	private ListView drawerView;
 	private ActionBarDrawerToggle drawerToggle;
 	private Fragment visibleFrag;
+	private int lastMenuPos = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,8 @@ public class MainActivity extends Activity {
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
 
-		drawerToggle = new ActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
-    	activityView.setDrawerListener(new MyDrawerListener());
+		drawerToggle = new MyActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+    	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
 	    
@@ -139,38 +140,25 @@ public class MainActivity extends Activity {
 		visibleFrag = fragment;
 		
 		drawerView.setItemChecked(position, true);
+		lastMenuPos = position;
 		setTitle(selected.getTitle());
-		activityView.closeDrawer(drawerView);		
+		activityView.closeDrawer(drawerView);
 	}
 	
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);
 	}
-	public class MyDrawerListener implements DrawerListener{
+	public class MyActionBarDrawerToggle extends ActionBarDrawerToggle{
 
-		@Override
-		public void onDrawerClosed(View arg0) {
-			// TODO Auto-generated method stub
-			
+		public MyActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
+			super(activity, drawerLayout, drawerImageRes, openDrawerContentDescRes, closeDrawerContentDescRes);
 		}
 
 		@Override
-		public void onDrawerOpened(View arg0) {
-			// TODO Auto-generated method stub
-			
+		public void onDrawerClosed(View view) {
+			super.onDrawerClosed(view);
+			if(lastMenuPos>=0)
+				drawerView.setItemChecked(lastMenuPos, false);
 		}
-
-		@Override
-		public void onDrawerSlide(View arg0, float arg1) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onDrawerStateChanged(int arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-		
 	}
 }
