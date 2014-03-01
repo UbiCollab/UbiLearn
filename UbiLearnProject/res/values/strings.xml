@@ -16,8 +16,7 @@
         <item>[t]Wiki</item>
         <item>[t]Førstehjelp</item>
     </string-array>
-    
-	<string-array name="wiki_main_options">
+    <string-array name="wiki_main_options">
         <item>Symptomer</item>
         <item>Skader</item>
         <item>Sykdom</item>
@@ -31,15 +30,12 @@
         <item>Sykdom</item>
         <item>Annet</item>
     </string-array>
-    
-	<string-array name="wiki_Symptomer_options">
+    <string-array name="wiki_Symptomer_options">
         <item>Feber symptomer</item>
         <item>Smerte</item>
         <item>Kvalme</item>
         <item>Annet</item>
     </string-array>
-    
-	
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -53,4 +49,8 @@
     <string name="exercise4">På hodet</string>
     <string name="choose_exercise">Velg øvelse</string>
     <string name="title_activity_wiki_fragment">WikiFragment</string>
+    <string name="title_activity_article_fragment">ArticleFragment</string>
+    <string name="title">Title</string>
+    <string name="gibberish">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</string>
+
 </resources>
