@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment
 				// what the user has achieved and the second the maximum score
 				// for the specific case. (Actually all case data should decide
 				// what 'Status' the user has).
-				String[] splitStr 	= caseData.split("\\s+");
+				String[] splitStr 	= caseData.split("/");
 					
 				caseData			= bufferedReader.readLine();
 			}
