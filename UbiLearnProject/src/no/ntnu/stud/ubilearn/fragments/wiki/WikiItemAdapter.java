@@ -6,8 +6,10 @@ import no.ntnu.stud.ubilearn.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -30,15 +32,20 @@ public class WikiItemAdapter extends ArrayAdapter<WikiItem>{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		View rowView;
 		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-		rowView = null;
-		rowView = inflater.inflate(R.layout.wiki_list_item, parent, false);
-		TextView txtView = (TextView) rowView.findViewById(R.id.item_text);
+		View rowView = inflater.inflate(R.layout.wiki_list_item, parent, false);
+		
+		TextView textView = (TextView) rowView.findViewById(R.id.item_text);
 		ImageView imgView = (ImageView) rowView.findViewById(R.id.item_icon);
-		txtView.setText(list.get(position).getName());
+		textView.setText(list.get(position).getName());
 		imgView.setImageResource(list.get(position).getIcon());
 		
+//		rowView.setOnClickListener(new OnClickListener() {	
+//			@Override
+//			public void onClick(View v) {
+//				v.setBackgroundColor(Color.BLACK);
+//			}
+//		});
 
 		return rowView;
 	}

@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import no.ntnu.stud.ubilearn.R;
+import android.R.color;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnHoverListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,7 +37,9 @@ public class WikiFragment extends Fragment {
 		categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
+				
+				v.setBackgroundColor(color.holo_orange_dark);
 
 				if (listItems.get(position) instanceof Catagory) {
 					Catagory cat = (Catagory) listItems.get(position);
