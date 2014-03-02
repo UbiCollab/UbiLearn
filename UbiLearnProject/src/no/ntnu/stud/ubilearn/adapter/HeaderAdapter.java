@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.adapter;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.*;
+import android.app.Activity;
 import android.content.Context;
 import android.text.Layout;
 import android.view.LayoutInflater;
