@@ -2,7 +2,7 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 
-import no.ntnu.stud.ubilearn.adapter.Model;
+import models.AdapterModel;
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import android.app.Activity;
@@ -21,7 +21,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	
-	private ArrayList<Model> drawerModels;
+	private ArrayList<AdapterModel> drawerModels;
 	private DrawerLayout activityView;
 	private ListView drawerView;
 	private ActionBarDrawerToggle drawerToggle;
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 		drawerView = (ListView) findViewById(R.id.left_drawer);
 		
 		//generates models that represent titles and text in the drawer
-		drawerModels = new ArrayList<Model>();
+		drawerModels = new ArrayList<AdapterModel>();
 		generateModels(getResources().getStringArray(R.array.menu_options));
 		
 		// set the adapter for the listview
@@ -67,9 +67,9 @@ public class MainActivity extends Activity {
 			 String s = menuOptions[i];
 			 char type = s.charAt(1);
 			if(type == 'h')//header
-				drawerModels.add(new Model(s.substring(3)));
+				drawerModels.add(new AdapterModel(s.substring(3)));
 			else if(type == 't')//text
-				drawerModels.add(new Model(R.drawable.ic_launcher, s.substring(3)));
+				drawerModels.add(new AdapterModel(R.drawable.ic_launcher, s.substring(3)));
 			else
 				throw new IllegalArgumentException("couldnt identiy menu options tag");
 		}
@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
 		
-		Model selected = drawerModels.get(position);
+		AdapterModel selected = drawerModels.get(position);
 		
 		Fragment fragment;
 		

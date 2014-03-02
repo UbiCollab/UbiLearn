@@ -7,12 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import models.Patient;
 import no.ntnu.stud.ubilearn.R;
-
 import no.ntnu.stud.ubilearn.R.drawable;
 import no.ntnu.stud.ubilearn.R.id;
 import no.ntnu.stud.ubilearn.R.layout;
-import no.ntnu.stud.ubilearn.adapter.Patient;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -33,6 +32,7 @@ import android.widget.ScrollView;
 
 
 
+
 import org.json.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -46,7 +46,7 @@ public class Training extends Fragment {
 	private RelativeLayout rl;
 	private ScrollView sv;
 	private View root;
-	private static final String jsonFilePath = "/Users/ingeborgoftedal/Documents/git/Prosjekt2/UbiLearn/UbiLearnProject/resources/pasient_info.json";
+//	private static final String jsonFilePath = "assets/pasient_info.json";
 
 	ArrayList<Patient> patientList;
 	int i;

@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.adapter;
+package models;
 
 public class Patient {
 	private String name;
