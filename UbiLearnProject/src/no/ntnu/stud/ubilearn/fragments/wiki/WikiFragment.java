@@ -7,6 +7,7 @@ import no.ntnu.stud.ubilearn.R;
 import android.R.color;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +25,7 @@ public class WikiFragment extends Fragment {
 	private ListView categoryListView;
 	private ArrayList<WikiItem> listItems;
 	private Fragment pointerHax = this;
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -38,9 +40,7 @@ public class WikiFragment extends Fragment {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
-				
-				v.setBackgroundColor(color.holo_orange_dark);
-
+			
 				if (listItems.get(position) instanceof Catagory) {
 					Catagory cat = (Catagory) listItems.get(position);
 					if (cat.hasSubs()) {
@@ -55,6 +55,7 @@ public class WikiFragment extends Fragment {
 		});
 		return root;
 	}
+	
 	
 	private void generateTestData(){
 		ArrayList<WikiItem> sub = new ArrayList<WikiItem>();

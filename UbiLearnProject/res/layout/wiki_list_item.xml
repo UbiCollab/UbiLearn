@@ -24,7 +24,7 @@
          android:layout_alignParentLeft="true"
          android:layout_marginLeft="16dp"
          android:textSize="32sp"
-         android:textColor="#DADADC" />
+         android:textColor="#707070" />
     
 
 </RelativeLayout>
