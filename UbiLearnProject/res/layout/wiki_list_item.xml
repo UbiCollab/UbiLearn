@@ -7,8 +7,8 @@
     <!-- icon -->
      <ImageView
          android:id="@+id/item_icon"
-         android:layout_width="32dp"
-         android:layout_height="32dp"
+         android:layout_width="24dp"
+         android:layout_height="24dp"
          android:layout_alignParentRight="true"
          android:layout_marginLeft="8dp"
          android:layout_marginRight="8dp"
@@ -23,7 +23,7 @@
          android:layout_height="wrap_content"
          android:layout_alignParentLeft="true"
          android:layout_marginLeft="16dp"
-         android:textSize="32sp"
+         android:textSize="24sp"
          android:textColor="#707070" />
     
 

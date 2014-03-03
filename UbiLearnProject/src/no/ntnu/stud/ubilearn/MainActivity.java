@@ -128,7 +128,9 @@ public class MainActivity extends Activity {
 			break;
 		case 4: fragment = new Practise();
 			break;
-		case 6: fragment = new WikiFragment();
+		case 6: {
+			fragment = new WikiFragment();
+		}
 			break;
 		case 7: fragment = new DummyFragment();
 			break;
