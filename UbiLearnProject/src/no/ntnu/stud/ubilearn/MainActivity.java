@@ -2,13 +2,14 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 
-import no.ntnu.stud.ubilearn.adapter.Model;
+import models.AdapterModel;
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,11 +22,12 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	
-	private ArrayList<Model> drawerModels;
+	private ArrayList<AdapterModel> drawerModels;
 	private DrawerLayout activityView;
 	private ListView drawerView;
 	private ActionBarDrawerToggle drawerToggle;
 	private Fragment visibleFrag;
+	private int lastMenuPos = -1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
 		drawerView = (ListView) findViewById(R.id.left_drawer);
 		
 		//generates models that represent titles and text in the drawer
-		drawerModels = new ArrayList<Model>();
+		drawerModels = new ArrayList<AdapterModel>();
 		generateModels(getResources().getStringArray(R.array.menu_options));
 		
 		// set the adapter for the listview
@@ -47,11 +49,17 @@ public class MainActivity extends Activity {
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
 
-		drawerToggle = new ActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
+		drawerToggle = new MyActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
     	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
 	    
+	}
+	@Override
+	protected void onResume(){
+		super.onResume();
+		//sets the home fragment as the start up screen everytime the main activity resumes.
+		getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	}
 	//parses an array of strings and creates header and text models of it
 	 private void generateModels(String[] menuOptions) {
@@ -60,9 +68,9 @@ public class MainActivity extends Activity {
 			 String s = menuOptions[i];
 			 char type = s.charAt(1);
 			if(type == 'h')//header
-				drawerModels.add(new Model(s.substring(3)));
+				drawerModels.add(new AdapterModel(s.substring(3)));
 			else if(type == 't')//text
-				drawerModels.add(new Model(R.drawable.ic_launcher, s.substring(3)));
+				drawerModels.add(new AdapterModel(R.drawable.ic_launcher, s.substring(3)));
 			else
 				throw new IllegalArgumentException("couldnt identiy menu options tag");
 		}
@@ -109,7 +117,7 @@ public class MainActivity extends Activity {
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
 		
-		Model selected = drawerModels.get(position);
+		AdapterModel selected = drawerModels.get(position);
 		
 		Fragment fragment;
 		
@@ -124,6 +132,8 @@ public class MainActivity extends Activity {
 			break;
 		case 7: fragment = new DummyFragment();
 			break;
+		case 9: logout();
+			return;
 		default: return; //when a field is pushed that does not link to a fragment. e.g a header
 		}
 		
@@ -133,12 +143,30 @@ public class MainActivity extends Activity {
 		visibleFrag = fragment;
 		
 		drawerView.setItemChecked(position, true);
+		lastMenuPos = position;
 		setTitle(selected.getTitle());
 		activityView.closeDrawer(drawerView);
-		
 	}
 	
+	private void logout() {
+		Intent intent = new Intent(this, LoginActivity.class);
+	    startActivity(intent);
+	}
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);
+	}
+	
+	//creates own version of this to reach the method that listens on the drawer close event
+	public class MyActionBarDrawerToggle extends ActionBarDrawerToggle{
+		public MyActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, int drawerImageRes, int openDrawerContentDescRes, int closeDrawerContentDescRes) {
+			super(activity, drawerLayout, drawerImageRes, openDrawerContentDescRes, closeDrawerContentDescRes);
+		}
+
+		@Override
+		public void onDrawerClosed(View view) {
+			super.onDrawerClosed(view);
+			if(lastMenuPos>=0)
+				drawerView.setItemChecked(lastMenuPos, false);
+		}
 	}
 }

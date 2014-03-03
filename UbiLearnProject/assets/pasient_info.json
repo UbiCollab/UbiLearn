@@ -1,0 +1,16 @@
+{
+	"pasienter":[
+	{"name": "Ragnar", "age":"68","gender":"male", "info":"lorumipsunskadja", "level":"1"},
+	{"name":"Dagmar", "age":"83","gender":"male", "info":"lorumipsunskadja", "level":"2"},
+	{"name":"Hallvard", "age":"72","gender":"male", "info":"lorumipsunskadja", "level":"3"},
+	{"name": "Fredrik", "age":"68","gender":"male", "info":"lorumipsunskadja", "level":"1"},
+	{"name":"Ragnhild", "age":"83","gender":"male", "info":"lorumipsunskadja", "level":"2"},
+	{"name":"Kyrre", "age":"72","gender":"male", "info":"lorumipsunskadja", "level":"3"},
+	{"name": "Espen", "age":"68","gender":"male", "info":"lorumipsunskadja", "level":"1"},
+	{"name":"Ingeborg", "age":"83","gender":"male", "info":"lorumipsunskadja", "level":"2"},
+	{"name":"Vegar", "age":"72","gender":"male", "info":"lorumipsunskadja", "level":"3"},
+	{"name":"Haldis", "age":"83","gender":"male", "info":"lorumipsunskadja", "level":"2"},
+	{"name":"Alfredo", "age":"72","gender":"male", "info":"lorumipsunskadja", "level":"3"},
+	{"name":"Kristian", "age":"80", "gender":"male","info":"lorumipsunskadja", "level":"1"}
+	]
+}

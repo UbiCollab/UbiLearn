@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn.adapter;
 
 import java.util.ArrayList;
 
+import models.AdapterModel;
 import no.ntnu.stud.ubilearn.*;
 import android.app.Activity;
 import android.content.Context;
@@ -13,14 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HeaderAdapter extends ArrayAdapter<Model>{
+public class HeaderAdapter extends ArrayAdapter<AdapterModel>{
 
 	
 	private final Context context;
-	private final ArrayList<Model> modelsArrayList;
+	private final ArrayList<AdapterModel> modelsArrayList;
 
-	public HeaderAdapter(Context context, ArrayList<Model> modelsArrayList){
-		super(context, R.layout.target_item, modelsArrayList);
+	public HeaderAdapter(Context context, ArrayList<AdapterModel> modelsArrayList){
+		super(context, R.layout.drawer_text_item, modelsArrayList);
 		 
         this.context = context;
         this.modelsArrayList = modelsArrayList;
@@ -33,7 +34,7 @@ public class HeaderAdapter extends ArrayAdapter<Model>{
 		//get rowView from inflater
 		View rowView = null;
 		if(!modelsArrayList.get(position).isGroupHeader()){
-			rowView = inflater.inflate(R.layout.target_item, parent,false);
+			rowView = inflater.inflate(R.layout.drawer_text_item, parent,false);
 			//get icon and text
 			ImageView imgView = (ImageView) rowView.findViewById(R.id.item_icon);
 			TextView txtView = (TextView) rowView.findViewById(R.id.item_text);
@@ -42,7 +43,7 @@ public class HeaderAdapter extends ArrayAdapter<Model>{
             txtView.setText(modelsArrayList.get(position).getTitle());
         }
         else{
-                rowView = inflater.inflate(R.layout.group_header_item, parent, false);
+                rowView = inflater.inflate(R.layout.drawer_header_item, parent, false);
                 TextView titleView = (TextView) rowView.findViewById(R.id.header);
                 titleView.setText(modelsArrayList.get(position).getTitle());
         }
