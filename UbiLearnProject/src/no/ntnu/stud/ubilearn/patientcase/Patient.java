@@ -1,4 +1,6 @@
-package no.ntnu.stud.ubilearn.adapter;
+package no.ntnu.stud.ubilearn.patientcase;
+
+import java.util.ArrayList;
 
 public class Patient {
 	private String name;
@@ -7,14 +9,16 @@ public class Patient {
 	private String info;
 	private String level;
 	
+	
+	
 	public Patient(String name, String age, String gender, String info, String level){
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
 		this.info = info;
-		this.level = level;
+		this.level = level;	
 	}
-
+	
 	public String getName() {
 		return name;
 	}

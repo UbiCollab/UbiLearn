@@ -11,17 +11,17 @@
         android:text="@string/hello_world"
         android:id="@+id/training_rel"
         android:background="@drawable/bakgrunn" >
-
-        <ImageView
+        
+            <ImageView
             android:id="@+id/training_hus1"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="46dp"
-            android:src="@drawable/hus1"
+            android:layout_marginTop="32dp"
             android:contentDescription="1"
-            android:onClick="houseClick"/>
+            android:onClick="houseClick"
+            android:src="@drawable/hus1" />
 
         <ImageView
             android:id="@+id/training_hus2"
@@ -29,7 +29,7 @@
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/training_hus1"
-            android:layout_marginTop="94dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
             android:contentDescription="2"
             android:onClick="houseClick" />
@@ -52,7 +52,7 @@
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/training_hus3"
-            android:layout_marginTop="71dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus3"
             android:contentDescription="4"
             android:onClick="houseClick" />
@@ -63,7 +63,7 @@
             android:layout_height="120dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/training_hus4"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus1" 
             android:contentDescription="5"
             android:onClick="houseClick"/>
@@ -74,7 +74,7 @@
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/training_hus5"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
             android:contentDescription="6"
             android:onClick="houseClick" />
@@ -85,7 +85,7 @@
             android:layout_height="120dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/training_hus6"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus3" 
             android:contentDescription="7"
             android:onClick="houseClick"/>
@@ -96,7 +96,7 @@
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/training_hus7"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus1" 
             android:contentDescription="8"
             android:onClick="houseClick"/>
@@ -107,7 +107,7 @@
             android:layout_height="120dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/training_hus8"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
             android:contentDescription="9" 
             android:onClick="houseClick"/>
@@ -118,7 +118,7 @@
             android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/training_hus9"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus3"
             android:contentDescription="10"
             android:onClick="houseClick" />
@@ -129,41 +129,10 @@
             android:layout_height="120dp"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/training_hus10"
-            android:layout_marginTop="71dp"
+            android:layout_marginTop="66dp"
             android:src="@drawable/hus1"
             android:contentDescription="11"
             android:onClick="houseClick" />
-
-        <ImageView
-            android:id="@+id/training_hus12"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignLeft="@+id/training_hus3"
-            android:layout_below="@+id/training_hus1"
-            android:clickable="true"
-            android:onClick="houseClick"
-            android:src="@drawable/hus3"
-            android:contentDescription="12" />
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/training_hus1"
-            android:layout_marginRight="24dp"
-            android:layout_marginTop="57dp"
-            android:src="@drawable/tree" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/training_hus12"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="48dp"
-            android:layout_marginLeft="51dp"
-            android:src="@drawable/tree" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -211,29 +180,11 @@
             android:src="@drawable/tree" />
 
         <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/training_hus6"
-            android:layout_marginTop="18dp"
-            android:layout_toLeftOf="@+id/imageView5"
-            android:src="@drawable/tree" />
-
-        <ImageView
             android:id="@+id/imageView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView5"
             android:layout_below="@+id/training_hus6"
-            android:src="@drawable/tree" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView1"
-            android:layout_marginBottom="20dp"
-            android:layout_toLeftOf="@+id/imageView1"
             android:src="@drawable/tree" />
 
         <ImageView
@@ -246,16 +197,6 @@
             android:src="@drawable/tree" 
             android:focusable="true"
 			android:focusableInTouchMode="true"/>
-
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView9"
-            android:layout_alignTop="@+id/training_hus8"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="33dp"
-            android:src="@drawable/tree" />
 
         <ImageView
             android:id="@+id/imageView13"
@@ -308,14 +249,6 @@
             android:src="@drawable/tree" />
 
         <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/training_hus2"
-            android:layout_toLeftOf="@+id/imageView1"
-            android:src="@drawable/tree" />
-
-        <ImageView
             android:id="@+id/imageView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -331,23 +264,6 @@
             android:layout_alignBottom="@+id/training_hus2"
             android:layout_alignRight="@+id/imageView1"
             android:layout_marginBottom="46dp"
-            android:src="@drawable/busk" />
-
-        <ImageView
-            android:id="@+id/imageView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView14"
-            android:layout_below="@+id/imageView19"
-            android:src="@drawable/busk" />
-
-        <ImageView
-            android:id="@+id/imageView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/imageView5"
-            android:layout_alignLeft="@+id/imageView19"
-            android:layout_marginBottom="48dp"
             android:src="@drawable/busk" />
 
         <ImageView
@@ -399,6 +315,77 @@
             android:layout_alignRight="@+id/imageView6"
             android:layout_below="@+id/training_hus9"
             android:layout_marginTop="22dp"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView21"
+            android:layout_alignLeft="@+id/training_hus3"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="38dp"
+            android:src="@drawable/tree" />
+
+
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/ImageView01"
+            android:layout_alignTop="@+id/training_hus1"
+            android:layout_marginTop="37dp"
+            android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/training_hus4"
+            android:layout_marginTop="14dp"
+            android:layout_toRightOf="@+id/imageView5"
+            android:src="@drawable/busk" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView8"
+            android:layout_toRightOf="@+id/imageView10"
+            android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView10"
+            android:layout_alignTop="@+id/training_hus8"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/imageView26"
+            android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView21"
+            android:layout_toRightOf="@+id/imageView21"
+            android:src="@drawable/tree" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ImageView01"
+            android:layout_toRightOf="@+id/imageView18"
             android:src="@drawable/busk" />
 
     </RelativeLayout>

@@ -1,0 +1,12 @@
+{
+	"questions": [
+	{"eier": "Dagmar", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Hallvard", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Fredrik", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Ragnhild", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Kyrre", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Espen", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Ingeborg", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"}
+
+	]
+}
