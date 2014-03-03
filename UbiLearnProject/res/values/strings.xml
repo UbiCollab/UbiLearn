@@ -15,7 +15,7 @@
         <item>[h]Lesestoff</item>
         <item>[t]Wiki</item>
         <item>[t]Førstehjelp</item>
-        <item>[h]Other></item>
+        <item>[h]Other</item>
         <item>[t]Log out</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
