@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -146,10 +147,7 @@ public class HomeFragment extends Fragment
 		{
 			public void onClick(View view)
 			{
-				Fragment fragment = new Training();
-				getFragmentManager().beginTransaction().
-				replace(R.id.content_frame, fragment).
-				/*addToBackStack("Home").*/commit();
+				((MainActivity)getActivity()).selectItem(3);
 			}
 		} );
 		
@@ -162,10 +160,7 @@ public class HomeFragment extends Fragment
 		{
 			public void onClick(View view)
 			{
-				Fragment fragment = new Practise();
-				getFragmentManager().beginTransaction().
-				replace(R.id.content_frame, fragment).
-				/*addToBackStack("Home").*/commit();
+				((MainActivity)getActivity()).selectItem(4);
 			}
 		} );
 				
