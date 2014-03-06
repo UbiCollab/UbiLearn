@@ -24,7 +24,7 @@ public class Catagory extends WikiItem{
 	}
 	@Override
 	protected void setIcon() {
-		this.icon = R.drawable.ic_drawer;
+		this.icon = R.drawable.ic_navigation_next_item;
 	}
 	
 }

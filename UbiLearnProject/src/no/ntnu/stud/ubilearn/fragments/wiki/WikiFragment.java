@@ -58,19 +58,27 @@ public class WikiFragment extends Fragment {
 	public void generateTestData(){
 		if (listItems == null) {
 			ArrayList<WikiItem> sub = new ArrayList<WikiItem>();
-			sub.add(new Catagory("Category 1", null));
-			sub.add(new Catagory("Category 2", null));
-			sub.add(new Article("Some article", getResources().getString(
+//			sub.add(new Catagory("Sub-category 1", null));
+//			sub.add(new Catagory("Sub-category 2", null));
+//			sub.add(new Catagory("Sub-category 3", null));
+//			sub.add(new Catagory("Sub-category 4", null));
+			sub.add(new Article("Article 1", getResources().getString(
 					R.string.gibberish)));
-			sub.add(new Article("Some other article", getResources().getString(
+			sub.add(new Article("Article 2", getResources().getString(
 					R.string.gibberish)));
-			sub.add(new Article("Some article with a really long name",
+			sub.add(new Article("Article 3",
 					getResources().getString(R.string.gibberish)));
 			listItems = new ArrayList<WikiItem>();
-			listItems.add(new Catagory("test", sub));
-			listItems.add(new Catagory("test2", sub));
-			listItems.add(new Catagory("test3", sub));
-			listItems.add(new Catagory("test4", sub));
+			listItems.add(new Catagory("Category 1", sub));
+			listItems.add(new Catagory("Category 2", sub));
+			listItems.add(new Catagory("Category 3", sub));
+			listItems.add(new Catagory("Category 4", sub));
+			listItems.add(new Catagory("Category 5", sub));
+			listItems.add(new Catagory("Category 6", sub));
+			listItems.add(new Catagory("Category 7", sub));
+			listItems.add(new Catagory("Category 8", sub));
+			listItems.add(new Catagory("Category 9", sub));
+			listItems.add(new Catagory("Category 10", sub));
 		}
 	}
 }
