@@ -37,7 +37,6 @@ public class WikiFragment extends Fragment {
 					if (cat.hasSubs()) {
 						WikiFragment handbook = new WikiFragment();
 						handbook.setListItems(cat.getSub());
-						System.out.println("derp");
 						getFragmentManager().beginTransaction().replace(R.id.content_frame, handbook).addToBackStack(null).commit();
 					}
 				}else{

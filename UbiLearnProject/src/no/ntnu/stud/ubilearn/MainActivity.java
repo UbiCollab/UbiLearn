@@ -53,13 +53,14 @@ public class MainActivity extends Activity {
     	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
+    	
+    	getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	    
 	}
 	@Override
 	protected void onResume(){
 		super.onResume();
 		//sets the home fragment as the start up screen everytime the main activity resumes.
-		getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	}
 	//parses an array of strings and creates header and text models of it
 	 private void generateModels(String[] menuOptions) {
