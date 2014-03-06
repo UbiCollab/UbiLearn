@@ -14,8 +14,7 @@ public class ServerCLI {
 	}
 
 	private void run() {
-		// TODO Auto-generated method stub
-		
+		server = new Server();
 	}
 
 }
