@@ -81,6 +81,7 @@ public class Training extends Fragment {
 
 	public void houseClick(View v){
 		final View house = v;
+		setCarPositionY(house.getY() + house.getWidth()/2);
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
@@ -104,7 +105,7 @@ public class Training extends Fragment {
 			@Override
 			public void onClick(View vi) {
 				Bundle data = new Bundle();
-				
+
 				if(i>=0){
 				data.putString("name", patientList.get(i).getName());
 				data.putString("age", patientList.get(i).getAge());
@@ -156,6 +157,15 @@ public class Training extends Fragment {
 			e.printStackTrace();
 			Log.e("ERROR JSON", "error parsing json");
 		}
+	}
+	
+	private void setCarPositionY(float y){
+		ImageView car = (ImageView) root.findViewById(R.id.traningCar);
+		System.out.println("works?");
+		if (car == null) {
+			System.out.println("thats why");
+		}
+		car.setY(y);
 	}
 
 }
