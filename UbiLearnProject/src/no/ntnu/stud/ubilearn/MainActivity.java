@@ -73,8 +73,23 @@ public class MainActivity extends Activity {
 			else if(type == 't')//text
 				drawerModels.add(new AdapterModel(R.drawable.ic_launcher, s.substring(3)));
 			else
-				throw new IllegalArgumentException("couldnt identiy menu options tag");
+				throw new IllegalArgumentException("couldnt identify menu options tag");
 		}
+		 
+		 
+		//home
+		drawerModels.get(1).setIcon(R.drawable.ic_home_white);
+		//training
+		drawerModels.get(3).setIcon(R.drawable.ic_training_white);
+		//practice
+		drawerModels.get(4).setIcon(R.drawable.ic_practice_white);
+		//handbook
+		drawerModels.get(6).setIcon(R.drawable.ic_handbook_white);
+		//first aid
+		drawerModels.get(7).setIcon(R.drawable.ic_first_aid_white);
+		//log out
+		drawerModels.get(9).setIcon(R.drawable.ic_logout_white);
+		 
 	}
 
 	@Override
