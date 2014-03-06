@@ -44,8 +44,8 @@ public class PatientCaseFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
-				Fragment fragment = new QuizFragment();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
+//				Fragment fragment = new QuizFragment();
+//				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
 			}
 		});
 		

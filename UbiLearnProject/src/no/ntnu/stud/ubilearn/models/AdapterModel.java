@@ -1,4 +1,4 @@
-package models;
+package no.ntnu.stud.ubilearn.models;
 
 public class AdapterModel {
 

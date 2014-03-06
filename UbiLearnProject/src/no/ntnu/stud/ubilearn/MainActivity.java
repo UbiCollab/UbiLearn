@@ -2,9 +2,10 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 
-import models.AdapterModel;
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
+import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
+import no.ntnu.stud.ubilearn.models.AdapterModel;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -52,13 +53,14 @@ public class MainActivity extends Activity {
     	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
+    	
+    	getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	    
 	}
 	@Override
 	protected void onResume(){
 		super.onResume();
 		//sets the home fragment as the start up screen everytime the main activity resumes.
-		getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	}
 	//parses an array of strings and creates header and text models of it
 	 private void generateModels(String[] menuOptions) {
@@ -127,7 +129,9 @@ public class MainActivity extends Activity {
 			break;
 		case 4: fragment = new Practise();
 			break;
-		case 6: fragment = new DummyFragment();
+		case 6: {
+			fragment = new WikiFragment();
+		}
 			break;
 		case 7: fragment = new DummyFragment();
 			break;
