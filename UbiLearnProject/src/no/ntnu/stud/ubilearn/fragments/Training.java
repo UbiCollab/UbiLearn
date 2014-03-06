@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import models.Patient;
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.R.drawable;
 import no.ntnu.stud.ubilearn.R.id;
 import no.ntnu.stud.ubilearn.R.layout;
+import no.ntnu.stud.ubilearn.models.Patient;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
+
 
 
 

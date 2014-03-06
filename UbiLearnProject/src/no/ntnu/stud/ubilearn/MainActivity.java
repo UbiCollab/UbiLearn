@@ -2,10 +2,10 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 
-import models.AdapterModel;
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
+import no.ntnu.stud.ubilearn.models.AdapterModel;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;

@@ -2,8 +2,8 @@ package no.ntnu.stud.ubilearn.adapter;
 
 import java.util.ArrayList;
 
-import models.AdapterModel;
 import no.ntnu.stud.ubilearn.*;
+import no.ntnu.stud.ubilearn.models.AdapterModel;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Layout;
