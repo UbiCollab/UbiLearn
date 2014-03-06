@@ -142,6 +142,13 @@ public class MainActivity extends Activity {
 		
 		
 		FragmentManager manager = getFragmentManager();
+		//checks if there are older items in the backstack
+		if(manager.getBackStackEntryCount()>1)
+			//clears the backstack
+			manager.popBackStack(manager.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		//sets the homefragment to the only fragment in the backstack
+		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+		//changes to the new fragment
 		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		visibleFrag = fragment;
 		
