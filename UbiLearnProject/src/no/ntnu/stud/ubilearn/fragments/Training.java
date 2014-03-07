@@ -69,9 +69,7 @@ public class Training extends Fragment {
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
-			Log.v("HEI", "i er1: " + i);
 			i = Integer.parseInt(house.getContentDescription().toString());
-			Log.v("HEI", "i er2: " + i);
 		}
 		Log.v("ERR", "lengden er: " + patientList.size());
 

@@ -2,6 +2,7 @@
 	"questions": [
 	{"eier": "Dagmar", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
 	{"eier": "Hallvard", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
+	{"eier": "Hallvard", "spm":"Vil du trykke på noen av svarene?", "svar1": "A", "svar2":"Ne", "svar3": "skje", "riktigSvar": "juba"},
 	{"eier": "Fredrik", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
 	{"eier": "Ragnhild", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},
 	{"eier": "Kyrre", "spm":"Vil du trykke på noen av svarene?", "svar1": "Ja", "svar2":"Nei", "svar3": "Kanskje", "riktigSvar": "Bajubajuba"},

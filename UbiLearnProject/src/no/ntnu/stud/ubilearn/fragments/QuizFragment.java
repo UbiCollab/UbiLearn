@@ -11,24 +11,39 @@ import org.json.JSONObject;
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.patientcase.Patient;
 import no.ntnu.stud.ubilearn.patientcase.Quiz;
+import android.R.color;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
 public class QuizFragment extends Fragment{
 	private ArrayList<Quiz> quiz = new ArrayList<Quiz>();
 	private Patient patient;
-	private String _qst;
-	int i;
-
+	
+	private int i;
+	
+	private TextView question;
+	private Button ans1;
+	private Button ans2;
+	private Button ans3;
+	private Button ans4;
 
 	public QuizFragment(){
 		
@@ -36,58 +51,46 @@ public class QuizFragment extends Fragment{
 	
 	public QuizFragment(Patient patient){
 		this.patient = patient;
-	
+		i = 0;
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View rootView = inflater.inflate(R.layout.fragment_training_quiz, container, false);
+
+		quiz = generateQuiz(patient.getName());		
+		
+		question = (TextView)rootView.findViewById(R.id.question);
+		ans1 = (Button)rootView.findViewById(R.id.quiz_button1);
+		ans2 = (Button)rootView.findViewById(R.id.quiz_button2);
+		ans3 = (Button)rootView.findViewById(R.id.quiz_button3);
+		ans4 = (Button)rootView.findViewById(R.id.quiz_button4);
+				
+		
+		ans1.setOnClickListener(new CustomClick(ans1));
+		ans2.setOnClickListener(new CustomClick(ans2));
+		ans3.setOnClickListener(new CustomClick(ans3));
+		ans4.setOnClickListener(new CustomClick(ans4));
 		
 		
-		quiz = generateQuiz(patient.getName());
-		Log.v("PASIENTNAVN: ", patient.getName());
-		String[] qtn = quiz.get(0).getAlternatives();
-		
-		
-		
-		
-		TextView question = (TextView)rootView.findViewById(R.id.question);
-		question.setText("yolo");
-		Button ans1 = (Button)rootView.findViewById(R.id.quiz_button1);
-		ans1.setText(qtn[0]);
-		Button ans2 = (Button)rootView.findViewById(R.id.quiz_button2);
-		ans2.setText(qtn[1]);
-		Button ans3 = (Button)rootView.findViewById(R.id.quiz_button3);
-		ans3.setText(qtn[2]);
-		Button ans4 = (Button)rootView.findViewById(R.id.quiz_button4);
-		ans4.setText(qtn[3]);
-		
-		ans1.setOnClickListener(onClickListener);
-		ans2.setOnClickListener(onClickListener);
-		ans3.setOnClickListener(onClickListener);
-		ans4.setOnClickListener(onClickListener);
+		setQuiz();
 		return rootView;
 	}
-	private OnClickListener onClickListener = new OnClickListener() {
-
-	    @Override
-	    public void onClick(final View v) {
-	             switch(v.getId()){
-	                 case R.id.quiz_button1:
-	                 case R.id.quiz_button2:
-	                 case R.id.quiz_button3:
-	                 case R.id.quiz_button4:
-	                      //DO something
-	                 break;
-	              }
-
-	    }
-	};
+	
+	
+	private void setQuiz(){
+		String[] qtn = quiz.get(i).getAlternatives();
+		question.setText(quiz.get(i).getQstn());
+		ans1.setText(qtn[0]);
+		ans2.setText(qtn[1]);
+		ans3.setText(qtn[2]);
+		ans4.setText(qtn[3]);
+	}
+	
 	private ArrayList<Quiz> generateQuiz(String name){
 		
 		String json = null;
 		ArrayList<Quiz> finalQuiz = new ArrayList<Quiz>();
-	//	quiz = new ArrayList<Quiz>();
 		try {
 			InputStream is = getActivity().getAssets().open("quiz_questions.json");
 			int size = is.available();
@@ -122,5 +125,56 @@ public class QuizFragment extends Fragment{
 		return finalQuiz;
 	}
 
+	
 
+	@SuppressLint("NewApi")
+	public class CustomClick implements OnClickListener{
+//		ColorDrawable cd = new ColorDrawable(0xffff6666);
+		Button c;
+		Button b;
+		
+		public CustomClick(Button b){
+			this.b = b;
+			this.c=b;
+		}
+		
+		
+		@Override
+		public void onClick(View v) {
+		    Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.quiz_button_animation);
+		    animAlpha.setAnimationListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationStart(Animation animation) {
+					b.setBackgroundColor(Color.GREEN);
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animation animation) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onAnimationEnd(Animation animation) {
+					b = c;
+					//getResources().getColor()
+//					b.setBackgroundResource(getResources().getColor(R.color.yellow));
+					//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
+				}
+			});
+			if(quiz.get(i).checkAnswer(b.getText().toString())){
+				Log.v("tekst", b.getText().toString());
+				Toast.makeText(getActivity(), "riktig", Toast.LENGTH_SHORT).show();
+				b.setAnimation(animAlpha);
+				b.startAnimation(animAlpha);
+			}
+			Log.v("Knapp trykket:", b.getText().toString());
+			if(quiz.size()-1 > i){
+			i++;
+			}
+			setQuiz();
+		}
+		
+	}
 }

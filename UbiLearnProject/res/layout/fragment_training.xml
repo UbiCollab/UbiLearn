@@ -131,7 +131,7 @@
             android:layout_below="@+id/training_hus10"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus1"
-            android:contentDescription="11"
+            android:contentDescription="0"
             android:onClick="houseClick" />
 
         <ImageView
