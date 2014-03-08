@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/caseMedalImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/caseName"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/default_text_size" />
+
+        <TextView
+            android:id="@+id/caseScore"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="right"
+            android:textSize="@dimen/default_text_size" />
+
+    </TableRow>
+
+</TableLayout>
