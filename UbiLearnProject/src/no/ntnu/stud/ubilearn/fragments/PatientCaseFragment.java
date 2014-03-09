@@ -68,10 +68,12 @@ public class PatientCaseFragment extends Fragment{
 			
 			@Override
 			public void onClick(View v) {
+
 				//TODO: remove line
 				Log.v("Navnet til pasientet", "er: " + patient.getName());
 				Fragment fragment = new QuizFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
+
 			}
 		});
 		//tilbake knapp fra pasientcase

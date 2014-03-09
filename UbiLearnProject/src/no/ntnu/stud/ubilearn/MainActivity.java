@@ -2,9 +2,10 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 
-import no.ntnu.stud.ubilearn.adapter.Model;
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
+import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
+import no.ntnu.stud.ubilearn.models.AdapterModel;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -21,7 +22,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	
-	private ArrayList<Model> drawerModels;
+	private ArrayList<AdapterModel> drawerModels;
 	private DrawerLayout activityView;
 	private ListView drawerView;
 	private ActionBarDrawerToggle drawerToggle;
@@ -38,7 +39,7 @@ public class MainActivity extends Activity {
 		drawerView = (ListView) findViewById(R.id.left_drawer);
 		
 		//generates models that represent titles and text in the drawer
-		drawerModels = new ArrayList<Model>();
+		drawerModels = new ArrayList<AdapterModel>();
 		generateModels(getResources().getStringArray(R.array.menu_options));
 		
 		// set the adapter for the listview
@@ -52,13 +53,14 @@ public class MainActivity extends Activity {
     	activityView.setDrawerListener(drawerToggle);
     	getActionBar().setDisplayHomeAsUpEnabled(true);
     	getActionBar().setHomeButtonEnabled(true);
+    	
+    	getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	    
 	}
 	@Override
 	protected void onResume(){
 		super.onResume();
 		//sets the home fragment as the start up screen everytime the main activity resumes.
-		getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
 	}
 	//parses an array of strings and creates header and text models of it
 	 private void generateModels(String[] menuOptions) {
@@ -67,12 +69,27 @@ public class MainActivity extends Activity {
 			 String s = menuOptions[i];
 			 char type = s.charAt(1);
 			if(type == 'h')//header
-				drawerModels.add(new Model(s.substring(3)));
+				drawerModels.add(new AdapterModel(s.substring(3)));
 			else if(type == 't')//text
-				drawerModels.add(new Model(R.drawable.ic_launcher, s.substring(3)));
+				drawerModels.add(new AdapterModel(R.drawable.ic_launcher, s.substring(3)));
 			else
-				throw new IllegalArgumentException("couldnt identiy menu options tag");
+				throw new IllegalArgumentException("couldnt identify menu options tag");
 		}
+		 
+		 
+		//home
+		drawerModels.get(1).setIcon(R.drawable.ic_home_white);
+		//training
+		drawerModels.get(3).setIcon(R.drawable.ic_training_white);
+		//practice
+		drawerModels.get(4).setIcon(R.drawable.ic_practice_white);
+		//handbook
+		drawerModels.get(6).setIcon(R.drawable.ic_handbook_white);
+		//first aid
+		drawerModels.get(7).setIcon(R.drawable.ic_first_aid_white);
+		//log out
+		drawerModels.get(9).setIcon(R.drawable.ic_logout_white);
+		 
 	}
 
 	@Override
@@ -116,7 +133,7 @@ public class MainActivity extends Activity {
 	// swaps fragments in the main contentview
 	public void selectItem(int position) {
 		
-		Model selected = drawerModels.get(position);
+		AdapterModel selected = drawerModels.get(position);
 		
 		Fragment fragment;
 		
@@ -127,7 +144,9 @@ public class MainActivity extends Activity {
 			break;
 		case 4: fragment = new Practise();
 			break;
-		case 6: fragment = new DummyFragment();
+		case 6: {
+			fragment = new WikiFragment();
+		}
 			break;
 		case 7: fragment = new DummyFragment();
 			break;
@@ -138,6 +157,13 @@ public class MainActivity extends Activity {
 		
 		
 		FragmentManager manager = getFragmentManager();
+		//checks if there are older items in the backstack
+		if(manager.getBackStackEntryCount()>1)
+			//clears the backstack
+			manager.popBackStack(manager.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		//sets the homefragment to the only fragment in the backstack
+		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+		//changes to the new fragment
 		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 		visibleFrag = fragment;
 		

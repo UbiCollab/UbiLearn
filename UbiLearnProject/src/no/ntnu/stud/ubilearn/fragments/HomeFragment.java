@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -28,27 +29,34 @@ public class HomeFragment extends Fragment
 				R.layout.fragment_home, container, false);
 		
 		
-		// TEST: Here we try to read from the userdata.txt file.
-		// The .txt file could also have been implemented as
-		// a .xml file, and we would then need to load the data differently.
-		InputStream inputStream = 
-				getResources().openRawResource(R.raw.userdata);
-		InputStreamReader inputStreamReader =
-				new InputStreamReader(inputStream);
-		BufferedReader bufferedReader =
-				new BufferedReader(inputStreamReader);
+		int userScore		= 0;
+		int userTotalScore	= 0;
+			
 		
-		
+		// Variables to store input from textfile.
 		String name 			= "";
-		String status 			= "";
+		String status 			= "";	//TODO: Delete this when you are
+										//certain it will not be used.
 		String achievements 	= "";
 		String unlockedCases 	= "";
 		String lockedCases		= "";
 		String caseData			= "";
+				
 		
-		
+		// Here we read the data from the textfile.
 		try
 		{
+			// TEST: Here we try to read from the userdata.txt file.
+			// The .txt file could also have been implemented as
+			// a .xml file, and we would then need to load the data differently.
+			InputStream inputStream = 
+					getResources().openRawResource(R.raw.userdata);
+			InputStreamReader inputStreamReader =
+					new InputStreamReader(inputStream);
+			BufferedReader bufferedReader =
+					new BufferedReader(inputStreamReader);
+				
+			
 			name 			= bufferedReader.readLine();
 			status			= bufferedReader.readLine();
 			achievements	= bufferedReader.readLine();
@@ -56,8 +64,13 @@ public class HomeFragment extends Fragment
 			lockedCases		= bufferedReader.readLine();
 			
 			
-			// We now need to load from 0 to many case data and dynamically
-			// add them to the layout file.
+			// We need this to indicate the number of unlocked cases that 
+			// is going to be dynamically added to the'Home' page. The idea
+			// is that the unlocked and locked cases will have different
+			// text color to indicate the differences
+			int nUnlocked	= Integer.parseInt(unlockedCases);
+			
+			
 			// Here we check to see if we have stored points for different
 			// cases in userdata.txt and if so we dynamically add these
 			// scores to the fragment_home.xml. If the score is good enough
@@ -75,8 +88,19 @@ public class HomeFragment extends Fragment
 				// what the user has achieved and the second the maximum score
 				// for the specific case. (Actually all case data should decide
 				// what 'Status' the user has).
-				String[] splitStr 	= caseData.split("/");
+				String[] splitStr 	= caseData.split("[#/]");
+				
+				
+				// We sum the scores the user has achieved. This will help us
+				// decide which 'Status' the user has
+				userScore 		+= Integer.parseInt(splitStr[1]);
+				userTotalScore	+= Integer.parseInt(splitStr[2]);
 					
+				
+				// Here we dynamically add the case to the fragment.home.xml.
+				
+				
+				
 				caseData			= bufferedReader.readLine();
 			}
 		}
@@ -88,14 +112,40 @@ public class HomeFragment extends Fragment
 		
 		
 		// We set the different TextViews in fragment_home.xml based on the
-		// values read from file
+		// values read from file.
 		TextView userName = 
 				(TextView)fragmentView.findViewById(R.id.homeUserName);
 		userName.setText(name);
 		
+		
+		// The status is based on the amount of score achieved of the total
+		// possible.
 		TextView userStatus = 
 				(TextView)fragmentView.findViewById(R.id.homeStatus);
-		userStatus.setText(status);
+		
+		
+		if(userTotalScore > 0)
+		{
+			int percentageAccomplished = (userScore * 100) / userTotalScore;
+			
+			if(percentageAccomplished < 51)
+			{
+				userStatus.setText(R.string.user_status_beginner);
+			}
+			else if(percentageAccomplished < 86)
+			{
+				userStatus.setText(R.string.user_status_experienced);
+			}
+			else
+			{
+				userStatus.setText(R.string.user_status_expert);
+			}
+		}
+		else
+		{
+			userStatus.setText(R.string.user_status_expert);
+		}
+				
 		
 		TextView userAchievement = 
 				(TextView)fragmentView.findViewById(R.id.homeAchievement);
@@ -146,10 +196,10 @@ public class HomeFragment extends Fragment
 		{
 			public void onClick(View view)
 			{
-				Fragment fragment = new Training();
-				getFragmentManager().beginTransaction().
-				replace(R.id.content_frame, fragment).
-				/*addToBackStack("Home").*/commit();
+				// Here call the getActivity method from class MainActivity to
+				// handle the change from this fragment to the Training 
+				// fragment 
+				((MainActivity)getActivity()).selectItem(3);
 			}
 		} );
 		
@@ -162,10 +212,10 @@ public class HomeFragment extends Fragment
 		{
 			public void onClick(View view)
 			{
-				Fragment fragment = new Practise();
-				getFragmentManager().beginTransaction().
-				replace(R.id.content_frame, fragment).
-				/*addToBackStack("Home").*/commit();
+				// Here call the getActivity method from class MainActivity to
+				// handle the change from this fragment to the Practice 
+				// fragment 
+				((MainActivity)getActivity()).selectItem(4);
 			}
 		} );
 				

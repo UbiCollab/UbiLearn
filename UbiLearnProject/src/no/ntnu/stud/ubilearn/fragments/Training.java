@@ -5,12 +5,18 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+
 import no.ntnu.stud.ubilearn.patientcase.Patient;
 import no.ntnu.stud.ubilearn.patientcase.Quiz;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import no.ntnu.stud.ubilearn.R.drawable;
+import no.ntnu.stud.ubilearn.R.id;
+import no.ntnu.stud.ubilearn.R.layout;
+import android.os.Bundle;
 
 import android.app.Dialog;
 import android.app.Fragment;
@@ -21,10 +27,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 
+
+
+
+import org.json.*;
 
 
 
@@ -33,6 +44,7 @@ public class Training extends Fragment {
 	private RelativeLayout rl;
 	private ScrollView sv;
 	private View root;
+
 
 	ArrayList<Patient> patientList;
 	int i;
@@ -66,6 +78,7 @@ public class Training extends Fragment {
 
 	public void houseClick(View v){
 		final View house = v;
+		setCarPositionY(house.getY() + house.getWidth()/2);
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
@@ -89,6 +102,7 @@ public class Training extends Fragment {
 
 			@Override
 			public void onClick(View vi) {
+
 //				Bundle data = new Bundle();
 				
 //				if(i>=0){
@@ -102,6 +116,20 @@ public class Training extends Fragment {
 				
 				Fragment patient = new PatientCaseFragment(patientList.get(i));
 //				patient.setArguments(data);
+
+				Bundle data = new Bundle();
+
+//				if(i>=0){
+//				data.putString("name", patientList.get(i).getName());
+//				data.putString("age", patientList.get(i).getAge());
+//				data.putString("gender", patientList.get(i).getGender());
+//				data.putString("info", patientList.get(i).getInfo());
+//				data.putString("level", patientList.get(i).getLevel());
+//				}
+//				
+//				//Fragment patient = new PatientCaseFragment();
+//				patient.setArguments(data);
+
 
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, patient).addToBackStack("training").commit();
 				dialog.dismiss();
@@ -146,5 +174,13 @@ public class Training extends Fragment {
 		}
 	}
 	
-	
+	private void setCarPositionY(float y){
+		ImageView car = (ImageView) root.findViewById(R.id.traningCar);
+		System.out.println("works?");
+		if (car == null) {
+			System.out.println("thats why");
+		}
+		car.setY(y);
+	}
+
 }

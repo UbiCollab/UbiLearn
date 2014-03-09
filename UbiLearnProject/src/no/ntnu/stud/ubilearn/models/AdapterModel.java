@@ -1,18 +1,18 @@
-package no.ntnu.stud.ubilearn.adapter;
+package no.ntnu.stud.ubilearn.models;
 
-public class Model {
+public class AdapterModel {
 
 	private int icon;
 	private String title;
 	
 	private boolean isGroupHeader = false;
 	
-	public Model(String title){
+	public AdapterModel(String title){
 		this(-1,title);
 		isGroupHeader = true;
 	}
 
-	public Model(int icon, String title) {
+	public AdapterModel(int icon, String title) {
 		this.icon = icon;
 		this.title = title;
 	}

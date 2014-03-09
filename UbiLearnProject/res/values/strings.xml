@@ -15,9 +15,16 @@
         <item>[h]Lesestoff</item>
         <item>[t]Wiki</item>
         <item>[t]Førstehjelp</item>
-        <item>[h]Other></item>
+        <item>[h]Other</item>
         <item>[t]Log out</item>
     </string-array>
+    <string-array name="wiki_Symptomer_options">
+        <item>Feber symptomer</item>
+        <item>Smerte</item>
+        <item>Kvalme</item>
+        <item>Annet</item>
+    </string-array>
+
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
@@ -29,10 +36,16 @@
     <string name="exercise3">På huk</string>
     <string name="exercise4">På hodet</string>
     <string name="choose_exercise">Velg øvelse</string>
-    
+    <string name="title_activity_wiki_fragment">WikiFragment</string>
+    <string name="title_activity_article_fragment">ArticleFragment</string>
+    <string name="title">Title</string>
+    <string name="gibberish">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</string>
     <string name="user_name">Bruker:</string>
     <string name="user_status">Status:</string>
     <string name="user_achievements">Prestasjoner:</string>
     <string name="user_unlocked_cases">Ulåste case:</string>
     <string name="user_locked_cases">Låste case:</string>
+    <string name="user_status_beginner">Nybegynner</string>
+    <string name="user_status_experienced">Erfaren</string>
+    <string name="user_status_expert">Ekspert</string>
 </resources>

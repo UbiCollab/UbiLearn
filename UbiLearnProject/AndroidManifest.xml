@@ -15,9 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="no.ntnu.stud.ubilearn.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"  
-            android:label="@string/app_name" >            
-            
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="no.ntnu.stud.ubilearn.LoginActivity"
@@ -25,8 +24,17 @@
             android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment"
+            android:label="@string/title_activity_wiki_fragment" >
+        </activity>
+        <activity
+            android:name="no.ntnu.stud.ubilearn.fragments.wiki.ArticleFragment"
+            android:label="@string/title_activity_article_fragment" >
         </activity>
     </application>
 

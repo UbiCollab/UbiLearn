@@ -387,6 +387,14 @@
             android:layout_below="@+id/ImageView01"
             android:layout_toRightOf="@+id/imageView18"
             android:src="@drawable/busk" />
+	<ImageView
+            android:id="@+id/traningCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ImageView01"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/mystery_machine_front" />
+
 
     </RelativeLayout>
 

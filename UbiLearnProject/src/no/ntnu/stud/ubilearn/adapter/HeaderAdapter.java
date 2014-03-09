@@ -3,6 +3,8 @@ package no.ntnu.stud.ubilearn.adapter;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.*;
+import no.ntnu.stud.ubilearn.models.AdapterModel;
+import android.app.Activity;
 import android.content.Context;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -12,13 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HeaderAdapter extends ArrayAdapter<Model>{
+public class HeaderAdapter extends ArrayAdapter<AdapterModel>{
 
 	
 	private final Context context;
-	private final ArrayList<Model> modelsArrayList;
+	private final ArrayList<AdapterModel> modelsArrayList;
 
-	public HeaderAdapter(Context context, ArrayList<Model> modelsArrayList){
+	public HeaderAdapter(Context context, ArrayList<AdapterModel> modelsArrayList){
 		super(context, R.layout.drawer_text_item, modelsArrayList);
 		 
         this.context = context;

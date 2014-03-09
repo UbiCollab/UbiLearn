@@ -157,7 +157,7 @@ public class QuizFragment extends Fragment{
 				
 				@Override
 				public void onAnimationEnd(Animation animation) {
-					b = c;
+				
 					//getResources().getColor()
 //					b.setBackgroundResource(getResources().getColor(R.color.yellow));
 					//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
