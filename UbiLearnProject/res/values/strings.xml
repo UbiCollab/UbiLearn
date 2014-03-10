@@ -49,4 +49,7 @@
     <string name="user_status_experienced">Erfaren</string>
     <string name="user_status_expert">Ekspert</string>
     <string name="training_details">Opplæringsdetaljer</string>
+    <string name="user_case_medals">Medalje:</string>
+    <string name="user_case_name">Case:</string>
+    <string name="user_case_scores">Poengsum:</string>
 </resources>
