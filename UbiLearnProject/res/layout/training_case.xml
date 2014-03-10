@@ -13,7 +13,8 @@
         android:text="Tore På Sporet"
         android:textAlignment="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:textSize="30dp" >
+        android:textSize="30dp"
+        android:layout_margin="8dp"  >
     </TextView>
 
     <TextView
@@ -46,7 +47,7 @@
         android:layout_weight="0.92"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-   		android:layout_marginBottom="50dp"
+   		android:layout_marginBottom="20dp"
         android:background="@android:color/black"
          >
 
@@ -66,6 +67,21 @@
         </FrameLayout>
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/training_level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vanskelighetsgrad: " 
+        android:textSize="20dp"
+        android:layout_margin="8dp" />
+
+    <RatingBar
+        android:id="@+id/training_ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="3"
+        android:layout_margin="8dp"  />
 
     <LinearLayout
         android:layout_width="match_parent"

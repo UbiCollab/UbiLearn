@@ -7,11 +7,11 @@
     android:background="@android:color/holo_blue_dark" >
 
     <TextView
-        android:id="@+id/articleTitle"
+        android:id="@+id/textView1"
         android:layout_width="177dp"
         android:layout_height="wrap_content"
         android:text="Oppgave:"
-        android:textSize="25dp" />
+        android:textSize="25sp" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:background="@android:color/white" >
 
             <TextView
-                android:id="@+id/articleText"
+                android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Hei er du der?" />
@@ -39,7 +39,7 @@
         android:layout_height="match_parent" >
 
         <Button
-            android:id="@+id/wikiSearchButton"
+            android:id="@+id/quiz_button1"
             android:layout_width="170dp"
             android:layout_height="130dp"
             android:layout_alignParentLeft="true"
@@ -49,7 +49,7 @@
             android:background="@android:color/holo_blue_bright"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/quiz_button2"
             android:layout_width="170dp"
             android:layout_height="130dp"
             android:layout_alignParentRight="true"
@@ -59,21 +59,21 @@
             android:background="@android:color/holo_blue_bright" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/quiz_button3"
             android:layout_width="170dp"
             android:layout_height="130dp"
-            android:layout_alignLeft="@+id/wikiSearchButton"
-            android:layout_below="@+id/wikiSearchButton"
+            android:layout_alignLeft="@+id/quiz_button1"
+            android:layout_below="@+id/quiz_button1"
             android:layout_marginTop="14dp"
             android:text="Kanskje"
             android:background="@android:color/holo_blue_bright" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/quiz_button4"
             android:layout_width="170dp"
             android:layout_height="130dp"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_alignTop="@+id/button3"
+            android:layout_alignLeft="@+id/quiz_button2"
+            android:layout_alignTop="@+id/quiz_button3"
             android:text="Vet ikke" 
             android:background="@android:color/holo_blue_bright"/>
 

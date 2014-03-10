@@ -1,21 +1,26 @@
 package no.ntnu.stud.ubilearn.fragments;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+
+import no.ntnu.stud.ubilearn.patientcase.Patient;
+import no.ntnu.stud.ubilearn.patientcase.Quiz;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import no.ntnu.stud.ubilearn.R.drawable;
 import no.ntnu.stud.ubilearn.R.id;
 import no.ntnu.stud.ubilearn.R.layout;
-import no.ntnu.stud.ubilearn.models.Patient;
 import android.os.Bundle;
+
 import android.app.Dialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +28,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 
 
@@ -35,10 +36,6 @@ import android.widget.ScrollView;
 
 
 import org.json.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-
 
 
 
@@ -47,7 +44,7 @@ public class Training extends Fragment {
 	private RelativeLayout rl;
 	private ScrollView sv;
 	private View root;
-//	private static final String jsonFilePath = "assets/pasient_info.json";
+
 
 	ArrayList<Patient> patientList;
 	int i;
@@ -87,6 +84,7 @@ public class Training extends Fragment {
 		if(house.getContentDescription().toString().length() > 0 ){
 			i = Integer.parseInt(house.getContentDescription().toString());
 		}
+		Log.v("ERR", "lengden er: " + patientList.size());
 
 		Button cancel = (Button) dialog.findViewById(R.id.training_popup_cancel);
 
@@ -104,23 +102,39 @@ public class Training extends Fragment {
 
 			@Override
 			public void onClick(View vi) {
+
+//				Bundle data = new Bundle();
+				
+//				if(i>=0){
+//				data.putString("name", patientList.get(i).getName());
+//				data.putString("age", patientList.get(i).getAge());
+//				data.putString("gender", patientList.get(i).getGender());
+//				data.putString("info", patientList.get(i).getInfo());
+//				data.putString("level", patientList.get(i).getLevel());
+//				}
+				
+				
+				Fragment patient = new PatientCaseFragment(patientList.get(i));
+//				patient.setArguments(data);
+
 				Bundle data = new Bundle();
 
-				if(i>=0){
-				data.putString("name", patientList.get(i).getName());
-				data.putString("age", patientList.get(i).getAge());
-				data.putString("gender", patientList.get(i).getGender());
-				data.putString("info", patientList.get(i).getInfo());
-				data.putString("level", patientList.get(i).getLevel());
-				}
-				Fragment patient = new PatientCaseFragment();
-				patient.setArguments(data);
+//				if(i>=0){
+//				data.putString("name", patientList.get(i).getName());
+//				data.putString("age", patientList.get(i).getAge());
+//				data.putString("gender", patientList.get(i).getGender());
+//				data.putString("info", patientList.get(i).getInfo());
+//				data.putString("level", patientList.get(i).getLevel());
+//				}
+//				
+//				//Fragment patient = new PatientCaseFragment();
+//				patient.setArguments(data);
+
 
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, patient).addToBackStack("training").commit();
 				dialog.dismiss();
 			}
 		});
-
 		dialog.setTitle(patientList.get(i).getName() + " sitt hus");
 		dialog.show();
 	}
@@ -151,6 +165,7 @@ public class Training extends Fragment {
 						 patientObj.getString("gender"), 
 						 patientObj.getString("info"), 
 						 patientObj.getString("level")));
+					//	 generateQuiz(patientObj.getString("name"))));
 			}
 			
 		} catch (JSONException e) {
