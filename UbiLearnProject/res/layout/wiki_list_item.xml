@@ -18,13 +18,12 @@
      
      <!-- text -->
     <TextView
-         android:id="@+id/item_text"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_marginLeft="16dp"
-         android:textSize="28sp"
-         android:textColor="#707070" />
+    	style="@style/StandardTextView"
+    	android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="@dimen/default_horizontal_margin"
+        android:textColor="#707070"
+   	/>
     
 
 </RelativeLayout>

@@ -45,4 +45,8 @@
     <string name="user_achievements">Prestasjoner:</string>
     <string name="user_unlocked_cases">Ulåste case:</string>
     <string name="user_locked_cases">Låste case:</string>
+    <string name="user_status_beginner">Nybegynner</string>
+    <string name="user_status_experienced">Erfaren</string>
+    <string name="user_status_expert">Ekspert</string>
+    <string name="training_details">Opplæringsdetaljer</string>
 </resources>
