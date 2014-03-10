@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
 			break;
 		case 3: fragment = new Training();
 			break;
-		case 4: fragment = new Practise();
+		case 4: fragment = new PractiseFragment();
 			break;
 		case 6: {
 			fragment = new WikiFragment();
