@@ -7,7 +7,7 @@
 
     <!-- [h] == header, [t] == text -->
     <string-array name="menu_options">
-        <item>[h]UbiLEarn</item>
+        <item>[h]UbiLearn</item>
         <item>[t]Hjem</item>
         <item>[h]Trening</item>
         <item>[t]Opplæring</item>
@@ -15,7 +15,7 @@
         <item>[h]Lesestoff</item>
         <item>[t]Wiki</item>
         <item>[t]Førstehjelp</item>
-        <item>[h]Other</item>
+        <item>[h]Annet</item>
         <item>[t]Log out</item>
     </string-array>
     <string-array name="wiki_Symptomer_options">
