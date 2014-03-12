@@ -26,7 +26,7 @@ public class DBConnection {
 
 	private static DBConnection instance;
 
-	//if no instances exist it will create a new instance. Makes sure that we use the same connection.
+	//makes sure that all DAO's uses the same connection
 	public static DBConnection getInstance(){
 		return instance = (instance == null) ? new DBConnection() : instance;
 	}
@@ -36,10 +36,8 @@ public class DBConnection {
 		try {
 			props.load(new FileInputStream(new File("/database.properties")));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +57,6 @@ public class DBConnection {
 		st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		}catch(SQLException e){
 			e.printStackTrace();
-			//TODO log it
 			throw e;
 		}
 		return st;
@@ -75,7 +72,6 @@ public class DBConnection {
 				st.close();
 			}
 		} catch (SQLException e) {
-			//TODO log it
 		}
 	}
 
@@ -106,7 +102,6 @@ public class DBConnection {
 			// conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			//TODO log it
 		}
 	}
 
@@ -118,7 +113,6 @@ public class DBConnection {
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//TODO log it
 		}
 	}
 
@@ -133,7 +127,6 @@ public class DBConnection {
 				conn = DriverManager.getConnection(props.getProperty("url"), props);
 		}catch(SQLException e){
 			e.printStackTrace();
-			//TODO log that cant connect to db, make appropriet actions
 			throw e;
 		}
 	}
