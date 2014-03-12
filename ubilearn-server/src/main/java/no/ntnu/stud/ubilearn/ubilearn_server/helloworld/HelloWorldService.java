@@ -22,6 +22,7 @@ public class HelloWorldService extends Service<HelloWorldConfiguration> {
         final String test = configuration.getTest();
         environment.addResource(new HelloWorldResource(template, defaultName, test));
         environment.addHealthCheck(new TemplateHealthCheck(template));
+
     }
 
 }
