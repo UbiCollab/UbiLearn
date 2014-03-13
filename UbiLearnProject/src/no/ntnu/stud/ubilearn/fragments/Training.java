@@ -62,15 +62,6 @@ public class Training extends Fragment {
 		patientList = new ArrayList<Patient>();
 		generatePatients();
 
-		sv.post(new Runnable() {            
-			@Override
-			public void run() {
-				// sv.fullScroll(View.FOCUS_DOWN); 
-				sv.scrollTo(0, sv.getBottom()*2);
-			}
-		});
-
-
 		return root;
 	}
 
@@ -102,34 +93,10 @@ public class Training extends Fragment {
 
 			@Override
 			public void onClick(View vi) {
-
-//				Bundle data = new Bundle();
-				
-//				if(i>=0){
-//				data.putString("name", patientList.get(i).getName());
-//				data.putString("age", patientList.get(i).getAge());
-//				data.putString("gender", patientList.get(i).getGender());
-//				data.putString("info", patientList.get(i).getInfo());
-//				data.putString("level", patientList.get(i).getLevel());
-//				}
-				
 				
 				Fragment patient = new PatientCaseFragment(patientList.get(i));
-//				patient.setArguments(data);
 
 				Bundle data = new Bundle();
-
-//				if(i>=0){
-//				data.putString("name", patientList.get(i).getName());
-//				data.putString("age", patientList.get(i).getAge());
-//				data.putString("gender", patientList.get(i).getGender());
-//				data.putString("info", patientList.get(i).getInfo());
-//				data.putString("level", patientList.get(i).getLevel());
-//				}
-//				
-//				//Fragment patient = new PatientCaseFragment();
-//				patient.setArguments(data);
-
 
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, patient).addToBackStack("training").commit();
 				dialog.dismiss();
@@ -165,7 +132,6 @@ public class Training extends Fragment {
 						 patientObj.getString("gender"), 
 						 patientObj.getString("info"), 
 						 patientObj.getString("level")));
-					//	 generateQuiz(patientObj.getString("name"))));
 			}
 			
 		} catch (JSONException e) {
