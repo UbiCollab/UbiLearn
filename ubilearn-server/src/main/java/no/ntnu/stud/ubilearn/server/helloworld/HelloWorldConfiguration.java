@@ -11,7 +11,7 @@ public class HelloWorldConfiguration extends Configuration {
 
     @NotEmpty
     @JsonProperty
-    private String defaultName = "Stranger derp";
+    private String defaultName;
     
     @NotEmpty
     @JsonProperty
