@@ -34,7 +34,7 @@ public class DBConnection {
 	public DBConnection(){
 
 		try {
-			props.load(new FileInputStream(new File("/database.properties")));
+			props.load(new FileInputStream(new File("database.properties")));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
