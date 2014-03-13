@@ -5,8 +5,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 
-import no.ntnu.stud.ubilearn.patientcase.Patient;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.patientcase.Quiz;
 
 import org.json.JSONArray;
@@ -30,6 +31,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 
 
@@ -44,6 +46,7 @@ public class Training extends Fragment {
 	private RelativeLayout rl;
 	private ScrollView sv;
 	private View root;
+	private View root2;
 
 
 	ArrayList<Patient> patientList;
@@ -56,11 +59,24 @@ public class Training extends Fragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
+		patientList = patientList = User.getInstance().getPatientList();
+		
 		root = inflater.inflate(R.layout.fragment_training, null);
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
-		patientList = new ArrayList<Patient>();
-		generatePatients();
+		
+		if(User.getInstance().getPoints()>10){
+			Toast.makeText(getActivity(), "Congratulations, you are now in level 2", Toast.LENGTH_SHORT).show();
+			root = inflater.inflate(R.layout.fragment_training_level2, null);
+			sv = (ScrollView) root.findViewById(R.id.training_scroll);
+			rl = (RelativeLayout) root.findViewById(R.id.training_rel);
+			return root;
+		}
+		
+		
+		
+		
+//	//	MainAcitivit.generatePatients();
 
 		return root;
 	}
@@ -104,40 +120,6 @@ public class Training extends Fragment {
 		});
 		dialog.setTitle(patientList.get(i).getName() + " sitt hus");
 		dialog.show();
-	}
-
-	private void generatePatients(){
-		String json = null;
-		try {
-			InputStream is = getActivity().getAssets().open("pasient_info.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-			
-			json = new String(buffer, "UTF-8");
-			
-		} catch (IOException ie) {
-			Log.e("ERROR I/O", "error reading patients file");
-		}
-		try {
-			JSONObject jsonObj = new JSONObject(json);
-			JSONArray patientArray = jsonObj.getJSONArray("pasienter");
-			
-			for (int i = 0; i < patientArray.length(); i++) {
-				JSONObject patientObj = (JSONObject) patientArray.get(i);
-				patientList.add(new Patient
-						(patientObj.getString("name"), 
-						 patientObj.getString("age"), 
-						 patientObj.getString("gender"), 
-						 patientObj.getString("info"), 
-						 patientObj.getString("level")));
-			}
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-			Log.e("ERROR JSON", "error parsing json");
-		}
 	}
 	
 	private void setCarPositionY(float y){
