@@ -32,9 +32,8 @@ public class ArticleResource {
 	
     @GET
     @Timed
-	public Saying getArticle(@QueryParam("article") Optional<String> name){
-		return new Saying(counter.incrementAndGet(),
-				String.format(format, new Object[]{article.getName(), article.getText()}));
+	public Article getArticle(@QueryParam("article") Optional<String> name){
+		return new Article("test", "fdsfdssd");
 		
 	}
 }

@@ -23,6 +23,7 @@ public class MainService extends Service<StandardConfiguration> {
 	public void run(StandardConfiguration configuration, Environment environment) throws Exception {
 		final String template = configuration.getTemplate();
 		environment.addResource(new ArticleResource(template));
+		environment.addResource(new UserResource());
 	}
 
 }
