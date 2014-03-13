@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.patientcase.Patient;
 import no.ntnu.stud.ubilearn.patientcase.Quiz;
+import no.ntnu.stud.ubilearn.patientcase.QuizAnimation;
 import android.R.color;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -82,9 +83,13 @@ public class QuizFragment extends Fragment{
 		String[] qtn = quiz.get(i).getAlternatives();
 		question.setText(quiz.get(i).getQstn());
 		ans1.setText(qtn[0]);
+		ans1.setBackgroundColor(color.background_light);
 		ans2.setText(qtn[1]);
+		ans2.setBackgroundColor(color.background_light);
 		ans3.setText(qtn[2]);
+		ans3.setBackgroundColor(color.background_light);
 		ans4.setText(qtn[3]);
+		ans4.setBackgroundColor(color.background_light);
 	}
 	
 	private ArrayList<Quiz> generateQuiz(String name){
@@ -129,7 +134,7 @@ public class QuizFragment extends Fragment{
 
 	@SuppressLint("NewApi")
 	public class CustomClick implements OnClickListener{
-//		ColorDrawable cd = new ColorDrawable(0xffff6666);
+
 		Button c;
 		Button b;
 		
@@ -141,39 +146,24 @@ public class QuizFragment extends Fragment{
 		
 		@Override
 		public void onClick(View v) {
-		    Animation animAlpha = AnimationUtils.loadAnimation(getActivity(), R.anim.quiz_button_animation);
-		    animAlpha.setAnimationListener(new AnimationListener() {
-				
-				@Override
-				public void onAnimationStart(Animation animation) {
-					b.setBackgroundColor(Color.GREEN);
-				}
-				
-				@Override
-				public void onAnimationRepeat(Animation animation) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onAnimationEnd(Animation animation) {
-				
-					//getResources().getColor()
-//					b.setBackgroundResource(getResources().getColor(R.color.yellow));
-					//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
-				}
-			});
+
 			if(quiz.get(i).checkAnswer(b.getText().toString())){
 				Log.v("tekst", b.getText().toString());
 				Toast.makeText(getActivity(), "riktig", Toast.LENGTH_SHORT).show();
-				b.setAnimation(animAlpha);
-				b.startAnimation(animAlpha);
+				b.setAnimation(QuizAnimation.correctAnimation(b, getActivity()));
+				b.startAnimation(QuizAnimation.correctAnimation(b, getActivity()));
+				
+			}
+			else {
+				b.setAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
+				b.startAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
 			}
 			Log.v("Knapp trykket:", b.getText().toString());
 			if(quiz.size()-1 > i){
 			i++;
-			}
 			setQuiz();
+			}
+			
 		}
 		
 	}
