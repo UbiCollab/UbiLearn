@@ -13,6 +13,7 @@ import android.widget.Button;
 public class PractiseFragment extends Fragment
 {
 	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view =  inflater.inflate(R.layout.fragment_practise, container, false);
@@ -21,6 +22,7 @@ public class PractiseFragment extends Fragment
 		
 		enterExercises.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View vi)
 			{
 				Fragment fragment = new PractiseExercisesFragment();
@@ -32,6 +34,7 @@ public class PractiseFragment extends Fragment
 		
 		enterPatients.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View vi)
 			{
 				Fragment fragment = new PractisePatientsFragment();

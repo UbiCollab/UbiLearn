@@ -13,7 +13,7 @@ public class Article extends WikiItem{
 
 	@Override
 	protected void setIcon() {
-		this.icon = -1;
+		this.icon = R.drawable.ic_handbook_black;
 	}
 	
 }

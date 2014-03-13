@@ -10,7 +10,6 @@ import java.util.List;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment 
 {
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
@@ -211,6 +211,7 @@ public class HomeFragment extends Fragment
 		
 		trainingButton.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View view)
 			{
 				// Here call the getActivity method from class MainActivity to
@@ -227,6 +228,7 @@ public class HomeFragment extends Fragment
 		
 		practiseButton.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View view)
 			{
 				// Here call the getActivity method from class MainActivity to

@@ -34,6 +34,7 @@ public class HomeAdapter extends ArrayAdapter<String>
 		_caseScoreValues	= caseScoreValues;
 	}
 	//-------------------------------------------------------------------------
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		LayoutInflater inflater	= (LayoutInflater)_context.getSystemService(
