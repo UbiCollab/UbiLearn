@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.models;
+package no.ntnu.stud.ubilearn.server.models;
 
 public class User {
 	private long id;

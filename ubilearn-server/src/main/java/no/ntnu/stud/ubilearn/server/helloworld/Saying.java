@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.helloworld;
+package no.ntnu.stud.ubilearn.server.helloworld;
 
 public class Saying {
     private final long id;

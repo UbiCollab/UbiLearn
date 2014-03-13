@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.db;
+package no.ntnu.stud.ubilearn.server.db;
 
 import java.util.ArrayList;
 

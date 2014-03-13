@@ -1,6 +1,6 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.db;
+package no.ntnu.stud.ubilearn.server.db;
 
-import no.ntnu.stud.ubilearn.ubilearn_server.models.User;
+import no.ntnu.stud.ubilearn.server.models.User;
 
 public class UserDAO extends DAO {
 	

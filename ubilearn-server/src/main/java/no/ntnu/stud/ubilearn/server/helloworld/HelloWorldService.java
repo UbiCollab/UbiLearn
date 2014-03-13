@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.helloworld;
+package no.ntnu.stud.ubilearn.server.helloworld;
 
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;

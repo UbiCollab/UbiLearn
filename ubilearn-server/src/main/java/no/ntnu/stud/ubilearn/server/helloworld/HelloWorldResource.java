@@ -1,6 +1,6 @@
-package no.ntnu.stud.ubilearn.ubilearn_server.helloworld;
+package no.ntnu.stud.ubilearn.server.helloworld;
 
-import no.ntnu.stud.ubilearn.ubilearn_server.helloworld.Saying;
+import no.ntnu.stud.ubilearn.server.helloworld.Saying;
 
 import com.google.common.base.Optional;
 import com.yammer.metrics.annotation.Timed;
