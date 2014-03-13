@@ -1,11 +1,8 @@
 package no.ntnu.stud.ubilearn.patientcase;
 
 import no.ntnu.stud.ubilearn.R;
-import android.R.color;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.text.style.BackgroundColorSpan;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;

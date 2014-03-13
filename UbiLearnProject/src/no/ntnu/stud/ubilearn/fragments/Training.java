@@ -7,20 +7,14 @@ import java.util.ArrayList;
 import no.ntnu.stud.ubilearn.R;
 
 import no.ntnu.stud.ubilearn.patientcase.Patient;
-import no.ntnu.stud.ubilearn.patientcase.Quiz;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import no.ntnu.stud.ubilearn.R.drawable;
-import no.ntnu.stud.ubilearn.R.id;
-import no.ntnu.stud.ubilearn.R.layout;
 import android.os.Bundle;
 
 import android.app.Dialog;
 import android.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,12 +24,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-
-
-
-
-
-import org.json.*;
 
 
 

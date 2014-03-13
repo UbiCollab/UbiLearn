@@ -1,7 +1,5 @@
 package no.ntnu.stud.ubilearn.patientcase;
 
-import java.util.ArrayList;
-
 public class Patient {
 	private String name;
 	private String age;

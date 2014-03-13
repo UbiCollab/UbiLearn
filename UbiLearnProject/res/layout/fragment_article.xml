@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="@dimen/default_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/default_horizontal_margin"
+    android:paddingRight="@dimen/default_horizontal_margin"
     android:paddingTop="@dimen/default_vertical_margin"
     tools:context=".ArticleFragment" >
 

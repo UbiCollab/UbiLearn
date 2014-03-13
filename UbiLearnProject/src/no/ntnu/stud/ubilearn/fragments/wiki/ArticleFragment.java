@@ -1,7 +1,6 @@
 package no.ntnu.stud.ubilearn.fragments.wiki;
 
 import no.ntnu.stud.ubilearn.R;
-import no.ntnu.stud.ubilearn.R.layout;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
