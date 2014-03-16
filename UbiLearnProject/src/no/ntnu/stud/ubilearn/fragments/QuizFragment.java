@@ -17,6 +17,7 @@ import android.R.color;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class QuizFragment extends Fragment{
 	private Button ans3;
 	private Button ans4;
 	private int points;
+	private Button nextBtn;
 	private int correctCounter = 0;
 
 	public QuizFragment(){
@@ -62,8 +64,23 @@ public class QuizFragment extends Fragment{
 		ans2 = (Button)rootView.findViewById(R.id.quiz_button2);
 		ans3 = (Button)rootView.findViewById(R.id.quiz_button3);
 		ans4 = (Button)rootView.findViewById(R.id.quiz_button4);
-
-
+		nextBtn = (Button)rootView.findViewById(R.id.quiz_next_button);
+		
+		nextBtn.setOnClickListener(new OnClickListener() {
+			
+			
+			@Override
+			public void onClick(View v) {
+				if(quiz.size()-1 > i){
+					i++;
+					nextBtn.setVisibility(View.INVISIBLE);
+					setQuiz();
+				}
+				
+				
+			}
+		});
+		
 		ans1.setOnClickListener(new CustomClick(ans1));
 		ans2.setOnClickListener(new CustomClick(ans2));
 		ans3.setOnClickListener(new CustomClick(ans3));
@@ -80,13 +97,11 @@ public class QuizFragment extends Fragment{
 		question.setText(quiz.get(i).getQstn());
 		ans1.setText(qtn[0]);
 		//Color.parseColor();
-	//	ans1.setBackgroundColor(color.background_light);
+
 		ans2.setText(qtn[1]);
-		//ans2.setBackgroundColor(color.background_light);
 		ans3.setText(qtn[2]);
-		//ans3.setBackgroundColor(color.background_light);
 		ans4.setText(qtn[3]);
-		//ans4.setBackgroundColor(color.background_light);
+
 	}
 
 	private ArrayList<Quiz> generateQuiz(String name){
@@ -154,11 +169,12 @@ public class QuizFragment extends Fragment{
 				b.setAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
 				b.startAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
 			}
+			
+			nextBtn.setVisibility(View.VISIBLE);
 
 			Log.v("Knapp trykket:", b.getText().toString());
 			if(quiz.size()-1 > i){
-				i++;
-				setQuiz();
+
 			}
 
 			else {

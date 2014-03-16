@@ -81,11 +81,13 @@
         <Button
             android:id="@+id/quiz_next_button"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="30dp"
+            android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/quiz_button4"
-            android:text="Neste" />
+            android:text="Neste"
+            android:visibility="invisible" />
+        	
 
     </RelativeLayout>
 	
