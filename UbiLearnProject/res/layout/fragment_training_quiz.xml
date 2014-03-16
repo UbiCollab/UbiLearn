@@ -78,6 +78,15 @@
             android:background="@android:color/holo_blue_bright"
             />
 
+        <Button
+            android:id="@+id/quiz_next_button"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/quiz_button4"
+            android:text="Neste" />
+
     </RelativeLayout>
 	
 </LinearLayout>

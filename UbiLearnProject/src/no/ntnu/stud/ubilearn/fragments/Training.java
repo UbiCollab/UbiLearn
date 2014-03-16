@@ -57,7 +57,7 @@ public class Training extends Fragment {
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 		
-		if(User.getInstance().getPoints()>10){
+		if(User.getInstance().getPoints()>=10){
 			Toast.makeText(getActivity(), "Congratulations, you are now in level 2", Toast.LENGTH_SHORT).show();
 			root = inflater.inflate(R.layout.fragment_training_level2, null);
 			sv = (ScrollView) root.findViewById(R.id.training_scroll);

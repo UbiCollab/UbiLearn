@@ -40,6 +40,7 @@ public class QuizFragment extends Fragment{
 	private Button ans3;
 	private Button ans4;
 	private int points;
+	private int correctCounter = 0;
 
 	public QuizFragment(){
 
@@ -142,6 +143,7 @@ public class QuizFragment extends Fragment{
 		public void onClick(View v) {
 
 			if(quiz.get(i).checkAnswer(b.getText().toString())){
+				correctCounter++;
 				Log.v("tekst", b.getText().toString());
 				Toast.makeText(getActivity(), "riktig", Toast.LENGTH_SHORT).show();
 				b.setAnimation(QuizAnimation.correctAnimation(b, getActivity()));
@@ -162,10 +164,11 @@ public class QuizFragment extends Fragment{
 			else {
 				final Dialog dialog = new Dialog(getActivity());
 				dialog.setContentView(R.layout.fragment_finish_quiz);
-
+				
 
 				Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
-
+				TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
+				correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
 				ok.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -183,9 +186,6 @@ public class QuizFragment extends Fragment{
 			}
 		}
 
-	}
-	public int getPoints(){
-		return this.points;
 	}
 
 }

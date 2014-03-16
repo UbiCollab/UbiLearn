@@ -10,6 +10,12 @@
         android:layout_height="wrap_content"
         android:text="Ingen flere spørsmål igjen" />
 
+    <TextView
+        android:id="@+id/quiz_spm_correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spørsmål du klarte var: " />
+
     <Button
         android:id="@+id/finish_quiz_button"
         android:layout_width="wrap_content"
