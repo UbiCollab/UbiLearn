@@ -9,15 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.R;
-import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.patientcase.Quiz;
 import no.ntnu.stud.ubilearn.patientcase.QuizAnimation;
-import android.R.color;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

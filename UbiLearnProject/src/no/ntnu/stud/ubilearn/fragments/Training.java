@@ -1,7 +1,5 @@
 package no.ntnu.stud.ubilearn.fragments;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
@@ -9,13 +7,6 @@ import no.ntnu.stud.ubilearn.User;
 
 
 import no.ntnu.stud.ubilearn.models.Patient;
-import no.ntnu.stud.ubilearn.patientcase.Quiz;
-
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.os.Bundle;
 
 import android.app.Dialog;
