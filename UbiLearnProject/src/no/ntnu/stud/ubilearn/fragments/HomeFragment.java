@@ -45,7 +45,9 @@ public class HomeFragment extends Fragment
 		List<String> listName		= new ArrayList<String>();
 		List<String> listMedal		= new ArrayList<String>();
 		List<String> listScore		= new ArrayList<String>();
-				
+		
+		BufferedReader		_bufferedReader		= null;
+		
 		
 		// Here we read the data from the textfile.
 		try
@@ -57,15 +59,15 @@ public class HomeFragment extends Fragment
 					getResources().openRawResource(R.raw.userdata);
 			InputStreamReader inputStreamReader =
 					new InputStreamReader(inputStream);
-			BufferedReader bufferedReader =
+			_bufferedReader =
 					new BufferedReader(inputStreamReader);
 				
 			
-			name 			= bufferedReader.readLine();
-			status			= bufferedReader.readLine();
-			achievements	= bufferedReader.readLine();
-			unlockedCases	= bufferedReader.readLine();
-			lockedCases		= bufferedReader.readLine();
+			name 			= _bufferedReader.readLine();
+			status			= _bufferedReader.readLine();
+			achievements	= _bufferedReader.readLine();
+			unlockedCases	= _bufferedReader.readLine();
+			lockedCases		= _bufferedReader.readLine();
 			
 			
 			// TODO: Color is supposed to separate locked from unlocked cases.
@@ -81,7 +83,7 @@ public class HomeFragment extends Fragment
 			// scores to the fragment_home.xml.
 			
 			// Read a line to see if we have data for a case
-			caseData = bufferedReader.readLine();
+			caseData = _bufferedReader.readLine();
 			
 			
 			// TODO: Unfinished. Add data dynamically...
@@ -106,13 +108,30 @@ public class HomeFragment extends Fragment
 				listMedal.add(splitStr[1]);
 				listScore.add(splitStr[2] + "/" + splitStr[3]);
 								
-				caseData			= bufferedReader.readLine();
+				caseData			= _bufferedReader.readLine();
 			}
 		}
 		catch(IOException exception)
 		{
 			// TODO: Replace with a dialog box and handle the error better.
 			System.out.println("Problems reading text file!");
+		}
+		/**
+		 * We must ensure that the file is closed after used.
+		 */
+		finally
+		{
+			try
+			{
+				if(_bufferedReader != null)
+					{
+					_bufferedReader.close();
+					}
+			}
+			catch(IOException ioException)
+			{
+				System.out.println("Problems closing the file");
+			}
 		}
 		
 			
