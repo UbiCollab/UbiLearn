@@ -17,6 +17,14 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+        <!-- 
+        	Standard theme for the application.
+        	Try changing parent to android:Theme.Holo to se how the app looks in "holo dark".
+       	-->
+    <style name="StandardTheme" parent="android:Theme.Light">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
