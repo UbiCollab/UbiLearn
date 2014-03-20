@@ -24,18 +24,25 @@
         <item>Kvalme</item>
         <item>Annet</item>
     </string-array>
+    <string-array name="patients_list">
+        <item>Per Persen</item>
+        <item>Stian Stiansen</item>
+        <item>Daniel Danielsen</item>
+        <item>Tom Tomsen</item>
+        <item>Hans Hansen</item>
+    </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
-    <string name="exercises">Øvelser</string>
-    <string name="patients">Pasienter</string>
+    <string name="exercises">Vis alle øvelser</string>
+    <string name="myPatients">Mine pasienter:</string>
     <string name="exercise1">Armer opp</string>
     <string name="exercise2">Armer ned</string>
     <string name="exercise3">På huk</string>
     <string name="exercise4">På hodet</string>
-    <string name="choose_exercise">Velg øvelse</string>
+    <string name="choose_exercise">Velg øvelse:</string>
     <string name="title_activity_wiki_fragment">WikiFragment</string>
     <string name="title_activity_article_fragment">ArticleFragment</string>
     <string name="title">Title</string>
@@ -52,4 +59,5 @@
     <string name="user_case_medals">Medalje:</string>
     <string name="user_case_name">Case:</string>
     <string name="user_case_scores">Poengsum:</string>
+    
 </resources>

@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 
 public class PractiseFragment extends Fragment
 {
 	
-	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view =  inflater.inflate(R.layout.fragment_practise, container, false);
@@ -22,7 +23,6 @@ public class PractiseFragment extends Fragment
 		
 		enterExercises.setOnClickListener(new OnClickListener()
 		{
-			@Override
 			public void onClick(View vi)
 			{
 				Fragment fragment = new PractiseExercisesFragment();
@@ -30,17 +30,9 @@ public class PractiseFragment extends Fragment
 			}
 		});
 		
-		Button enterPatients = (Button) view.findViewById(R.id.patients_button);
-		
-		enterPatients.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View vi)
-			{
-				Fragment fragment = new PractisePatientsFragment();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
-			}
-		});
+		ListView listView = (ListView) view.findViewById(R.id.patientsList);
+		 
+	    String[] patients = getResources().getStringArray(R.array.patients_list);
 		
 		return view;
 	}	
