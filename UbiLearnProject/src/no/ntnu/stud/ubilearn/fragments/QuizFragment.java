@@ -62,10 +62,9 @@ public class QuizFragment extends Fragment{
 		ans3 = (Button)rootView.findViewById(R.id.quiz_button3);
 		ans4 = (Button)rootView.findViewById(R.id.quiz_button4);
 		nextBtn = (Button)rootView.findViewById(R.id.quiz_next_button);
-		
+
 		nextBtn.setOnClickListener(new OnClickListener() {
-			
-			
+
 			@Override
 			public void onClick(View v) {
 				if(quiz.size()-1 > i){
@@ -76,10 +75,10 @@ public class QuizFragment extends Fragment{
 				else {
 					setDialog();
 				}
-				
+
 			}
 		});
-		
+
 		ans1.setOnClickListener(new CustomClick(ans1));
 		ans2.setOnClickListener(new CustomClick(ans2));
 		ans3.setOnClickListener(new CustomClick(ans3));
@@ -92,6 +91,7 @@ public class QuizFragment extends Fragment{
 
 
 	private void setQuiz(){
+		enableButtons(true);
 		String[] qtn = quiz.get(i).getAlternatives();
 		question.setText(quiz.get(i).getQstn());
 		ans1.setText(qtn[0]);
@@ -100,13 +100,13 @@ public class QuizFragment extends Fragment{
 
 		ans2.setText(qtn[1]);
 		ans2.setBackgroundResource(android.R.drawable.btn_default);
-		
+
 		ans3.setText(qtn[2]);
 		ans3.setBackgroundResource(android.R.drawable.btn_default);
-		
+
 		ans4.setText(qtn[3]);
 		ans4.setBackgroundResource(android.R.drawable.btn_default);
-		
+
 
 	}
 
@@ -162,72 +162,57 @@ public class QuizFragment extends Fragment{
 
 		@Override
 		public void onClick(View v) {
-
+			enableButtons(false);
 			if(quiz.get(i).checkAnswer(b.getText().toString())){
 				correctCounter++;
 				Log.v("tekst", b.getText().toString());
-				Toast.makeText(getActivity(), "riktig", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "riktig svar", Toast.LENGTH_SHORT).show();
 				b.setAnimation(QuizAnimation.correctAnimation(b, getActivity()));
 				b.startAnimation(QuizAnimation.correctAnimation(b, getActivity()));
 
 			}
 			else {
+				Toast.makeText(getActivity(), "feil svar", Toast.LENGTH_SHORT).show();
 				b.setAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
 				b.startAnimation(QuizAnimation.wrongAnimation(b, getActivity()));
 			}
-			
+
 			nextBtn.setVisibility(View.VISIBLE);
 
 			Log.v("Knapp trykket:", b.getText().toString());
 
 
-//			if(quiz.size()-1 < i) {
-//				final Dialog dialog = new Dialog(getActivity());
-//				dialog.setContentView(R.layout.fragment_finish_quiz);
-//				dialog.setTitle("Ingen flere spørsmål igjen");
-//
-//				Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
-//				TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
-//				correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
-//				ok.setOnClickListener(new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View vi) {
-//
-//						Bundle data = new Bundle();
-//						Fragment fragment = new Training();
-//						getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
-//						dialog.dismiss();
-//					}
-//				});
-//
-//				dialog.show();
-//
-//			}
+
 		}
 
 	}
 	public void setDialog(){
-			final Dialog dialog = new Dialog(getActivity());
-			dialog.setContentView(R.layout.fragment_finish_quiz);
-			dialog.setTitle("Ingen flere spørsmål igjen");
+		final Dialog dialog = new Dialog(getActivity());
+		dialog.setContentView(R.layout.fragment_finish_quiz);
+		dialog.setTitle("Ingen flere spørsmål igjen");
 
-			Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
-			TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
-			correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
-			ok.setOnClickListener(new OnClickListener() {
+		Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
+		TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
+		correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
+		ok.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View vi) {
+			@Override
+			public void onClick(View vi) {
 
-					Bundle data = new Bundle();
-					Fragment fragment = new Training();
-					getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
-					dialog.dismiss();
-				}
-			});
+				Bundle data = new Bundle();
+				Fragment fragment = new Training();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
+				dialog.dismiss();
+			}
+		});
 
-			dialog.show();
+		dialog.show();
+	}
+	public void enableButtons(boolean b){
+		ans1.setEnabled(b);
+		ans2.setEnabled(b);
+		ans3.setEnabled(b);
+		ans4.setEnabled(b);
 	}
 
 }

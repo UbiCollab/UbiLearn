@@ -55,6 +55,7 @@ public class PatientCaseFragment extends Fragment{
 		pasientInfo.setText(_pasientInfo);
 		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
 		level.setRating(_level);
+		level.setEnabled(false);
 		Button next = (Button)rootView.findViewById(R.id.training_case_next);
 		
 		next.setOnClickListener(new OnClickListener() {//neste knapp til Quiz fra pasientCase
