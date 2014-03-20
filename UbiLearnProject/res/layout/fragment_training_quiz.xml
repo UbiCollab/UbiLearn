@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/holo_blue_dark" >
+    >
 
     <TextView
         android:id="@+id/textView1"
@@ -46,7 +46,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="17dp"
             android:text="Ja" 
-            android:background="@android:color/holo_blue_bright"/>
+            />
 
         <Button
             android:id="@+id/quiz_button2"
@@ -56,7 +56,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="14dp"
             android:text="Nei"
-            android:background="@android:color/holo_blue_bright" />
+            />
 
         <Button
             android:id="@+id/quiz_button3"
@@ -66,7 +66,7 @@
             android:layout_below="@+id/quiz_button1"
             android:layout_marginTop="14dp"
             android:text="Kanskje"
-            android:background="@android:color/holo_blue_bright" />
+             />
 
         <Button
             android:id="@+id/quiz_button4"
@@ -75,7 +75,7 @@
             android:layout_alignLeft="@+id/quiz_button2"
             android:layout_alignTop="@+id/quiz_button3"
             android:text="Vet ikke" 
-            android:background="@android:color/holo_blue_bright"
+           
             />
 
         <Button

@@ -30,7 +30,7 @@
         </activity>
         <activity
             android:name="no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment"
-            android:label="@string/title_activity_wiki_fragment" >
+            android:label="@string/title_activity_wiki_fragment">
         </activity>
         <activity
             android:name="no.ntnu.stud.ubilearn.fragments.wiki.ArticleFragment"
