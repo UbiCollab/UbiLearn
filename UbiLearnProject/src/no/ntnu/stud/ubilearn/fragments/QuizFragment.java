@@ -177,7 +177,7 @@ public class QuizFragment extends Fragment{
 			else {
 				final Dialog dialog = new Dialog(getActivity());
 				dialog.setContentView(R.layout.fragment_finish_quiz);
-				
+				dialog.setTitle("Ingen flere spørsmål igjen");
 
 				Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
 				TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);

@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
+        android:layout_height="50dp" >
+
 
         <Button
             android:id="@+id/training_popup_enter"
@@ -30,7 +30,8 @@
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/wikiSearchButton"
             android:text="Avbryt" />
-
     </RelativeLayout>
+
+
 
 </LinearLayout>

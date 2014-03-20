@@ -35,6 +35,7 @@ public class QuizAnimation {
 			//getResources().getColor()
 //			b.setBackgroundResource(getResources().getColor(R.color.yellow));
 			//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
+			b.setBackgroundResource(android.R.drawable.btn_default);
 		}
 	});
     
