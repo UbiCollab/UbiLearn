@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -222,7 +222,7 @@ public class HomeFragment extends Fragment
 		
 		
 		// We need to handle button clicks from the fragment_home.xml file. If
-		// the user clicks 'Opplæring' or 'Praksis' we should replace this
+		// the user clicks 'Opplï¿½ring' or 'Praksis' we should replace this
 		// fragment with the chosen one.
 		Button trainingButton = 
 				(Button)fragmentView.findViewById(R.id.homeButtonTraining);

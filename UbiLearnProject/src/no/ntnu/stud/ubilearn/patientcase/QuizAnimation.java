@@ -31,10 +31,7 @@ public class QuizAnimation {
 		
 		@Override
 		public void onAnimationEnd(Animation animation) {
-			//b.setBackgroundColor(c3);
-			//getResources().getColor()
-//			b.setBackgroundResource(getResources().getColor(R.color.yellow));
-			//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
+			
 		}
 	});
     
@@ -61,10 +58,7 @@ public class QuizAnimation {
 		
 		@Override
 		public void onAnimationEnd(Animation animation) {
-			//b.setBackgroundColor(c3);
-			//getResources().getColor()
-//			b.setBackgroundResource(getResources().getColor(R.color.yellow));
-			//b.setBackgroundColor(getResources().getColor(android.graphics.drawable);
+			
 		}
 	});
 	return animAlpha1;

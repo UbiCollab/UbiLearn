@@ -2,24 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="6" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingen flere spørsmål igjen" />
+        android:layout_weight="4"
+        />
 
     <TextView
         android:id="@+id/quiz_spm_correct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spørsmål du klarte var: " />
+        android:layout_weight="3"
+        android:text="Sporsmål du klarte var: "
+        
+         />
 
     <Button
         android:id="@+id/finish_quiz_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+  
+        style="@style/NormalButton"
         android:text="Ok" />
 
 </LinearLayout>

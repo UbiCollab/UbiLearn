@@ -101,7 +101,7 @@ public class Training extends Fragment {
 				dialog.dismiss();
 			}
 		});
-		dialog.setTitle(patientList.get(i).getName() + " sitt hus");
+		dialog.setTitle("Her bor " +patientList.get(i).getName());
 		dialog.show();
 	}
 	
