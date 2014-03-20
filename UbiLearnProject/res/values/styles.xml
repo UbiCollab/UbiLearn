@@ -34,7 +34,7 @@
  		 <item name="android:textSize">19sp</item>
  		 <item name="android:layout_margin">0dip</item>
  		<!--   <item name="android:background">#ff0000</item> -->
- 		<item name="@drawable/custom_button.xml"></item>
+ 		 <item name="@drawable/custom_button.xml"></item> 
 
 	 </style>
 

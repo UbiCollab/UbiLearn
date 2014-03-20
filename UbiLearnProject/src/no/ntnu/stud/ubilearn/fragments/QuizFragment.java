@@ -73,7 +73,9 @@ public class QuizFragment extends Fragment{
 					nextBtn.setVisibility(View.INVISIBLE);
 					setQuiz();
 				}
-				
+				else {
+					setDialog();
+				}
 				
 			}
 		});
@@ -93,11 +95,18 @@ public class QuizFragment extends Fragment{
 		String[] qtn = quiz.get(i).getAlternatives();
 		question.setText(quiz.get(i).getQstn());
 		ans1.setText(qtn[0]);
+		ans1.setBackgroundResource(android.R.drawable.btn_default);
 		//Color.parseColor();
 
 		ans2.setText(qtn[1]);
+		ans2.setBackgroundResource(android.R.drawable.btn_default);
+		
 		ans3.setText(qtn[2]);
+		ans3.setBackgroundResource(android.R.drawable.btn_default);
+		
 		ans4.setText(qtn[3]);
+		ans4.setBackgroundResource(android.R.drawable.btn_default);
+		
 
 	}
 
@@ -170,35 +179,55 @@ public class QuizFragment extends Fragment{
 			nextBtn.setVisibility(View.VISIBLE);
 
 			Log.v("Knapp trykket:", b.getText().toString());
-			if(quiz.size()-1 > i){
 
-			}
 
-			else {
-				final Dialog dialog = new Dialog(getActivity());
-				dialog.setContentView(R.layout.fragment_finish_quiz);
-				dialog.setTitle("Ingen flere spørsmål igjen");
-
-				Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
-				TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
-				correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
-				ok.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View vi) {
-
-						Bundle data = new Bundle();
-						Fragment fragment = new Training();
-						getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-
-			}
+//			if(quiz.size()-1 < i) {
+//				final Dialog dialog = new Dialog(getActivity());
+//				dialog.setContentView(R.layout.fragment_finish_quiz);
+//				dialog.setTitle("Ingen flere spørsmål igjen");
+//
+//				Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
+//				TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
+//				correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
+//				ok.setOnClickListener(new OnClickListener() {
+//
+//					@Override
+//					public void onClick(View vi) {
+//
+//						Bundle data = new Bundle();
+//						Fragment fragment = new Training();
+//						getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
+//						dialog.dismiss();
+//					}
+//				});
+//
+//				dialog.show();
+//
+//			}
 		}
 
+	}
+	public void setDialog(){
+			final Dialog dialog = new Dialog(getActivity());
+			dialog.setContentView(R.layout.fragment_finish_quiz);
+			dialog.setTitle("Ingen flere spørsmål igjen");
+
+			Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
+			TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
+			correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
+			ok.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View vi) {
+
+					Bundle data = new Bundle();
+					Fragment fragment = new Training();
+					getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
 	}
 
 }
