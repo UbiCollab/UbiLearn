@@ -12,8 +12,8 @@
         android:id="@+id/training_rel"
         android:background="@drawable/bakgrunn"
          >
-        
-            <ImageView
+         
+         <ImageView
             android:id="@+id/training_hus1"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -22,7 +22,7 @@
             android:layout_marginTop="32dp"
             android:contentDescription="1"
             android:onClick="houseClick"
-            android:src="@drawable/hus1" 
+            android:src="@drawable/hus1"
             />
 
         <ImageView
@@ -34,7 +34,7 @@
             android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
             android:contentDescription="2"
-            android:onClick="houseClick" 
+            android:onClick="houseClick"
             />
 
         <ImageView
