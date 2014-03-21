@@ -28,3 +28,6 @@ proguard/
 
 #OS generated  files
 .DS_Store
+
+#database.config
+database.properties
