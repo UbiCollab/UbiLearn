@@ -65,9 +65,9 @@ public class HomeFragment extends Fragment
 			
 			name 			= _bufferedReader.readLine();
 			status			= _bufferedReader.readLine();
-			achievements	= _bufferedReader.readLine();
+			achievements	= _bufferedReader.readLine(); 
 			unlockedCases	= _bufferedReader.readLine();
-			lockedCases		= _bufferedReader.readLine();
+			lockedCases		= _bufferedReader.readLine(); 
 			
 			
 			// TODO: Color is supposed to separate locked from unlocked cases.
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment
 		// We set the different TextViews in fragment_home.xml based on the
 		// values read from file.
 		TextView userName = 
-				(TextView)fragmentView.findViewById(R.id.homeUserName);
+				(TextView)fragmentView.findViewById(R.id.homeUserName); 
 		userName.setText(name);
 		
 		
@@ -146,7 +146,7 @@ public class HomeFragment extends Fragment
 		// possible. NB! This could have been calculated when data from a 
 		// case is saved.
 		TextView userStatus = 
-				(TextView)fragmentView.findViewById(R.id.homeStatus);
+				(TextView)fragmentView.findViewById(R.id.homeStatus); 
 		
 		
 		if(userTotalScore > 0)
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment
 			}
 			else if(percentageAccomplished < 86)
 			{
-				userStatus.setText(R.string.user_status_experienced);
+				userStatus.setText(R.string.user_status_experienced); 
 			}
 			else
 			{
@@ -173,11 +173,11 @@ public class HomeFragment extends Fragment
 				
 		
 		TextView userAchievement = 
-				(TextView)fragmentView.findViewById(R.id.homeAchievement);
+				(TextView)fragmentView.findViewById(R.id.homeAchievement); 
 		userAchievement.setText(achievements);
 		
 		TextView userUnlockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases);
+				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases); 
 		userUnlockedCases.setText(unlockedCases);
 		
 		TextView userLockedCases =
