@@ -1,5 +1,8 @@
 package no.ntnu.stud.ubilearn;
 
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -53,7 +56,8 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		//initializes Parse with its keys 
+		Parse.initialize(this, "y2KpGsOtyVwMXrseSGA7AxG75ntgfQuRFyMV6d2C", "h2v7Ew9KyBKFpDsxGz1E1jLXzJgNcm2CLN6ApPxp");
 		setContentView(R.layout.activity_login);
 		
 		// Set up the login form.
