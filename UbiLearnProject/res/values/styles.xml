@@ -17,6 +17,25 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+        <!-- 
+        	Standard theme for the application.
+        	Try changing parent to android:Theme.Holo to se how the app looks in "holo dark".
+       	-->
+    <style name="StandardTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:buttonStyle">@style/NormalButton</item>
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        
+    </style>
+            <!-- 
+        	Stil på standard knappene
+       	-->
+	 <style name="NormalButton" parent="android:style/Widget.Button">
+ 		 <item name="android:textSize">19sp</item>
+ 		 <item name="android:layout_margin">0dip</item>
+ 		<!--   <item name="android:background">#ff0000</item> -->
+
+	 </style>
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>

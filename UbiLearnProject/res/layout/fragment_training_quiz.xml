@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/holo_blue_dark" >
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="177dp"
-        android:layout_height="wrap_content"
-        android:text="Oppgave:"
-        android:textSize="25sp" />
+
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="5dp"
-        android:background="@android:color/black" >
+        android:layout_height="170dp"
+        android:layout_margin="10dp"
+
+        android:background="@drawable/my_border" >
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -27,56 +21,67 @@
 
             <TextView
                 android:id="@+id/question"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Hei er du der?" />
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hei er du der?"
+                android:layout_gravity="center"
+                android:textSize="18sp" />
         </FrameLayout>
     </FrameLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="0dp"
+        android:layout_weight="0.76"
+        android:orientation="vertical"
+        android:weightSum="5"
+        android:layout_margin="5dp" >
 
         <Button
             android:id="@+id/quiz_button1"
-            android:layout_width="170dp"
-            android:layout_height="130dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="17dp"
-            android:text="Ja" 
-            android:background="@android:color/holo_blue_bright"/>
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button" />
 
         <Button
             android:id="@+id/quiz_button2"
-            android:layout_width="170dp"
-            android:layout_height="130dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="14dp"
-            android:text="Nei"
-            android:background="@android:color/holo_blue_bright" />
+             android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button" />
 
         <Button
             android:id="@+id/quiz_button3"
-            android:layout_width="170dp"
-            android:layout_height="130dp"
-            android:layout_alignLeft="@+id/quiz_button1"
-            android:layout_below="@+id/quiz_button1"
-            android:layout_marginTop="14dp"
-            android:text="Kanskje"
-            android:background="@android:color/holo_blue_bright" />
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button" />
 
         <Button
             android:id="@+id/quiz_button4"
-            android:layout_width="170dp"
-            android:layout_height="130dp"
-            android:layout_alignLeft="@+id/quiz_button2"
-            android:layout_alignTop="@+id/quiz_button3"
-            android:text="Vet ikke" 
-            android:background="@android:color/holo_blue_bright"/>
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button" />
 
-    </RelativeLayout>
-	
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" 
+            android:weightSum="5" >
+           <Button
+            android:id="@+id/quiz_next_button"
+           
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+           	android:layout_margin="5dp"
+            android:text="Neste"
+            android:visibility="invisible" />
+
+        </LinearLayout>
+
+</LinearLayout>
+
+
 </LinearLayout>

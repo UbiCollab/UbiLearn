@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.*;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
-import android.app.Activity;
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

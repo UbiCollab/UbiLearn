@@ -9,12 +9,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@android:color/holo_blue_bright" >
+        android:layout_height="50dp" >
+
 
         <Button
             android:id="@+id/training_popup_enter"
-            style="@style/AppTheme"
+            style="@style/NormalButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -28,9 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/wikiSearchButton"
+			style="@style/NormalButton"
             android:text="Avbryt" />
-
     </RelativeLayout>
+
+
 
 </LinearLayout>

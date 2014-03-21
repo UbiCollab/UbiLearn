@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <Button
-        android:id="@+id/exercises_button"
-        android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+	
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/exercises" />
+        android:layout_margin="8dp" >
 
-    <Button
-        android:id="@+id/patients_button"
-        android:layout_width="wrap_content"
+   	 <Button
+   	     android:id="@+id/exercises_button"
+   	     android:layout_width="fill_parent"
+   	     android:layout_height="wrap_content"
+   	     android:text="@string/exercises" />
+   	 
+   	 </LinearLayout>
+   	 <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/exercises_button"
-        android:layout_below="@+id/exercises_button"
-        android:layout_marginTop="39dp"
-        android:text="@string/patients" />
+        android:layout_margin="8dp" >
+   	 
+   	     <TextView
+            android:id="@+id/patients_textView"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/myPatients"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+   	     
+   	 </LinearLayout>
+   	 <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" >
+   	 	
+   	    <ListView
+	        android:id="@+id/patientsList"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:entries="@array/patients_list" >
 
-</RelativeLayout>
+    	</ListView>
+   	 </LinearLayout>
+   	 
+</LinearLayout>

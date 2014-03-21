@@ -1,11 +1,18 @@
 package no.ntnu.stud.ubilearn;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
+import no.ntnu.stud.ubilearn.models.Patient;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -14,6 +21,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +36,7 @@ public class MainActivity extends Activity {
 	private ActionBarDrawerToggle drawerToggle;
 	private Fragment visibleFrag;
 	private int lastMenuPos = -1;
+	ArrayList<Patient> patientList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +54,9 @@ public class MainActivity extends Activity {
 		// set the adapter for the listview
 		HeaderAdapter adapter = new HeaderAdapter(this, drawerModels);
 		drawerView.setAdapter(adapter);
+		
+		generatePatients();
+		patientList = User.getInstance().getPatientList();
 
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
@@ -192,6 +204,43 @@ public class MainActivity extends Activity {
 			super.onDrawerClosed(view);
 			if(lastMenuPos>=0)
 				drawerView.setItemChecked(lastMenuPos, false);
+		}
+	}
+	private void generatePatients(){
+		String json = null;
+		ArrayList<Patient> temp = new ArrayList<Patient>();
+		try {
+			InputStream is = getAssets().open("pasient_info.json");
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+			
+			json = new String(buffer, "UTF-8");
+			
+		} catch (IOException ie) {
+			Log.e("ERROR I/O", "error reading patients file");
+		}
+		try {
+			JSONObject jsonObj = new JSONObject(json);
+			JSONArray patientArray = jsonObj.getJSONArray("pasienter");
+			
+			for (int i = 0; i < patientArray.length(); i++) {
+				JSONObject patientObj = (JSONObject) patientArray.get(i);
+				temp.add(new Patient
+						(patientObj.getString("name"), 
+						 patientObj.getString("age"), 
+						 patientObj.getString("gender"), 
+						 patientObj.getString("info"), 
+						 patientObj.getString("level")));
+						
+			}
+			
+			User.getInstance().setPatientList(temp);
+			
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("ERROR JSON", "error parsing json");
 		}
 	}
 }

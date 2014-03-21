@@ -1,11 +1,10 @@
 package no.ntnu.stud.ubilearn.patientcase;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+
+import no.ntnu.stud.ubilearn.User;
+
 
 import android.util.Log;
 
@@ -43,9 +42,12 @@ public class Quiz {
 	public boolean checkAnswer(String ans){
 		Log.v("ans", ans);
 		if(this.correct.equals(ans)){
-			Log.v("ans på plass 3", answers.get(3));
+			//Log.v("ans på plass 3", answers.get(3));
+			User.getInstance().addPoints();
+			System.out.println("antall poeng: "+ User.getInstance().getPoints());
 			return true;
 		}
 		return false;
 	}
+	
 }

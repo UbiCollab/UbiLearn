@@ -8,10 +8,10 @@
         android:id="@+id/case_PatientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:ems="10"
+
+       
         android:text="Tore På Sporet"
-        android:textAlignment="center"
+   
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:textSize="30dp"
         android:layout_margin="8dp"  >
@@ -48,7 +48,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
    		android:layout_marginBottom="20dp"
-        android:background="@android:color/black"
+        android:background="@drawable/my_border" 
          >
 
         <FrameLayout
@@ -81,18 +81,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="3"
-        android:layout_margin="8dp"  />
+        android:layout_margin="8dp"
+          />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.25"
+        android:weightSum="6"
          >
 
         <Button
             android:id="@+id/training_case_back"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="Tilbake"
             android:layout_margin="20dp" />
 
@@ -100,16 +103,11 @@
             android:id="@+id/training_case_next"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Neste" 
+            android:layout_weight="2"
+            android:text="Quiz" 
             android:layout_margin="20dp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.26"
-        android:orientation="vertical" >
 
-    </LinearLayout>
 
 </LinearLayout>

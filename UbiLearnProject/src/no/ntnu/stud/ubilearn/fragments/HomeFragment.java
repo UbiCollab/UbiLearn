@@ -7,10 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
-import android.app.AlertDialog;
+import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment 
 {
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
@@ -45,7 +45,9 @@ public class HomeFragment extends Fragment
 		List<String> listName		= new ArrayList<String>();
 		List<String> listMedal		= new ArrayList<String>();
 		List<String> listScore		= new ArrayList<String>();
-				
+		
+		BufferedReader		_bufferedReader		= null;
+		
 		
 		// Here we read the data from the textfile.
 		try
@@ -57,15 +59,15 @@ public class HomeFragment extends Fragment
 					getResources().openRawResource(R.raw.userdata);
 			InputStreamReader inputStreamReader =
 					new InputStreamReader(inputStream);
-			BufferedReader bufferedReader =
+			_bufferedReader =
 					new BufferedReader(inputStreamReader);
 				
 			
-			name 			= bufferedReader.readLine();
-			status			= bufferedReader.readLine();
-			achievements	= bufferedReader.readLine();
-			unlockedCases	= bufferedReader.readLine();
-			lockedCases		= bufferedReader.readLine();
+			name 			= _bufferedReader.readLine();
+			status			= _bufferedReader.readLine();
+			achievements	= _bufferedReader.readLine(); 
+			unlockedCases	= _bufferedReader.readLine();
+			lockedCases		= _bufferedReader.readLine(); 
 			
 			
 			// TODO: Color is supposed to separate locked from unlocked cases.
@@ -81,7 +83,7 @@ public class HomeFragment extends Fragment
 			// scores to the fragment_home.xml.
 			
 			// Read a line to see if we have data for a case
-			caseData = bufferedReader.readLine();
+			caseData = _bufferedReader.readLine();
 			
 			
 			// TODO: Unfinished. Add data dynamically...
@@ -106,7 +108,7 @@ public class HomeFragment extends Fragment
 				listMedal.add(splitStr[1]);
 				listScore.add(splitStr[2] + "/" + splitStr[3]);
 								
-				caseData			= bufferedReader.readLine();
+				caseData			= _bufferedReader.readLine();
 			}
 		}
 		catch(IOException exception)
@@ -114,12 +116,29 @@ public class HomeFragment extends Fragment
 			// TODO: Replace with a dialog box and handle the error better.
 			System.out.println("Problems reading text file!");
 		}
+		/**
+		 * We must ensure that the file is closed after used.
+		 */
+		finally
+		{
+			try
+			{
+				if(_bufferedReader != null)
+					{
+					_bufferedReader.close();
+					}
+			}
+			catch(IOException ioException)
+			{
+				System.out.println("Problems closing the file");
+			}
+		}
 		
 			
 		// We set the different TextViews in fragment_home.xml based on the
 		// values read from file.
 		TextView userName = 
-				(TextView)fragmentView.findViewById(R.id.homeUserName);
+				(TextView)fragmentView.findViewById(R.id.homeUserName); 
 		userName.setText(name);
 		
 		
@@ -127,7 +146,7 @@ public class HomeFragment extends Fragment
 		// possible. NB! This could have been calculated when data from a 
 		// case is saved.
 		TextView userStatus = 
-				(TextView)fragmentView.findViewById(R.id.homeStatus);
+				(TextView)fragmentView.findViewById(R.id.homeStatus); 
 		
 		
 		if(userTotalScore > 0)
@@ -140,7 +159,7 @@ public class HomeFragment extends Fragment
 			}
 			else if(percentageAccomplished < 86)
 			{
-				userStatus.setText(R.string.user_status_experienced);
+				userStatus.setText(R.string.user_status_experienced); 
 			}
 			else
 			{
@@ -154,11 +173,11 @@ public class HomeFragment extends Fragment
 				
 		
 		TextView userAchievement = 
-				(TextView)fragmentView.findViewById(R.id.homeAchievement);
+				(TextView)fragmentView.findViewById(R.id.homeAchievement); 
 		userAchievement.setText(achievements);
 		
 		TextView userUnlockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases);
+				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases); 
 		userUnlockedCases.setText(unlockedCases);
 		
 		TextView userLockedCases =
@@ -203,7 +222,7 @@ public class HomeFragment extends Fragment
 		
 		
 		// We need to handle button clicks from the fragment_home.xml file. If
-		// the user clicks 'Opplæring' or 'Praksis' we should replace this
+		// the user clicks 'Opplï¿½ring' or 'Praksis' we should replace this
 		// fragment with the chosen one.
 		Button trainingButton = 
 				(Button)fragmentView.findViewById(R.id.homeButtonTraining);
@@ -211,6 +230,7 @@ public class HomeFragment extends Fragment
 		
 		trainingButton.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View view)
 			{
 				// Here call the getActivity method from class MainActivity to
@@ -227,6 +247,7 @@ public class HomeFragment extends Fragment
 		
 		practiseButton.setOnClickListener(new OnClickListener()
 		{
+			@Override
 			public void onClick(View view)
 			{
 				// Here call the getActivity method from class MainActivity to
