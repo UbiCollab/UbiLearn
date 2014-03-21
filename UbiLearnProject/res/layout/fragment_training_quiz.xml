@@ -66,18 +66,17 @@
             android:text="Button" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1" 
-            android:weightSum="5" >
-           <Button
-            android:id="@+id/quiz_next_button"
-           
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-           	android:layout_margin="5dp"
-            android:text="Neste"
-            android:visibility="invisible" />
+            android:layout_weight="1"
+            android:layout_gravity="right" >
+
+            <Button
+                android:id="@+id/quiz_next_button"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Neste"
+                android:visibility="invisible" />
 
         </LinearLayout>
 
