@@ -26,7 +26,15 @@
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:text="@string/myPatients"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+             />
+
+   	     <ImageButton
+   	         android:id="@+id/imageButton1"
+   	         android:layout_width="24dp"
+   	         android:layout_height="21dp"
+   	         android:src="@drawable/ic_action_new"
+   	         android:layout_gravity="right" />
    	     
    	 </LinearLayout>
    	 <LinearLayout
@@ -38,7 +46,9 @@
 	        android:id="@+id/patientsList"
     	    android:layout_width="match_parent"
     	    android:layout_height="wrap_content"
-    	    android:entries="@array/patients_list" >
+    	    android:entries="@array/patients_list"
+    	  	
+    	    >
 
     	</ListView>
    	 </LinearLayout>
