@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp" >
+
+    <TextView
+        android:id="@+id/practise_patient_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pasientnavn"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/practise_patient_info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rediger pasient" />
+
+    <Button
+        android:id="@+id/practise_patient_exersiceProgram_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Treningsprogram" />
+
+    <Button
+        android:id="@+id/practise_patient_SPPB_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SPPB testing" />
+
+</LinearLayout>
