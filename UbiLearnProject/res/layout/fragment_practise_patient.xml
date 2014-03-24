@@ -3,7 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="10dp" >
+    android:layout_margin="15dp" >
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_action_edit"
+        android:layout_gravity="right" />
 
     <TextView
         android:id="@+id/practise_patient_name"
@@ -12,22 +19,97 @@
         android:text="Pasientnavn"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/practise_patient_info_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rediger pasient" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/practice_patient_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alder: " />
+
+        <EditText
+            android:id="@+id/practise_patient_age_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/practice_patient_problems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Problemområder: " />
+
+        <EditText
+            android:id="@+id/practice_patient_problems_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/practice_patient_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Annet: " />
+
+        <EditText
+            android:id="@+id/practice_patient_other_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/practise_patient_SPPB_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultat SPPB: " />
+
+        <TextView
+            android:id="@+id/practice_patient_SPPB_automatic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="skrøpelig" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/practise_patient_exersiceProgram_button"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Treningsprogram" />
 
     <Button
-        android:id="@+id/practise_patient_SPPB_button"
+        android:id="@+id/practice_SPPB_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SPPB testing" />
+        android:text="SPPB test" />
 
 </LinearLayout>
