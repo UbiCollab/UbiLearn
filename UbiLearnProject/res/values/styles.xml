@@ -24,6 +24,7 @@
        	-->
     <style name="StandardTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:buttonStyle">@style/NormalButton</item>
+      <!--      <item name = "android:textStyle">@style/NormalTextStyle</item> --> 
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         
     </style>
@@ -34,8 +35,18 @@
  		 <item name="android:textSize">19sp</item>
  		 <item name="android:layout_margin">0dip</item>
  		<!--   <item name="android:background">#ff0000</item> -->
-
 	 </style>
+	             <!-- 
+        	Stil på standard tekst, to be continiued
+       	-->
+	 
+   <style name = "NormalTextStyle" parent="@android:style/TextAppearance"> 
+        <item name="android:textSize">20sp</item> 
+        <item name="android:textColor">#33B5E5</item> 
+     <!--    <item name="android:textStyle">bold</item>--> 
+     <!--    <item name="android:typeface">sans</item>--> 
+	 
+	 </style> 	
 
     <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
