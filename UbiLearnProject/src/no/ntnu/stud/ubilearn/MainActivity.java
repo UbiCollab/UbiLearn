@@ -167,12 +167,10 @@ public class MainActivity extends Activity {
 		default: return; //when a field is pushed that does not link to a fragment. e.g a header
 		}
 		
+		clearBackstack();
 		
 		FragmentManager manager = getFragmentManager();
-		//checks if there are older items in the backstack
-		if(manager.getBackStackEntryCount()>1)
-			//clears the backstack
-			manager.popBackStack(manager.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		
 		//sets the homefragment to the only fragment in the backstack
 		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 		//changes to the new fragment
@@ -185,8 +183,20 @@ public class MainActivity extends Activity {
 		activityView.closeDrawer(drawerView);
 	}
 	
+	private void clearBackstack(){
+		FragmentManager manager = getFragmentManager();
+		//checks if there are older items in the backstack
+		if(manager.getBackStackEntryCount()>1)
+			//clears the backstack
+			manager.popBackStack(manager.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+	}
+	
 	private void logout() {
+		
+		clearBackstack();
+		
 		Intent intent = new Intent(this, LoginActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    startActivity(intent);
 	}
 	public void houseClick(View v){
