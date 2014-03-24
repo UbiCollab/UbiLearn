@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.parse.ParseUser;
+
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
@@ -194,7 +196,7 @@ public class MainActivity extends Activity {
 	private void logout() {
 		
 		clearBackstack();
-		
+		ParseUser.logOut();
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    startActivity(intent);

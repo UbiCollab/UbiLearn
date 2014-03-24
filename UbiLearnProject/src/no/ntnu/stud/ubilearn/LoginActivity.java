@@ -54,18 +54,10 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		user = new ParseUser();
-//		 user.setUsername("test@test.com");
-//		 user.setEmail("test@test.com");
-//		 user.setPassword("test");
-//		 user.signUpInBackground(new SignUpCallback() {
-//			@Override
-//			public void done(ParseException e) {
-//				if (e == null) {
-//				}else{
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+		//checks if the user is already logged in
+		if (ParseUser.getCurrentUser() != null) {
+			startMain(null);
+		}
 		
 		// Set up the login form.
 		mEmailView = (EditText) findViewById(R.id.email);
