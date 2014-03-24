@@ -1,7 +1,11 @@
 package no.ntnu.stud.ubilearn;
 
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,6 +15,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -18,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -34,20 +41,36 @@ public class LoginActivity extends Activity {
 	private View mLoginFormView;
 	private View mLoginStatusView;
 	private TextView mLoginStatusMessageView;
+	private ParseUser user;
+	private Activity pointerHax;
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		pointerHax = this;
 		//initializes Parse with its keys 
 		Parse.initialize(this, "y2KpGsOtyVwMXrseSGA7AxG75ntgfQuRFyMV6d2C", "h2v7Ew9KyBKFpDsxGz1E1jLXzJgNcm2CLN6ApPxp");
 		setContentView(R.layout.activity_login);
+		
+		user = new ParseUser();
+//		 user.setUsername("test@test.com");
+//		 user.setEmail("test@test.com");
+//		 user.setPassword("test");
+//		 user.signUpInBackground(new SignUpCallback() {
+//			@Override
+//			public void done(ParseException e) {
+//				if (e == null) {
+//				}else{
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 		
 		// Set up the login form.
 		mEmailView = (EditText) findViewById(R.id.email);
 		mEmailView.setText(mEmail);
 		
-	
 		
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView
@@ -56,7 +79,7 @@ public class LoginActivity extends Activity {
 					public boolean onEditorAction(TextView textView, int id,
 							KeyEvent keyEvent) {
 						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
+							login(false);
 							return true;
 						}
 						return false;
@@ -71,13 +94,19 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						attemptLogin();
+						login(false);
 					}
 				});
+		findViewById(R.id.register_button).setOnClickListener(new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				login(true);
+			}
+		});
 	}
 	
 	//used by skip button
-	public void sendMessage(View view) 
+	public void startMain(View view) 
 	{
 	    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -93,10 +122,9 @@ public class LoginActivity extends Activity {
 
 	/**
 	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
+	 * If singUp is true, signup will be performed instead of login. 
 	 */
-	public void attemptLogin() {
+	public void login(boolean signUp) {
 
 		// Reset errors.
 		mEmailView.setError(null);
@@ -138,9 +166,55 @@ public class LoginActivity extends Activity {
 		} else {
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
+			if (!signUp) {
+				attemptLogin();							
+			}else {
+				attemptSignup();
+			}
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
 		}
+	}
+
+	private void attemptLogin() {
+		
+		ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
+			
+			@Override
+			public void done(ParseUser user, ParseException e) {
+				if (e == null) {
+					startMain(null);
+				}else{
+					showProgress(false);
+					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+//		try {
+//			ParseUser.logIn(mEmail, mPassword);
+//		} catch (ParseException e) {
+//			return false;
+//		}
+//		return true;
+	}
+
+	private void attemptSignup() {
+		user.setUsername(mEmail);
+		user.setEmail(mEmail);
+		user.setPassword(mPassword);
+		user.signUpInBackground(new SignUpCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if (e == null) {
+					Toast.makeText(pointerHax, "Registration successful", Toast.LENGTH_LONG).show();
+					startMain(null);
+				}else{
+					showProgress(false);
+					Toast.makeText(pointerHax, "Registration unsuccessful", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 	}
 
 	/**

@@ -59,5 +59,6 @@
     <string name="user_case_medals">Medalje:</string>
     <string name="user_case_name">Case:</string>
     <string name="user_case_scores">Poengsum:</string>
+    <string name="register">Register</string>
     
 </resources>
