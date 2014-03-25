@@ -1,9 +1,12 @@
 package no.ntnu.stud.ubilearn;
 
+import no.ntnu.stud.ubilearn.parse.SyncContent;
+
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
@@ -55,7 +58,6 @@ public class LoginActivity extends Activity {
 		//initializes Parse with its keys 
 		Parse.initialize(this, "y2KpGsOtyVwMXrseSGA7AxG75ntgfQuRFyMV6d2C", "h2v7Ew9KyBKFpDsxGz1E1jLXzJgNcm2CLN6ApPxp");
 		setContentView(R.layout.activity_login);
-		
 		user = new ParseUser();
 		//checks if the user is already logged in
 		if (ParseUser.getCurrentUser() != null) {

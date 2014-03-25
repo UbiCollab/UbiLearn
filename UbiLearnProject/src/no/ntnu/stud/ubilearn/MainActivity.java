@@ -15,6 +15,7 @@ import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
     	getActionBar().setHomeButtonEnabled(true);
     	
     	getFragmentManager().beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
-	    
+    	
 	}
 	@Override
 	protected void onResume(){

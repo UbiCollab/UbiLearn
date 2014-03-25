@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.fragments.wiki;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
