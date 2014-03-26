@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		pointerHax = this;
 		//initializes Parse with its keys 
-		Parse.initialize(this, "y2KpGsOtyVwMXrseSGA7AxG75ntgfQuRFyMV6d2C", "h2v7Ew9KyBKFpDsxGz1E1jLXzJgNcm2CLN6ApPxp");
+		Parse.initialize(this, "LSFbjJtg93wCMZGCbVibMVL2cSnl0mq7OTaEqm7W", "TuxF6aioePOXrBROvhbwrBJ2Z4kOb5PGMoXyU8lo");
 		setContentView(R.layout.activity_login);
 		user = new ParseUser();
 		//checks if the user is already logged in
