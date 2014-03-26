@@ -1,6 +1,11 @@
 package no.ntnu.stud.ubilearn.db;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import no.ntnu.stud.ubilearn.fragments.wiki.Article;
+import no.ntnu.stud.ubilearn.fragments.wiki.Category;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -49,6 +54,18 @@ public class HandbookDAO extends DAO {
 		return article;
 		
 		
+	}
+	
+	public List<Category> getHandbook(){
+		HashMap<Integer,Category> categories = new HashMap<Integer, Category>();
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
+		
+		
+		
+		
+		
+		
+		return new ArrayList<Category>(categories.values());
 	}
 	
 	

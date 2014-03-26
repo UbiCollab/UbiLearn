@@ -32,8 +32,8 @@ public class WikiFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position,long arg3) {
 			
-				if (listItems.get(position) instanceof Catagory) {
-					Catagory cat = (Catagory) listItems.get(position);
+				if (listItems.get(position) instanceof Category) {
+					Category cat = (Category) listItems.get(position);
 					if (cat.hasSubs()) {
 						WikiFragment handbook = new WikiFragment();
 						handbook.setListItems(cat.getSub());
@@ -68,16 +68,16 @@ public class WikiFragment extends Fragment {
 			sub.add(new Article("Article 3",
 					getResources().getString(R.string.gibberish)));
 			listItems = new ArrayList<WikiItem>();
-			listItems.add(new Catagory("Category 1", sub));
-			listItems.add(new Catagory("Category 2", sub));
-			listItems.add(new Catagory("Category 3", sub));
-			listItems.add(new Catagory("Category 4", sub));
-			listItems.add(new Catagory("Category 5", sub));
-			listItems.add(new Catagory("Category 6", sub));
-			listItems.add(new Catagory("Category 7", sub));
-			listItems.add(new Catagory("Category 8", sub));
-			listItems.add(new Catagory("Category 9", sub));
-			listItems.add(new Catagory("Category 10", sub));
+			listItems.add(new Category("Category 1", sub));
+			listItems.add(new Category("Category 2", sub));
+			listItems.add(new Category("Category 3", sub));
+			listItems.add(new Category("Category 4", sub));
+			listItems.add(new Category("Category 5", sub));
+			listItems.add(new Category("Category 6", sub));
+			listItems.add(new Category("Category 7", sub));
+			listItems.add(new Category("Category 8", sub));
+			listItems.add(new Category("Category 9", sub));
+			listItems.add(new Category("Category 10", sub));
 		}
 	}
 }
