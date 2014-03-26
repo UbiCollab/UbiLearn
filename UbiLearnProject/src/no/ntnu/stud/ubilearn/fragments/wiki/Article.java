@@ -12,6 +12,7 @@ public class Article extends WikiItem{
 	private String title;
 	private String content;
 	private Date createdAt;
+	private long parentId;
 	
 
 	public Article(String name, String text) {
@@ -19,13 +20,14 @@ public class Article extends WikiItem{
 		this.text = text;
 	}
 
-	public Article(long id, String objectId, String title, String content, Date createdAt) {
+	public Article(long id, String objectId, String title, String content, Date createdAt, long parentId) {
 		super();
 		this.id = id;
 		this.objectId = objectId;
 		this.title = title;
 		this.content = content;
 		this.createdAt = createdAt;
+		this.parentId = parentId;
 	}
 
 	@Override
@@ -56,6 +58,8 @@ public class Article extends WikiItem{
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	
+	public long getParentId(){
+		return parentId;
+	}
 	
 }
