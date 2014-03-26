@@ -31,6 +31,11 @@ public class HandbookDAO extends DAO {
 		
 		return articleId;
 	}
+	public void insertArticles(List<Article> articles){	
+		for (Article article : articles) {
+			insertArticle(article);
+		}	
+	}
 	
 	public Article getArticle(long id){
 		
@@ -130,7 +135,37 @@ public class HandbookDAO extends DAO {
 		else
 			return -1;
 	}
+	
+	public long insertCategory(Category category){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHandler.KEY_ID, category.getId());
+		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
+		values.put(DatabaseHandler.KEY_TITLE, category.getTitle());
+		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(category.getCreatedAt()));
+		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
+		long categoryId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
+		return categoryId;
+	}
+	public void insertCategories(List<Category> categories){
+		for (Category category : categories) {
+			insertCategory(category);
+		}
+	}
+	public Category getCategory(long id){
+		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
+	            + DatabaseHandler.KEY_ID + " = " + id;
+		
+		Log.i(LOG, query);
+		
+		Cursor result = database.rawQuery(query, null);
+		
+		if(result.moveToFirst())
+			return getCategory(result);
+		else 
+			return null;
+	}
+	
 	private Category getCategory(Cursor result){
 		long id = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
