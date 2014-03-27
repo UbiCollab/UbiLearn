@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class PractiseBalanceFragment extends Fragment {
@@ -38,11 +40,19 @@ public class PractiseBalanceFragment extends Fragment {
 		
 		final TextView titleField = (TextView) view.findViewById(R.id.titleField);
 		
+		final ImageView	imageField = (ImageView) view.findViewById(R.id.imageField);
+		
+		final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+		
+		progressBar.setMax(10);
+		progressBar.setProgress(10);
+		
 		final CountDownTimer timer = new CountDownTimer(10000, 1000)
 		{
 			public void onTick(long millisUntilFinished)
 			{
-				counterField.setText(" " + millisUntilFinished / 1000);
+				//counterField.setText(" " + millisUntilFinished / 1000);
+				progressBar.setProgress((int) (millisUntilFinished / 1000));
 			}
 			
 			public void onFinish()
@@ -57,10 +67,12 @@ public class PractiseBalanceFragment extends Fragment {
 				switch(state) {
 					case 1:
 						titleField.setText("SEMI-TANDEM");
+						imageField.setImageResource(R.drawable.semi2);
 						startStopButton.setEnabled(true);
 						break;
 					case 2:
 						titleField.setText("TANDEM");
+						imageField.setImageResource(R.drawable.tandem2);
 						startStopButton.setEnabled(true);
 						break;
 					case 3:
@@ -88,10 +100,12 @@ public class PractiseBalanceFragment extends Fragment {
 				switch(state) {
 				case 1:
 					titleField.setText("SEMI-TANDEM");
+					imageField.setImageResource(R.drawable.semi2);
 					startStopButton.setEnabled(true);
 					break;
 				case 2:
 					titleField.setText("TANDEM");
+					imageField.setImageResource(R.drawable.tandem2);
 					startStopButton.setEnabled(true);
 					break;
 				case 3:
