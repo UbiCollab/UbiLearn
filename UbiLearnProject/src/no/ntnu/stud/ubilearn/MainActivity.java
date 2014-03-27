@@ -46,6 +46,8 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		SyncContent.retriveNewContent(this);
 
 		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerView = (ListView) findViewById(R.id.left_drawer);
