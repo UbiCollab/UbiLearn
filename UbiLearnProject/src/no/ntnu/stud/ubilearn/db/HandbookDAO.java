@@ -155,11 +155,9 @@ public class HandbookDAO extends DAO {
 	public Category getCategory(long id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
 	            + DatabaseHandler.KEY_ID + " = " + id;
-		
 		Log.i(LOG, query);
 		
 		Cursor result = database.rawQuery(query, null);
-		
 		if(result.moveToFirst())
 			return getCategory(result);
 		else 
