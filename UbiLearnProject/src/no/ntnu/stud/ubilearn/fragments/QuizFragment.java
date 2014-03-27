@@ -93,7 +93,7 @@ public class QuizFragment extends Fragment{
 	private void setQuiz(){
 		enableButtons(true);
 		String[] qtn = quiz.get(i).getAlternatives();
-		question.setText(quiz.get(i).getQstn());
+		question.setText(quiz.get(i).getQuestion());
 		ans1.setText(qtn[0]);
 		ans1.setBackgroundResource(android.R.drawable.btn_default);
 		//Color.parseColor();

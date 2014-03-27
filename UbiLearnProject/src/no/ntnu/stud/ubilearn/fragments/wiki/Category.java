@@ -10,8 +10,8 @@ public class Category extends WikiItem{
 	private long id;
 	private String objectId;
 	private Date createdAt;
-	private String title;
 	private long parentId;
+	private String name;
 	
 	
 
@@ -22,14 +22,15 @@ public class Category extends WikiItem{
 	
 	
 	
-	public Category(long id, String objectId, String title, Date createdAt, long parentId) {
+	public Category(long id, String objectId, String name, Date createdAt, long parentId) {
 		super();
 		this.id = id;
 		this.objectId = objectId;
 		this.createdAt = createdAt;
-		this.title = title;
 		this.parentId = parentId;
 		subItems = new ArrayList<WikiItem>();
+		this.name = name;
+
 	}
 
 
@@ -57,12 +58,10 @@ public class Category extends WikiItem{
 		return createdAt;
 	}
 
-	public String getTitle() {
-		return title;
-	}
 	public long getParentId(){
 		return parentId;
 	}
+
 	@Override
 	protected void setIcon() {
 		this.icon = R.drawable.ic_navigation_next_item;
@@ -78,7 +77,20 @@ public class Category extends WikiItem{
 
 	public void addSubItem(WikiItem item) {
 		subItems.add(item);
-		
+	}
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	@Override
+	public void setName(String name) {
+		this.name = name;		
 	}
 	
+	@Override
+	public String toString(){
+		return name;
+	}
 }

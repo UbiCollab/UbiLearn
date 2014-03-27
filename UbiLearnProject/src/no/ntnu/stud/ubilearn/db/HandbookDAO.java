@@ -124,23 +124,23 @@ public class HandbookDAO extends DAO {
 		return new ArrayList<Category>(categories.values());
 	}
 	
-	private long isSubCategory(Category categorie) {
-		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY_ARTICLE_CATEGORY + 
-				"WHERE " + DatabaseHandler.KEY_CHILD_ARTICLE_ID + " = " + categorie.getId();
-		Log.i(LOG, query);
-		Cursor result = database.rawQuery(query, null);
-		
-		if(result.moveToFirst())
-			return result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_CATEGORY_ID));
-		else
-			return -1;
-	}
+//	private long isSubCategory(Category categorie) {
+//		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY_ARTICLE_CATEGORY + 
+//				"WHERE " + DatabaseHandler.KEY_CHILD_ARTICLE_ID + " = " + categorie.getId();
+//		Log.i(LOG, query);
+//		Cursor result = database.rawQuery(query, null);
+//		
+//		if(result.moveToFirst())
+//			return result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_CATEGORY_ID));
+//		else
+//			return -1;
+//	}
 	
 	public long insertCategory(Category category){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_ID, category.getId());
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
-		values.put(DatabaseHandler.KEY_TITLE, category.getTitle());
+		values.put(DatabaseHandler.KEY_NAME, category.getName());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(category.getCreatedAt()));
 		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
@@ -167,11 +167,11 @@ public class HandbookDAO extends DAO {
 	private Category getCategory(Cursor result){
 		long id = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
-		String title = result.getString(result.getColumnIndex(DatabaseHandler.KEY_TITLE));
+		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		long parentId = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_ID));
 		
-		Category category = new Category(id, objectId, title, stringToDate(createdAt), parentId);
+		Category category = new Category(id, objectId, name, stringToDate(createdAt), parentId);
 		return category;
 	}
 

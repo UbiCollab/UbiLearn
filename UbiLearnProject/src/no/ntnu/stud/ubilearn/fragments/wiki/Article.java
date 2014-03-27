@@ -16,7 +16,7 @@ public class Article extends WikiItem{
 	
 
 	public Article(String name, String text) {
-		this.name = name;
+//		this.name = name;
 		this.text = text;
 	}
 
@@ -61,5 +61,19 @@ public class Article extends WikiItem{
 	public long getParentId(){
 		return parentId;
 	}
+
+	@Override
+	public String getName() {
+		return title;
+	}
+
+	@Override
+	public void setName(String name) {
+		title = name;		
+	}
 	
+	@Override
+	public String toString(){
+		return title;
+	}
 }
