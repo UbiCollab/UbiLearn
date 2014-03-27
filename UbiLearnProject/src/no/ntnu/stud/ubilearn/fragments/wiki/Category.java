@@ -6,44 +6,47 @@ import java.util.Date;
 import no.ntnu.stud.ubilearn.R;
 
 public class Category extends WikiItem{
-	private ArrayList<WikiItem> sub;
-	private int id;
+	private ArrayList<WikiItem> subItems;
+	private long id;
 	private String objectId;
 	private Date createdAt;
-	private String title;
+	private long parentId;
+	private String name;
 	
 	
 
 	public Category(String name, ArrayList<WikiItem> sub){
 		this.name = name;
-		this.sub = sub;
+		this.subItems = sub;
 	}
 	
 	
 	
-	public Category(int id, String objectId, Date createdAt, String title) {
+	public Category(long id, String objectId, String name, Date createdAt, long parentId) {
 		super();
 		this.id = id;
 		this.objectId = objectId;
 		this.createdAt = createdAt;
-		this.title = title;
-		sub = new ArrayList<WikiItem>();
+		this.parentId = parentId;
+		subItems = new ArrayList<WikiItem>();
+		this.name = name;
+
 	}
 
 
 
 	public ArrayList<WikiItem> getSub(){
-		return sub;
+		return subItems;
 	}
 	
 	public boolean hasSubs(){
-		if (sub != null && !sub.isEmpty()) {
+		if (subItems != null && !subItems.isEmpty()) {
 			return true;
 		}
 		return false;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -55,12 +58,39 @@ public class Category extends WikiItem{
 		return createdAt;
 	}
 
-	public String getTitle() {
-		return title;
+	public long getParentId(){
+		return parentId;
 	}
+
 	@Override
 	protected void setIcon() {
 		this.icon = R.drawable.ic_navigation_next_item;
 	}
+
+
+	//havent decided how to represent a top level category
+	public boolean isTopLevel() {
+		return id == parentId || id == -1;
+	}
+
+
+
+	public void addSubItem(WikiItem item) {
+		subItems.add(item);
+	}
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	@Override
+	public void setName(String name) {
+		this.name = name;		
+	}
 	
+	@Override
+	public String toString(){
+		return name;
+	}
 }

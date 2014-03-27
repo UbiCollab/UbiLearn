@@ -9,12 +9,18 @@ import no.ntnu.stud.ubilearn.User;
 import android.util.Log;
 
 public class Quiz {
-	private String qstn;
+	private String question;
 	private ArrayList<String> answers; //answers[3] er riktig svar
 	private String correct;
+	private long id;
+	private String objectId;
+	/**
+	 * the the same as the id of a patient
+	 */
+	private long ownerId;
 	
 	public Quiz(String qstn, String ans1, String ans2, String ans3, String correct){
-		this.qstn = qstn;
+		this.question = qstn;
 		this.answers = new ArrayList<String>();
 		this.answers.add(ans1);
 		this.answers.add(ans2);
@@ -22,6 +28,8 @@ public class Quiz {
 		this.answers.add(correct);
 		this.correct = correct;//riktig svar
 	}
+	
+	
 	
 	public String[] getAlternatives(){
 		
@@ -35,8 +43,8 @@ public class Quiz {
 	}
 
 	
-	public String getQstn(){
-		return this.qstn;
+	public String getQuestion(){
+		return this.question;
 	}
 	
 	public boolean checkAnswer(String ans){

@@ -26,13 +26,26 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	private Timer t;
 	private int TimeCounter = 0;
 	TextView time;
+	TextView result1;
+	TextView result2;
 	boolean isTime = false;
+	String minSec;
+	int testCounter = 1;
+	ImageView resultAccept1;
+	ImageView resultAccept2;
+	TextView startTest;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View rootView = inflater.inflate(R.layout.fragment_practice_gangtest, container, false);
 
 		time = (TextView)rootView.findViewById(R.id.gangtest_tid);
+		result1 = (TextView)rootView.findViewById(R.id.gangtest_result1);
+		result2 = (TextView)rootView.findViewById(R.id.gangtest_result2);
+		resultAccept1 = (ImageView)rootView.findViewById(R.id.result1_accept);
+		resultAccept2 = (ImageView)rootView.findViewById(R.id.result2_accept);
+		startTest = (TextView)rootView.findViewById(R.id.start_test);
+		startTest.setText("Start test "+testCounter);
 		t = new Timer();
 
 		final ImageView imageView = (ImageView) rootView.findViewById(R.id.gangtest_timeButton);
@@ -69,9 +82,11 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 				Animation anim = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-
+				startTest.setText("Start test "+testCounter);
 				if(isTime == false){
 					start.setText("Stopp");
+					testCounter++;
+					
 					anim.setDuration(10000);
 					anim.setRepeatCount(Animation.INFINITE);
 					imageView.setAnimation(anim);
@@ -84,17 +99,18 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 
 							getActivity().runOnUiThread(new Runnable() {
 								public void run() {
-									String minSec = ((int)TimeCounter/10) + ":" + TimeCounter%10;
+									minSec = ((int)TimeCounter/10) + ":" + TimeCounter%10;
 									time.setText(minSec); // you can set it to a textView to show it to the user to see the time passing while he is writing.
 									TimeCounter++;
 								}
 							});
 						}
 					}, 100, 100);
+
 					isTime = true;
 				}else if(isTime){
+					results();
 					start.setText("Start");
-
 					try {
 						t.cancel();
 
@@ -108,8 +124,27 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			}
 		});
 
-
 		return rootView;
 	}
-
+	public void accept(ImageView acceptImage){
+		if(TimeCounter/10>10){
+			acceptImage.setVisibility(0x00000004);
+		}
+		else{
+			acceptImage.setVisibility(0x00000000);
+		}}
+	public void results(){
+		if(testCounter==2){
+			result1.setText("1. "+minSec);
+			accept(resultAccept1);
+			TimeCounter = 0;
+		}
+		if(testCounter==3){
+			result2.setText("2. "+minSec);
+			accept(resultAccept2);
+			startTest.setText("ferdig");
+		}
+	}
 }
+
+
