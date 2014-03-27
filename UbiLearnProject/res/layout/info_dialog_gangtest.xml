@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A. Første test av ganghastighet
+
+1. Dette er distansen du skal gå. Jeg vil at du skal gå til den andre enden, i din vanlige 
+
+hastighet, som om du gikk nedover gaten til butikken. 
+
+2. Demonstrer øvelsen for deltageren 
+
+3. Gå hele lengden, over og forbi teip‐markeringen før du stopper. Jeg kommer til å gå 
+
+sammen med deg. Føler du at dette er trygt? 
+
+4. La deltageren stå med begge føttene inntil startlinjen. 
+
+5. Når jeg vil du skal starte, sier jeg: ”Klar, start”. Når deltageren bekrefter å ha forstått 
+
+instruksjonen, si: ”Klar, start.” 
+
+6. Start tidtakingen idet deltageren begynner å gå. 
+
+7. Gå bak og til siden for deltageren. 
+
+8. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen. 
+
+B. Andre test av ganghastighet 
+
+1. Nå vil jeg at du skal gjøre det samme en gang til. Husk å gå i din vanlige hastighet, og 
+
+gå helt over og forbi teip‐markeringen. 
+
+2. La deltageren stå med begge føttene inntil startlinjen. 
+
+3. Når jeg vil at du starter, sier jeg: ”Klar, start”.  Når deltageren bekrefter å ha forstått 
+
+instruksjonen, si: ”Klar, start.” 
+
+4. Start tidtakingen idet deltageren begynner å gå. 
+
+5. Gå bak og til siden for deltageren. 
+
+6. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen." />
+
+    <Button 
+        android:id="@+id/info_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        />
+    
+</LinearLayout>
+    </ScrollView>

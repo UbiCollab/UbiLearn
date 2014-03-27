@@ -24,10 +24,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     // Common column names
     static final String KEY_ID = "id";
     static final String KEY_OBJECT_ID = "objectId";
+    static final String KEY_NAME = "name";
     static final String KEY_CREATED_AT = "createdAt";
-    static final String KEY_TITLE = "title";
+    static final String KEY_PARENT_ID = "parentId";
+
  
     // Article Table - column names
+    static final String KEY_TITLE = "title";
     static final String KEY_CONTENT = "content";
  
     // Category Table - column names
@@ -49,10 +52,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		
 		//the syntax for creating tables
 		final String CREATE_ARTICLE_TABLE = "CREATE TABLE " + TABLE_ARTICLE + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_TITLE + " TEXT," + KEY_CONTENT + " TEXT, "
+				+ KEY_CREATED_AT + " DATETIME" + KEY_PARENT_ID + " INTEGER" + ")";
+
+
+		final String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_NAME + " TEXT,"
 				+ KEY_CREATED_AT + " DATETIME" + ")";
 
-		final String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_TITLE + " TEXT,"
-				+ KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
 				+ KEY_CHILD_CATEGORY_ID + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
