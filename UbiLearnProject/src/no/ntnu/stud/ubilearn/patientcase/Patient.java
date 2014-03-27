@@ -1,11 +1,14 @@
 package no.ntnu.stud.ubilearn.patientcase;
 
 public class Patient {
+	
 	private String name;
 	private String age;
 	private String gender;
 	private String info;
 	private String level;
+	private long id;
+	private String objectId;
 	
 	
 	
