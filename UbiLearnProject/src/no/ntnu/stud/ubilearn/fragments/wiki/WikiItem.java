@@ -1,7 +1,7 @@
 package no.ntnu.stud.ubilearn.fragments.wiki;
 
 public abstract class WikiItem {
-	protected String name;
+//	protected String name;
 	protected int icon;
 	
 	public WikiItem() {
@@ -9,15 +9,11 @@ public abstract class WikiItem {
 	}
 	
 
-	public String getName() {
-		return name;
-	}
+	public abstract String getName();
 
 
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract void setName(String name);
 
 	
 	protected abstract void setIcon();
@@ -26,8 +22,8 @@ public abstract class WikiItem {
 		return icon;
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
+//	@Override
+//	public String toString() {
+//		return name;
+//	}
 }

@@ -15,7 +15,7 @@ public class Article extends WikiItem{
 	
 
 	public Article(String name, String text) {
-		this.name = name;
+//		this.name = name;
 		this.text = text;
 	}
 
@@ -56,6 +56,19 @@ public class Article extends WikiItem{
 	public Date getCreatedAt() {
 		return createdAt;
 	}
+
+	@Override
+	public String getName() {
+		return title;
+	}
+
+	@Override
+	public void setName(String name) {
+		title = name;		
+	}
 	
-	
+	@Override
+	public String toString(){
+		return title;
+	}
 }

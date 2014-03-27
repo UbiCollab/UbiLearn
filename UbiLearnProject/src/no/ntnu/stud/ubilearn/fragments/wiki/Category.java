@@ -10,23 +10,23 @@ public class Category extends WikiItem{
 	private int id;
 	private String objectId;
 	private Date createdAt;
-	private String title;
+	private String name;
 	
 	
 
 	public Category(String name, ArrayList<WikiItem> sub){
-		this.name = name;
+//		this.name = name;
 		this.sub = sub;
 	}
 	
 	
 	
-	public Category(int id, String objectId, Date createdAt, String title) {
+	public Category(int id, String objectId, Date createdAt, String name) {
 		super();
 		this.id = id;
 		this.objectId = objectId;
 		this.createdAt = createdAt;
-		this.title = title;
+		this.name = name;
 		sub = new ArrayList<WikiItem>();
 	}
 
@@ -55,12 +55,26 @@ public class Category extends WikiItem{
 		return createdAt;
 	}
 
-	public String getTitle() {
-		return title;
-	}
 	@Override
 	protected void setIcon() {
 		this.icon = R.drawable.ic_navigation_next_item;
 	}
+
+
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+
+	@Override
+	public void setName(String name) {
+		this.name = name;		
+	}
 	
+	@Override
+	public String toString(){
+		return name;
+	}
 }
