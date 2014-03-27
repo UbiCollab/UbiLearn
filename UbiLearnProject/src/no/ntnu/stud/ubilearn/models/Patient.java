@@ -1,20 +1,32 @@
 package no.ntnu.stud.ubilearn.models;
 
 public class Patient {
+	
 	private String name;
 	private String age;
 	private String gender;
 	private String info;
 	private String level;
+	private String objectId;
+	
+	
 	
 	public Patient(String name, String age, String gender, String info, String level){
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
 		this.info = info;
-		this.level = level;
+		this.level = level;	
 	}
-
+	public Patient(String objectId, String name, String age, String gender, String info, String level){
+		this.objectId = objectId;
+		this.name = name;
+		this.age = age;
+		this.gender = gender;
+		this.info = info;
+		this.level = level;	
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -53,6 +65,9 @@ public class Patient {
 
 	public void setLevel(String level) {
 		this.level = level;
+	}
+	public String getObjectId() {
+		return objectId;
 	}
 
 }

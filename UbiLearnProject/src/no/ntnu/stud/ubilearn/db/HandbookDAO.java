@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import no.ntnu.stud.ubilearn.fragments.wiki.Article;
-import no.ntnu.stud.ubilearn.fragments.wiki.Category;
+import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.Category;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

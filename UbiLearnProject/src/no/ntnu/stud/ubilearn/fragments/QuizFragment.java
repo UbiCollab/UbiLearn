@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.models.Patient;
-import no.ntnu.stud.ubilearn.patientcase.Quiz;
+import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.patientcase.QuizAnimation;
 import android.annotation.SuppressLint;
 import android.app.Dialog;

@@ -1,18 +1,15 @@
-package no.ntnu.stud.ubilearn.patientcase;
+package no.ntnu.stud.ubilearn.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import no.ntnu.stud.ubilearn.User;
-
-
 import android.util.Log;
 
 public class Quiz {
 	private String question;
 	private ArrayList<String> answers; //answers[3] er riktig svar
 	private String correct;
-	private long id;
 	private String objectId;
 	/**
 	 * the the same as the id of a patient
@@ -27,10 +24,18 @@ public class Quiz {
 		this.answers.add(ans3);
 		this.answers.add(correct);
 		this.correct = correct;//riktig svar
+	}	
+	
+	
+	public Quiz(String question, ArrayList<String> answers, String correct, String objectId, long ownerId) {
+		super();
+		this.question = question;
+		this.answers = answers;
+		this.correct = correct;
+		this.objectId = objectId;
+		this.ownerId = ownerId;
 	}
-	
-	
-	
+
 	public String[] getAlternatives(){
 		
 		ArrayList<String> shuff = answers;
@@ -47,6 +52,26 @@ public class Quiz {
 		return this.question;
 	}
 	
+	public ArrayList<String> getAnswers() {
+		return answers;
+	}
+
+
+	public String getCorrect() {
+		return correct;
+	}
+
+
+	public String getObjectId() {
+		return objectId;
+	}
+
+
+	public long getOwnerId() {
+		return ownerId;
+	}
+
+
 	public boolean checkAnswer(String ans){
 		Log.v("ans", ans);
 		if(this.correct.equals(ans)){

@@ -3,6 +3,9 @@ package no.ntnu.stud.ubilearn.fragments.wiki;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.os.Bundle;
 import android.app.Fragment;

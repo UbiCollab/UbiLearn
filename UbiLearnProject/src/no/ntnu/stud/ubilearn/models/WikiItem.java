@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.models;
 
 public abstract class WikiItem {
 //	protected String name;
