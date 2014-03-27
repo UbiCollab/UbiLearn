@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 import no.ntnu.stud.ubilearn.User;
 import android.util.Log;
@@ -14,7 +15,8 @@ public class Quiz {
 	/**
 	 * the the same as the id of a patient
 	 */
-	private long ownerId;
+	private String ownerId;
+	private Date createdAt;
 	
 	public Quiz(String qstn, String ans1, String ans2, String ans3, String correct){
 		this.question = qstn;
@@ -27,13 +29,14 @@ public class Quiz {
 	}	
 	
 	
-	public Quiz(String question, ArrayList<String> answers, String correct, String objectId, long ownerId) {
+	public Quiz(String question, ArrayList<String> answers, String correct, String objectId, String ownerId, Date createdAt) {
 		super();
 		this.question = question;
 		this.answers = answers;
 		this.correct = correct;
 		this.objectId = objectId;
 		this.ownerId = ownerId;
+		this.createdAt = createdAt;
 	}
 
 	public String[] getAlternatives(){
@@ -67,8 +70,11 @@ public class Quiz {
 	}
 
 
-	public long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
+	}
+	public Date getCreatedAt(){
+		return createdAt;
 	}
 
 

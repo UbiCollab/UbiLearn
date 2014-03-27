@@ -1,13 +1,16 @@
 package no.ntnu.stud.ubilearn.models;
 
+import java.util.Date;
+
 public class Patient {
 	
 	private String name;
 	private String age;
 	private String gender;
 	private String info;
-	private String level;
+	private int level;
 	private String objectId;
+	private Date createdAt;
 	
 	
 	
@@ -16,15 +19,16 @@ public class Patient {
 		this.age = age;
 		this.gender = gender;
 		this.info = info;
-		this.level = level;	
+		this.level = Integer.parseInt(level);	
 	}
-	public Patient(String objectId, String name, String age, String gender, String info, String level){
+	public Patient(String objectId, String name, String age, String gender, String info, int level, Date createdAt){
 		this.objectId = objectId;
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
 		this.info = info;
-		this.level = level;	
+		this.level = level;
+		this.createdAt = createdAt;
 	}
 	
 	public String getName() {
@@ -59,15 +63,18 @@ public class Patient {
 		this.info = info;
 	}
 
-	public String getLevel() {
+	public int getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 	public String getObjectId() {
 		return objectId;
+	}
+	public Date getCreatedAt(){
+		return createdAt;
 	}
 
 }

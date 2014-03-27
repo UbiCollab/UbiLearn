@@ -26,9 +26,9 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_PARENT_ID, article.getParentId());
 
 		
-		long articleId = database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
+		long rowId = database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
 		
-		return articleId;
+		return rowId;
 	}
 	public void insertArticles(List<Article> articles){	
 		for (Article article : articles) {
@@ -141,8 +141,8 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(category.getCreatedAt()));
 		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
-		long categoryId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
-		return categoryId;
+		long rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
+		return rowId;
 	}
 	public void insertCategories(List<Category> categories){
 		for (Category category : categories) {
