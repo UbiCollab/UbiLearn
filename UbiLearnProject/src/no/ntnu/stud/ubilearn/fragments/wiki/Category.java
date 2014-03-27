@@ -10,7 +10,7 @@ public class Category extends WikiItem{
 	private long id;
 	private String objectId;
 	private Date createdAt;
-	private long parentId;
+	private String parentId;
 	private String name;
 	
 	
@@ -22,9 +22,8 @@ public class Category extends WikiItem{
 	
 	
 	
-	public Category(long id, String objectId, String name, Date createdAt, long parentId) {
+	public Category(String objectId, String name, Date createdAt, String parentId) {
 		super();
-		this.id = id;
 		this.objectId = objectId;
 		this.createdAt = createdAt;
 		this.parentId = parentId;
@@ -58,7 +57,7 @@ public class Category extends WikiItem{
 		return createdAt;
 	}
 
-	public long getParentId(){
+	public String getParentId(){
 		return parentId;
 	}
 
@@ -70,7 +69,7 @@ public class Category extends WikiItem{
 
 	//havent decided how to represent a top level category
 	public boolean isTopLevel() {
-		return id == parentId || id == -1;
+		return objectId == null || objectId.equals("");
 	}
 
 

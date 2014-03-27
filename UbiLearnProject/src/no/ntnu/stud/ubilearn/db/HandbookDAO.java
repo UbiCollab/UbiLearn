@@ -19,7 +19,6 @@ public class HandbookDAO extends DAO {
 	
 	public long insertArticle(Article article){
 		ContentValues values = new ContentValues();
-		values.put(DatabaseHandler.KEY_ID, article.getId());
 		values.put(DatabaseHandler.KEY_OBJECT_ID, article.getObjectId());
 		values.put(DatabaseHandler.KEY_TITLE, article.getTitle());
 		values.put(DatabaseHandler.KEY_CONTENT, article.getContent());
@@ -37,10 +36,10 @@ public class HandbookDAO extends DAO {
 		}	
 	}
 	
-	public Article getArticle(long id){
+	public Article getArticle(String id){
 		
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_ARTICLE + " WHERE "
-	            + DatabaseHandler.KEY_ID + " = " + id;
+	            + DatabaseHandler.KEY_OBJECT_ID + " = " + id;
 		
 		Log.i(LOG, query);
 		
@@ -55,14 +54,13 @@ public class HandbookDAO extends DAO {
 	
 	private Article getArticle(Cursor result){
 		
-		long id = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String title = result.getString(result.getColumnIndex(DatabaseHandler.KEY_TITLE));
 		String content = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CONTENT));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
-		long parentId = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_ID));
+		String parentId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_PARENT_ID));
 		
-		Article article = new Article(id, objectId, title, content, stringToDate(createdAt), parentId);
+		Article article = new Article(objectId, title, content, stringToDate(createdAt), parentId);
 		return article;
 	}
 	
@@ -138,7 +136,6 @@ public class HandbookDAO extends DAO {
 	
 	public long insertCategory(Category category){
 		ContentValues values = new ContentValues();
-		values.put(DatabaseHandler.KEY_ID, category.getId());
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, category.getName());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(category.getCreatedAt()));
@@ -152,9 +149,9 @@ public class HandbookDAO extends DAO {
 			insertCategory(category);
 		}
 	}
-	public Category getCategory(long id){
+	public Category getCategory(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
-	            + DatabaseHandler.KEY_ID + " = " + id;
+	            + DatabaseHandler.KEY_OBJECT_ID + " = " + id;
 		Log.i(LOG, query);
 		
 		Cursor result = database.rawQuery(query, null);
@@ -165,13 +162,12 @@ public class HandbookDAO extends DAO {
 	}
 	
 	private Category getCategory(Cursor result){
-		long id = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
-		long parentId = result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_ID));
+		String parentId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_PARENT_ID));
 		
-		Category category = new Category(id, objectId, name, stringToDate(createdAt), parentId);
+		Category category = new Category(objectId, name, stringToDate(createdAt), parentId);
 		return category;
 	}
 
