@@ -80,14 +80,14 @@
         android:layout_margin="8dp" >
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/homeCasesUnlockedCases"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:text="@string/user_unlocked_cases"
+            android:text="@string/home_unlocked_levels"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/homeUnlockedCases"
+            android:id="@+id/homeUnlockedLevels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -99,14 +99,14 @@
         android:layout_margin="8dp" >
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/homeCasesLockedCases"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:text="@string/user_locked_cases"
+            android:text="@string/home_locked_levels"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/homeLockedCases"
+            android:id="@+id/homeLockedLevels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -120,26 +120,22 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/home_level_name" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/user_case_name" />
-
-        <TextView
-            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/user_case_scores" />
+            android:text="@string/home_level_score" />
+
     </TableRow>
 
     <ListView
-        android:id="@+id/homeListCase"
+        android:id="@+id/homeListLevel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"

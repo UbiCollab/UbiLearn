@@ -60,5 +60,18 @@
     <string name="user_case_name">Case:</string>
     <string name="user_case_scores">Poengsum:</string>
     <string name="register">Register</string>
+    <string name="home_cases_level">Level:</string>
+    <string name="home_cases_unlocked_cases">Ulåste case:</string>
+    <string name="home_cases_locked_cases">Låste case:</string>
+    <string name="home_cases_total_score">Total poengsum:</string>
+    <string name="home_cases_number_of_achievements">Prestasjoner:</string>
+    <string name="home_cases_medal">Medalje:</string>
+    <string name="home_cases_name">Case</string>
+    <string name="home_cases_score">Poengsum</string>
+    <string name="home_cases_button_back">Tilbake</string>
+    <string name="home_unlocked_levels">Ulåste levels:</string>
+    <string name="home_locked_levels">Låste levels:</string>
+    <string name="home_level_name">Level</string>
+    <string name="home_level_score">Poengsum</string>
     
 </resources>

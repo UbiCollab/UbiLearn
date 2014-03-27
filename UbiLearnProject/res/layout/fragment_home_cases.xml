@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/levelName"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_level" />
+
+        <TextView
+            android:id="@+id/homeCasesLevelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_unlocked_cases" />
+
+        <TextView
+            android:id="@+id/homeCasesUnlockedCases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_locked_cases" />
+
+        <TextView
+            android:id="@+id/homeCasesLockedCases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_total_score" />
+
+        <TextView
+            android:id="@+id/homeCasesTotalScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_number_of_achievements" />
+
+        <TextView
+            android:id="@+id/homeCasesAchievements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_medal" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_name" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_score" />
+    </TableRow>
+
+    <ListView
+        android:id="@+id/homeCasesListCases"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_weight="0.73" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/homeCasesButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_cases_button_back" />
+    </LinearLayout>
+
+</LinearLayout>

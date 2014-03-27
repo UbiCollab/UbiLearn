@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,92 +24,85 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment 
 {
+	private int _userScore		= 0;
+	private int _userTotalScore	= 0;
+	
+	// Variables to store input from textfile.
+	private String _name 			= "";
+	private String _status 			= "";	//TODO: Delete this when you are
+									//certain it will not be used.
+	private String _achievements 	= "";
+	private String _unlockedLevels	= "";
+	private String _lockedLevels	= "";
+	private String _caseData		= "";
+	
+	private List<String> _listName	= new ArrayList<String>();
+	private List<String> _listScore	= new ArrayList<String>();
+	
+	private BufferedReader _bufferedReader	= null;
+	
+	private ListView _levelListView	= null;
+		
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
-		
-		int userScore		= 0;
-		int userTotalScore	= 0;
-		
-		// Variables to store input from textfile.
-		String name 			= "";
-		String status 			= "";	//TODO: Delete this when you are
-										//certain it will not be used.
-		String achievements 	= "";
-		String unlockedCases 	= "";
-		String lockedCases		= "";
-		String caseData			= "";
-		
-		List<String> listName		= new ArrayList<String>();
-		List<String> listMedal		= new ArrayList<String>();
-		List<String> listScore		= new ArrayList<String>();
-		
-		BufferedReader		_bufferedReader		= null;
-		
+					
 		
 		// Here we read the data from the textfile.
 		try
 		{
-			// TEST: Here we try to read from the userdata.txt file.
-			// The .txt file could also have been implemented as
-			// a .xml file, and we would then need to load the data differently.
+			//TODO: Used only for testing. The way we store scores and so on,
+			// has not yet been decided.
+			// TEST: Here we try to read from the userdata_expanded.txt file.
 			InputStream inputStream = 
-					getResources().openRawResource(R.raw.userdata);
+					getResources().openRawResource(R.raw.userdata_expanded);
 			InputStreamReader inputStreamReader =
 					new InputStreamReader(inputStream);
 			_bufferedReader =
 					new BufferedReader(inputStreamReader);
 				
 			
-			name 			= _bufferedReader.readLine();
-			status			= _bufferedReader.readLine();
-			achievements	= _bufferedReader.readLine(); 
-			unlockedCases	= _bufferedReader.readLine();
-			lockedCases		= _bufferedReader.readLine(); 
+			_name 			= _bufferedReader.readLine();
+			_status			= _bufferedReader.readLine();
+			_achievements	= _bufferedReader.readLine(); 
+			_unlockedLevels = _bufferedReader.readLine();
+			_lockedLevels	= _bufferedReader.readLine();
+								
 			
-			
-			// TODO: Color is supposed to separate locked from unlocked cases.
-			// We need this to indicate the number of unlocked cases that 
-			// is going to be dynamically added to the'Home' page. The idea
-			// is that the unlocked and locked cases will have different
-			// text color to indicate the differences
-			int nUnlocked	= Integer.parseInt(unlockedCases);
-			
-			
-			// Here we check to see if we have stored points for different
-			// cases in userdata.txt and if so we dynamically add these
-			// scores to the fragment_home.xml.
-			
+			// Here we check to see if we have stored data for the different
+			// levels. If so we add these to the list in fragment_home.xm
 			// Read a line to see if we have data for a case
-			caseData = _bufferedReader.readLine();
+			_caseData = _bufferedReader.readLine();
 			
 			
 			// TODO: Unfinished. Add data dynamically...
-			// This is for testing purposes. Perhaps doing it this way will
-			// slow the application and we need to change it???
-			while(caseData != null)
+			// This is for testing purposes.
+			int counter	= 0;
+			
+			
+			while(_caseData != null)
 			{
-				// A line should consist of two numbers. The first to indicate
-				// what the user has achieved and the second the maximum score
-				// for the specific case. (Actually all case data should decide
-				// what 'Status' the user has).
-				String[] splitStr 	= caseData.split("[#&/]");
+				// We add the counter for every level 
+				counter++;
 				
-				// We sum the scores the user has achieved. This will help us
-				// decide which 'Status' the user has
-				userScore 		+= Integer.parseInt(splitStr[2]);
-				userTotalScore	+= Integer.parseInt(splitStr[3]);		
+				String[] splitStr 	= _caseData.split("[#/]");
 				
 				//Here we add the data to the lists that we will use to fill
 				// the ListView in fragment_home.xml
-				listName.add(splitStr[0]);
-				listMedal.add(splitStr[1]);
-				listScore.add(splitStr[2] + "/" + splitStr[3]);
+				_listName.add(splitStr[0]);
+				_listScore.add(splitStr[1] + "/" + splitStr[2]);
+				
+				
+				// We sum the scores the user has achieved. This will help us
+				// decide which 'Status' the user has
+				_userScore 		+= Integer.parseInt(splitStr[1]);
+				_userTotalScore	+= Integer.parseInt(splitStr[2]);		
 								
-				caseData			= _bufferedReader.readLine();
+				_caseData			= _bufferedReader.readLine();
 			}
 		}
 		catch(IOException exception)
@@ -139,19 +133,18 @@ public class HomeFragment extends Fragment
 		// values read from file.
 		TextView userName = 
 				(TextView)fragmentView.findViewById(R.id.homeUserName); 
-		userName.setText(name);
-		
+		userName.setText(_name);
 		
 		// The status is based on the amount of score achieved of the total
 		// possible. NB! This could have been calculated when data from a 
 		// case is saved.
 		TextView userStatus = 
 				(TextView)fragmentView.findViewById(R.id.homeStatus); 
+
 		
-		
-		if(userTotalScore > 0)
+		if(_userTotalScore > 0)
 		{
-			int percentageAccomplished = (userScore * 100) / userTotalScore;
+			int percentageAccomplished = (_userScore * 100) / _userTotalScore;
 			
 			if(percentageAccomplished < 51)
 			{
@@ -174,60 +167,52 @@ public class HomeFragment extends Fragment
 		
 		TextView userAchievement = 
 				(TextView)fragmentView.findViewById(R.id.homeAchievement); 
-		userAchievement.setText(achievements);
+		userAchievement.setText(_achievements);
 		
-		TextView userUnlockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases); 
-		userUnlockedCases.setText(unlockedCases);
+		TextView userUnlockedLevels =
+				(TextView)fragmentView.findViewById(R.id.homeUnlockedLevels);
+		userUnlockedLevels.setText(_unlockedLevels);
 		
-		TextView userLockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeLockedCases);
-		userLockedCases.setText(lockedCases);
-	
+		TextView userLockedLevels =
+				(TextView)fragmentView.findViewById(R.id.homeLockedLevels);
+		userLockedLevels.setText(_lockedLevels);
 		
+
 		// Now we want to fill the list in 'fragment_home.xml' with data loaded
 		// from the textfile.
-		ListView caseListView = 
-				(ListView)fragmentView.findViewById(R.id.homeListCase);
+		_levelListView = 
+				(ListView)fragmentView.findViewById(R.id.homeListLevel);
 		
-		caseListView.setAdapter(new HomeAdapter(
-				this.getActivity(),
-				listMedal, listName, listScore));
-		
-	
-		/*
-		// Here we set the different TextViews in fragment_home.xml based on
-		// hardcoded values. Should be replaced with values read from file
-		// but we keep it in case of errors reading from file.
-		TextView userName = 
-				(TextView)fragmentView.findViewById(R.id.homeUserName);
-		userName.setText("Ola Nordman");
-		
-		TextView userStatus = 
-				(TextView)fragmentView.findViewById(R.id.homeStatus);
-		userStatus.setText("Nybegynner");
-		
-		TextView userAchievement = 
-				(TextView)fragmentView.findViewById(R.id.homeAchievement);
-		userAchievement.setText("Ingen");
-		
-		TextView userUnlockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeUnlockedCases);
-		userUnlockedCases.setText("3");
-		
-		TextView userLockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeLockedCases);
-		userLockedCases.setText("27");		
-		*/
+		_levelListView.setAdapter(new HomeAdapter(
+				this.getActivity(),	_listName, _listScore));
 		
 		
+		_levelListView.setClickable(true);
+		_levelListView.setOnItemClickListener(
+				new AdapterView.OnItemClickListener()
+		{
+			public void onItemClick(
+					AdapterView<?> parent, View view,
+					int position, long id)
+			{
+				String levelName = (String)_listName.get(position);
+				
+				HomeCasesFragment fragment = HomeCasesFragment.newInstance(
+						levelName, position + 1);
+				getFragmentManager().beginTransaction().replace(
+						R.id.content_frame, fragment).addToBackStack(
+								null).commit();
+			}
+		});
+		
+			
 		// We need to handle button clicks from the fragment_home.xml file. If
-		// the user clicks 'Oppl�ring' or 'Praksis' we should replace this
+		// the user clicks 'Opplæring' or 'Praksis' we should replace this
 		// fragment with the chosen one.
 		Button trainingButton = 
 				(Button)fragmentView.findViewById(R.id.homeButtonTraining);
 		
-		
+				
 		trainingButton.setOnClickListener(new OnClickListener()
 		{
 			@Override
