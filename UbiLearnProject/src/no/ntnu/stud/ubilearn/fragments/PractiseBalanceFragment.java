@@ -13,31 +13,112 @@ import android.widget.TextView;
 
 public class PractiseBalanceFragment extends Fragment {
 	
+	int state = 0;
+	int score = 0;
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void changeScore(int i) {
+		score = score + i;
+	}
+	
+	public OnClickListener start, stop;
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_practise_balance, container, false);
 		
-		Button startStopButton = (Button) view.findViewById(R.id.startStopButton);
+		final Button startStopButton = (Button) view.findViewById(R.id.startStopButton);
 		
 		final TextView counterField = (TextView) view.findViewById(R.id.counterField);
 		
-		startStopButton.setOnClickListener(new OnClickListener()
+		final TextView scoreField = (TextView) view.findViewById(R.id.scoreField);
+		
+		final TextView titleField = (TextView) view.findViewById(R.id.titleField);
+		
+		final CountDownTimer timer = new CountDownTimer(10000, 1000)
+		{
+			public void onTick(long millisUntilFinished)
+			{
+				counterField.setText(" " + millisUntilFinished / 1000);
+			}
+			
+			public void onFinish()
+			{
+				startStopButton.setEnabled(false);
+				startStopButton.setOnClickListener(start);
+				startStopButton.setText("Start");
+				counterField.setText(" ");
+				changeScore(1);
+				
+				state = state + 1;
+				switch(state) {
+					case 1:
+						titleField.setText("SEMI-TANDEM");
+						startStopButton.setEnabled(true);
+						break;
+					case 2:
+						titleField.setText("TANDEM");
+						startStopButton.setEnabled(true);
+						break;
+					case 3:
+						titleField.setText("FERDIG");
+						changeScore(1);
+						startStopButton.setEnabled(false);
+						break;
+				}
+				
+				scoreField.setText("Poeng: " + getScore());
+			}
+		};
+		
+		stop = new OnClickListener()
 		{
 			public void onClick(View vi)
 			{
-				 new CountDownTimer(10000, 1000) {
-
-				     public void onTick(long millisUntilFinished) {
-				         counterField.setText(" " + millisUntilFinished / 1000);
-				     }
-
-				     public void onFinish() {
-				         
-				     }
-				  }.start();
-
+				startStopButton.setEnabled(false);
+				startStopButton.setOnClickListener(start);
+				timer.cancel();
+				startStopButton.setText("Start");
+				counterField.setText(" ");
+				
+				state = state + 1;
+				switch(state) {
+				case 1:
+					titleField.setText("SEMI-TANDEM");
+					startStopButton.setEnabled(true);
+					break;
+				case 2:
+					titleField.setText("TANDEM");
+					startStopButton.setEnabled(true);
+					break;
+				case 3:
+					titleField.setText("FERDIG");
+					changeScore(1);
+					startStopButton.setEnabled(false);
+					break;
+				}
+				
+				scoreField.setText("Poeng: " + getScore());
 			}
-		});
+		};
+		
+		start = new OnClickListener()
+		{
+			public void onClick(View vi)
+			{
+				startStopButton.setEnabled(false);
+				startStopButton.setOnClickListener(stop);
+				timer.start();
+				startStopButton.setText("Stopp");
+				startStopButton.setEnabled(true);	
+			}
+		};
+		
+		titleField.setText("SAMLEDE FØTTER");
+		startStopButton.setOnClickListener(start);
 		
 		return view;
 	}
