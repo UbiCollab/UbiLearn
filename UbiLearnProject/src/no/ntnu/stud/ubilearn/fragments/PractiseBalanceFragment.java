@@ -21,10 +21,6 @@ public class PractiseBalanceFragment extends Fragment {
 	public int getScore() {
 		return score;
 	}
-
-	public void changeScore(int i) {
-		score = score + i;
-	}
 	
 	public OnClickListener start, stop;
 
@@ -34,14 +30,12 @@ public class PractiseBalanceFragment extends Fragment {
 		
 		final Button startStopButton = (Button) view.findViewById(R.id.startStopButton);
 		
-		final TextView counterField = (TextView) view.findViewById(R.id.counterField);
-		
-		final TextView scoreField = (TextView) view.findViewById(R.id.scoreField);
-		
 		final TextView titleField = (TextView) view.findViewById(R.id.titleField);
-		
+		final TextView score1 = (TextView) view.findViewById(R.id.score1);
+		final TextView score2 = (TextView) view.findViewById(R.id.score2);
+		final TextView score3 = (TextView) view.findViewById(R.id.score3);
+		final TextView score4 = (TextView) view.findViewById(R.id.score4);
 		final ImageView	imageField = (ImageView) view.findViewById(R.id.imageField);
-		
 		final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 		
 		progressBar.setMax(10);
@@ -51,38 +45,40 @@ public class PractiseBalanceFragment extends Fragment {
 		{
 			public void onTick(long millisUntilFinished)
 			{
-				//counterField.setText(" " + millisUntilFinished / 1000);
 				progressBar.setProgress((int) (millisUntilFinished / 1000));
 			}
 			
 			public void onFinish()
 			{
 				startStopButton.setEnabled(false);
+				progressBar.setProgress(0);
 				startStopButton.setOnClickListener(start);
 				startStopButton.setText("Start");
-				counterField.setText(" ");
-				changeScore(1);
+				score++;
 				
 				state = state + 1;
 				switch(state) {
 					case 1:
 						titleField.setText("SEMI-TANDEM");
 						imageField.setImageResource(R.drawable.semi2);
+						score1.setText("1 poeng");
 						startStopButton.setEnabled(true);
 						break;
 					case 2:
 						titleField.setText("TANDEM");
 						imageField.setImageResource(R.drawable.tandem2);
+						score2.setText("1 poeng");
 						startStopButton.setEnabled(true);
 						break;
 					case 3:
 						titleField.setText("FERDIG");
-						changeScore(1);
+						score3.setText("2 poeng");
+						score++;
 						startStopButton.setEnabled(false);
 						break;
 				}
 				
-				scoreField.setText("Poeng: " + getScore());
+				score4.setText(getScore() + " poeng");
 			}
 		};
 		
@@ -94,28 +90,30 @@ public class PractiseBalanceFragment extends Fragment {
 				startStopButton.setOnClickListener(start);
 				timer.cancel();
 				startStopButton.setText("Start");
-				counterField.setText(" ");
 				
 				state = state + 1;
 				switch(state) {
 				case 1:
 					titleField.setText("SEMI-TANDEM");
 					imageField.setImageResource(R.drawable.semi2);
+					score1.setText("0 poeng");
 					startStopButton.setEnabled(true);
 					break;
 				case 2:
 					titleField.setText("TANDEM");
 					imageField.setImageResource(R.drawable.tandem2);
+					score2.setText("0 poeng");
 					startStopButton.setEnabled(true);
 					break;
 				case 3:
 					titleField.setText("FERDIG");
-					changeScore(1);
+					score3.setText("0 poeng");
+					score++;
 					startStopButton.setEnabled(false);
 					break;
 				}
 				
-				scoreField.setText("Poeng: " + getScore());
+				score4.setText(getScore() + " poeng");
 			}
 		};
 		
@@ -131,7 +129,6 @@ public class PractiseBalanceFragment extends Fragment {
 			}
 		};
 		
-		titleField.setText("SAMLEDE FØTTER");
 		startStopButton.setOnClickListener(start);
 		
 		return view;
