@@ -71,7 +71,8 @@ public class PractiseBalanceFragment extends Fragment {
 						startStopButton.setEnabled(true);
 						break;
 					case 3:
-						titleField.setText("FERDIG");
+						titleField.setText("TEST FULLFØRT");
+						imageField.setImageResource(R.drawable.balancecheck);
 						score3.setText("2 poeng");
 						score++;
 						startStopButton.setEnabled(false);
@@ -106,7 +107,8 @@ public class PractiseBalanceFragment extends Fragment {
 					startStopButton.setEnabled(true);
 					break;
 				case 3:
-					titleField.setText("FERDIG");
+					titleField.setText("TEST FULLFØRT");
+					imageField.setImageResource(R.drawable.balancecheck);
 					score3.setText("0 poeng");
 					score++;
 					startStopButton.setEnabled(false);
