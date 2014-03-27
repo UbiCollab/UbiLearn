@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/articleTitle"
-                android:layout_width="128dp"
+                android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/user_name"
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/articleText"
-                android:layout_width="128dp"
+                android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/user_status"
@@ -58,11 +58,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" >
+        android:layout_margin="4dp" >
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="128dp"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/user_achievements"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -77,11 +77,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" >
+        android:layout_margin="4dp" >
 
         <TextView
             android:id="@+id/homeCasesUnlockedCases"
-            android:layout_width="128dp"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/home_unlocked_levels"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -96,11 +96,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp" >
+        android:layout_margin="4dp" >
 
         <TextView
             android:id="@+id/homeCasesLockedCases"
-            android:layout_width="128dp"
+            android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/home_locked_levels"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -134,18 +134,32 @@
 
     </TableRow>
 
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_margin="1dp"
+        android:background="#FF000000" />
+
     <ListView
         android:id="@+id/homeListLevel"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="fill_parent"
         android:layout_marginTop="8dp"
         android:layout_weight="0.54" >
     </ListView>
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_margin="1dp"
+        android:background="#FF000000" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:weightSum="10" >
 
         <Button
