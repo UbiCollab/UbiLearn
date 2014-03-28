@@ -47,12 +47,14 @@ public class SyncContent {
 					List<Category> list = new ArrayList<Category>();
 					for (int i = 0; i < objects.size(); i++) {
 						ParseObject o = objects.get(i);
-						
-						//Log.v("Parent id", ""+o.getParseObject("parent").getObjectId());
-						list.add(new Category(o.getString("objectId"), o.getString("name"), o.getCreatedAt(), ""));
+						String parentId = null;
+						if (o.getParseObject("parent") != null) {
+							parentId = o.getParseObject("parent").getObjectId();
+						}
+						list.add(new Category(o.getString("objectId"), o.getString("name"), o.getCreatedAt(), parentId));
 					}
-					HandbookDAO dao = new HandbookDAO(context);
-					dao.insertCategories(list);
+					//HandbookDAO dao = new HandbookDAO(context);
+					//dao.insertCategories(list);
 				}else{
 					Log.v("SyncContent", e.getMessage());
 				}
