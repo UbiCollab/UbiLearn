@@ -49,7 +49,7 @@ public class TrainingDAO extends DAO{
 
 	public Quiz getQuiz(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_QUIZ + " WHERE "
-	            + DatabaseHandler.KEY_OBJECT_ID + " = " + id;
+	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		Log.i(LOG, query);
 		
 		Cursor result = database.rawQuery(query, null);

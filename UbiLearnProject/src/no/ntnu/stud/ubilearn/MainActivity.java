@@ -3,6 +3,8 @@ package no.ntnu.stud.ubilearn;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,10 +13,14 @@ import org.json.JSONObject;
 import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
+import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
+import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
 import android.app.Fragment;
@@ -63,6 +69,10 @@ public class MainActivity extends Activity {
 
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
+		
+		
+
+		
 
 		drawerToggle = new MyActionBarDrawerToggle(this, activityView, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close);
     	activityView.setDrawerListener(drawerToggle);
@@ -201,6 +211,27 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, LoginActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	    startActivity(intent);
+		
+		//-----------------------------DATABASE TESTING--------------------------------------
+		
+//		HandbookDAO hb = new HandbookDAO(this);
+//		hb.open();
+////		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
+////		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
+////		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
+//
+////		Log.d("MAIN",hb.getCategory("abc123").printContent());
+//		
+//		List<Category> content = hb.getHandbook();
+//		for (Category category : content) {
+//			Log.d("SUPER",category.printContent());
+//			for (WikiItem item : category.getSub()) {
+//				Log.d("SUB",item.printContent());
+//			}
+//		}
+//		hb.close();
+		
+		//---------------------------------------------------------------------------------
 	}
 	public void houseClick(View v){
 		((Training) visibleFrag).houseClick(v);

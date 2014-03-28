@@ -38,12 +38,14 @@ public class HandbookDAO extends DAO {
 	
 	public Article getArticle(String id){
 		
-		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_ARTICLE + " WHERE "
-	            + DatabaseHandler.KEY_OBJECT_ID + " = " + id;
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE + " WHERE "
+	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		
 		Log.i(LOG, query);
 		
 		Cursor result = database.rawQuery(query, null);
+		
+		Log.d(LOG,""+result.getCount());
 		
 		if(result.moveToFirst())
 			return getArticle(result);
@@ -65,7 +67,7 @@ public class HandbookDAO extends DAO {
 	}
 	
 	public List<Category> getHandbook(){
-		HashMap<Long,Category> categories = new HashMap<Long, Category>();
+		HashMap<String,Category> categories = new HashMap<String, Category>();
 //		HashMap<Long,Category> subCategories = new HashMap<Long, Category>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
@@ -83,7 +85,7 @@ public class HandbookDAO extends DAO {
 //					categories.put(parentId, category);
 //				else
 //					//adds all categories to the hashmap
-					categories.put(category.getId(), category);
+					categories.put(category.getObjectId(), category);
 				
 			}while(categoriesResult.moveToNext());
 		else
@@ -151,7 +153,7 @@ public class HandbookDAO extends DAO {
 	}
 	public Category getCategory(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
-	            + DatabaseHandler.KEY_OBJECT_ID + " = " + id;
+	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		Log.i(LOG, query);
 		
 		Cursor result = database.rawQuery(query, null);

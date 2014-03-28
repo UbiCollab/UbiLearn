@@ -80,9 +80,16 @@ public class Article extends WikiItem{
 	public void setName(String name) {
 		title = name;		
 	}
+
+	public String printContent() {
+		return "Article [objectId=" + objectId + ", title=" + title
+				+ ", content=" + content + ", createdAt=" + createdAt
+				+ ", parentId=" + parentId + "]";
+	}
 	
 	@Override
 	public String toString(){
 		return title;
 	}
+
 }

@@ -69,7 +69,7 @@ public class Category extends WikiItem{
 
 	//havent decided how to represent a top level category
 	public boolean isTopLevel() {
-		return objectId == null || objectId.equals("");
+		return parentId == null;
 	}
 
 
@@ -87,9 +87,18 @@ public class Category extends WikiItem{
 	public void setName(String name) {
 		this.name = name;		
 	}
+
+
+	
+	public String printContent() {
+		return "Category [subItems=" + subItems + ", objectId=" + objectId
+				+ ", createdAt=" + createdAt + ", parentId=" + parentId
+				+ ", name=" + name + "]";
+	}
 	
 	@Override
 	public String toString(){
 		return name;
 	}
+	
 }

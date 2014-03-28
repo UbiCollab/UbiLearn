@@ -1,6 +1,7 @@
 package no.ntnu.stud.ubilearn.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -11,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 5;
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -65,27 +66,35 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		
 		//the syntax for creating tables
 		final String CREATE_ARTICLE_TABLE = "CREATE TABLE " + TABLE_ARTICLE + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_TITLE + " TEXT," + KEY_CONTENT + " TEXT, "
-				+ KEY_CREATED_AT + " DATETIME" + KEY_PARENT_ID + " TEXT" + ")";
+				+ KEY_CREATED_AT + " DATETIME," + KEY_PARENT_ID + " TEXT" + ")";
 
 
 		final String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
-				+ KEY_CREATED_AT + " DATETIME" + KEY_PARENT_ID + " TEXT" + ")";
+				+ KEY_CREATED_AT + " DATETIME," + KEY_PARENT_ID + " TEXT" + ")";
 		
 		final String CREATE_QUIZ_TABLE = "CREATE TABLE " + TABLE_QUIZ + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_QUESTION + " TEXT,"
-				+ KEY_ANSWERS + " TEXT," + KEY_CORRECT + " TEXT," + KEY_OWNER_ID + " TEXT" + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_ANSWERS + " TEXT," + KEY_CORRECT + " TEXT," + KEY_OWNER_ID + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CERATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
-				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + "TEXT," + KEY_LEVEL + " INTEGER" + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + "TEXT," + KEY_LEVEL + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
 
 		
 //		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
 //				+ KEY_CHILD_CATEGORY_ID + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
 
 		//invoking the method for creating the actual tables on the disk
+		Log.i(LOG, "Creating tables");
 		db.execSQL(CREATE_ARTICLE_TABLE);
 		db.execSQL(CREATE_CATEGORY_TABLE);
 		db.execSQL(CREATE_QUIZ_TABLE);
 		db.execSQL(CERATE_PATIENT_TABLE);
+		
+		Cursor ti = db.rawQuery("PRAGMA table_info(" + TABLE_CATEGORY + ")", null);
+	    if ( ti.moveToFirst() ) {
+	        do {
+	            Log.i(LOG,"col: " + ti.getString(1));
+	        } while (ti.moveToNext());
+	    }
 //		db.execSQL(CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE);
 		
 	}

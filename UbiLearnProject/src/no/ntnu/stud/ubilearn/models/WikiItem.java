@@ -21,6 +21,7 @@ public abstract class WikiItem {
 	public int getIcon() {
 		return icon;
 	}
+	public abstract String printContent();
 
 //	@Override
 //	public String toString() {
