@@ -1,9 +1,11 @@
 package no.ntnu.stud.ubilearn.db;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,32 +27,22 @@ public class TrainingDAO extends DAO{
 		values.put(DatabaseHandler.KEY_OWNER_ID, quiz.getOwnerId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(quiz.getCreatedAt()));
 
+		log(values.toString());
+		
 		long rowId = database.insert(DatabaseHandler.TABLE_QUIZ,null,values);
 		return rowId;
 	}
-	public void insertQuizs(List<Quiz> quizs){	
-		for (Quiz quiz : quizs) {
+	public void insertQuizzes(List<Quiz> quizzes){	
+		for (Quiz quiz : quizzes) {
 			insertQuiz(quiz);
 		}	
 	}
 	
-	private String parseAnswersToString(ArrayList<String> answers) {
-		
-		StringBuilder output = new StringBuilder();
-		
-		output.append(answers.get(0));
-		
-		for (int i = 1; i < answers.size(); i++) {
-			output.append(" | ");
-			output.append(answers.get(i));
-		}
-		return output.toString();
-	}
 
 	public Quiz getQuiz(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_QUIZ + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
-		Log.i(LOG, query);
+		log(query);
 		
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
@@ -67,13 +59,46 @@ public class TrainingDAO extends DAO{
 		String ownerId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OWNER_ID));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
+		
+		
 		return new Quiz(question, answers, correct, objectId, ownerId, stringToDate(createdAt));
 		
 	}
+	
+	public ArrayList<Quiz> getPatientQuizzes(Patient patient) {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_QUIZ + " WHERE "
+				+ DatabaseHandler.KEY_OWNER_ID + " = '" + patient.getObjectId() + "'";
+		log(query);
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			do{
+				Quiz quiz = getQuiz(result);
+								
+				quizzes.add(quiz);
+			}while(result.moveToNext());
+		else
+			return null;
+		return quizzes;
+	}
+	
+	private String parseAnswersToString(ArrayList<String> answers) {
+		
+		StringBuilder output = new StringBuilder();
+		
+		output.append(answers.get(0));
+		
+		for (int i = 1; i < answers.size(); i++) {
+			output.append(" | ");
+			output.append(answers.get(i));
+		}
+		return output.toString();
+	}
 
 	private ArrayList<String> parseAnswersToArray(String answers) {
-
-		String[] answersArray = answers.split("|");
+		
+		String[] answersArray = answers.split("\\|");
 		ArrayList<String> answersList = new ArrayList<String>();
 		for (int i = 0; i < answersArray.length; i++) {
 			answersList.add(answersArray[i].trim());
@@ -82,6 +107,73 @@ public class TrainingDAO extends DAO{
 		return answersList;
 	}
 	
+	public long insertPatient(Patient patient){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHandler.KEY_OBJECT_ID, patient.getObjectId());
+		values.put(DatabaseHandler.KEY_NAME, patient.getName());
+		values.put(DatabaseHandler.KEY_AGE, patient.getAge());
+		values.put(DatabaseHandler.KEY_GENDER, patient.getGender());
+		values.put(DatabaseHandler.KEY_INFO, patient.getInfo());
+		values.put(DatabaseHandler.KEY_LEVEL, patient.getLevel());
+		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(patient.getCreatedAt()));
+		
+		log(values.toString());
+		
+		long rowId = database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
+		return rowId;
+	}
+	public void insertPatients(List<Patient> patients){	
+		for (Patient patient : patients) {
+			insertPatient(patient);
+		}	
+	}
 	
+
+	public Patient getPatient(String id){
+		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_PATIENT + " WHERE "
+	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
+		log(query);
+		
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			return getPatient(result);
+		else 
+			return null;
+	}
+	
+	private Patient getPatient(Cursor result){
+		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
+		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
+		String age = result.getString(result.getColumnIndex(DatabaseHandler.KEY_AGE));
+		String gender = result.getString(result.getColumnIndex(DatabaseHandler.KEY_GENDER));
+		String info = result.getString(result.getColumnIndex(DatabaseHandler.KEY_INFO));
+		int level = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_LEVEL));
+		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
+		
+		return new Patient(objectId, name, age, gender, info, level, stringToDate(createdAt));
+		
+	}
+
+	public ArrayList<Patient> getAllPatients() {
+		
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_PATIENT;
+		log(query);
+		
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			do{
+				Patient patient = getPatient(result);
+				patients.add(patient);
+				
+			}while(result.moveToNext());
+		else
+			return null;
+		
+		
+		return patients;
+	}
+
+
 
 }

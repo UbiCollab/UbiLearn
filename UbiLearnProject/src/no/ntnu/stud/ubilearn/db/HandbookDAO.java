@@ -25,6 +25,7 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(article.getCreatedAt()));
 		values.put(DatabaseHandler.KEY_PARENT_ID, article.getParentId());
 
+		log(values.toString());
 		
 		long rowId = database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
 		
@@ -41,12 +42,10 @@ public class HandbookDAO extends DAO {
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		
-		Log.i(LOG, query);
+		log(query);
 		
 		Cursor result = database.rawQuery(query, null);
-		
-		Log.d(LOG,""+result.getCount());
-		
+				
 		if(result.moveToFirst())
 			return getArticle(result);
 		else 
@@ -71,7 +70,7 @@ public class HandbookDAO extends DAO {
 //		HashMap<Long,Category> subCategories = new HashMap<Long, Category>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
-		Log.i(LOG,query);
+		log(query);
 		Cursor categoriesResult = database.rawQuery(query, null);
 		
 		if(categoriesResult.moveToFirst())
@@ -104,7 +103,7 @@ public class HandbookDAO extends DAO {
 				
 		}
 		query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE;
-		Log.i(LOG, query);
+		log(query);
 		
 		List<Article> articles = new ArrayList<Article>();
 		Cursor articlesResult = database.rawQuery(query, null);
@@ -143,6 +142,8 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(category.getCreatedAt()));
 		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
+		log(values.toString());
+		
 		long rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
 		return rowId;
 	}
@@ -154,7 +155,7 @@ public class HandbookDAO extends DAO {
 	public Category getCategory(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
-		Log.i(LOG, query);
+		log(query);
 		
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())

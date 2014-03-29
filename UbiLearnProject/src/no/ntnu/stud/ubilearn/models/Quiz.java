@@ -26,7 +26,20 @@ public class Quiz {
 		this.answers.add(ans3);
 		this.answers.add(correct);
 		this.correct = correct;//riktig svar
-	}	
+	}
+	
+	public Quiz(String qstn, String ans1, String ans2, String ans3, String correct, String ownerId){
+		this.question = qstn;
+		this.answers = new ArrayList<String>();
+		this.answers.add(ans1);
+		this.answers.add(ans2);
+		this.answers.add(ans3);
+		this.answers.add(correct);
+		this.correct = correct;//riktig svar
+		this.ownerId = ownerId;
+		createdAt = new Date();
+		objectId = ownerId+correct+(qstn.length()*Math.random());
+	}
 	
 	
 	public Quiz(String question, ArrayList<String> answers, String correct, String objectId, String ownerId, Date createdAt) {
@@ -87,6 +100,13 @@ public class Quiz {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Quiz [question=" + question + ", answers=" + answers
+				+ ", correct=" + correct + ", objectId=" + objectId
+				+ ", ownerId=" + ownerId + ", createdAt=" + createdAt + "]";
 	}
 	
 }

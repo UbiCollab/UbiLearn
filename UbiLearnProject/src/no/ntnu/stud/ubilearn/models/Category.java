@@ -7,7 +7,6 @@ import no.ntnu.stud.ubilearn.R;
 
 public class Category extends WikiItem{
 	private ArrayList<WikiItem> subItems;
-	private long id;
 	private String objectId;
 	private Date createdAt;
 	private String parentId;
@@ -45,9 +44,6 @@ public class Category extends WikiItem{
 		return false;
 	}
 
-	public long getId() {
-		return id;
-	}
 
 	public String getObjectId() {
 		return objectId;
@@ -67,7 +63,6 @@ public class Category extends WikiItem{
 	}
 
 
-	//havent decided how to represent a top level category
 	public boolean isTopLevel() {
 		return parentId == null;
 	}

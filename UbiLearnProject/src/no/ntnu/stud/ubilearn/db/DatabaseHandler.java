@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 5;
+    static final int DATABASE_VERSION = 6;
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -76,7 +76,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 				+ KEY_ANSWERS + " TEXT," + KEY_CORRECT + " TEXT," + KEY_OWNER_ID + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CERATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
-				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + "TEXT," + KEY_LEVEL + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + " TEXT," + KEY_LEVEL + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
 
 		
 //		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
@@ -85,18 +85,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		//invoking the method for creating the actual tables on the disk
 		Log.i(LOG, "Creating tables");
 		db.execSQL(CREATE_ARTICLE_TABLE);
+		logColumns(db, TABLE_ARTICLE);
+		
 		db.execSQL(CREATE_CATEGORY_TABLE);
+		logColumns(db, CREATE_CATEGORY_TABLE);
+		
 		db.execSQL(CREATE_QUIZ_TABLE);
+		logColumns(db, CREATE_QUIZ_TABLE);
+		
 		db.execSQL(CERATE_PATIENT_TABLE);
-		
-		Cursor ti = db.rawQuery("PRAGMA table_info(" + TABLE_CATEGORY + ")", null);
-	    if ( ti.moveToFirst() ) {
-	        do {
-	            Log.i(LOG,"col: " + ti.getString(1));
-	        } while (ti.moveToNext());
-	    }
-//		db.execSQL(CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE);
-		
+		logColumns(db, CERATE_PATIENT_TABLE);
+				
 	}
 
 	@Override
@@ -106,8 +105,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENT);
-//			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY_ARTICLE_CATEGORY);
 			    onCreate(db);		
+	}
+	
+	private void logColumns(SQLiteDatabase db, String table){
+		Cursor result = db.rawQuery("PRAGMA table_info(" + table + ")", null);
+		Log.i(LOG,"Successfully created table " + table);
+	    if ( result.moveToFirst() ) {
+	        do {
+	            Log.i(LOG,"col: " + result.getString(1));
+	        } while (result.moveToNext());
+	    }
 	}
 
 }

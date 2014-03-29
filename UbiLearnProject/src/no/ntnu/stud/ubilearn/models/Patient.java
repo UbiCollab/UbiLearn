@@ -4,22 +4,24 @@ import java.util.Date;
 
 public class Patient {
 	
+	private String objectId;
 	private String name;
 	private String age;
 	private String gender;
 	private String info;
 	private int level;
-	private String objectId;
 	private Date createdAt;
 	
 	
 	
 	public Patient(String name, String age, String gender, String info, String level){
+		objectId = name + age;
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
 		this.info = info;
-		this.level = Integer.parseInt(level);	
+		this.level = Integer.parseInt(level);
+		createdAt = new Date();
 	}
 	public Patient(String objectId, String name, String age, String gender, String info, int level, Date createdAt){
 		this.objectId = objectId;

@@ -14,12 +14,14 @@ import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
@@ -46,6 +48,7 @@ public class MainActivity extends Activity {
 	private Fragment visibleFrag;
 	private int lastMenuPos = -1;
 	ArrayList<Patient> patientList;
+	private TrainingDAO trainingDAO;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +67,17 @@ public class MainActivity extends Activity {
 		HeaderAdapter adapter = new HeaderAdapter(this, drawerModels);
 		drawerView.setAdapter(adapter);
 		
+		//---------GSON------------------
 		generatePatients();
 		patientList = User.getInstance().getPatientList();
+		
+		//----------SQLite--------------
+//		trainingDAO = new TrainingDAO(this);
+//		trainingDAO.open();
+//		patientList = trainingDAO.getAllPatients();
+//		User.getInstance().setPatientList(patientList);
+//		trainingDAO.close();
+		
 
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
@@ -216,10 +228,10 @@ public class MainActivity extends Activity {
 		
 //		HandbookDAO hb = new HandbookDAO(this);
 //		hb.open();
-////		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
-////		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
-////		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
-//
+//		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
+//		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
+//		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
+
 ////		Log.d("MAIN",hb.getCategory("abc123").printContent());
 //		
 //		List<Category> content = hb.getHandbook();
@@ -230,6 +242,15 @@ public class MainActivity extends Activity {
 //			}
 //		}
 //		hb.close();
+		
+//		TrainingDAO tDAO = new TrainingDAO(this);
+//		tDAO.open();
+////		tDAO.insertPatients(patientList);
+//		
+//		for (Patient patient : patientList) {
+//			tDAO.insertQuizs(generateQuiz(patient));
+//		}
+//		tDAO.close();
 		
 		//---------------------------------------------------------------------------------
 	}
@@ -286,5 +307,44 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 			Log.e("ERROR JSON", "error parsing json");
 		}
+		
+	}
+	private ArrayList<Quiz> generateQuiz(Patient patient){
+
+		String json = null;
+		ArrayList<Quiz> finalQuiz = new ArrayList<Quiz>();
+		try {
+			InputStream is = getAssets().open("quiz_questions.json");
+			int size = is.available();
+			byte[] buffer = new byte[size];
+			is.read(buffer);
+			is.close();
+
+			json = new String(buffer, "UTF-8");
+
+		} catch (IOException ie) {
+			Log.e("ERROR I/O", "error reading quiz file");
+		}
+		try {
+			JSONObject jsonObj = new JSONObject(json);
+			JSONArray quizArray = jsonObj.getJSONArray("questions");
+			for (int i = 0; i < quizArray.length(); i++) {
+				JSONObject jo = (JSONObject) quizArray.get(i);
+				if(jo.getString("eier").equals(patient.getName())){
+					finalQuiz.add(new Quiz(
+							jo.getString("spm"),
+							jo.getString("svar1"),
+							jo.getString("svar2"),
+							jo.getString("svar3"),
+							jo.getString("riktigSvar"),
+							patient.getObjectId()));
+				}
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			Log.e("ERROR JSON", "error parsing json");
+		}
+		return finalQuiz;
 	}
 }
