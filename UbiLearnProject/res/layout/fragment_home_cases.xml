@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:text="@string/home_cases_button_back" />
+            android:text="@string/home_button_back" />
 
     </LinearLayout>
 

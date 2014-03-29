@@ -241,6 +241,23 @@ public class HomeFragment extends Fragment
 				((MainActivity)getActivity()).selectItem(4);
 			}
 		} );
+		
+		
+		// Load the "Achievements" page if the user push this specific button.
+		Button achievementsButton =
+				(Button)fragmentView.findViewById(R.id.homeButtonAchievements);
+		
+		achievementsButton.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View view)
+			{
+				HomeAchievementsFragment fragment = new HomeAchievementsFragment();
+				
+				getFragmentManager().beginTransaction().replace(
+						R.id.content_frame, fragment).addToBackStack(
+								null).commit();
+			}
+		});
 				
 		
 		return fragmentView;
