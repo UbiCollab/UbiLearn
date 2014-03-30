@@ -138,6 +138,13 @@
                     android:src="@drawable/ic_action_accept"
                     android:visibility="invisible" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/next_button_gangtest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Neste" />
+
         </LinearLayout>
 
         <ImageView
