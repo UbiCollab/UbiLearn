@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.datatype.Duration;
+
 import no.ntnu.stud.ubilearn.R;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -20,6 +22,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class Practice_SPPB_gangtestFragment extends Fragment{
@@ -34,11 +37,13 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	ImageView resultAccept1;
 	ImageView resultAccept2;
 	TextView startTest;
+	private Button next;
+	private double[] results = new double [2];
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View rootView = inflater.inflate(R.layout.fragment_practice_gangtest, container, false);
-
+		next = (Button)rootView.findViewById(R.id.next_button);
 		time = (TextView)rootView.findViewById(R.id.gangtest_tid);
 		result1 = (TextView)rootView.findViewById(R.id.gangtest_result1);
 		result2 = (TextView)rootView.findViewById(R.id.gangtest_result2);
@@ -48,15 +53,28 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 		startTest.setText("Start test "+testCounter);
 		t = new Timer();
 
-		final ImageView imageView = (ImageView) rootView.findViewById(R.id.gangtest_timeButton);
+		final ImageView circle= (ImageView) rootView.findViewById(R.id.circle);
+		
 		final TextView start = (TextView) rootView.findViewById(R.id.start);
 
 
 		ImageView info = (ImageView)rootView.findViewById(R.id.gangtest_info);
 		info.setClickable(true);
 		info.setEnabled(true);
+		
+		next.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new gangTestResultat(results);
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("training").commit();
+				
+			}
+		});
 		info.setOnClickListener(new OnClickListener() {
-
+			
+			
+			
 			@Override
 			public void onClick(View v) {
 				Log.v("Trykket: ", "info knapp");
@@ -77,19 +95,19 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 		});
 
 
-		imageView.setOnClickListener(new OnClickListener() {
+		circle.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Animation anim = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+			Animation anim = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);	
+			anim.setDuration(10000);
+			
 				startTest.setText("Start test "+testCounter);
 				if(isTime == false){
+					circle.startAnimation(anim);
 					start.setText("Stopp");
 					testCounter++;
-					
-					anim.setDuration(10000);
-					anim.setRepeatCount(Animation.INFINITE);
-					imageView.setAnimation(anim);
+
 					t = new Timer();
 					t.scheduleAtFixedRate(new TimerTask() {
 
@@ -109,6 +127,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 
 					isTime = true;
 				}else if(isTime){
+					circle.clearAnimation();
 					results();
 					start.setText("Start");
 					try {
@@ -118,7 +137,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 						e.printStackTrace();
 					}
 
-					imageView.clearAnimation();
+					circle.clearAnimation();
 					isTime = false;
 				}
 			}
@@ -136,6 +155,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	public void results(){
 		if(testCounter==2){
 			result1.setText("1. "+minSec);
+			results[0]=Double.parseDouble(minSec.replace(":", "."));
 			accept(resultAccept1);
 			TimeCounter = 0;
 		}
@@ -143,6 +163,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			result2.setText("2. "+minSec);
 			accept(resultAccept2);
 			startTest.setText("ferdig");
+			results[1]=Double.parseDouble(minSec.replace(":", "."));
 		}
 	}
 }

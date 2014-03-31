@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fails">
+        <item>Deltager fullførte hele testen</item>
+        <item>Forsøkte</item>
+        <item>Kunne ikke gå uten assistanse</item>
+        <item>Ikke forsøkt, tester følte det utrygt</item>
+        <item>Ikke forsøkt, deltager føte seg utrygg</item>
+        <item>Deltager tar ikke instruksjon</item>
+        <item>Deltager nektet</item>
+        <item>Annet</item>
+    </string-array>
+</resources>
