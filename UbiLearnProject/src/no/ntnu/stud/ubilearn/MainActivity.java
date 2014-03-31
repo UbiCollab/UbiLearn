@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
