@@ -6,7 +6,7 @@ import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
 
 
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import android.os.Bundle;
 
 import android.app.Dialog;
@@ -32,7 +32,7 @@ public class Training extends Fragment {
 	private View root2;
 
 
-	ArrayList<Patient> patientList;
+	ArrayList<CasePatient> patientList;
 	int i;
 
 	@Override

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.patientcase.QuizAnimation;
 import android.annotation.SuppressLint;
@@ -29,7 +29,7 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class QuizFragment extends Fragment{
 	private ArrayList<Quiz> quiz = new ArrayList<Quiz>();
-	private Patient patient;
+	private CasePatient patient;
 
 	private int i;
 
@@ -47,7 +47,7 @@ public class QuizFragment extends Fragment{
 
 	}
 
-	public QuizFragment(Patient patient){
+	public QuizFragment(CasePatient patient){
 		this.patient = patient;
 		i = 0;
 	}

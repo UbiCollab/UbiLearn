@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.Article;
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import android.content.ContentValues;
 import android.content.Context;
@@ -65,7 +65,7 @@ public class TrainingDAO extends DAO{
 		
 	}
 	
-	public ArrayList<Quiz> getPatientQuizzes(Patient patient) {
+	public ArrayList<Quiz> getPatientQuizzes(CasePatient patient) {
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_QUIZ + " WHERE "
@@ -107,7 +107,7 @@ public class TrainingDAO extends DAO{
 		return answersList;
 	}
 	
-	public long insertPatient(Patient patient){
+	public long insertCasePatient(CasePatient patient){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, patient.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, patient.getName());
@@ -122,26 +122,26 @@ public class TrainingDAO extends DAO{
 		long rowId = database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
 		return rowId;
 	}
-	public void insertPatients(List<Patient> patients){	
-		for (Patient patient : patients) {
-			insertPatient(patient);
+	public void insertCasePatients(List<CasePatient> patients){	
+		for (CasePatient patient : patients) {
+			insertCasePatient(patient);
 		}	
 	}
 	
 
-	public Patient getPatient(String id){
+	public CasePatient getCasePatient(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_PATIENT + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		log(query);
 		
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
-			return getPatient(result);
+			return getCasePatient(result);
 		else 
 			return null;
 	}
 	
-	private Patient getPatient(Cursor result){
+	private CasePatient getCasePatient(Cursor result){
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		String age = result.getString(result.getColumnIndex(DatabaseHandler.KEY_AGE));
@@ -150,20 +150,20 @@ public class TrainingDAO extends DAO{
 		int level = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_LEVEL));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new Patient(objectId, name, age, gender, info, level, stringToDate(createdAt));
+		return new CasePatient(objectId, name, age, gender, info, level, stringToDate(createdAt));
 		
 	}
 
-	public ArrayList<Patient> getAllPatients() {
+	public ArrayList<CasePatient> getAllCasePatients() {
 		
-		ArrayList<Patient> patients = new ArrayList<Patient>();
+		ArrayList<CasePatient> patients = new ArrayList<CasePatient>();
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_PATIENT;
 		log(query);
 		
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
 			do{
-				Patient patient = getPatient(result);
+				CasePatient patient = getCasePatient(result);
 				patients.add(patient);
 				
 			}while(result.moveToNext());

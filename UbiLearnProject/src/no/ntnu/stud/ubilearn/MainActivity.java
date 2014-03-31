@@ -20,7 +20,7 @@ import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 	private ActionBarDrawerToggle drawerToggle;
 	private Fragment visibleFrag;
 	private int lastMenuPos = -1;
-	ArrayList<Patient> patientList;
+	ArrayList<CasePatient> patientList;
 	private TrainingDAO trainingDAO;
 
 	@Override
@@ -273,7 +273,7 @@ public class MainActivity extends Activity {
 	}
 	private void generatePatients(){
 		String json = null;
-		ArrayList<Patient> temp = new ArrayList<Patient>();
+		ArrayList<CasePatient> temp = new ArrayList<CasePatient>();
 		try {
 			InputStream is = getAssets().open("pasient_info.json");
 			int size = is.available();
@@ -292,7 +292,7 @@ public class MainActivity extends Activity {
 			
 			for (int i = 0; i < patientArray.length(); i++) {
 				JSONObject patientObj = (JSONObject) patientArray.get(i);
-				temp.add(new Patient
+				temp.add(new CasePatient
 						(patientObj.getString("name"), 
 						 patientObj.getString("age"), 
 						 patientObj.getString("gender"), 
@@ -309,7 +309,7 @@ public class MainActivity extends Activity {
 		}
 		
 	}
-	private ArrayList<Quiz> generateQuiz(Patient patient){
+	private ArrayList<Quiz> generateQuiz(CasePatient patient){
 
 		String json = null;
 		ArrayList<Quiz> finalQuiz = new ArrayList<Quiz>();

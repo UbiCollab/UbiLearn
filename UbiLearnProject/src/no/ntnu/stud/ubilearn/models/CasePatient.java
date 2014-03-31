@@ -2,7 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.util.Date;
 
-public class Patient {
+public class CasePatient {
 	
 	private String objectId;
 	private String name;
@@ -14,7 +14,7 @@ public class Patient {
 	
 	
 	
-	public Patient(String name, String age, String gender, String info, String level){
+	public CasePatient(String name, String age, String gender, String info, String level){
 		objectId = name + age;
 		this.name = name;
 		this.age = age;
@@ -23,7 +23,7 @@ public class Patient {
 		this.level = Integer.parseInt(level);
 		createdAt = new Date();
 	}
-	public Patient(String objectId, String name, String age, String gender, String info, int level, Date createdAt){
+	public CasePatient(String objectId, String name, String age, String gender, String info, int level, Date createdAt){
 		this.objectId = objectId;
 		this.name = name;
 		this.age = age;
