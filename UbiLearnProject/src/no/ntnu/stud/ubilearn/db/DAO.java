@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -48,6 +49,16 @@ public abstract class DAO {
 	}
 	protected void log(String string){
 		Log.i(LOG,string);
+	}
+	
+	protected boolean exists(String table, String id){
+		String query = selectWhere(table,DatabaseHandler.KEY_OBJECT_ID,id);
+		Cursor result = database.rawQuery(query, null);
+		return result.moveToFirst();
+	}
+	protected String selectWhere(String table, String column, String id){
+		return "SELECT * FROM " + table + " WHERE "
+	            + column + " = '" + id + "'";
 	}
 
 }

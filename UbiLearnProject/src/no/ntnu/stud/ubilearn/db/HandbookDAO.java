@@ -143,7 +143,7 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
 		log(values.toString());
-		
+				
 		long rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
 		return rowId;
 	}
