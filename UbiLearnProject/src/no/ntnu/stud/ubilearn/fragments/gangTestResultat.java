@@ -1,6 +1,8 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
+import no.ntnu.stud.ubilearn.models.WalkingSPPB;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ public class gangTestResultat extends Fragment{
 	private TextView poeng2;
 	private Spinner fail1;
 	private Spinner fail2;
+	private WalkingSPPB test;
+	private PractiseDAO dao;
 
 	public gangTestResultat(double[] results) {
 		this.results=results;
@@ -34,6 +38,8 @@ public class gangTestResultat extends Fragment{
 		poeng1= (TextView)view.findViewById(R.id.poeng1);
 		fail2 = (Spinner)view.findViewById(R.id.fail_chooser2);
 		poeng2= (TextView)view.findViewById(R.id.poeng2);
+		
+		dao = new PractiseDAO(getActivity());
 
 		fail1.setOnItemSelectedListener(new OnItemSelectedListener() {
 

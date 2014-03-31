@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 public class PractiseFragment extends Fragment
 {
-
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view =  inflater.inflate(R.layout.fragment_practise, container, false);

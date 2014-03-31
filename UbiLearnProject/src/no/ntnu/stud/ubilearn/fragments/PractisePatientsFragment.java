@@ -11,6 +11,7 @@ import android.widget.Button;
 
 public class PractisePatientsFragment extends Fragment 
 {
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -33,6 +34,8 @@ public class PractisePatientsFragment extends Fragment
 				
 			}
 		});
+		
+		
 		
 		return rootView;
 
