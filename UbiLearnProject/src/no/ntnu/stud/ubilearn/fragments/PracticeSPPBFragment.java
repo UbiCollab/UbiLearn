@@ -39,6 +39,17 @@ public class PracticeSPPBFragment extends Fragment {
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});
+		
+		Button standup = (Button) view.findViewById(R.id.standup_button);
+
+		standup.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View vi)
+			{
+				Fragment fragment = new PractiseStandupFragment();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
+			}
+		});
 
 		return view;
 	}
