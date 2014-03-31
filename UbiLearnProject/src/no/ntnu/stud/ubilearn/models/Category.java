@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,10 +7,9 @@ import no.ntnu.stud.ubilearn.R;
 
 public class Category extends WikiItem{
 	private ArrayList<WikiItem> subItems;
-	private long id;
 	private String objectId;
 	private Date createdAt;
-	private long parentId;
+	private String parentId;
 	private String name;
 	
 	
@@ -22,9 +21,8 @@ public class Category extends WikiItem{
 	
 	
 	
-	public Category(long id, String objectId, String name, Date createdAt, long parentId) {
+	public Category(String objectId, String name, Date createdAt, String parentId) {
 		super();
-		this.id = id;
 		this.objectId = objectId;
 		this.createdAt = createdAt;
 		this.parentId = parentId;
@@ -46,9 +44,6 @@ public class Category extends WikiItem{
 		return false;
 	}
 
-	public long getId() {
-		return id;
-	}
 
 	public String getObjectId() {
 		return objectId;
@@ -58,7 +53,7 @@ public class Category extends WikiItem{
 		return createdAt;
 	}
 
-	public long getParentId(){
+	public String getParentId(){
 		return parentId;
 	}
 
@@ -68,9 +63,8 @@ public class Category extends WikiItem{
 	}
 
 
-	//havent decided how to represent a top level category
 	public boolean isTopLevel() {
-		return id == parentId || id == -1;
+		return parentId == null;
 	}
 
 
@@ -88,9 +82,18 @@ public class Category extends WikiItem{
 	public void setName(String name) {
 		this.name = name;		
 	}
+
+
+	
+	public String printContent() {
+		return "Category [subItems=" + subItems + ", objectId=" + objectId
+				+ ", createdAt=" + createdAt + ", parentId=" + parentId
+				+ ", name=" + name + "]";
+	}
 	
 	@Override
 	public String toString(){
 		return name;
 	}
+	
 }

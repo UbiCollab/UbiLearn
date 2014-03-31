@@ -3,7 +3,7 @@ package no.ntnu.stud.ubilearn.fragments.wiki;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
-
+import no.ntnu.stud.ubilearn.models.WikiItem;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;

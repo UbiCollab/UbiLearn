@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.models;
 
 public abstract class WikiItem {
 //	protected String name;
@@ -21,6 +21,7 @@ public abstract class WikiItem {
 	public int getIcon() {
 		return icon;
 	}
+	public abstract String printContent();
 
 //	@Override
 //	public String toString() {

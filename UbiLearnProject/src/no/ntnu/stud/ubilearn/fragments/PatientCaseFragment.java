@@ -1,7 +1,7 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -19,14 +19,14 @@ public class PatientCaseFragment extends Fragment{
 	
 	private String _name, _age, _gender, _pasientInfo;
 	private int _level;
-	private Patient patient;
+	private CasePatient patient;
 	
 	//Empty constructor for validFragment
 	public PatientCaseFragment() {
 		
 	}
 	
-	public PatientCaseFragment(Patient patient) {
+	public PatientCaseFragment(CasePatient patient) {
 		this.patient = patient;
 	}
 
@@ -37,7 +37,7 @@ public class PatientCaseFragment extends Fragment{
 		_age = patient.getAge();
 		_gender = patient.getGender();
 		_pasientInfo = patient.getInfo();
-		_level = Integer.parseInt(patient.getLevel());
+		_level = patient.getLevel();
 		
 	}
 	
