@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import no.ntnu.stud.ubilearn.models.*;
 
 public class User {
-	private ArrayList<Patient> patientList;
+	private ArrayList<CasePatient> patientList;
 	
 	private static User instance;
 	private int points;
@@ -22,11 +22,11 @@ public class User {
 		}
 	}
 	//pasient listen
-	public ArrayList<Patient> getPatientList() {
+	public ArrayList<CasePatient> getPatientList() {
 		return patientList;
 	}
 
-	public void setPatientList(ArrayList<Patient> patientList) {
+	public void setPatientList(ArrayList<CasePatient> patientList) {
 		this.patientList = patientList;
 	}
 	//poeng til quizen

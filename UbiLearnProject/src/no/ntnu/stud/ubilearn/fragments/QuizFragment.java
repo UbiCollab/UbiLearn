@@ -9,7 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.R;
-import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
+import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.patientcase.QuizAnimation;
 import android.annotation.SuppressLint;
@@ -28,7 +29,7 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class QuizFragment extends Fragment{
 	private ArrayList<Quiz> quiz = new ArrayList<Quiz>();
-	private Patient patient;
+	private CasePatient patient;
 
 	private int i;
 
@@ -40,12 +41,13 @@ public class QuizFragment extends Fragment{
 	private int points;
 	private Button nextBtn;
 	private int correctCounter = 0;
+	private TrainingDAO trainingDAO;
 
 	public QuizFragment(){
 
 	}
 
-	public QuizFragment(Patient patient){
+	public QuizFragment(CasePatient patient){
 		this.patient = patient;
 		i = 0;
 	}
@@ -54,7 +56,15 @@ public class QuizFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		View rootView = inflater.inflate(R.layout.fragment_training_quiz, container, false);
 
-		quiz = generateQuiz(patient.getName());		
+		//----------GSON---------------
+		quiz = generateQuiz(patient.getName());
+		
+		//---------SQLite---------------
+//		trainingDAO = new TrainingDAO(getActivity());
+//		trainingDAO.open();
+//		quiz = trainingDAO.getPatientQuizzes(patient);
+//		trainingDAO.close();
+		
 
 		question = (TextView)rootView.findViewById(R.id.question);
 		ans1 = (Button)rootView.findViewById(R.id.quiz_button1);

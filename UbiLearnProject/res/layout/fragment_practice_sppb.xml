@@ -17,13 +17,13 @@
         android:text="Balansetest" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/gangtest_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gangtest" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/standup_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reise/sette seg" />

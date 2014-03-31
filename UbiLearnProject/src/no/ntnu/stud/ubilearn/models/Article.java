@@ -7,7 +7,6 @@ import no.ntnu.stud.ubilearn.R;
 public class Article extends WikiItem{
 	
 	String text;
-	private long id;
 	private String objectId;
 	private String title;
 	private String content;
@@ -48,9 +47,6 @@ public class Article extends WikiItem{
 		return text;
 	}
 
-	public long getId() {
-		return id;
-	}
 
 	public String getObjectId() {
 		return objectId;
@@ -80,9 +76,16 @@ public class Article extends WikiItem{
 	public void setName(String name) {
 		title = name;		
 	}
+
+	public String printContent() {
+		return "Article [objectId=" + objectId + ", title=" + title
+				+ ", content=" + content + ", createdAt=" + createdAt
+				+ ", parentId=" + parentId + "]";
+	}
 	
 	@Override
 	public String toString(){
 		return title;
 	}
+
 }
