@@ -37,7 +37,7 @@ public class PatientCaseFragment extends Fragment{
 		_age = patient.getAge();
 		_gender = patient.getGender();
 		_pasientInfo = patient.getInfo();
-		_level = Integer.parseInt(patient.getLevel());
+		_level = patient.getLevel();
 		
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public abstract class DAO {
 
@@ -44,6 +45,9 @@ public abstract class DAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	protected void log(String string){
+		Log.i(LOG,string);
 	}
 
 }

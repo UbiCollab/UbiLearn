@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.models;
 
 import java.util.Date;
 
@@ -7,12 +7,11 @@ import no.ntnu.stud.ubilearn.R;
 public class Article extends WikiItem{
 	
 	String text;
-	private long id;
 	private String objectId;
 	private String title;
 	private String content;
 	private Date createdAt;
-	private long parentId;
+	private String parentId;
 	
 
 	public Article(String name, String text) {
@@ -20,9 +19,18 @@ public class Article extends WikiItem{
 		this.text = text;
 	}
 
-	public Article(long id, String objectId, String title, String content, Date createdAt, long parentId) {
+//	public Article(long id, String objectId, String title, String content, Date createdAt, long parentId) {
+//		super();
+//		this.id = id;
+//		this.objectId = objectId;
+//		this.title = title;
+//		this.content = content;
+//		this.createdAt = createdAt;
+//		this.parentId = parentId;
+//	}
+
+	public Article(String objectId, String title, String content, Date createdAt, String parentId) {
 		super();
-		this.id = id;
 		this.objectId = objectId;
 		this.title = title;
 		this.content = content;
@@ -39,9 +47,6 @@ public class Article extends WikiItem{
 		return text;
 	}
 
-	public long getId() {
-		return id;
-	}
 
 	public String getObjectId() {
 		return objectId;
@@ -58,7 +63,7 @@ public class Article extends WikiItem{
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public long getParentId(){
+	public String getParentId(){
 		return parentId;
 	}
 
@@ -71,9 +76,16 @@ public class Article extends WikiItem{
 	public void setName(String name) {
 		title = name;		
 	}
+
+	public String printContent() {
+		return "Article [objectId=" + objectId + ", title=" + title
+				+ ", content=" + content + ", createdAt=" + createdAt
+				+ ", parentId=" + parentId + "]";
+	}
 	
 	@Override
 	public String toString(){
 		return title;
 	}
+
 }
