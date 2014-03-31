@@ -6,6 +6,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.WikiItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -65,8 +66,9 @@ public class HandbookDAO extends DAO {
 		return article;
 	}
 	
-	public List<Category> getHandbook(){
+	public List<WikiItem> getHandbook(){
 		HashMap<String,Category> categories = new HashMap<String, Category>();
+		List<WikiItem> topLevelItems = new ArrayList<WikiItem>();
 //		HashMap<Long,Category> subCategories = new HashMap<Long, Category>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
@@ -95,7 +97,7 @@ public class HandbookDAO extends DAO {
 		for (Category category : categories.values()) {
 			
 			if(category.isTopLevel())
-				continue;
+				topLevelItems.add(category);
 			else{
 				Category parent = categories.get(category.getParentId());
 				parent.addSubItem(category);
@@ -116,11 +118,14 @@ public class HandbookDAO extends DAO {
 		
 		//iterates thru all articles and adds them to their parent category
 		for (Article article : articles) {
-			categories.get(article.getParentId()).addSubItem(article);
+			if(article.isTopLevel())
+				topLevelItems.add(article);
+			else
+				categories.get(article.getParentId()).addSubItem(article);
 		}
 		
 		
-		return new ArrayList<Category>(categories.values());
+		return topLevelItems;
 	}
 	
 //	private long isSubCategory(Category categorie) {

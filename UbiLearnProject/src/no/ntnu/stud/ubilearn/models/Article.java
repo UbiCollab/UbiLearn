@@ -11,7 +11,6 @@ public class Article extends WikiItem{
 	private String title;
 	private String content;
 	private Date createdAt;
-	private String parentId;
 	
 
 	public Article(String name, String text) {
