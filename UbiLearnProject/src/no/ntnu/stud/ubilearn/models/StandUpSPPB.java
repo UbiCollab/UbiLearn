@@ -1,7 +1,16 @@
 package no.ntnu.stud.ubilearn.models;
 
+import java.util.Date;
+
+
 public class StandUpSPPB extends SPPB{
 	private double time;
+
+	public StandUpSPPB(String objectId, String name, String patientId, double time, Date createdAt) {
+		super(objectId, name, patientId, createdAt);
+		this.time = time;
+	}
+	
 	@Override
 	public int getScore() {
 			if(time>60){
