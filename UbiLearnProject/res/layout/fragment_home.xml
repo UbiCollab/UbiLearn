@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="5"
-            android:text="@string/home_button_training" />
+            android:text="@string/home_button_practise" />
     </LinearLayout>
 
 </LinearLayout>

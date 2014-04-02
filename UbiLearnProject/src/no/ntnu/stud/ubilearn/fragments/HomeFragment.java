@@ -9,6 +9,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment
 	
 	private ListView _levelListView	= null;
 	
+	private User _user = null;
 		
 	
 	@Override
@@ -52,7 +54,9 @@ public class HomeFragment extends Fragment
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
 		
-				
+		_user = User.getInstance();
+		
+		
 		
 		// Here we read the data from the textfile.
 		try
