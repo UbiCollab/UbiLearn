@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment
 	private BufferedReader _bufferedReader	= null;
 	
 	private ListView _levelListView	= null;
+	
 		
 	
 	@Override
@@ -50,7 +51,8 @@ public class HomeFragment extends Fragment
 	{
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
-					
+		
+				
 		
 		// Here we read the data from the textfile.
 		try
