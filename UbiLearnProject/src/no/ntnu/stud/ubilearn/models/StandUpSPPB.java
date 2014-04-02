@@ -26,4 +26,13 @@ public class StandUpSPPB extends SPPB{
 			}
 		return 0;
 	}
+
+	public double getTime() {
+		return time;
+	}
+
+	public void setTime(double time) {
+		this.time = time;
+	}
+	
 }

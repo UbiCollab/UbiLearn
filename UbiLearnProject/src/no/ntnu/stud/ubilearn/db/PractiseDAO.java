@@ -68,13 +68,13 @@ public class PractiseDAO extends DAO {
 	
 	
 	
-	private ArrayList<SPPB> getTests(String id) {
+	private ArrayList<SPPB> getTests(String patientId) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
-		tests.addAll(getStandUpSPPBs(id));
-		tests.addAll(getBalanceSPPBs(id));
-		tests.addAll(getWalkingSPPBs(id));
+		tests.addAll(getStandUpSPPBs(patientId));
+		tests.addAll(getBalanceSPPBs(patientId));
+		tests.addAll(getWalkingSPPBs(patientId));
 		
-		Patient patient = getPatient(id);
+		Patient patient = getPatient(patientId);
 		for (SPPB sppb : tests) {
 			sppb.setPatient(patient);
 		}
@@ -155,7 +155,46 @@ public class PractiseDAO extends DAO {
 	}
 
 	public void insertSBBP(SPPB test){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHandler.KEY_OBJECT_ID, test.getObjectId());
+		values.put(DatabaseHandler.KEY_NAME, test.getName());
+		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
+		String table = "";
+		if(test instanceof WalkingSPPB){
+			insertWalkingSPPB((WalkingSPPB)test, values);
+			table = DatabaseHandler.TABLE_WALKING_SPPB;
+		}
+		else if (test instanceof BalanceSPPB){
+			insertBalanceSPPB((BalanceSPPB) test, values);
+			table = DatabaseHandler.TABLE_BALANCE_SPPB;
+		}
+		else if (test instanceof StandUpSPPB){
+			insertStandUpSPPB((StandUpSPPB) test, values);
+			table = DatabaseHandler.TABLE_STANDUP_SPPB;
+		}
+		
+		log(values.toString());
+		
+		long rowId;
+		if(!exists(table, test.getObjectId()))
+			rowId = database.insert(table,null,values);
+		else
+			rowId = database.update(table,values,null,null);
+	}
+	private void insertWalkingSPPB(WalkingSPPB test, ContentValues values){
+		values.put(DatabaseHandler.KEY_TIME, test.getTime());
+		values.put(DatabaseHandler.KEY_NO_AID, test.isNoAid());
+		values.put(DatabaseHandler.KEY_CRUTCHES, test.isCrutches());
+		values.put(DatabaseHandler.KEY_ROLLATER, test.isRollater());
+		values.put(DatabaseHandler.KEY_OTHER, test.getOther());
 		
 	}
-
+	private void insertBalanceSPPB(BalanceSPPB test, ContentValues values){
+		values.put(DatabaseHandler.KEY_PAIRED_SCORE, test.getPairedScore());
+		values.put(DatabaseHandler.KEY_SEMI_TANDEM_SCORE, test.getSemiTandemScore());
+		values.put(DatabaseHandler.KEY_TANDEM_SCORE, test.getTandemScore());
+	}
+	private void insertStandUpSPPB(StandUpSPPB test, ContentValues values){
+		values.put(DatabaseHandler.KEY_TIME, test.getTime());
+	}
 }
