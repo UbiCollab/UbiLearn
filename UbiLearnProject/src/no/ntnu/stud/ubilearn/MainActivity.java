@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
@@ -55,6 +56,8 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		SyncContent.retriveNewContent(this);
 
 		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerView = (ListView) findViewById(R.id.left_drawer);
@@ -68,15 +71,15 @@ public class MainActivity extends Activity {
 		drawerView.setAdapter(adapter);
 		
 		//---------GSON------------------
-		generatePatients();
-		patientList = User.getInstance().getPatientList();
+//		generatePatients();
+//		patientList = User.getInstance().getPatientList();
 		
 		//----------SQLite--------------
-//		trainingDAO = new TrainingDAO(this);
-//		trainingDAO.open();
-//		patientList = trainingDAO.getAllPatients();
-//		User.getInstance().setPatientList(patientList);
-//		trainingDAO.close();
+		trainingDAO = new TrainingDAO(this);
+		trainingDAO.open();
+		patientList = trainingDAO.getAllCasePatients();
+		User.getInstance().setPatientList(patientList);
+		trainingDAO.close();
 		
 
 		// set the lists click listener

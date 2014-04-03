@@ -12,7 +12,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 7;
+    static final int DATABASE_VERSION = 11;
+
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -135,6 +136,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			
 		db.execSQL(CREATE_BALANCE_SPPB_TABLE);
 		logColumns(db,TABLE_BALANCE_SPPB);
+
 	}
 
 	@Override

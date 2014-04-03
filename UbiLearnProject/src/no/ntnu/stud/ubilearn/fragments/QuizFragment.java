@@ -57,13 +57,13 @@ public class QuizFragment extends Fragment{
 		View rootView = inflater.inflate(R.layout.fragment_training_quiz, container, false);
 
 		//----------GSON---------------
-		quiz = generateQuiz(patient.getName());
+//		quiz = generateQuiz(patient.getName());
 		
 		//---------SQLite---------------
-//		trainingDAO = new TrainingDAO(getActivity());
-//		trainingDAO.open();
-//		quiz = trainingDAO.getPatientQuizzes(patient);
-//		trainingDAO.close();
+		trainingDAO = new TrainingDAO(getActivity());
+		trainingDAO.open();
+		quiz = trainingDAO.getPatientQuizzes(patient);
+		trainingDAO.close();
 		
 
 		question = (TextView)rootView.findViewById(R.id.question);
