@@ -21,8 +21,8 @@ public class TrainingHouse
 		_name		= "";
 	}
 	//-------------------------------------------------------------------------
-	public TrainingHouse(boolean isLocked, int userScore, int maxScore,
-			String name)
+	public TrainingHouse(String name, boolean isLocked, 
+			int userScore, int maxScore)
 	{
 		_isLocked		= isLocked;
 		
@@ -52,7 +52,7 @@ public class TrainingHouse
 		return _name;
 	}
 	//-------------------------------------------------------------------------
-	public void setLock(boolean isLocked)
+	public void setLockStatus(boolean isLocked)
 	{
 		_isLocked = isLocked;
 	}
