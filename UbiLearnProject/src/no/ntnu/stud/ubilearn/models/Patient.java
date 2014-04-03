@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Patient {
 	private String objectId;
+	private int id;
 	private String name;
 	private String age;
 	private String problems;
@@ -35,6 +36,28 @@ public class Patient {
 		exercises = new ArrayList<Exercise>();
 		this.createdAt = createdAt;
 	}
+	public Patient(int id, String name, String age, String problems, String comment, Date createdAt) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.problems = problems;
+		this.comment = comment;
+		tests = new ArrayList<SPPB>();
+		exercises = new ArrayList<Exercise>();
+		this.createdAt = createdAt;
+	}
+	public Patient(int id, String name, String age, String problems, String comment,ArrayList<SPPB> tests, Date createdAt) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.problems = problems;
+		this.comment = comment;
+		this.tests = tests;
+		exercises = new ArrayList<Exercise>();
+		this.createdAt = createdAt;
+	}
 
 	public String getObjectId() {
 		return objectId;
@@ -42,6 +65,12 @@ public class Patient {
 
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
+	}
+	public int getId(){
+		return id;
+	}
+	public void setId(int id){
+		this.id=id;
 	}
 
 	public String getName() {
