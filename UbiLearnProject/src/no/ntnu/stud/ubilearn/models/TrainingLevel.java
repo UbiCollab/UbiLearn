@@ -28,8 +28,8 @@ public class TrainingLevel
 		_houseList	= new ArrayList<TrainingHouse>();
 	}
 	//_------------------------------------------------------------------------
-	public TrainingLevel(boolean isLocked, int userScore, int maxScore,
-			String name, List<TrainingHouse> houseList)
+	public TrainingLevel(String name, boolean isLocked, 
+			int userScore, int maxScore, List<TrainingHouse> houseList)
 	{
 		_isLocked		= isLocked;
 		

@@ -11,6 +11,7 @@ import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
+import no.ntnu.stud.ubilearn.models.TrainingLevel;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,9 +55,7 @@ public class HomeFragment extends Fragment
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
 		
-		_user = User.getInstance();
-		
-		
+	
 		
 		// Here we read the data from the textfile.
 		try
