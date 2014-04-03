@@ -188,7 +188,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			
 			try{
 				String name = "Gangtest";
-				String patientID = patient.getObjectId();
+				int patientID = patient.getId();
 				double parsedTime = Double.parseDouble(minSec.replace(":", "."));
 				Date date = new Date();
 				
@@ -208,7 +208,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			
 			//time = Double.parseDouble(minSec.replace(":", "."));
 			
-			test2 = new WalkingSPPB("Gangtest", patient.getObjectId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
+			test2 = new WalkingSPPB("Gangtest", patient.getId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
 					
 		}
 	}

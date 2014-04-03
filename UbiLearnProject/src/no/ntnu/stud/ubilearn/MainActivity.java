@@ -242,13 +242,10 @@ public class MainActivity extends Activity {
 //		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
 
 ////		Log.d("MAIN",hb.getCategory("abc123").printContent());
-//		
-//		List<Category> content = hb.getHandbook();
-//		for (Category category : content) {
-//			Log.d("SUPER",category.printContent());
-//			for (WikiItem item : category.getSub()) {
-//				Log.d("SUB",item.printContent());
-//			}
+		
+//		List<WikiItem> content = hb.getHandbook();
+//		for (WikiItem item : content) {
+//			Log.d("SUPER",item.printContent());
 //		}
 //		hb.close();
 		

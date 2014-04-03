@@ -10,6 +10,14 @@ public class StandUpSPPB extends SPPB{
 		super(objectId, name, patientId, createdAt);
 		this.time = time;
 	}
+	public StandUpSPPB(String name, int patientId, double time, Date createdAt) {
+		super(name, patientId, createdAt);
+		this.time = time;
+	}
+	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt) {
+		super(id,name, patientId, createdAt);
+		this.time = time;
+	}
 	
 	@Override
 	public int getScore() {
