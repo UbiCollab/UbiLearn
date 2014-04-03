@@ -8,7 +8,9 @@ import java.util.TimerTask;
 import javax.xml.datatype.Duration;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.WalkingSPPB;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.Matrix;
@@ -31,12 +33,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+@SuppressLint("ValidFragment")
 public class Practice_SPPB_gangtestFragment extends Fragment{
 	private Timer t;
 	private int TimeCounter = 0;
-	double time;
-	TextView result1;
-	TextView result2;
+
 	boolean isTime = false;
 	String minSec;
 	int testCounter = 1;
@@ -44,14 +45,25 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	ImageView resultAccept2;
 	TextView startTest;
 	private Button next;
-	private double[] results = new double [2];
-	private WalkingSPPB test1;
-	private WalkingSPPB test2;
+	
+
+	//UI-elements
 	private RadioButton noAidButton;
 	private RadioButton crutchesButton;
 	private RadioButton rollatorButton;
 	private RadioButton otherButton;
 	private EditText otherEdit;
+	private TextView time;
+	private TextView result1;
+	private TextView result2;
+	//Model:
+	private Patient patient;
+	private WalkingSPPB test1;
+	private WalkingSPPB test2;
+	
+	public Practice_SPPB_gangtestFragment(Patient patient){
+		this.patient = patient;
+	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -85,7 +97,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 
 			@Override
 			public void onClick(View v) {
-				Fragment fragment = new gangTestResultatFragment(results);
+				Fragment fragment = new gangTestResultatFragment(test1, test2);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("training").commit();
 
 			}
@@ -173,24 +185,35 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	public void results(){
 		if(testCounter==2){
 			result1.setText("1. "+minSec);
-			//results[0]=Double.parseDouble(minSec.replace(":", "."));
-
-			test1 = new WalkingSPPB(Double.parseDouble(minSec.replace(":", "."), aid());
+			
+			try{
+				String name = "Gangtest";
+				String patientID = patient.getObjectId();
+				double parsedTime = Double.parseDouble(minSec.replace(":", "."));
+				Date date = new Date();
+				
+			test1 = new WalkingSPPB(name,patientID , date, parsedTime, noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
+			
 			accept(resultAccept1);
 			TimeCounter = 0;
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		if(testCounter==3){
 			result2.setText("2. "+minSec);
 			accept(resultAccept2);
 			startTest.setText("ferdig");
 			
-			time = Double.parseDouble(minSec.replace(":", "."));
+			//time = Double.parseDouble(minSec.replace(":", "."));
 			
-			test2 = new WalkingSPPB(time, aid());
+			test2 = new WalkingSPPB("Gangtest", patient.getObjectId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
 					
 		}
 	}
 	public String aid(){
+		
 		if(noAidButton.isChecked()){
 			return "uten";
 		}
@@ -205,6 +228,12 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			
 		}
 		return null;
+	}
+	private String getOtherText(){
+		if(otherButton.isChecked()){
+			return otherEdit.getText().toString();
+		}
+		else return "";
 	}
 }
 

@@ -13,9 +13,18 @@ public class Patient {
 	private ArrayList<Exercise> exercises;
 	private Date createdAt;
 	
-	public Patient(String objectId, String name, String age, String problems,
-			String comment, ArrayList<SPPB> tests,
-			ArrayList<Exercise> exercises, Date createdAt) {
+	public Patient(String objectId, String name, String age, String problems, String comment, Date createdAt) {
+		super();
+		this.objectId = objectId;
+		this.name = name;
+		this.age = age;
+		this.problems = problems;
+		this.comment = comment;
+		tests = new ArrayList<SPPB>();
+		exercises = new ArrayList<Exercise>();
+		this.createdAt = createdAt;
+	}
+	public Patient(String objectId, String name, String age, String problems, String comment,ArrayList<SPPB> tests, Date createdAt) {
 		super();
 		this.objectId = objectId;
 		this.name = name;
@@ -23,7 +32,7 @@ public class Patient {
 		this.problems = problems;
 		this.comment = comment;
 		this.tests = tests;
-		this.exercises = exercises;
+		exercises = new ArrayList<Exercise>();
 		this.createdAt = createdAt;
 	}
 

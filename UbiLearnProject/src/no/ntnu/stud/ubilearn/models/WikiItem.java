@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.models;
 public abstract class WikiItem {
 //	protected String name;
 	protected int icon;
+	protected String parentId;
 	
 	public WikiItem() {
 		setIcon();
@@ -17,6 +18,10 @@ public abstract class WikiItem {
 
 	
 	protected abstract void setIcon();
+	
+	public boolean isTopLevel() {
+		return parentId == null;
+	}
 
 	public int getIcon() {
 		return icon;

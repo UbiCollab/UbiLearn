@@ -24,12 +24,14 @@ public class gangTestResultatFragment extends Fragment{
 	private TextView poeng2;
 	private Spinner fail1;
 	private Spinner fail2;
+	private PractiseDAO dao;
+	
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
-	private PractiseDAO dao;
 
-	public gangTestResultatFragment(double[] results) {
-		this.results=results;
+	public gangTestResultatFragment(WalkingSPPB test1, WalkingSPPB test2) {
+		this.test1 = test1;
+		this.test2 = test2;
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -54,7 +56,7 @@ public class gangTestResultatFragment extends Fragment{
 				if(arg2!=0){
 					poeng1.setText("Poengsum: 0");
 				}else{
-					poeng1.setText("Poengsum: "+test.getScore());
+					poeng1.setText("Poengsum: "+test1.getScore());
 				}
 
 			}
@@ -76,7 +78,7 @@ public class gangTestResultatFragment extends Fragment{
 					poeng2.setText("Poengsum: 0");
 				}else{
 				
-					poeng2.setText("Poengsum: "+test.getScore());
+					poeng2.setText("Poengsum: "+test2.getScore());
 					
 				}
 			}
