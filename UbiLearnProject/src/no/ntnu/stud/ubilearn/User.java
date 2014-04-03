@@ -38,10 +38,37 @@ public class User {
 	}
 	
 	//-------------------------------------------------------------------------
-/*	public String getUserName()
+	/**
+	 * Retrieves the name of the user that is currently logged in the
+	 * application.
+	 * 
+	 * @return The name of the user that is currently logged in.
+	 */
+/*	public String getName()
 	{
 		
 	}
-	//-------------------------------------------------------------------------
-*/	
+*/	//-------------------------------------------------------------------------
+	/**
+	 * Retrieves a list of all the levels in the training part.
+	 * 
+	 * @return A list of the levels in the training part 
+	 */
+	/* Når det gjelder denne så er jeg usikker på hvordan det har blitt tenkt
+		med hensyn til å lagre nivå og hus. Men det jeg har gjort er å lage to
+		klasser; TrainingLevel og TrainingHouse som kan brukes. Slik at denne 
+		metoden kan returnere alle levels/nivå, hvor hvert nivå inneholder data
+		for det spesifikke nivå, samt en liste med objekter av type 
+		TrainingHouse. TrainingHouse inneholder data for det spesifikke huset.
+		Denne metoden vil da hente alle data med en gang og kanskje dette er
+		litt dumt, at det kan ta litt tid før data blir hentet. Kunne kanskje
+		ha gjort det sånn at man kaller en metode som henter data for et
+		spesifikt hus når man velger et nivå fra listen i "Home"-siden, men
+		dette kan sikkert endres senere hvis det blir aktuelt.  
+	*/
+/*	public List<TrainingLevels> getLevels()
+	{
+		
+	}
+*/	//-------------------------------------------------------------------------
 }
