@@ -65,4 +65,12 @@ public class WalkingSPPB extends SPPB{
 	public void setOther(String other) {
 		this.other = other;
 	}
+	@Override
+	public String toString() {
+		return "WalkingSPPB [time=" + time + ", noAid=" + noAid + ", crutches="
+				+ crutches + ", rollater=" + rollater + ", other=" + other
+				+ ", objectId=" + objectId + ", name=" + name + ", patient="
+				+ patient + ", patientId=" + patientId + ", createdAt="
+				+ createdAt + "]";
+	}
 }

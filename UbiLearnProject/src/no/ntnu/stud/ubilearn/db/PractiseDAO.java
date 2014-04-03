@@ -78,6 +78,11 @@ public class PractiseDAO extends DAO {
 		return tests;
 	}
 
+	/**
+	 * 
+	 * @param id the id of the patient that theese tests are performed on
+	 * @return all tests of this type that this patient has performed
+	 */
 	public ArrayList<SPPB> getStandUpSPPBs(String id) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_STANDUP_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
@@ -100,6 +105,11 @@ public class PractiseDAO extends DAO {
 		
 		return new StandUpSPPB(objectId, name, patientId, time, stringToDate(createdAt));
 	}
+	/**
+	 * 
+	 * @param id the id of the patient that theese tests are performed on
+	 * @return all tests of this type that this patient has performed
+	 */
 	public ArrayList<SPPB> getBalanceSPPBs(String id) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_BALANCE_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
@@ -123,7 +133,11 @@ public class PractiseDAO extends DAO {
 		
 		return new BalanceSPPB(objectId, name, patientId, stringToDate(createdAt), pairedScore, semiTandemScore, tandemScore);
 	}
-	
+	/**
+	 * 
+	 * @param id the id of the patient that theese tests are performed on
+	 * @return all tests of this type that this patient has performed
+	 */
 	public ArrayList<SPPB> getWalkingSPPBs(String id) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_WALKING_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
@@ -135,7 +149,7 @@ public class PractiseDAO extends DAO {
 			return null;
 		return tests;
 	}
-
+	
 	private WalkingSPPB getWalkingSPPB(Cursor result) {
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -154,6 +168,7 @@ public class PractiseDAO extends DAO {
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, test.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
+		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
 		String table = "";
 		if(test instanceof WalkingSPPB){

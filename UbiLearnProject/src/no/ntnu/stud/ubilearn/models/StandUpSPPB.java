@@ -34,5 +34,13 @@ public class StandUpSPPB extends SPPB{
 	public void setTime(double time) {
 		this.time = time;
 	}
+
+	@Override
+	public String toString() {
+		return "StandUpSPPB [time=" + time + ", objectId=" + objectId
+				+ ", name=" + name + ", patient=" + patient + ", patientId="
+				+ patientId + ", createdAt=" + createdAt + "]";
+	}
+	
 	
 }
