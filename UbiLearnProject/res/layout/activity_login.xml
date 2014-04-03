@@ -94,7 +94,7 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:onClick="startMain"
+                android:onClick="skip"
                 android:text="Skip"
                 android:textSize="20sp" />
 
