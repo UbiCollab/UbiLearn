@@ -10,8 +10,16 @@ public class WalkingSPPB extends SPPB{
 	private String other;
 	private String aid;
 
-	public WalkingSPPB(String name, String patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
-		super("123", name, patientId, createdAt);
+	public WalkingSPPB(String name, int patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
+		super(name, patientId, createdAt);
+		this.time = time;
+		this.noAid = noAid;
+		this.crutches = crutches;
+		this.rollater = rollater;
+		this.other = other;
+	}
+	public WalkingSPPB(int id, String name, int patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
+		super(id, name, patientId, createdAt);
 		this.time = time;
 		this.noAid = noAid;
 		this.crutches = crutches;
@@ -27,6 +35,7 @@ public class WalkingSPPB extends SPPB{
 		this.rollater = rollater;
 		this.other = other;
 	}
+	
 	@Override
 	public int getScore() {
 		if(time>8.7){

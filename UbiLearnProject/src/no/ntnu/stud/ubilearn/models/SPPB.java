@@ -5,9 +5,10 @@ import java.util.Date;
 
 public abstract class SPPB {
 	protected String objectId;
+	protected int id;
 	protected String name;
 	protected Patient patient;
-	protected String patientId;
+	protected int patientId;
 	protected Date createdAt;
 	
 	public SPPB(String objectId, String name, Patient patient, Date createdAt) {
@@ -15,13 +16,26 @@ public abstract class SPPB {
 		this.objectId = objectId;
 		this.name = name;
 		this.patient = patient;
-		this.patientId = patient.getObjectId();
+		this.patientId = patient.getId();
 		this.createdAt = createdAt;
 	}
 
 	public SPPB(String objectId, String name, String patientId, Date createdAt) {
 		super();
 		this.objectId = objectId;
+		this.name = name;
+//		this.patientId = patientId;
+		this.createdAt = createdAt;
+	}
+	public SPPB(int id, String name, int patientId, Date createdAt) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.patientId = patientId;
+		this.createdAt = createdAt;
+	}
+	public SPPB(String name, int patientId, Date createdAt) {
+		super();
 		this.name = name;
 		this.patientId = patientId;
 		this.createdAt = createdAt;
@@ -36,6 +50,12 @@ public abstract class SPPB {
 	public void setObjectId(String objectId) {
 		this.objectId = objectId;
 	}
+	public int getId(){
+		return id;
+	}
+	public void setId(int id){
+		this.id=id;
+	}
 
 	public String getName() {
 		return name;
@@ -48,7 +68,7 @@ public abstract class SPPB {
 	public Patient getPatient() {
 		return patient;
 	}
-	public String getPatientId(){
+	public int getPatientId(){
 		return patientId;
 	}
 
