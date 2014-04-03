@@ -263,7 +263,8 @@ public class MainActivity extends Activity {
 //	    pDAO.insertPatient(p2);
 	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
 //	    pDAO.insertSBBP(test);
-	    pDAO.getStandUpSPPBs(p1.getObjectId());
+	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getObjectId());
+	    
 	    
 	    pDAO.close();
 		
