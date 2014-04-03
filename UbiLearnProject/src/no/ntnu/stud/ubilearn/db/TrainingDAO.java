@@ -32,8 +32,10 @@ public class TrainingDAO extends DAO{
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_QUIZ, quiz.getObjectId()))
 			rowId = database.insert(DatabaseHandler.TABLE_QUIZ,null,values);
-		else
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
 			rowId = database.update(DatabaseHandler.TABLE_QUIZ,values,null,null);
+		}
 		return rowId;
 	}
 	public void insertQuizzes(List<Quiz> quizzes){	
@@ -126,8 +128,10 @@ public class TrainingDAO extends DAO{
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_CASE_PATIENT, patient.getObjectId()))
 			rowId = database.insert(DatabaseHandler.TABLE_CASE_PATIENT,null,values);
-		else
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
 			rowId = database.update(DatabaseHandler.TABLE_CASE_PATIENT,values,null,null);
+		}
 		return rowId;
 	}
 	public void insertCasePatients(List<CasePatient> patients){	

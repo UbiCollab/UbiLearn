@@ -33,8 +33,10 @@ public class PractiseDAO extends DAO {
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_PATIENT, patient.getId()))
 			rowId = database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
-		else
+		else{
+			values.remove(DatabaseHandler.KEY_ID);
 			rowId = database.update(DatabaseHandler.TABLE_PATIENT,values,null,null);
+		}
 		return rowId;
 	}
 	
@@ -191,8 +193,10 @@ public class PractiseDAO extends DAO {
 		long rowId;
 		if(!exists(table, test.getId()))
 			rowId = database.insert(table,null,values);
-		else
+		else{
+			values.remove(DatabaseHandler.KEY_ID);
 			rowId = database.update(table,values,null,null);
+		}
 	}
 	private void insertWalkingSPPB(WalkingSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
