@@ -37,6 +37,7 @@ import android.widget.Toast;
  */
 public class LoginActivity extends Activity {
 	protected static final String InputMethodManager = null;
+	private static boolean isInit = false;
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
@@ -56,7 +57,10 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		pointerHax = this;
 		//initializes Parse with its keys 
-		Parse.initialize(this, "LSFbjJtg93wCMZGCbVibMVL2cSnl0mq7OTaEqm7W", "TuxF6aioePOXrBROvhbwrBJ2Z4kOb5PGMoXyU8lo");
+		if (!isInit) {			
+			Parse.initialize(this, "LSFbjJtg93wCMZGCbVibMVL2cSnl0mq7OTaEqm7W", "TuxF6aioePOXrBROvhbwrBJ2Z4kOb5PGMoXyU8lo");
+			isInit = true;
+		}
 		setContentView(R.layout.activity_login);
 		user = new ParseUser();
 		//checks if the user is already logged in

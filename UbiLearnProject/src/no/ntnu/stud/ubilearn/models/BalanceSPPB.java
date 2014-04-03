@@ -40,5 +40,14 @@ public class BalanceSPPB extends SPPB{
 	public void setTandemScore(int tandemScore) {
 		this.tandemScore = tandemScore;
 	}
+	@Override
+	public String toString() {
+		return "BalanceSPPB [pairedScore=" + pairedScore + ", semiTandemScore="
+				+ semiTandemScore + ", tandemScore=" + tandemScore
+				+ ", objectId=" + objectId + ", name=" + name + ", patient="
+				+ patient + ", patientId=" + patientId + ", createdAt="
+				+ createdAt + "]";
+	}
+	
 
 }

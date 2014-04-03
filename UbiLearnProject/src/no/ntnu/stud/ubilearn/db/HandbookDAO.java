@@ -126,6 +126,7 @@ public class HandbookDAO extends DAO {
 	
 	
 	public long insertCategory(Category category){
+		System.out.println(category);
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, category.getName());

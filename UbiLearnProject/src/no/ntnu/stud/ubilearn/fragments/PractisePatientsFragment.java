@@ -78,7 +78,7 @@ public class PractisePatientsFragment extends Fragment
 				
 				
 			}
-		})
+		});
 		
 		return rootView;
 
