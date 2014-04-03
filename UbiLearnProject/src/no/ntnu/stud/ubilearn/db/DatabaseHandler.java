@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 9;
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -88,13 +88,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		logColumns(db, TABLE_ARTICLE);
 		
 		db.execSQL(CREATE_CATEGORY_TABLE);
-		logColumns(db, CREATE_CATEGORY_TABLE);
+		logColumns(db, TABLE_CATEGORY);
 		
 		db.execSQL(CREATE_QUIZ_TABLE);
-		logColumns(db, CREATE_QUIZ_TABLE);
+		logColumns(db, TABLE_QUIZ);
 		
 		db.execSQL(CERATE_PATIENT_TABLE);
-		logColumns(db, CERATE_PATIENT_TABLE);
+		logColumns(db, TABLE_PATIENT);
 				
 	}
 
