@@ -52,7 +52,7 @@ public class TrainingHouse
 		return _name;
 	}
 	//-------------------------------------------------------------------------
-	public void setLock(boolean isLocked)
+	public void setLockStatus(boolean isLocked)
 	{
 		_isLocked = isLocked;
 	}

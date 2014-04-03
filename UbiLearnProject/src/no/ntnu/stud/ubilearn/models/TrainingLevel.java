@@ -66,7 +66,7 @@ public class TrainingLevel
 		return _houseList;
 	}
 	//-------------------------------------------------------------------------
-	public void setLock(boolean isLocked)
+	public void setLockStatus(boolean isLocked)
 	{
 		_isLocked = isLocked;
 	}
