@@ -29,7 +29,11 @@ public class TrainingDAO extends DAO{
 
 		log(values.toString());
 		
-		long rowId = database.insert(DatabaseHandler.TABLE_QUIZ,null,values);
+		long rowId;
+		if(!exists(DatabaseHandler.TABLE_QUIZ, quiz.getObjectId()))
+			rowId = database.insert(DatabaseHandler.TABLE_QUIZ,null,values);
+		else
+			rowId = database.update(DatabaseHandler.TABLE_QUIZ,values,null,null);
 		return rowId;
 	}
 	public void insertQuizzes(List<Quiz> quizzes){	
@@ -119,7 +123,11 @@ public class TrainingDAO extends DAO{
 		
 		log(values.toString());
 		
-		long rowId = database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
+		long rowId;
+		if(!exists(DatabaseHandler.TABLE_CASE_PATIENT, patient.getObjectId()))
+			rowId = database.insert(DatabaseHandler.TABLE_CASE_PATIENT,null,values);
+		else
+			rowId = database.update(DatabaseHandler.TABLE_CASE_PATIENT,values,null,null);
 		return rowId;
 	}
 	public void insertCasePatients(List<CasePatient> patients){	
@@ -130,7 +138,7 @@ public class TrainingDAO extends DAO{
 	
 
 	public CasePatient getCasePatient(String id){
-		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_PATIENT + " WHERE "
+		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CASE_PATIENT + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
 		log(query);
 		
@@ -157,7 +165,7 @@ public class TrainingDAO extends DAO{
 	public ArrayList<CasePatient> getAllCasePatients() {
 		
 		ArrayList<CasePatient> patients = new ArrayList<CasePatient>();
-		String query = "SELECT * FROM " + DatabaseHandler.TABLE_PATIENT;
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CASE_PATIENT;
 		log(query);
 		
 		Cursor result = database.rawQuery(query, null);

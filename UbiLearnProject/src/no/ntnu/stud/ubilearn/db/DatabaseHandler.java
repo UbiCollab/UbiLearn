@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 6;
+    static final int DATABASE_VERSION = 7;
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -22,8 +22,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String TABLE_CATEGORY = "Category";
 //    static final String TABLE_CATEGORY_ARTICLE_CATEGORY = "CategoryArticleCategory";
     static final String TABLE_QUIZ = "Quiz";
+    static final String TABLE_CASE_PATIENT = "CasePatient";
     static final String TABLE_PATIENT = "Patient";
- 
+    static final String TABLE_STANDUP_SPPB = "StandUpSPPB";
+    static final String TABLE_BALANCE_SPPB = "BalanceSPPB";
+    static final String TABLE_WALKING_SPPB = "WalkingSPPB";
+    
     // Common column names
     static final String KEY_OBJECT_ID = "objectId";
     static final String KEY_NAME = "name";
@@ -42,12 +46,25 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_GENDER = "gender";
     static final String KEY_INFO = "info";
     static final String KEY_LEVEL = "level";
+    static final String KEY_PROBLEMS = "Problems";
+    static final String KEY_COMMENT = "Comment";
     
     // quiz Table - column names
     static final String KEY_QUESTION = "question";
     static final String KEY_ANSWERS = "answer";
     static final String KEY_CORRECT = "correct";
     static final String KEY_OWNER_ID = "ownerId";
+    
+    // tests Table - column names
+    static final String KEY_PATIENT_ID = "patientId";
+    static final String KEY_TIME = "Time";
+    static final String KEY_NO_AID = "NoAid";
+    static final String KEY_CRUTCHES = "Crutches";
+    static final String KEY_ROLLATER = "Rollater";
+    static final String KEY_OTHER = "Other";
+    static final String KEY_PAIRED_SCORE = "PairedScore";
+    static final String KEY_SEMI_TANDEM_SCORE = "SemiTandemScore";
+    static final String KEY_TANDEM_SCORE = "TandemScore";
     
     // CategoryArticleCategory Table - column names
 //    static final String KEY_PARENT_CATEGORY_ID = "parent_category_id";
@@ -75,9 +92,20 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		final String CREATE_QUIZ_TABLE = "CREATE TABLE " + TABLE_QUIZ + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_QUESTION + " TEXT,"
 				+ KEY_ANSWERS + " TEXT," + KEY_CORRECT + " TEXT," + KEY_OWNER_ID + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
-		final String CERATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+		final String CREATE_CASE_PATIENT_TABLE = "CREATE TABLE " + TABLE_CASE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
 				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + " TEXT," + KEY_LEVEL + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
+		
+		final String CREATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_AGE + " TEXT," + KEY_PROBLEMS + " TEXT," + KEY_COMMENT + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 
+		final String CREATE_BALANCE_SPPB_TABLE = "CREATE TABLE " + TABLE_BALANCE_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_PATIENT_ID + " TEXT," + KEY_PAIRED_SCORE + " INTEGER," + KEY_SEMI_TANDEM_SCORE + " INTEGER, " + KEY_TANDEM_SCORE + " INTEGER, " + KEY_CREATED_AT + " DATETIME" + ")";
+		
+		final String CREATE_WALKING_SPPB_TABLE = "CREATE TABLE " + TABLE_WALKING_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_NO_AID + " INTEGER," + KEY_CRUTCHES + " INTEGER," + KEY_ROLLATER + " INTEGER, " + KEY_OTHER + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
+		
+		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 //		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
 //				+ KEY_CHILD_CATEGORY_ID + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
@@ -93,9 +121,20 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		db.execSQL(CREATE_QUIZ_TABLE);
 		logColumns(db, TABLE_QUIZ);
 		
-		db.execSQL(CERATE_PATIENT_TABLE);
-		logColumns(db, TABLE_PATIENT);
-				
+		db.execSQL(CREATE_CASE_PATIENT_TABLE);
+		logColumns(db, TABLE_CASE_PATIENT);
+		
+		db.execSQL(CREATE_PATIENT_TABLE);
+		logColumns(db,TABLE_PATIENT);
+		
+		db.execSQL(CREATE_STANDUP_SPPB_TABLE);
+		logColumns(db,TABLE_STANDUP_SPPB);
+		
+		db.execSQL(CREATE_WALKING_SPPB_TABLE);
+		logColumns(db,TABLE_WALKING_SPPB);
+			
+		db.execSQL(CREATE_BALANCE_SPPB_TABLE);
+		logColumns(db,TABLE_BALANCE_SPPB);
 	}
 
 	@Override
@@ -104,7 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARTICLE);
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
 			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_PATIENT);
+			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CASE_PATIENT);
 			    onCreate(db);		
 	}
 	
