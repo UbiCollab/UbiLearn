@@ -71,15 +71,15 @@ public class MainActivity extends Activity {
 		drawerView.setAdapter(adapter);
 		
 		//---------GSON------------------
-		generatePatients();
-		patientList = User.getInstance().getPatientList();
+//		generatePatients();
+//		patientList = User.getInstance().getPatientList();
 		
 		//----------SQLite--------------
-//		trainingDAO = new TrainingDAO(this);
-//		trainingDAO.open();
-//		patientList = trainingDAO.getAllPatients();
-//		User.getInstance().setPatientList(patientList);
-//		trainingDAO.close();
+		trainingDAO = new TrainingDAO(this);
+		trainingDAO.open();
+		patientList = trainingDAO.getAllCasePatients();
+		User.getInstance().setPatientList(patientList);
+		trainingDAO.close();
 		
 
 		// set the lists click listener
