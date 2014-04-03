@@ -29,7 +29,8 @@ public class WikiFragment extends Fragment {
 		generateTestData();
 		HandbookDAO dao = new HandbookDAO(getActivity());
 		dao.open();
-		//listItems = dao.getHandbook();
+		listItems = (ArrayList<WikiItem>) dao.getHandbook();
+		dao.close();
 		root = inflater.inflate(R.layout.fragment_wiki, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
 		categoryListView.setAdapter(new WikiItemAdapter(this.getActivity(), listItems));

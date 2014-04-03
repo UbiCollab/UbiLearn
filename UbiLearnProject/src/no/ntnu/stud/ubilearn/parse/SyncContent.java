@@ -40,10 +40,10 @@ public class SyncContent {
 		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
-//		fetchHandBookCategoryAfterUpdated(context);
-//		fetchHandBookArticleAfterUpdate(context);
-//		fetchQuizesAfterUpdate(context);
-//		fetchCasePatient(context);
+		fetchHandBookCategoryAfterUpdated(context);
+		fetchHandBookArticleAfterUpdate(context);
+		fetchQuizesAfterUpdate(context);
+		fetchCasePatient(context);
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
