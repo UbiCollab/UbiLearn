@@ -222,11 +222,11 @@ public class MainActivity extends Activity {
 	
 	private void logout() {
 		
-//		clearBackstack();
-//		ParseUser.logOut();
-//		Intent intent = new Intent(this, LoginActivity.class);
-//		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	    startActivity(intent);
+		clearBackstack();
+		ParseUser.logOut();
+		Intent intent = new Intent(this, LoginActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
 		
 		//-----------------------------DATABASE TESTING--------------------------------------
 		
@@ -255,18 +255,20 @@ public class MainActivity extends Activity {
 //			tDAO.insertQuizs(generateQuiz(patient));
 //		}
 //		tDAO.close();
-	    PractiseDAO pDAO = new PractiseDAO(this);
-	    pDAO.open();
-	    Patient p1 = new Patient("qaz321", "Hans", "69", "everything", "nothing", new Date());
-//	    pDAO.insertPatient(p1);
-	    Patient p2 = new Patient("wsx321", "Jon", "64", "everything", "nothing", new Date());
-//	    pDAO.insertPatient(p2);
-	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
+//	    PractiseDAO pDAO = new PractiseDAO(this);
+//	    pDAO.open();
+//	    Patient p1 = new Patient("qaz321", "Hans", "69", "everything", "nothing", new Date());
+////	    pDAO.insertPatient(p1);
+//	    Patient p2 = new Patient("wsx321", "Jon", "64", "everything", "nothing", new Date());
+////	    pDAO.insertPatient(p2);
+//	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
 //	    pDAO.insertSBBP(test);
-	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getObjectId());
+//	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getObjectId());
+//	    for (SPPB sppb : tests) {
+//			Log.d("test", sppb.toString());
+//		}
 	    
-	    
-	    pDAO.close();
+//	    pDAO.close();
 		
 		//---------------------------------------------------------------------------------
 	}
