@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 7;
+    static final int DATABASE_VERSION = 8;
  
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
@@ -140,10 +140,16 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		 Log.w(LOG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARTICLE);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CASE_PATIENT);
+			   
+		 		
+		 		drop(db, TABLE_ARTICLE);
+			    drop(db, TABLE_CATEGORY);
+			    drop(db, TABLE_QUIZ);
+			    drop(db, TABLE_CASE_PATIENT);
+			    drop(db, TABLE_PATIENT);
+			    drop(db, TABLE_BALANCE_SPPB);
+			    drop(db, TABLE_WALKING_SPPB);
+			    drop(db, TABLE_STANDUP_SPPB);
 			    onCreate(db);		
 	}
 	
@@ -155,6 +161,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	            Log.i(LOG,"col: " + result.getString(1));
 	        } while (result.moveToNext());
 	    }
+	}
+	private void drop(SQLiteDatabase db, String table){
+ 		db.execSQL("DROP TABLE IF EXISTS " + table);
+ 		Log.i(LOG, "Dropping " + table);
 	}
 
 }

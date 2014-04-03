@@ -14,6 +14,7 @@ import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
@@ -21,7 +22,10 @@ import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
+import no.ntnu.stud.ubilearn.models.SPPB;
+import no.ntnu.stud.ubilearn.models.StandUpSPPB;
 import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
@@ -218,11 +222,11 @@ public class MainActivity extends Activity {
 	
 	private void logout() {
 		
-		clearBackstack();
-		ParseUser.logOut();
-		Intent intent = new Intent(this, LoginActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    startActivity(intent);
+//		clearBackstack();
+//		ParseUser.logOut();
+//		Intent intent = new Intent(this, LoginActivity.class);
+//		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//	    startActivity(intent);
 		
 		//-----------------------------DATABASE TESTING--------------------------------------
 		
@@ -251,6 +255,17 @@ public class MainActivity extends Activity {
 //			tDAO.insertQuizs(generateQuiz(patient));
 //		}
 //		tDAO.close();
+	    PractiseDAO pDAO = new PractiseDAO(this);
+	    pDAO.open();
+	    Patient p1 = new Patient("qaz321", "Hans", "69", "everything", "nothing", new Date());
+//	    pDAO.insertPatient(p1);
+	    Patient p2 = new Patient("wsx321", "Jon", "64", "everything", "nothing", new Date());
+//	    pDAO.insertPatient(p2);
+	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
+//	    pDAO.insertSBBP(test);
+	    pDAO.getStandUpSPPBs(p1.getObjectId());
+	    
+	    pDAO.close();
 		
 		//---------------------------------------------------------------------------------
 	}
