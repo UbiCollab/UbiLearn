@@ -168,6 +168,7 @@ public class PractiseDAO extends DAO {
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, test.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
+		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
 		String table = "";
 		if(test instanceof WalkingSPPB){
