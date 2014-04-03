@@ -64,10 +64,6 @@ public class PractiseDAO extends DAO {
 	}
 	
 	
-	
-	
-	
-	
 	private ArrayList<SPPB> getTests(String patientId) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
 		tests.addAll(getStandUpSPPBs(patientId));
