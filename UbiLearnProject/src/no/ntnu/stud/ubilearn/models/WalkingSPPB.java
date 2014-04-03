@@ -6,6 +6,13 @@ public class WalkingSPPB extends SPPB{
 	private boolean crutches;
 	private boolean rollater;
 	private String other;
+	private String aid;
+
+	public WalkingSPPB(double time, String aid) {
+		super();
+		this.time = time;
+		this.aid = aid;
+	}
 
 	@Override
 	public int getScore() {
@@ -20,7 +27,16 @@ public class WalkingSPPB extends SPPB{
 		else if(time < 4.82){
 			return 4;
 		}
-		return 0;
+		else{
+			return  0;
+		}
 	}
 
+	public double getTime() {
+		return time;
+	}
+
+	public void setTime(double time) {
+		this.time = time;
+	}
 }

@@ -158,8 +158,8 @@
                         android:layout_height="wrap_content"
                         android:text="1. " />
 
-                    <CheckBox
-                        android:id="@+id/checkBox1"
+                    <RadioButton
+                        android:id="@+id/uten_hjelpemidler"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="uten" />
@@ -176,8 +176,8 @@
                         android:layout_height="wrap_content"
                         android:text="2. " />
 
-                    <CheckBox
-                        android:id="@+id/checkBox1"
+                    <RadioButton
+                        android:id="@+id/krykker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="krykke/stokk(er)" />
@@ -194,8 +194,8 @@
                         android:layout_height="wrap_content"
                         android:text="3. " />
 
-                    <CheckBox
-                        android:id="@+id/checkBox1"
+                    <RadioButton
+                        android:id="@+id/rollator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="rollator" />
@@ -212,11 +212,22 @@
                         android:layout_height="wrap_content"
                         android:text="4. " />
 
-                    <CheckBox
-                        android:id="@+id/checkBox1"
+                    <RadioButton
+                        android:id="@+id/annet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="annet" />
+
+                    <EditText
+                        android:id="@+id/annet_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                         >
+
+                        <requestFocus />
+                    </EditText>
+
                 </LinearLayout>
 
                 <Button
