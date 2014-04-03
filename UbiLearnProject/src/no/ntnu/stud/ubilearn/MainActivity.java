@@ -79,12 +79,14 @@ public class MainActivity extends Activity {
 //		patientList = User.getInstance().getPatientList();
 		
 		//----------SQLite--------------
-		trainingDAO = new TrainingDAO(this);
-		trainingDAO.open();
-		patientList = trainingDAO.getAllCasePatients();
-		User.getInstance().setPatientList(patientList);
-		trainingDAO.close();
 		
+		//doing it in SyncContent for now.
+//		trainingDAO = new TrainingDAO(this);
+//		trainingDAO.open();
+//		patientList = trainingDAO.getAllCasePatients();
+//		User.getInstance().setPatientList(patientList);
+//		trainingDAO.close();			
+//		
 
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());

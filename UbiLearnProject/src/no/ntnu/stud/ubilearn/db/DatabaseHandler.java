@@ -13,7 +13,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
  
     // Database Version
 
-    static final int DATABASE_VERSION = 13;
+
+    static final int DATABASE_VERSION = 14;
 
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";

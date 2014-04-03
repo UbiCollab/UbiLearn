@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.Article;
@@ -29,21 +30,28 @@ public class SyncContent {
 	static Date lastUpdate;
 	public static boolean isRetriving = false;
 	public static boolean hasRetrived = false;
+	
 	public static void retriveNewContent(Context context){
 		isRetriving = true;
 		//checks if user is logged in
-		if (ParseUser.getCurrentUser() == null) {
+		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
 			return;
 		}
 		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
-		fetchHandBookCategoryAfterUpdated(context);
-		fetchHandBookArticleAfterUpdate(context);
-		fetchQuizesAfterUpdate(context);
-		fetchCasePatient(context);
+//		fetchHandBookCategoryAfterUpdated(context);
+//		fetchHandBookArticleAfterUpdate(context);
+//		fetchQuizesAfterUpdate(context);
+//		fetchCasePatient(context);
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
+		
+		TrainingDAO trainingDAO = new TrainingDAO(context);
+		trainingDAO.open();
+		ArrayList<CasePatient> patientList = trainingDAO.getAllCasePatients();
+		User.getInstance().setPatientList(patientList);
+		trainingDAO.close();	
 		
 		isRetriving = false;
 		hasRetrived = true;

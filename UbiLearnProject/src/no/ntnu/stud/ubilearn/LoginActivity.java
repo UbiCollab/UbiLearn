@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -109,6 +110,22 @@ public class LoginActivity extends Activity {
 	}
 	
 	//used by skip button
+	public void skip(View view){
+		ParseUser.logInInBackground("test@test.com", "test", new LogInCallback() {
+			
+			@Override
+			public void done(ParseUser user, ParseException e) {
+				if (e == null) {
+					Log.v("Login", "skip with user");
+					startMain(null);
+				}else{
+					showProgress(false);
+					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		showProgress(true);
+	}
 	public void startMain(View view) 
 	{
 	    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -193,12 +210,6 @@ public class LoginActivity extends Activity {
 				}
 			}
 		});
-//		try {
-//			ParseUser.logIn(mEmail, mPassword);
-//		} catch (ParseException e) {
-//			return false;
-//		}
-//		return true;
 	}
 
 	private void attemptSignup() {
