@@ -12,8 +12,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 7;
- 
+
+
+
+    static final int DATABASE_VERSION = 14;
+
+
     // Database Name
     static final String DATABASE_NAME = "UbiLearn";
  
@@ -30,6 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     
     // Common column names
     static final String KEY_OBJECT_ID = "objectId";
+    static final String KEY_ID = "id";
     static final String KEY_NAME = "name";
     static final String KEY_CREATED_AT = "createdAt";
     static final String KEY_PARENT_ID = "parentId";
@@ -95,16 +100,16 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		final String CREATE_CASE_PATIENT_TABLE = "CREATE TABLE " + TABLE_CASE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
 				+ KEY_AGE + " TEXT," + KEY_GENDER + " TEXT," + KEY_INFO + " TEXT," + KEY_LEVEL + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
 		
-		final String CREATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+		final String CREATE_PATIENT_TABLE = "CREATE TABLE " + TABLE_PATIENT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 				+ KEY_AGE + " TEXT," + KEY_PROBLEMS + " TEXT," + KEY_COMMENT + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 
-		final String CREATE_BALANCE_SPPB_TABLE = "CREATE TABLE " + TABLE_BALANCE_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+		final String CREATE_BALANCE_SPPB_TABLE = "CREATE TABLE " + TABLE_BALANCE_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 				+ KEY_PATIENT_ID + " TEXT," + KEY_PAIRED_SCORE + " INTEGER," + KEY_SEMI_TANDEM_SCORE + " INTEGER, " + KEY_TANDEM_SCORE + " INTEGER, " + KEY_CREATED_AT + " DATETIME" + ")";
 		
-		final String CREATE_WALKING_SPPB_TABLE = "CREATE TABLE " + TABLE_WALKING_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+		final String CREATE_WALKING_SPPB_TABLE = "CREATE TABLE " + TABLE_WALKING_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_NO_AID + " INTEGER," + KEY_CRUTCHES + " INTEGER," + KEY_ROLLATER + " INTEGER, " + KEY_OTHER + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
-		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT,"
+		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 //		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
@@ -135,15 +140,22 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			
 		db.execSQL(CREATE_BALANCE_SPPB_TABLE);
 		logColumns(db,TABLE_BALANCE_SPPB);
+
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		 Log.w(LOG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARTICLE);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ);
-			    db.execSQL("DROP TABLE IF EXISTS " + TABLE_CASE_PATIENT);
+			   
+		 		
+		 		drop(db, TABLE_ARTICLE);
+			    drop(db, TABLE_CATEGORY);
+			    drop(db, TABLE_QUIZ);
+			    drop(db, TABLE_CASE_PATIENT);
+			    drop(db, TABLE_PATIENT);
+			    drop(db, TABLE_BALANCE_SPPB);
+			    drop(db, TABLE_WALKING_SPPB);
+			    drop(db, TABLE_STANDUP_SPPB);
 			    onCreate(db);		
 	}
 	
@@ -155,6 +167,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	            Log.i(LOG,"col: " + result.getString(1));
 	        } while (result.moveToNext());
 	    }
+	}
+	private void drop(SQLiteDatabase db, String table){
+ 		db.execSQL("DROP TABLE IF EXISTS " + table);
+ 		Log.i(LOG, "Dropping " + table);
 	}
 
 }

@@ -32,8 +32,10 @@ public class HandbookDAO extends DAO {
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_ARTICLE, article.getObjectId()))	
 			rowId= database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
-		else
-			rowId= database.update(DatabaseHandler.TABLE_ARTICLE,values,null,null);		
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
+			rowId= database.update(DatabaseHandler.TABLE_ARTICLE,values,null,null);	
+		}
 		return rowId;
 	}
 	public void insertArticles(List<Article> articles){	
@@ -126,6 +128,7 @@ public class HandbookDAO extends DAO {
 	
 	
 	public long insertCategory(Category category){
+		System.out.println(category);
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, category.getName());
@@ -136,8 +139,10 @@ public class HandbookDAO extends DAO {
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_CATEGORY,category.getObjectId()))
 			rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
-		else
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
 			rowId = database.update(DatabaseHandler.TABLE_CATEGORY,values, null,null);
+		}
 		return rowId;
 	}
 	public void insertCategories(List<Category> categories){

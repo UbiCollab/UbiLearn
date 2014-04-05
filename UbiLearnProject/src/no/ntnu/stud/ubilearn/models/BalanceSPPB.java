@@ -14,7 +14,18 @@ public class BalanceSPPB extends SPPB{
 		this.semiTandemScore = semiTandemScore;
 		this.tandemScore = tandemScore;
 	}
-
+	public BalanceSPPB(String name, int patientId,Date createdAt, int pairedScore, int semiTandemScore, int tandemScore) {
+		super(name, patientId, createdAt);
+		this.pairedScore = pairedScore;
+		this.semiTandemScore = semiTandemScore;
+		this.tandemScore = tandemScore;
+	}
+	public BalanceSPPB(int id, String name, int patientId,Date createdAt, int pairedScore, int semiTandemScore, int tandemScore) {
+		super(id, name, patientId, createdAt);
+		this.pairedScore = pairedScore;
+		this.semiTandemScore = semiTandemScore;
+		this.tandemScore = tandemScore;
+	}
 
 
 
@@ -40,5 +51,14 @@ public class BalanceSPPB extends SPPB{
 	public void setTandemScore(int tandemScore) {
 		this.tandemScore = tandemScore;
 	}
+	@Override
+	public String toString() {
+		return "BalanceSPPB [pairedScore=" + pairedScore + ", semiTandemScore="
+				+ semiTandemScore + ", tandemScore=" + tandemScore
+				+ ", objectId=" + objectId + ", name=" + name + ", patient="
+				+ patient + ", patientId=" + patientId + ", createdAt="
+				+ createdAt + "]";
+	}
+	
 
 }

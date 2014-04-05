@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -37,6 +38,7 @@ import android.widget.Toast;
  */
 public class LoginActivity extends Activity {
 	protected static final String InputMethodManager = null;
+	private static boolean isInit = false;
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
@@ -56,7 +58,10 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		pointerHax = this;
 		//initializes Parse with its keys 
-		Parse.initialize(this, "LSFbjJtg93wCMZGCbVibMVL2cSnl0mq7OTaEqm7W", "TuxF6aioePOXrBROvhbwrBJ2Z4kOb5PGMoXyU8lo");
+		if (!isInit) {			
+			Parse.initialize(this, "LSFbjJtg93wCMZGCbVibMVL2cSnl0mq7OTaEqm7W", "TuxF6aioePOXrBROvhbwrBJ2Z4kOb5PGMoXyU8lo");
+			isInit = true;
+		}
 		setContentView(R.layout.activity_login);
 		user = new ParseUser();
 		//checks if the user is already logged in
@@ -105,6 +110,22 @@ public class LoginActivity extends Activity {
 	}
 	
 	//used by skip button
+	public void skip(View view){
+		ParseUser.logInInBackground("test@test.com", "test", new LogInCallback() {
+			
+			@Override
+			public void done(ParseUser user, ParseException e) {
+				if (e == null) {
+					Log.v("Login", "skip with user");
+					startMain(null);
+				}else{
+					showProgress(false);
+					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		showProgress(true);
+	}
 	public void startMain(View view) 
 	{
 	    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -189,12 +210,6 @@ public class LoginActivity extends Activity {
 				}
 			}
 		});
-//		try {
-//			ParseUser.logIn(mEmail, mPassword);
-//		} catch (ParseException e) {
-//			return false;
-//		}
-//		return true;
 	}
 
 	private void attemptSignup() {

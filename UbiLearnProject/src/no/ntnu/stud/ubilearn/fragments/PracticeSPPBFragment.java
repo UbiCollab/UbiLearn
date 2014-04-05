@@ -1,6 +1,8 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.models.Patient;
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +11,14 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+@SuppressLint("ValidFragment")
 public class PracticeSPPBFragment extends Fragment {
+	
+	Patient patient;
+	
+	public PracticeSPPBFragment(Patient patient){
+		this.patient = patient;
+	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -23,7 +32,7 @@ public class PracticeSPPBFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-				Fragment fragment = new Practice_SPPB_gangtestFragment();
+				Fragment fragment = new Practice_SPPB_gangtestFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});
