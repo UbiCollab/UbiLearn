@@ -27,7 +27,9 @@ public class PractiseFragment extends Fragment
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		dao = new PractiseDAO(getActivity());
 		patientList = generatePatients();
+		
 		View view =  inflater.inflate(R.layout.fragment_practise, container, false);
 
 		Button enterExercises = (Button) view.findViewById(R.id.exercises_button);
@@ -71,6 +73,8 @@ public class PractiseFragment extends Fragment
 	}
 	public ArrayList<Patient> generatePatients(){
 		//TODO hent pasienter fra backend
+		
+		dao.open();
 		ArrayList<Patient> tempPatients = new ArrayList<Patient>();
 		
 		Patient p1 = new Patient("1", "Kristian", "23", "vondt i ryggen", "snuser mye", new Date());
@@ -80,7 +84,7 @@ public class PractiseFragment extends Fragment
 		Patient p4 = new Patient("4", "Espen", "23", "vondt i ryggen", "snuser mye", new Date());
 		Patient p5 = new Patient("5", "Kua", "23", "vondt i ryggen", "snuser mye", new Date());
 		Patient p6 = new Patient("6", "Grisen", "23", "vondt i ryggen", "snuser mye", new Date());
-		
+		dao.close();
 		//(String objectId, String name, String age, String problems, String comment, Date createdAt)
 		
 		tempPatients.add(p1);

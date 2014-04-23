@@ -82,7 +82,7 @@ public class Patient {
 	}
 
 	public String getAge() {
-		return age;
+		return this.age;
 	}
 
 	public void setAge(String age) {
