@@ -20,7 +20,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="32dp"
-            android:contentDescription="1"
+            android:contentDescription="0"
             android:onClick="houseClick"
             android:src="@drawable/hus1" 
             />
@@ -33,7 +33,7 @@
             android:layout_below="@+id/training_hus1"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
-            android:contentDescription="2"
+            android:contentDescription="1"
             android:onClick="houseClick" 
             />
 
@@ -45,7 +45,7 @@
             android:layout_below="@+id/training_hus2"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
-            android:contentDescription="3"
+            android:contentDescription="2"
             android:onClick="houseClick" 
             />
         
@@ -58,7 +58,7 @@
             android:layout_below="@+id/training_hus3"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus3"
-            android:contentDescription="4"
+            android:contentDescription="3"
             android:onClick="houseClick"
              />
 
@@ -70,7 +70,7 @@
             android:layout_below="@+id/training_hus4"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus1" 
-            android:contentDescription="5"
+            android:contentDescription="4"
             android:onClick="houseClick"
             />
 
@@ -82,7 +82,7 @@
             android:layout_below="@+id/training_hus5"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
-            android:contentDescription="6"
+            android:contentDescription="5"
             android:onClick="houseClick"
              />
 
@@ -94,7 +94,7 @@
             android:layout_below="@+id/training_hus6"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus3" 
-            android:contentDescription="7"
+            android:contentDescription="6"
             android:onClick="houseClick"
             />
 
@@ -106,7 +106,7 @@
             android:layout_below="@+id/training_hus7"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus1" 
-            android:contentDescription="8"
+            android:contentDescription="7"
             android:onClick="houseClick"
             />
 
@@ -118,7 +118,7 @@
             android:layout_below="@+id/training_hus8"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus2"
-            android:contentDescription="9" 
+            android:contentDescription="8" 
             android:onClick="houseClick"
             />
 
@@ -130,7 +130,7 @@
             android:layout_below="@+id/training_hus9"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus3"
-            android:contentDescription="10"
+            android:contentDescription="9"
             android:onClick="houseClick"
              />
 
@@ -142,7 +142,7 @@
             android:layout_below="@+id/training_hus10"
             android:layout_marginTop="66dp"
             android:src="@drawable/hus1"
-            android:contentDescription="0"
+            android:contentDescription="10"
             android:onClick="houseClick"
              />
 
