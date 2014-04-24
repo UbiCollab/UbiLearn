@@ -23,6 +23,7 @@ public class User {
 	}
 	//pasient listen
 	public ArrayList<CasePatient> getPatientList() {
+		
 		return patientList;
 	}
 
