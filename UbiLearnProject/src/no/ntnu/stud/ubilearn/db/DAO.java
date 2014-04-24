@@ -72,7 +72,7 @@ public abstract class DAO {
 	
 	protected void printTable(String table){
 		String query = "SELECT * FROM " + table;
-		log(query);
+		log("Printing content of " + table);
 		Cursor result = database.rawQuery(query, null);
 		StringBuilder output = new StringBuilder();
 		if(result.moveToFirst()){

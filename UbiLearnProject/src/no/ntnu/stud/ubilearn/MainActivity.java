@@ -227,35 +227,42 @@ public class MainActivity extends Activity {
 	
 	private void logout() {
 		
-//		clearBackstack();
-//		ParseUser.logOut();
-//		Intent intent = new Intent(this, LoginActivity.class);
-//		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	    startActivity(intent);
+		clearBackstack();
+		ParseUser.logOut();
+		Intent intent = new Intent(this, LoginActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(intent);
 		
 		//-----------------------------DATABASE TESTING--------------------------------------
 		
-		HandbookDAO hb = new HandbookDAO(this);
-		hb.open();
-		hb.printTable();
-		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
-		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
-		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
-
-//		Log.d("MAIN",hb.getCategory("abc123").printContent());
-		
-		List<WikiItem> content = hb.getHandbook();
-		System.out.println(content.size());
-		for (WikiItem item : content) {
-			Log.d("SUPER",item.printContent());
-			if(item instanceof Category){
-				for (WikiItem sub : ((Category)item).getSub()) {
-					Log.d("SUB",sub.printContent());
-
-				}
-			}
-		}
-		hb.close();
+//		HandbookDAO hb = new HandbookDAO(this);
+//		hb.open();
+//		hb.printTable();
+//		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
+//		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
+//		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
+//		hb.printTable();
+//		
+//		
+////		Log.d("MAIN",hb.getCategory("abc123").printContent());
+//		
+//		List<WikiItem> content = hb.getHandbook();
+//		System.out.println(content.size());
+//		for (WikiItem item : content) {
+//			Log.d("SUPER",item.printContent());
+//			if(item instanceof Category){
+//				for (WikiItem sub : ((Category)item).getSub()) {
+//					Log.d("SUB",sub.printContent());
+//					if(item instanceof Category){
+//						for (WikiItem subsub : ((Category)item).getSub()) {
+//							Log.d("SUBSUB",subsub.printContent());
+//
+//						}
+//					}
+//				}
+//			}
+//		}
+//		hb.close();
 		
 //		TrainingDAO tDAO = new TrainingDAO(this);
 //		tDAO.open();
