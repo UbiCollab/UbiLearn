@@ -83,6 +83,10 @@ public abstract class SPPB {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;		
+	}
 	
 	
 }
