@@ -9,7 +9,10 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeCasesAdapter;
+import no.ntnu.stud.ubilearn.models.TrainingHouse;
+import no.ntnu.stud.ubilearn.models.TrainingLevel;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,17 +26,21 @@ import android.widget.TextView;
 
 public class HomeCasesFragment extends Fragment 
 {
-	int _levelNo		= -1;
-	int _userScore		= 0;
-	int _userTotalScore	= 0;
+	int _levelNo			= -1;
+	int _levelScore			= 0;
+	int _levelMaxScore		= 0;
+	int _nUnlockedHouses 	= 0;
+	int _nLockedHouses	 	= 0;
+	int _nAchievements		= 0;
+	
 	// Variables to store input from textfile.
 	String _levelName 			= "";
 //	String _status 			= "";	//TODO: Delete this when you are
 									//certain it will not be used.
-	String _unlockedCases 	= "";
-	String _lockedCases		= "";
+//	String _unlockedCases 	= "";
+//	String _lockedCases		= "";
 	String _totalScore		= "";
-	String _achievements 	= "";
+//	String _achievements 	= "";
 //	String _unlockedLevels	= "";
 //	String _lockedLevels	= "";
 	String _caseData		= "";
@@ -41,32 +48,31 @@ public class HomeCasesFragment extends Fragment
 	List<String> _listName	= new ArrayList<String>();
 	List<String> _listMedal	= new ArrayList<String>();
 	List<String> _listScore	= new ArrayList<String>();
-//	List<String> _listName	= new ArrayList<String>();
-//	List<String> _listScore	= new ArrayList<String>();
 	
-	BufferedReader		_bufferedReader		= null;
+	BufferedReader _bufferedReader		= null;
+	
+	TrainingLevel _level = null;
 	
 	
-	//-------------------------------------------------------------------------
+	//#########################################################################
 	public HomeCasesFragment()
 	{
 		
 	}
 	
 	//-------------------------------------------------------------------------
-/*	public HomeCasesFragment(String levelName, int levelNo)
+/*	public HomeCasesFragment(String levelName, TrainingLevel level)
 	{
 		_levelName	= levelName;
-		_levelNo 	= levelNo + 1;
-	}
-*/	
-	//-------------------------------------------------------------------------
-	public static HomeCasesFragment newInstance(String levelName, int levelNo)
+		_level 		= level;
+	}	
+*/	//-------------------------------------------------------------------------
+	public static HomeCasesFragment newInstance(/*String levelName, */int levelNo)
 	{
 		HomeCasesFragment fragment = new HomeCasesFragment();
 		
-		Bundle bundle = new Bundle(2);
-		bundle.putString("levelName", levelName);
+		Bundle bundle = new Bundle(1);
+//		bundle.putString("levelName", levelName);
 		bundle.putInt("levelNo", levelNo);
 		fragment.setArguments(bundle);
 		
@@ -78,14 +84,13 @@ public class HomeCasesFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
-		_levelName 	= getArguments().getString("levelName");
+		//_levelName 	= getArguments().getString("levelName");
 		_levelNo	= getArguments().getInt("levelNo");
-		
-				
+						
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_cases, container, false);
 					
-		String level = "#LEVEL_" + String.valueOf(_levelNo);
+/*		String level = "#LEVEL_" + String.valueOf(_levelNo);
 		
 		System.out.println("Level name:" + _levelName);
 		System.out.println("Level #:" + _levelNo);
@@ -149,10 +154,10 @@ public class HomeCasesFragment extends Fragment
 			// TODO: Replace with a dialog box and handle the error better.
 			System.out.println("Problems reading text file!");
 		}
-		/**
+*/		/**
 		 * We must ensure that the file is closed after used.
 		 */
-		finally
+/*		finally
 		{
 			try
 			{
@@ -166,6 +171,87 @@ public class HomeCasesFragment extends Fragment
 				System.out.println("Problems closing the file");
 			}
 		}
+*/		
+		TrainingLevel level = User.getInstance().getLevelNo(_levelNo);
+		
+		_levelName = level.getName();
+		
+		
+		
+		// We go through a list of cases and intialize relevant data
+		for(TrainingHouse house : level.getHouseList())
+		{
+			if(house.isLocked() == true)
+			{
+				_nLockedHouses += 1;
+			}
+			else
+			{
+				_nUnlockedHouses += 1;
+			}
+			
+			
+			int houseUserScore = house.getUserScore();
+			int houseMaxScore  = house.getMaxScore();
+			
+			_listName.add(house.getName());
+			_listScore.add(houseUserScore + "/" + houseMaxScore);
+				
+			
+			// We need to calculate the type of medal the user has retrieved in
+			// the specified house/case.
+			if(houseMaxScore > 5)
+			{
+				int score = (houseUserScore * 100) / houseMaxScore;
+				
+				
+				if(score >= 89)
+				{
+					_listMedal.add("Gold");
+				}
+				else if(score >= 77)
+				{
+					_listMedal.add("Silver");
+				}
+				else if(score >= 65)
+				{
+					_listMedal.add("Bronze");
+				}
+				else
+				{
+					_listMedal.add("None");
+				}
+			}
+			else
+			{
+				if(houseUserScore == houseMaxScore)
+				{
+					_listMedal.add("Gold");
+				}
+				else if(houseUserScore == (houseMaxScore - 1))
+				{
+					_listMedal.add("Silver");
+				}
+				else if(houseUserScore == (houseMaxScore - 2))
+				{
+					_listMedal.add("Bronze");
+				}
+				else
+				{
+					_listMedal.add("None");
+				}
+			}
+		}
+		
+		
+		_levelScore 	= level.getUserScore();
+		_levelMaxScore	= level.getMaxScore();
+		
+		
+		if(_levelScore == _levelMaxScore)
+		{
+			_nAchievements += 1;
+		}
 		
 			
 		// We set the different TextViews in fragment_home.xml based on the
@@ -176,19 +262,20 @@ public class HomeCasesFragment extends Fragment
 		
 		TextView unlockedCases =
 				(TextView)fragmentView.findViewById(R.id.homeCasesUnlockedCases); 
-		unlockedCases.setText(_unlockedCases);
+		unlockedCases.setText(Integer.toString(_nUnlockedHouses));
 		
 		TextView lockedCases =
 				(TextView)fragmentView.findViewById(R.id.homeCasesLockedCases);
-		lockedCases.setText(_lockedCases);
+		lockedCases.setText(Integer.toString(_nLockedHouses));
 		
 		TextView totalScore =
 				(TextView)fragmentView.findViewById(R.id.homeCasesTotalScore);
-		totalScore.setText(_totalScore);
+		totalScore.setText(Integer.toString(_levelScore) + "/" +
+				Integer.toString(_levelMaxScore));
 		
 		TextView achievements =
 				(TextView)fragmentView.findViewById(R.id.homeCasesAchievements);
-		achievements.setText(_achievements);
+		achievements.setText(Integer.toString(_nAchievements));
 	
 		// Now we want to fill the list in 'fragment_home.xml' with data loaded
 		// from the textfile.
@@ -198,6 +285,8 @@ public class HomeCasesFragment extends Fragment
 		caseListView.setAdapter(new HomeCasesAdapter(
 				this.getActivity(),
 				_listMedal, _listName, _listScore));
+		
+		caseListView.setClickable(false);
 		
 	
 		// We need the ability to return to the previous "Home" page

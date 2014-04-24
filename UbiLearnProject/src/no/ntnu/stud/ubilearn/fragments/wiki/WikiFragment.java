@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.fragments.wiki;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.WikiItem;
@@ -26,6 +27,9 @@ public class WikiFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		generateTestData();
+		HandbookDAO dao = new HandbookDAO(getActivity());
+		dao.open();
+		//listItems = dao.getHandbook();
 		root = inflater.inflate(R.layout.fragment_wiki, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
 		categoryListView.setAdapter(new WikiItemAdapter(this.getActivity(), listItems));

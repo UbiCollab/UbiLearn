@@ -29,7 +29,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
              />
 
-   	     <ImageButton
+   	     <ImageView
    	         android:id="@+id/imageButton1"
    	         android:layout_width="24dp"
    	         android:layout_height="21dp"
@@ -45,10 +45,7 @@
    	    <ListView
 	        android:id="@+id/patientsList"
     	    android:layout_width="match_parent"
-    	    android:layout_height="wrap_content"
-    	    android:entries="@array/patients_list"
-    	  	
-    	    >
+    	    android:layout_height="wrap_content" >
 
     	</ListView>
    	 </LinearLayout>

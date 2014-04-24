@@ -10,10 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.parse.Parse;
 import com.parse.ParseUser;
 
 import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.wiki.WikiFragment;
@@ -21,7 +23,10 @@ import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
+import no.ntnu.stud.ubilearn.models.SPPB;
+import no.ntnu.stud.ubilearn.models.StandUpSPPB;
 import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
@@ -55,6 +60,8 @@ public class MainActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		SyncContent.retriveNewContent(this);
 
 		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerView = (ListView) findViewById(R.id.left_drawer);
@@ -68,16 +75,18 @@ public class MainActivity extends Activity {
 		drawerView.setAdapter(adapter);
 		
 		//---------GSON------------------
-		generatePatients();
-		patientList = User.getInstance().getPatientList();
+//		generatePatients();
+//		patientList = User.getInstance().getPatientList();
 		
 		//----------SQLite--------------
+		
+		//doing it in SyncContent for now.
 //		trainingDAO = new TrainingDAO(this);
 //		trainingDAO.open();
-//		patientList = trainingDAO.getAllPatients();
+//		patientList = trainingDAO.getAllCasePatients();
 //		User.getInstance().setPatientList(patientList);
-//		trainingDAO.close();
-		
+//		trainingDAO.close();			
+//		
 
 		// set the lists click listener
 		drawerView.setOnItemClickListener(new DrawerItemClickListener());
@@ -228,17 +237,29 @@ public class MainActivity extends Activity {
 		
 //		HandbookDAO hb = new HandbookDAO(this);
 //		hb.open();
+//		hb.printTable();
 //		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
 //		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
 //		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
-
+//		hb.printTable();
+//		
+//		
 ////		Log.d("MAIN",hb.getCategory("abc123").printContent());
 //		
-//		List<Category> content = hb.getHandbook();
-//		for (Category category : content) {
-//			Log.d("SUPER",category.printContent());
-//			for (WikiItem item : category.getSub()) {
-//				Log.d("SUB",item.printContent());
+//		List<WikiItem> content = hb.getHandbook();
+//		System.out.println(content.size());
+//		for (WikiItem item : content) {
+//			Log.d("SUPER",item.printContent());
+//			if(item instanceof Category){
+//				for (WikiItem sub : ((Category)item).getSub()) {
+//					Log.d("SUB",sub.printContent());
+//					if(item instanceof Category){
+//						for (WikiItem subsub : ((Category)item).getSub()) {
+//							Log.d("SUBSUB",subsub.printContent());
+//
+//						}
+//					}
+//				}
 //			}
 //		}
 //		hb.close();
@@ -251,6 +272,20 @@ public class MainActivity extends Activity {
 //			tDAO.insertQuizs(generateQuiz(patient));
 //		}
 //		tDAO.close();
+//	    PractiseDAO pDAO = new PractiseDAO(this);
+//	    pDAO.open();
+//	    Patient p1 = new Patient("qaz321", "Hans", "69", "everything", "nothing", new Date());
+////	    pDAO.insertPatient(p1);
+//	    Patient p2 = new Patient("wsx321", "Jon", "64", "everything", "nothing", new Date());
+////	    pDAO.insertPatient(p2);
+//	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
+//	    pDAO.insertSBBP(test);
+//	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getObjectId());
+//	    for (SPPB sppb : tests) {
+//			Log.d("test", sppb.toString());
+//		}
+	    
+//	    pDAO.close();
 		
 		//---------------------------------------------------------------------------------
 	}

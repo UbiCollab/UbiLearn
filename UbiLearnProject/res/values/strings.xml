@@ -50,6 +50,9 @@
     <string name="user_name">Bruker:</string>
     <string name="user_status">Status:</string>
     <string name="user_achievements">Prestasjoner:</string>
+    <string name="home_button_achievements">Prestasjoner</string>
+   	<string name="home_button_training">Opplæring</string>
+   	<string name="home_button_practise">Praksis</string>
     <string name="user_unlocked_cases">Ulåste case:</string>
     <string name="user_locked_cases">Låste case:</string>
     <string name="user_status_beginner">Nybegynner</string>

@@ -1,6 +1,8 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
+import no.ntnu.stud.ubilearn.models.WalkingSPPB;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -15,16 +17,21 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("ValidFragment")
-public class gangTestResultat extends Fragment{
+public class gangTestResultatFragment extends Fragment{
 
 	private double[] results;
 	private TextView poeng1;
 	private TextView poeng2;
 	private Spinner fail1;
 	private Spinner fail2;
+	private PractiseDAO dao;
+	
+	private WalkingSPPB test1;
+	private WalkingSPPB test2;
 
-	public gangTestResultat(double[] results) {
-		this.results=results;
+	public gangTestResultatFragment(WalkingSPPB test1, WalkingSPPB test2) {
+		this.test1 = test1;
+		this.test2 = test2;
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -34,6 +41,10 @@ public class gangTestResultat extends Fragment{
 		poeng1= (TextView)view.findViewById(R.id.poeng1);
 		fail2 = (Spinner)view.findViewById(R.id.fail_chooser2);
 		poeng2= (TextView)view.findViewById(R.id.poeng2);
+		
+		
+		
+		dao = new PractiseDAO(getActivity());
 
 		fail1.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -45,7 +56,7 @@ public class gangTestResultat extends Fragment{
 				if(arg2!=0){
 					poeng1.setText("Poengsum: 0");
 				}else{
-					poeng1.setText("Poengsum: "+setPoeng(results[0]));
+					poeng1.setText("Poengsum: "+test1.getScore());
 				}
 
 			}
@@ -66,9 +77,10 @@ public class gangTestResultat extends Fragment{
 				if(arg2!=0){
 					poeng2.setText("Poengsum: 0");
 				}else{
-					poeng2.setText("Poengsum: "+setPoeng(results[1]));
+				
+					poeng2.setText("Poengsum: "+test2.getScore());
+					
 				}
-
 			}
 
 			@Override
@@ -80,18 +92,5 @@ public class gangTestResultat extends Fragment{
 
 		return view;
 	}
-	private int setPoeng(double tid){
-		if(tid>8.7){
-			return 1;
-		}else if(tid>6.21 && tid<8.7){
-			return 2;
-		}
-		else if(tid>4.82 && tid<6.2){
-			return 3;
-		}
-		else if(tid < 4.82){
-			return 4;
-		}
-		return 0;
-	}
+
 }

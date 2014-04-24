@@ -9,7 +9,6 @@ public class Category extends WikiItem{
 	private ArrayList<WikiItem> subItems;
 	private String objectId;
 	private Date createdAt;
-	private String parentId;
 	private String name;
 	
 	
@@ -61,13 +60,6 @@ public class Category extends WikiItem{
 	protected void setIcon() {
 		this.icon = R.drawable.ic_navigation_next_item;
 	}
-
-
-	public boolean isTopLevel() {
-		return parentId == null;
-	}
-
-
 
 	public void addSubItem(WikiItem item) {
 		subItems.add(item);

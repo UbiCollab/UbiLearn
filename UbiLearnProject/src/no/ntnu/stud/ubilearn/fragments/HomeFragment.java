@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
+import no.ntnu.stud.ubilearn.models.TrainingHouse;
+import no.ntnu.stud.ubilearn.models.TrainingLevel;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,16 +28,20 @@ import android.widget.TextView;
 
 public class HomeFragment extends Fragment 
 {
-	private int _userScore		= 0;
-	private int _userTotalScore	= 0;
+	private int _userScore			= 0;
+	private int _maxScore			= 0;
+	private int _nAchievements 		= 0;
+	private int _nUnlockedLevels	= 0;
+	private int _nLockedLevels		= 0;
 	
 	// Variables to store input from textfile.
-	private String _name 			= "";
+	private String _userName 		= "";
 	private String _status 			= "";	//TODO: Delete this when you are
 									//certain it will not be used.
-	private String _achievements 	= "";
-	private String _unlockedLevels	= "";
-	private String _lockedLevels	= "";
+	
+	//private String _unlockedLevels	= "";
+	//private String _lockedLevels	= "";
+//	private String achievements		= "";
 	private String _caseData		= "";
 	
 	private List<String> _listName	= new ArrayList<String>();
@@ -42,16 +50,97 @@ public class HomeFragment extends Fragment
 	private BufferedReader _bufferedReader	= null;
 	
 	private ListView _levelListView	= null;
-		
 	
+	private User _user = null;
+	
+	//TODO: Only for testing. Delete afterwards.
+	private List<TrainingLevel> _levelList;
+	
+	
+	//#########################################################################
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
-					
 		
+	
+		_user = User.getInstance();
+		
+		
+		if(_user == null)
+		{
+			//TODO: Output that an error occured and return to the login 
+			// screen 
+		}
+		
+		_userName = _user.getName();						 
+		_levelList = _user.getLevels();
+		
+		/*
+		 * We go through the list of levels and retrieve data that will be used
+		 * to fill the level list in the "Home"-page as well as other
+		 * variables.
+		 */
+		for(TrainingLevel level : _levelList)
+		{
+			_listName.add(level.getName());
+			_listScore.add(level.getUserScore() + "/" + level.getMaxScore());
+			
+			_userScore += level.getUserScore();
+			_maxScore  += level.getMaxScore();
+			
+			
+			if(level.isLocked())
+			{
+				_nLockedLevels++; 
+			}
+			else
+			{
+				_nUnlockedLevels++;
+			}
+			
+						
+			if(level.getUserScore() == level.getMaxScore())
+			{
+				_nAchievements++;
+			}
+		}		
+		
+		
+		// The status is based on the amount of score achieved of the total
+		// possible. NB! This could have been calculated when data from a 
+		// case is saved.
+		TextView userStatus = 
+				(TextView)fragmentView.findViewById(R.id.homeStatus);
+		
+		
+		if(_maxScore > 0)
+		{
+			int percentageAccomplished = (_userScore * 100) / _maxScore;
+			
+			
+			if(percentageAccomplished < 51)
+			{
+				userStatus.setText(R.string.user_status_beginner);
+			}
+			else if(percentageAccomplished < 86)
+			{
+				userStatus.setText(R.string.user_status_experienced); 
+			}
+			else
+			{
+				userStatus.setText(R.string.user_status_expert);
+			}
+		}
+		else
+		{
+			userStatus.setText(R.string.user_status_beginner);
+		}		
+			
+		
+/*		
 		// Here we read the data from the textfile.
 		try
 		{
@@ -66,7 +155,7 @@ public class HomeFragment extends Fragment
 					new BufferedReader(inputStreamReader);
 				
 			
-			_name 			= _bufferedReader.readLine();
+			_userName		= _bufferedReader.readLine();
 			_status			= _bufferedReader.readLine();
 			_achievements	= _bufferedReader.readLine(); 
 			_unlockedLevels = _bufferedReader.readLine();
@@ -110,9 +199,7 @@ public class HomeFragment extends Fragment
 			// TODO: Replace with a dialog box and handle the error better.
 			System.out.println("Problems reading text file!");
 		}
-		/**
-		 * We must ensure that the file is closed after used.
-		 */
+		//We must ensure that the file is closed after used.
 		finally
 		{
 			try
@@ -128,13 +215,13 @@ public class HomeFragment extends Fragment
 			}
 		}
 		
-			
+*/			
 		// We set the different TextViews in fragment_home.xml based on the
 		// values read from file.
 		TextView userName = 
 				(TextView)fragmentView.findViewById(R.id.homeUserName); 
-		userName.setText(_name);
-		
+		userName.setText(_userName);
+/*		
 		// The status is based on the amount of score achieved of the total
 		// possible. NB! This could have been calculated when data from a 
 		// case is saved.
@@ -163,23 +250,22 @@ public class HomeFragment extends Fragment
 		{
 			userStatus.setText(R.string.user_status_expert);
 		}
-				
+
+*/				
 		
 		TextView userAchievement = 
 				(TextView)fragmentView.findViewById(R.id.homeAchievement); 
-		userAchievement.setText(_achievements);
+		userAchievement.setText(Integer.toString(_nAchievements));
 		
 		TextView userUnlockedLevels =
 				(TextView)fragmentView.findViewById(R.id.homeUnlockedLevels);
-		userUnlockedLevels.setText(_unlockedLevels);
+		userUnlockedLevels.setText(Integer.toString(_nUnlockedLevels));
 		
 		TextView userLockedLevels =
 				(TextView)fragmentView.findViewById(R.id.homeLockedLevels);
-		userLockedLevels.setText(_lockedLevels);
-		
+		userLockedLevels.setText(Integer.toString(_nLockedLevels));		
 
-		// Now we want to fill the list in 'fragment_home.xml' with data loaded
-		// from the textfile.
+		// Now we want to fill the list in 'fragment_home.xml' with data 
 		_levelListView = 
 				(ListView)fragmentView.findViewById(R.id.homeListLevel);
 		
@@ -195,17 +281,17 @@ public class HomeFragment extends Fragment
 					AdapterView<?> parent, View view,
 					int position, long id)
 			{
-				String levelName = (String)_listName.get(position);
+//				String levelName = (String)_listName.get(position);
 				
-				HomeCasesFragment fragment = HomeCasesFragment.newInstance(
-						levelName, position + 1);
+				HomeCasesFragment fragment = 
+						HomeCasesFragment.newInstance(position);//position + 1);
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();
 			}
 		});
-		
 			
+		
 		// We need to handle button clicks from the fragment_home.xml file. If
 		// the user clicks 'Opplæring' or 'Praksis' we should replace this
 		// fragment with the chosen one.

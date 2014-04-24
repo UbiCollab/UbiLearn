@@ -6,6 +6,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.WikiItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -27,8 +28,15 @@ public class HandbookDAO extends DAO {
 
 		log(values.toString());
 		
-		long rowId = database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
 		
+		long rowId;
+		if(!exists(DatabaseHandler.TABLE_ARTICLE, article.getObjectId()))	
+			rowId= database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
+			rowId = database.update(DatabaseHandler.TABLE_ARTICLE,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{article.getObjectId()});
+			
+		}
 		return rowId;
 	}
 	public void insertArticles(List<Article> articles){	
@@ -65,9 +73,9 @@ public class HandbookDAO extends DAO {
 		return article;
 	}
 	
-	public List<Category> getHandbook(){
+	public List<WikiItem> getHandbook(){
 		HashMap<String,Category> categories = new HashMap<String, Category>();
-//		HashMap<Long,Category> subCategories = new HashMap<Long, Category>();
+		List<WikiItem> topLevelItems = new ArrayList<WikiItem>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
 		log(query);
@@ -77,14 +85,7 @@ public class HandbookDAO extends DAO {
 			do{
 				//gets each category in the database
 				Category category = getCategory(categoriesResult);
-				//sets the id for the catogry´s parent, if it is a top level category its -1
-//				long parentId = isSubCategory(category);
-//				if(parentId != -1)
-//					//stores the category and the id of the parent
-//					categories.put(parentId, category);
-//				else
-//					//adds all categories to the hashmap
-					categories.put(category.getObjectId(), category);
+				categories.put(category.getObjectId(), category);
 				
 			}while(categoriesResult.moveToNext());
 		else
@@ -95,12 +96,11 @@ public class HandbookDAO extends DAO {
 		for (Category category : categories.values()) {
 			
 			if(category.isTopLevel())
-				continue;
+				topLevelItems.add(category);
 			else{
 				Category parent = categories.get(category.getParentId());
 				parent.addSubItem(category);
-			}
-				
+			}				
 		}
 		query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE;
 		log(query);
@@ -116,26 +116,19 @@ public class HandbookDAO extends DAO {
 		
 		//iterates thru all articles and adds them to their parent category
 		for (Article article : articles) {
-			categories.get(article.getParentId()).addSubItem(article);
+			if(article.isTopLevel())
+				topLevelItems.add(article);
+			else
+				categories.get(article.getParentId()).addSubItem(article);
 		}
 		
 		
-		return new ArrayList<Category>(categories.values());
+		return topLevelItems;
 	}
 	
-//	private long isSubCategory(Category categorie) {
-//		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY_ARTICLE_CATEGORY + 
-//				"WHERE " + DatabaseHandler.KEY_CHILD_ARTICLE_ID + " = " + categorie.getId();
-//		Log.i(LOG, query);
-//		Cursor result = database.rawQuery(query, null);
-//		
-//		if(result.moveToFirst())
-//			return result.getLong(result.getColumnIndex(DatabaseHandler.KEY_PARENT_CATEGORY_ID));
-//		else
-//			return -1;
-//	}
 	
 	public long insertCategory(Category category){
+//		System.out.println(category);
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, category.getName());
@@ -143,8 +136,13 @@ public class HandbookDAO extends DAO {
 		values.put(DatabaseHandler.KEY_PARENT_ID, category.getParentId());
 
 		log(values.toString());
-		
-		long rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
+		long rowId;
+		if(!exists(DatabaseHandler.TABLE_CATEGORY,category.getObjectId()))
+			rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
+		else{
+			values.remove(DatabaseHandler.KEY_OBJECT_ID);
+			rowId = database.update(DatabaseHandler.TABLE_CATEGORY,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{category.getObjectId()});
+		}
 		return rowId;
 	}
 	public void insertCategories(List<Category> categories){
@@ -172,6 +170,10 @@ public class HandbookDAO extends DAO {
 		
 		Category category = new Category(objectId, name, stringToDate(createdAt), parentId);
 		return category;
+	}
+	public void printTable(){
+		printTable(DatabaseHandler.TABLE_ARTICLE);
+		printTable(DatabaseHandler.TABLE_CATEGORY);
 	}
 
 }
