@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class WikiFragment extends Fragment {
@@ -26,11 +27,7 @@ public class WikiFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		generateTestData();
-		HandbookDAO dao = new HandbookDAO(getActivity());
-		dao.open();
-		listItems = (ArrayList<WikiItem>) dao.getHandbook();
-		dao.close();
+		fetchDataFromDAO();
 		root = inflater.inflate(R.layout.fragment_wiki, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
 		categoryListView.setAdapter(new WikiItemAdapter(this.getActivity(), listItems));
@@ -47,9 +44,13 @@ public class WikiFragment extends Fragment {
 						WikiFragment handbook = new WikiFragment();
 						handbook.setListItems(cat.getSub());
 						getFragmentManager().beginTransaction().replace(R.id.content_frame, handbook).addToBackStack(null).commit();
+					}else{
+						Toast.makeText(pointerHax.getActivity(), "This category is empty", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					Fragment article = new ArticleFragment();
+					Article art = (Article) listItems.get(position);
+					ArticleFragment article = new ArticleFragment();
+					article.setTitle("derp!");
 					getFragmentManager().beginTransaction().replace(R.id.content_frame, article).addToBackStack(null).commit();
 				}	
 			}	
@@ -62,7 +63,15 @@ public class WikiFragment extends Fragment {
 		this.listItems = listItems;
 	}
 
-
+	public void fetchDataFromDAO(){
+		if (listItems == null) {
+			HandbookDAO dao = new HandbookDAO(getActivity());
+			dao.open();
+			listItems = (ArrayList<WikiItem>) dao.getHandbook();
+			dao.close();
+		}
+	}
+	
 	public void generateTestData(){
 		if (listItems == null) {
 			ArrayList<WikiItem> sub = new ArrayList<WikiItem>();

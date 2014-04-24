@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 
 public class ArticleFragment extends Fragment {
 	
 	View root;
-	View articleTitleView; 
-	View articleTextView;
+	private TextView articleTitleView; 
+	private TextView articleTextView;
 	
 
 	@Override
@@ -22,13 +23,13 @@ public class ArticleFragment extends Fragment {
 		Bundle b = getArguments();
 		
 		root = inflater.inflate(R.layout.fragment_article, null);
-		articleTitleView = root.findViewById(R.id.articleTitle);
-		articleTextView = root.findViewById(R.id.articleText);
-		
-		
-		
-		
+		articleTitleView = (TextView) root.findViewById(R.id.articleTitle);
+		articleTextView = (TextView) root.findViewById(R.id.articleText);
+
 		return root;
 	}
 
+	public void setTitle(String title){
+		articleTextView.setText(title);
+	}
 }

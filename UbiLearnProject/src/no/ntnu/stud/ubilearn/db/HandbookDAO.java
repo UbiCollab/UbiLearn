@@ -34,7 +34,8 @@ public class HandbookDAO extends DAO {
 			rowId= database.insert(DatabaseHandler.TABLE_ARTICLE,null,values);
 		else{
 			values.remove(DatabaseHandler.KEY_OBJECT_ID);
-			rowId= database.update(DatabaseHandler.TABLE_ARTICLE,values,null,null);	
+			rowId = database.update(DatabaseHandler.TABLE_ARTICLE,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{article.getObjectId()});
+			
 		}
 		return rowId;
 	}
@@ -99,8 +100,7 @@ public class HandbookDAO extends DAO {
 			else{
 				Category parent = categories.get(category.getParentId());
 				parent.addSubItem(category);
-			}
-				
+			}				
 		}
 		query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE;
 		log(query);
@@ -128,7 +128,7 @@ public class HandbookDAO extends DAO {
 	
 	
 	public long insertCategory(Category category){
-		System.out.println(category);
+//		System.out.println(category);
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, category.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, category.getName());
@@ -141,7 +141,7 @@ public class HandbookDAO extends DAO {
 			rowId = database.insert(DatabaseHandler.TABLE_CATEGORY,null,values);
 		else{
 			values.remove(DatabaseHandler.KEY_OBJECT_ID);
-			rowId = database.update(DatabaseHandler.TABLE_CATEGORY,values, null,null);
+			rowId = database.update(DatabaseHandler.TABLE_CATEGORY,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{category.getObjectId()});
 		}
 		return rowId;
 	}
@@ -170,6 +170,10 @@ public class HandbookDAO extends DAO {
 		
 		Category category = new Category(objectId, name, stringToDate(createdAt), parentId);
 		return category;
+	}
+	public void printTable(){
+		printTable(DatabaseHandler.TABLE_ARTICLE);
+		printTable(DatabaseHandler.TABLE_CATEGORY);
 	}
 
 }
