@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A. Stående stilling, samlede føtter\n 
+
+1. Nå vil jeg vise deg den første stillingen.\n 
+
+2. (Demonstrer) Jeg vil at du skal forsøke å stå med føttene samlet, inntil hverandre, i ca 
+
+10 sekunder.\n 
+
+3. Du kan bruke armene, bøye knærne eller bevege kroppen for å holde balansen, men 
+
+prøv å ikke flytte på føttene. Prøv å holde stillingen helt til jeg ber deg stoppe.\n 
+
+4. Stå ved siden av deltagerne for å hjelpe han/henne inn i stillingen.\n
+
+5. Gi akkurat nok støtte til deltagerens arm for å unngå at han/hun mister balansen.\n 
+
+6. Når deltageren står med føttene samlet, spør ”Er du klar?” \n
+
+7. Slipp så taket og start tidtakingen idet du sier, ”Klar, start”\n 
+
+8. Stopp stoppeklokken og si ”stopp” etter 10 sekunder eller hvis deltageren flytter føttene 
+
+og forlater stillingen eller griper tak i armen din.\n
+
+9. Hvis deltageren ikke klarer å holde stillingen i 10 sekunder, noter resultatet og gå videre 
+
+til ganghastighetstesten.\n\n\n
+
+ 
+
+B. Stående stilling, semi‐tandem\n 
+
+1. Nå vil jeg vise deg den andre stillingen.\n 
+
+2. (Demonstrer) Nå vil jeg at du skal forsøke å stå med siden av hælen på den ene foten 
+
+inntil stortåen på den andre foten i ca 10 sekunder. Du kan velge hvilken fot du har 
+
+fremst, den som føles mest naturlig for deg.\n   
+
+3. Du kan bruke armene, bøye knærne eller bevege kroppen for å holde balansen, men 
+
+prøv å ikke flytte på føttene. Prøv å holde stillingen helt til jeg ber deg stoppe.\n 
+
+4. Stå ved siden av deltageren for å hjelpe han/henne inn i semi‐tandem stilling.\n
+
+5. Gi akkurat nok støtte til deltagerens arm for å unngå at han/hun mister balansen.\n 
+
+6. Når deltageren står med føttene samlet, spør ”Er du klar?” \n
+
+7. Slipp så taket og start tidtakingen idet du sier, ”Klar, start”\n 
+
+8. Stopp stoppeklokken og si ”stopp” etter 10 sekunder eller hvis deltageren flytter føttene 
+
+og forlater stillingen eller griper tak i armen din. \n
+
+9. Hvis deltageren ikke klarer å holde stillingen i 10 sekunder, noter resultatet og gå videre 
+
+til ganghastighetstesten.\n\n\n
+
+C. Stående stilling, tandem\n
+
+1. Nå vil jeg vise deg den tredje stillingen.\n 
+
+2. (Demonstrer) Nå vil jeg at du skal forsøke å stå med hælen på den ene foten foran og 
+
+inntil tærne på den andre foten i ca 10 sekunder. Du kan velge hvilken fot du har 
+
+fremst, den som føles mest naturlig for deg.\n
+
+3. Du kan bruke armene, bøye knærne eller bevege kroppen for å holde balansen, men 
+
+prøv å ikke flytte på føttene. Prøv å holde stillingen helt til jeg ber deg stoppe.\n
+
+4. Stå ved siden av deltageren for å hjelpe han/henne inn i tandem stilling.\n
+
+5. Gi akkurat nok støtte til deltagerens arm for å unngå at han/hun mister balansen.\n
+
+6. Når deltageren står med føttene samlet, spør ”Er du klar?” \n
+
+7. Slipp så taket og start tidtakingen idet du sier, ”Klar, start”\n 
+
+8. Stopp stoppeklokken og si ”stopp” etter 10 sekunder eller hvis deltageren flytter føttene 
+
+og forlater stillingen eller griper tak i armen din." />
+
+    <Button 
+        android:id="@+id/info_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        />
+    
+</LinearLayout>
+    </ScrollView>
+

@@ -1,9 +1,11 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,7 @@ public class PractiseBalanceFragment extends Fragment {
 	}
 	
 	public OnClickListener start, stop;
-
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_practise_balance, container, false);
@@ -37,6 +39,10 @@ public class PractiseBalanceFragment extends Fragment {
 		final TextView score4 = (TextView) view.findViewById(R.id.score4);
 		final ImageView	imageField = (ImageView) view.findViewById(R.id.imageField);
 		final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+		final ImageView info = (ImageView)view.findViewById(R.id.balance_info);
+		
+		info.setClickable(true);
+		info.setEnabled(true);
 		
 		progressBar.setMax(10);
 		progressBar.setProgress(10);
@@ -60,7 +66,7 @@ public class PractiseBalanceFragment extends Fragment {
 				switch(state) {
 					case 1:
 						titleField.setText("SEMI-TANDEM");
-						imageField.setImageResource(R.drawable.semi);
+						imageField.setImageResource(R.drawable.semi2);
 						score1.setText("1 poeng");
 						startStopButton.setEnabled(true);
 						break;
@@ -82,6 +88,27 @@ public class PractiseBalanceFragment extends Fragment {
 				score4.setText(getScore() + " poeng");
 			}
 		};
+		
+		info.setOnClickListener(new OnClickListener() 
+		{	
+			@Override
+			public void onClick(View v) 
+			{
+				final Dialog dialog = new Dialog(getActivity());
+				dialog.show();
+				dialog.setContentView(R.layout.info_dialog_balance);
+				dialog.setTitle("Balansetest");
+				Button infoOk = (Button)dialog.findViewById(R.id.info_ok);
+				infoOk.setOnClickListener(new OnClickListener() 
+				{
+					@Override
+					public void onClick(View v) 
+					{
+						dialog.dismiss();
+					}
+				});
+			}
+		});
 		
 		stop = new OnClickListener()
 		{
