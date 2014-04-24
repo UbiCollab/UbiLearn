@@ -171,5 +171,9 @@ public class HandbookDAO extends DAO {
 		Category category = new Category(objectId, name, stringToDate(createdAt), parentId);
 		return category;
 	}
+	public void printTable(){
+		printTable(DatabaseHandler.TABLE_ARTICLE);
+		printTable(DatabaseHandler.TABLE_CATEGORY);
+	}
 
 }

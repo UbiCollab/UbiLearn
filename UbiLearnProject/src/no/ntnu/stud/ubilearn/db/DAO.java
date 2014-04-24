@@ -69,5 +69,29 @@ public abstract class DAO {
 		return "SELECT * FROM " + table + " WHERE "
 	            + column + " = '" + id + "'";
 	}
+	
+	protected void printTable(String table){
+		String query = "SELECT * FROM " + table;
+		log(query);
+		Cursor result = database.rawQuery(query, null);
+		StringBuilder output = new StringBuilder();
+		if(result.moveToFirst()){
+			String[] columns = result.getColumnNames();
+			output.append(" | ");
+			for (int i = 0; i < columns.length; i++) {
+				output.append(columns[i] + " | ");
+			}
+			
+			do{
+				output.append("\n | ");
+				int n = result.getColumnCount();
+				for (int i = 0; i < n; i++) {
+					output.append(result.getString(i) + " | ");	
+				}
+			}while(result.moveToNext());
+		}else
+			return;
+		log(output.toString());
+	}
 
 }

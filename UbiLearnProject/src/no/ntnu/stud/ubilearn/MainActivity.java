@@ -237,6 +237,7 @@ public class MainActivity extends Activity {
 		
 		HandbookDAO hb = new HandbookDAO(this);
 		hb.open();
+		hb.printTable();
 		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
 		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
 		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
