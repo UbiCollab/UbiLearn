@@ -42,12 +42,18 @@ public class Training extends Fragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
-		patientList = patientList = User.getInstance().getPatientList();
-		
+		patientList = User.getInstance().getPatientList();
+		if(patientList == null){
+			Toast.makeText(getActivity(), "lista er tom", Toast.LENGTH_SHORT).show();
+		}
+		//Log.v("TrainingPatient", ""+patientList.size());
+
+
+
 		root = inflater.inflate(R.layout.fragment_training, null);
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
-		
+
 		if(User.getInstance().getPoints()>=10){
 			Toast.makeText(getActivity(), "Congratulations, you are now in level 2", Toast.LENGTH_SHORT).show();
 			root = inflater.inflate(R.layout.fragment_training_level2, null);
@@ -55,11 +61,11 @@ public class Training extends Fragment {
 			rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 			return root;
 		}
-		
-		
-		
-		
-//	//	MainAcitivit.generatePatients();
+
+
+
+
+		//	//	MainAcitivit.generatePatients();
 
 		return root;
 	}
@@ -68,13 +74,13 @@ public class Training extends Fragment {
 
 	public void houseClick(View v){
 		final View house = v;
+		Log.v("husnummer: "+house.getContentDescription(), "");
 		setCarPositionY(house.getY() + house.getWidth()/2);
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
 			i = Integer.parseInt(house.getContentDescription().toString());
 		}
-		Log.v("ERR", "lengden er: " + patientList.size());
 
 		Button cancel = (Button) dialog.findViewById(R.id.training_popup_cancel);
 
@@ -92,7 +98,7 @@ public class Training extends Fragment {
 
 			@Override
 			public void onClick(View vi) {
-				
+
 				Fragment patient = new PatientCaseFragment(patientList.get(i));
 
 				Bundle data = new Bundle();
@@ -101,10 +107,17 @@ public class Training extends Fragment {
 				dialog.dismiss();
 			}
 		});
-		dialog.setTitle("Her bor " +patientList.get(i).getName());
-		dialog.show();
+
+		try{
+			dialog.setTitle("Her bor " +patientList.get(i).getName());
+			dialog.show();
+		}
+		catch(Exception e){
+			Toast.makeText(getActivity(), "ingen hjemme", Toast.LENGTH_SHORT).show();
+		}
 	}
-	
+
+
 	private void setCarPositionY(float y){
 		ImageView car = (ImageView) root.findViewById(R.id.traningCar);
 		System.out.println("works?");
