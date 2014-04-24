@@ -20,7 +20,7 @@ public class HomeCasesAdapter extends ArrayAdapter<String>
 	private final List<String>	_caseScoreValues;
 	
 	
-	//-------------------------------------------------------------------------
+	//#########################################################################
 	public HomeCasesAdapter(Context context, 
 			List<String> caseMedalValues,
 			List<String> caseNameValues,
