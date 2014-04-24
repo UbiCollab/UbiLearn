@@ -227,21 +227,21 @@ public class MainActivity extends Activity {
 	
 	private void logout() {
 		
-		clearBackstack();
-		ParseUser.logOut();
-		Intent intent = new Intent(this, LoginActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    startActivity(intent);
+//		clearBackstack();
+//		ParseUser.logOut();
+//		Intent intent = new Intent(this, LoginActivity.class);
+//		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//	    startActivity(intent);
 		
 		//-----------------------------DATABASE TESTING--------------------------------------
 		
-//		HandbookDAO hb = new HandbookDAO(this);
-//		hb.open();
-//		hb.printTable();
-//		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
-//		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
-//		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
-//		hb.printTable();
+		HandbookDAO hb = new HandbookDAO(this);
+		hb.open();
+		hb.printTable();
+		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
+		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
+		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
+		hb.printTable();
 //		
 //		
 ////		Log.d("MAIN",hb.getCategory("abc123").printContent());
@@ -274,17 +274,17 @@ public class MainActivity extends Activity {
 //		tDAO.close();
 //	    PractiseDAO pDAO = new PractiseDAO(this);
 //	    pDAO.open();
-//	    Patient p1 = new Patient("qaz321", "Hans", "69", "everything", "nothing", new Date());
-////	    pDAO.insertPatient(p1);
-//	    Patient p2 = new Patient("wsx321", "Jon", "64", "everything", "nothing", new Date());
-////	    pDAO.insertPatient(p2);
-//	    SPPB test = new StandUpSPPB(null, "Vandringstest", p1.getObjectId(), 5, new Date());
+//	    Patient p1 = new Patient("Hans", "69", "everything", "nothing", new Date());
+//	    p1.setId(pDAO.insertPatient(p1));
+//	    Patient p2 = new Patient("Jon", "64", "everything", "nothing", new Date());
+//	    pDAO.insertPatient(p2);
+//	    SPPB test = new StandUpSPPB("Vandringstest", p1.getId(), 5, new Date());
 //	    pDAO.insertSBBP(test);
-//	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getObjectId());
+//	    List<SPPB> tests = pDAO.getStandUpSPPBs(p1.getId());
 //	    for (SPPB sppb : tests) {
 //			Log.d("test", sppb.toString());
 //		}
-	    
+//	    pDAO.printTables();
 //	    pDAO.close();
 		
 		//---------------------------------------------------------------------------------

@@ -57,7 +57,7 @@ public abstract class DAO {
 		return result.moveToFirst();
 	}
 	protected boolean exists(String table, int id){
-		String query = selectWhere(table,DatabaseHandler.KEY_OBJECT_ID,id);
+		String query = selectWhere(table,DatabaseHandler.KEY_ID,id);
 		Cursor result = database.rawQuery(query, null);
 		return result.moveToFirst();
 	}

@@ -12,47 +12,48 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A. Første test av ganghastighet
+        android:text="A. Første test av ganghastighet&#xA;
 
 1. Dette er distansen du skal gå. Jeg vil at du skal gå til den andre enden, i din vanlige 
 
-hastighet, som om du gikk nedover gaten til butikken. 
+hastighet, som om du gikk nedover gaten til butikken.&#xA;
 
-2. Demonstrer øvelsen for deltageren 
+2. Demonstrer øvelsen for deltageren&#xA;
 
 3. Gå hele lengden, over og forbi teip‐markeringen før du stopper. Jeg kommer til å gå 
 
-sammen med deg. Føler du at dette er trygt? 
+sammen med deg. Føler du at dette er trygt?&#xA;
 
-4. La deltageren stå med begge føttene inntil startlinjen. 
+4. La deltageren stå med begge føttene inntil startlinjen.&#xA; 
 
 5. Når jeg vil du skal starte, sier jeg: ”Klar, start”. Når deltageren bekrefter å ha forstått 
 
-instruksjonen, si: ”Klar, start.” 
+instruksjonen, si: ”Klar, start.”\n 
 
-6. Start tidtakingen idet deltageren begynner å gå. 
+6. Start tidtakingen idet deltageren begynner å gå.\n 
 
-7. Gå bak og til siden for deltageren. 
+7. Gå bak og til siden for deltageren.\n
 
-8. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen. 
+8. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen.\n\n\n 
 
-B. Andre test av ganghastighet 
+B. Andre test av ganghastighet\n 
 
 1. Nå vil jeg at du skal gjøre det samme en gang til. Husk å gå i din vanlige hastighet, og 
 
-gå helt over og forbi teip‐markeringen. 
+gå helt over og forbi teip‐markeringen.\n 
 
-2. La deltageren stå med begge føttene inntil startlinjen. 
+2. La deltageren stå med begge føttene inntil startlinjen.\n 
 
 3. Når jeg vil at du starter, sier jeg: ”Klar, start”.  Når deltageren bekrefter å ha forstått 
 
-instruksjonen, si: ”Klar, start.” 
+instruksjonen, si: ”Klar, start.”\n
 
-4. Start tidtakingen idet deltageren begynner å gå. 
+4. Start tidtakingen idet deltageren begynner å gå.\n 
 
-5. Gå bak og til siden for deltageren. 
+5. Gå bak og til siden for deltageren.\n
 
-6. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen." />
+6. Stopp tidtakingen når en av deltagerens føtter er helt over mållinjen."
+/>
 
     <Button 
         android:id="@+id/info_ok"

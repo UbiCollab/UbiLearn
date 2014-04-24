@@ -34,7 +34,7 @@ public class TrainingDAO extends DAO{
 			rowId = database.insert(DatabaseHandler.TABLE_QUIZ,null,values);
 		else{
 			values.remove(DatabaseHandler.KEY_OBJECT_ID);
-			rowId = database.update(DatabaseHandler.TABLE_QUIZ,values,null,null);
+			rowId = database.update(DatabaseHandler.TABLE_QUIZ,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{quiz.getObjectId()});
 		}
 		return rowId;
 	}
@@ -130,7 +130,7 @@ public class TrainingDAO extends DAO{
 			rowId = database.insert(DatabaseHandler.TABLE_CASE_PATIENT,null,values);
 		else{
 			values.remove(DatabaseHandler.KEY_OBJECT_ID);
-			rowId = database.update(DatabaseHandler.TABLE_CASE_PATIENT,values,null,null);
+			rowId = database.update(DatabaseHandler.TABLE_CASE_PATIENT,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{patient.getObjectId()});
 		}
 		return rowId;
 	}
@@ -186,6 +186,9 @@ public class TrainingDAO extends DAO{
 		return patients;
 	}
 
-
+	public void printTables(){
+		printTable(DatabaseHandler.TABLE_CASE_PATIENT);
+		printTable(DatabaseHandler.TABLE_QUIZ);
+	}
 
 }

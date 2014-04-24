@@ -5,25 +5,38 @@
     android:orientation="vertical" >
 	
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" >
-        
-	    <TextView
-	        android:id="@+id/titleField"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:text="SAMLEDE FØTTER"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	</LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageField"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:src="@drawable/samlet2" />
+        android:layout_height="34dp"
+        android:layout_gravity="center" >
+
+            <TextView
+                android:id="@+id/titleField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SAMLEDE FØTTER"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageView
+                android:id="@+id/balance_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_about" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+            
+            <ImageView 
+                android:id="@+id/imageField"
+        		android:layout_width="wrap_content"
+        		android:layout_height="150dp"
+        		android:src="@drawable/samlet2" />
+            
+    </LinearLayout>
+
+    
 
     <Button
         android:id="@+id/startStopButton"

@@ -58,6 +58,26 @@ public class Patient {
 		exercises = new ArrayList<Exercise>();
 		this.createdAt = createdAt;
 	}
+	public Patient(String name, String age, String problems, String comment, Date createdAt) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.problems = problems;
+		this.comment = comment;
+		tests = new ArrayList<SPPB>();
+		exercises = new ArrayList<Exercise>();
+		this.createdAt = createdAt;
+	}
+	public Patient(String name, String age, String problems, String comment,ArrayList<SPPB> tests, Date createdAt) {
+		super();
+		this.name = name;
+		this.age = age;
+		this.problems = problems;
+		this.comment = comment;
+		this.tests = tests;
+		exercises = new ArrayList<Exercise>();
+		this.createdAt = createdAt;
+	}
 
 	public String getObjectId() {
 		return objectId;
