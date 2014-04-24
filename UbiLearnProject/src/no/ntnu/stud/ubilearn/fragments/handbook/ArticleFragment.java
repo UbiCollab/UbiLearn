@@ -1,8 +1,10 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.fragments.handbook;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.models.Article;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ public class ArticleFragment extends Fragment {
 	View root;
 	private TextView articleTitleView; 
 	private TextView articleTextView;
+	private Article article;
 	
 
 	@Override
@@ -25,11 +28,15 @@ public class ArticleFragment extends Fragment {
 		root = inflater.inflate(R.layout.fragment_article, null);
 		articleTitleView = (TextView) root.findViewById(R.id.articleTitle);
 		articleTextView = (TextView) root.findViewById(R.id.articleText);
+		if (article != null) {
+			articleTitleView.setText(article.getTitle());
+			articleTextView.setText(article.getContent());
+		}
 
 		return root;
 	}
 
-	public void setTitle(String title){
-		articleTextView.setText(title);
+	public void setArticle(Article article){
+		this.article = article;
 	}
 }

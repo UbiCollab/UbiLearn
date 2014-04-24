@@ -6,16 +6,15 @@ import no.ntnu.stud.ubilearn.R;
 
 public class Article extends WikiItem{
 	
-	String text;
 	private String objectId;
 	private String title;
 	private String content;
 	private Date createdAt;
 	
 
-	public Article(String name, String text) {
-//		this.name = name;
-		this.text = text;
+	public Article(String title, String content) {
+		this.title = title;
+		this.content = content;
 	}
 
 //	public Article(long id, String objectId, String title, String content, Date createdAt, long parentId) {
@@ -41,12 +40,7 @@ public class Article extends WikiItem{
 	protected void setIcon() {
 		this.icon = R.drawable.ic_handbook_black;
 	}
-
-	public String getText() {
-		return text;
-	}
-
-
+	
 	public String getObjectId() {
 		return objectId;
 	}

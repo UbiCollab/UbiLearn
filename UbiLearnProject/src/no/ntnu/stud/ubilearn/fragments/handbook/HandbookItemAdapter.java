@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.fragments.handbook;
 
 import java.util.ArrayList;
 
@@ -13,12 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class WikiItemAdapter extends ArrayAdapter<WikiItem>{
+public class HandbookItemAdapter extends ArrayAdapter<WikiItem>{
 	Context context; 
     int resource;    
     ArrayList<WikiItem> list;
 
-	public WikiItemAdapter(Context context, ArrayList<WikiItem> list) {
+	public HandbookItemAdapter(Context context, ArrayList<WikiItem> list) {
 		super(context, R.layout.wiki_list_item, list);
 		
 		this.context = context;
