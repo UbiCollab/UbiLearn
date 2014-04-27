@@ -11,9 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
+/**
+ * This class is part of the loading of data in the list that is constructed
+ * when a user clicks on a specified level from the Home fragment. The new
+ * fragment that is created contains the different houses/cases that is part of
+ * the level selected and data for each case will be loaded into the list on this
+ * page.
+ */
 public class HomeCasesAdapter extends ArrayAdapter<String>
 {
+	// This variable will hold the current Activity.
 	private final Context 		_context;
 	private final List<String>	_caseMedalValues;
 	private final List<String>	_caseNameValues;
@@ -21,6 +28,17 @@ public class HomeCasesAdapter extends ArrayAdapter<String>
 	
 	
 	//#########################################################################
+	/**
+	 * The constructor initializes data for the adapter.
+	 * 
+	 * @param context - The Activity this fragment is currently associated with.
+	 * @param caseMedalValues - A list of strings that represent the medals for
+	 * each case.
+	 * @param caseNameValues - A list of strings that represent the name for 
+	 * each case.
+	 * @param caseScoreValues - A list of strings that represent the score for
+	 * each case. The format is <scoreAchieved/maxScore>.
+	 */
 	public HomeCasesAdapter(Context context, 
 			List<String> caseMedalValues,
 			List<String> caseNameValues,
@@ -52,7 +70,6 @@ public class HomeCasesAdapter extends ArrayAdapter<String>
 		
 		
 		// Based on the type of medal we will load the specific medal image.
-		// If "None" is specified we will not load a image. 
 		// TODO: Later we could load an image indicating no medal.
 		if(_caseMedalValues.get(position).equals("Bronze"))
 		{

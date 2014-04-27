@@ -1,9 +1,5 @@
 package no.ntnu.stud.ubilearn.fragments;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,20 +33,13 @@ public class HomeCasesFragment extends Fragment
 	String _levelName 			= "";
 //	String _status 			= "";	//TODO: Delete this when you are
 									//certain it will not be used.
-//	String _unlockedCases 	= "";
-//	String _lockedCases		= "";
 	String _totalScore		= "";
-//	String _achievements 	= "";
-//	String _unlockedLevels	= "";
-//	String _lockedLevels	= "";
 	String _caseData		= "";
 	
 	List<String> _listName	= new ArrayList<String>();
 	List<String> _listMedal	= new ArrayList<String>();
 	List<String> _listScore	= new ArrayList<String>();
-	
-	BufferedReader _bufferedReader		= null;
-	
+		
 	TrainingLevel _level = null;
 	
 	
@@ -59,14 +48,7 @@ public class HomeCasesFragment extends Fragment
 	{
 		
 	}
-	
 	//-------------------------------------------------------------------------
-/*	public HomeCasesFragment(String levelName, TrainingLevel level)
-	{
-		_levelName	= levelName;
-		_level 		= level;
-	}	
-*/	//-------------------------------------------------------------------------
 	public static HomeCasesFragment newInstance(/*String levelName, */int levelNo)
 	{
 		HomeCasesFragment fragment = new HomeCasesFragment();
@@ -90,94 +72,12 @@ public class HomeCasesFragment extends Fragment
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_cases, container, false);
 					
-/*		String level = "#LEVEL_" + String.valueOf(_levelNo);
 		
-		System.out.println("Level name:" + _levelName);
-		System.out.println("Level #:" + _levelNo);
-		System.out.println("Level: " + level);
-		
-		
-		// Here we read the data from the textfile.
-		try
-		{
-			//TODO: Used only for testing. The way we store scores and so on,
-			// has not yet been decided.
-			InputStream inputStream = 
-					getResources().openRawResource(R.raw.levels_data);
-			InputStreamReader inputStreamReader =
-					new InputStreamReader(inputStream);
-			_bufferedReader =
-					new BufferedReader(inputStreamReader);
-			
-			
-			_caseData = _bufferedReader.readLine();
-			
-			System.out.println("CaseData: " + _caseData);
-			
-			
-			//TODO: Error handling needs to be implemented
-			while(!_caseData.equals(level) && _caseData != null)
-			{
-				_caseData = _bufferedReader.readLine();
-			}
-			
-						
-			_unlockedCases 	= _bufferedReader.readLine();
-			_lockedCases	= _bufferedReader.readLine();
-			_totalScore		= _bufferedReader.readLine();
-			_achievements	= _bufferedReader.readLine(); 
-						
-			// Read a line to see if we have data for a case
-			_caseData = _bufferedReader.readLine();
-			
-			
-			// TODO: Unfinished. Add data dynamically...
-			// This is for testing purposes.
-			while(!_caseData.startsWith("#") && _caseData != null)
-			{
-				// A line should consist of two numbers. The first to indicate
-				// what the user has achieved and the second the maximum score
-				// for the specific case.
-				String[] splitStr 	= _caseData.split("[#&/]");
-								
-				//Here we add the data to the lists that we will use to fill
-				// the ListView in fragment_home.xml
-				_listName.add(splitStr[0]);
-				_listMedal.add(splitStr[1]);
-				_listScore.add(splitStr[2] + "/" + splitStr[3]);
-								
-				_caseData			= _bufferedReader.readLine();
-			}
-		}
-		catch(IOException exception)
-		{
-			// TODO: Replace with a dialog box and handle the error better.
-			System.out.println("Problems reading text file!");
-		}
-*/		/**
-		 * We must ensure that the file is closed after used.
-		 */
-/*		finally
-		{
-			try
-			{
-				if(_bufferedReader != null)
-					{
-					_bufferedReader.close();
-					}
-			}
-			catch(IOException ioException)
-			{
-				System.out.println("Problems closing the file");
-			}
-		}
-*/		
 		TrainingLevel level = User.getInstance().getLevelNo(_levelNo);
 		
 		_levelName = level.getName();
 		
-		
-		
+			
 		// We go through a list of cases and intialize relevant data
 		for(TrainingHouse house : level.getHouseList())
 		{
@@ -277,8 +177,7 @@ public class HomeCasesFragment extends Fragment
 				(TextView)fragmentView.findViewById(R.id.homeCasesAchievements);
 		achievements.setText(Integer.toString(_nAchievements));
 	
-		// Now we want to fill the list in 'fragment_home.xml' with data loaded
-		// from the textfile.
+		// Now we want to fill the list in 'fragment_home_cases.xml' with data
 		ListView caseListView = 
 				(ListView)fragmentView.findViewById(R.id.homeCasesListCases);
 		

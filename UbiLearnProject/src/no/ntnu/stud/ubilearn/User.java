@@ -6,6 +6,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.*;
 
+
 public class User {
 	private ArrayList<CasePatient> patientList;
 	
