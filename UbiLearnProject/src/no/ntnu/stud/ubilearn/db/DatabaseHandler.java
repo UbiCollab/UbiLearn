@@ -12,7 +12,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-
     static final int DATABASE_VERSION = 17;
 
 
@@ -37,7 +36,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_CREATED_AT = "createdAt";
     static final String KEY_PARENT_ID = "parentId";
 
- 
+
     // Article Table - column names
     static final String KEY_TITLE = "title";
     static final String KEY_CONTENT = "content";
