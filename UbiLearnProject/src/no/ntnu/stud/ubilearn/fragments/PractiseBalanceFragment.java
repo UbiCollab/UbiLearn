@@ -31,6 +31,7 @@ public class PractiseBalanceFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_practise_balance, container, false);
 		
 		final Button startStopButton = (Button) view.findViewById(R.id.startStopButton);
+		final Button next = (Button) view.findViewById(R.id.next_button);
 		
 		final TextView titleField = (TextView) view.findViewById(R.id.titleField);
 		final TextView score1 = (TextView) view.findViewById(R.id.score1);
