@@ -78,5 +78,6 @@
     <string name="home_level_score">Poengsum</string>
     <string name="home_cases_achievements">Prestasjoner</string>
     <string name="addButton">Add Patient</string>
+    <string name="save">Save</string>
     
 </resources>

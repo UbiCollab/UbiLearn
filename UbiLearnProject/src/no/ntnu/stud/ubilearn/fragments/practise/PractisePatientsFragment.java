@@ -31,6 +31,7 @@ public class PractisePatientsFragment extends Fragment
 	private EditText patientOtherEdit;
 	private TextView SPPBresult;
 	private ImageView editInfo;
+	private Button saveBtn;
 	Patient patient;
 	public PractisePatientsFragment(Patient patient){
 		this.patient = patient;
@@ -58,6 +59,7 @@ public class PractisePatientsFragment extends Fragment
 		patientOther = (TextView)rootView.findViewById(R.id.practice_patient_other);
 		patientOther.setText("Kommentar: ");
 		patientOtherEdit = (EditText)rootView.findViewById(R.id.practice_patient_other_edit);
+		saveBtn = (Button)rootView.findViewById(R.id.saveBtn);
 		setEnabled(false);
 		
 		editInfo = (ImageView)rootView.findViewById(R.id.edit_info_button);
@@ -111,6 +113,10 @@ public class PractisePatientsFragment extends Fragment
 //		patientOtherEdit.setVisibility(v);
 		patientOtherEdit.setEnabled(b);
 		patientOtherEdit.setText(patient.getComment());
+		if(b)
+			saveBtn.setVisibility(Button.VISIBLE);
+		else
+			saveBtn.setVisibility(Button.INVISIBLE);
 		}
 	}
 

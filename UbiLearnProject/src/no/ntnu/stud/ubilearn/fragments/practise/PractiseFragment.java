@@ -81,8 +81,9 @@ public class PractiseFragment extends Fragment {
 		addPatient.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast t = Toast.makeText(getActivity(), "testing", Toast.LENGTH_SHORT);
-				t.show();
+				Fragment fragment = new AddPatientFragment();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+
 			}
 		});
 		
