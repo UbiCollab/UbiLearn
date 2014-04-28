@@ -56,6 +56,7 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 	private TextView time;
 	private TextView result1;
 	private TextView result2;
+	private ImageView circle;
 	//Model:
 	private Patient patient;
 	private WalkingSPPB test1;
@@ -67,7 +68,7 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View rootView = inflater.inflate(R.layout.fragment_practice_gangtest, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_practice_walking, container, false);
 		next = (Button)rootView.findViewById(R.id.next_button);
 		time = (TextView)rootView.findViewById(R.id.gangtest_tid);
 		result1 = (TextView)rootView.findViewById(R.id.gangtest_result1);
@@ -84,7 +85,7 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 		startTest.setText("Start test "+testCounter);
 		t = new Timer();
 
-		final ImageView circle= (ImageView) rootView.findViewById(R.id.circle);
+		circle = (ImageView) rootView.findViewById(R.id.circle);
 
 		final TextView start = (TextView) rootView.findViewById(R.id.start);
 
@@ -93,6 +94,7 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 		info.setClickable(true);
 		info.setEnabled(true);
 
+		next.setEnabled(false);
 		next.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -208,9 +210,13 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 			
 			//time = Double.parseDouble(minSec.replace(":", "."));
 			
-			test2 = new WalkingSPPB("Gangtest", patient.getId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
-					
+			test2 = new WalkingSPPB("Gangtest", patient.getId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());		
 		}
+		if(testCounter>2){
+			circle.setEnabled(false);
+			next.setEnabled(true);
+		}
+			
 	}
 	public String aid(){
 		
@@ -234,6 +240,9 @@ public class PracticeSPPBWalkingFragment extends Fragment{
 			return otherEdit.getText().toString();
 		}
 		else return "";
+	}
+	private void resetAids(){
+		
 	}
 }
 
