@@ -11,6 +11,7 @@ import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -23,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class SyncContent {
 	
@@ -169,6 +171,29 @@ public class SyncContent {
 		});
 	}
 
+	public static void savePatient(Patient p){
+		
+		ParseObject patient = new ParseObject("Patient");
+		patient.put("name", p.getName());
+		patient.put("id", p.getId());
+		patient.put("problems", p.getProblems());
+		patient.put("age", p.getAge());
+		patient.put("comment", p.getComment());
+		
+		patient.saveInBackground(new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if (e == null) {
+					Log.v("Sync", "Saved patient");
+				}else {
+					Log.v("Sync", e.getMessage());
+				}
+				
+			}
+		});
+	}
+	
 	private static ArrayList<String> downcastListOfObjects(List<Object> objects){
 		ArrayList<String> stringList = new ArrayList<String>();
 		for (Object object : objects) {
@@ -178,6 +203,8 @@ public class SyncContent {
 		}
 		return stringList;
 	}
+	
+	
 }
 
 

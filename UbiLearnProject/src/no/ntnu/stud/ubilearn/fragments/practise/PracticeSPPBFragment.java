@@ -44,7 +44,7 @@ public class PracticeSPPBFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-				Fragment fragment = new PractiseBalanceFragment();
+				Fragment fragment = new PractiseBalanceFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});
