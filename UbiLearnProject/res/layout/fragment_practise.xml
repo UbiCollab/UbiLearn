@@ -3,51 +3,69 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-	
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" >
 
-   	 <Button
-   	     android:id="@+id/exercises_button"
-   	     android:layout_width="fill_parent"
-   	     android:layout_height="wrap_content"
-   	     android:text="@string/exercises" />
-   	 
-   	 </LinearLayout>
-   	 <LinearLayout
+        <Button
+            android:id="@+id/exercises_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/exercises" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" >
-   	 
-   	     <TextView
+
+        <TextView
             android:id="@+id/patients_textView"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/addPatientBtn"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:text="@string/myPatients"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-             />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-   	     <ImageView
-   	         android:id="@+id/imageButton1"
-   	         android:layout_width="24dp"
-   	         android:layout_height="21dp"
-   	         android:src="@drawable/ic_action_new"
-   	         android:layout_gravity="right" />
-   	     
-   	 </LinearLayout>
-   	 <LinearLayout
+        <ImageView
+            android:id="@+id/imageButton1"
+            android:layout_width="24dp"
+            android:layout_height="21dp"
+            android:layout_alignBaseline="@+id/addPatientBtn"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="right"
+            android:layout_toRightOf="@+id/patients_textView"
+            android:clickable="true"
+            android:src="@drawable/ic_action_new"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/addPatientBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right"
+            android:text="@string/addButton"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" >
-   	 	
-   	    <ListView
-	        android:id="@+id/patientsList"
-    	    android:layout_width="match_parent"
-    	    android:layout_height="wrap_content" >
 
-    	</ListView>
-   	 </LinearLayout>
-   	 
+        <ListView
+            android:id="@+id/patientsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+    </LinearLayout>
+
 </LinearLayout>

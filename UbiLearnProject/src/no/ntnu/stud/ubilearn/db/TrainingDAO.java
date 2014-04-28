@@ -88,6 +88,42 @@ public class TrainingDAO extends DAO{
 			return null;
 		return quizzes;
 	}
+	/**
+	 * returns the number of quizzes assigned to a CasePatient for a specific level
+	 * @param level the level where the number of quizzes will be counted
+	 */
+	public int getNofQuizzes(int level){
+		int nofQuizzes = 0;
+		
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CASE_PATIENT + " INNER JOIN " + DatabaseHandler.TABLE_QUIZ 
+				+ " ON " + DatabaseHandler.TABLE_CASE_PATIENT + "." + DatabaseHandler.KEY_OBJECT_ID + " = " + DatabaseHandler.TABLE_QUIZ + "." + DatabaseHandler.KEY_OWNER_ID
+				+ " WHERE " + DatabaseHandler.KEY_LEVEL + " = " + level;
+		
+		log(query);
+		Cursor result = database.rawQuery(query, null);
+//		StringBuilder output = new StringBuilder();
+		if(result.moveToFirst()){
+//			String[] columns = result.getColumnNames();
+//			output.append(" | ");
+//			for (int i = 0; i < columns.length; i++) {
+//				output.append(columns[i] + " | ");
+//			}
+			
+			do{
+//				output.append("\n | ");
+//				int n = result.getColumnCount();
+//				for (int i = 0; i < n; i++) {
+//					output.append(result.getString(i) + " | ");	
+//				}
+				nofQuizzes++;
+			}while(result.moveToNext());
+		}else
+			return 0;
+//		log(output.toString());
+		
+		
+		return nofQuizzes;
+	}
 	
 	private String parseAnswersToString(ArrayList<String> answers) {
 		

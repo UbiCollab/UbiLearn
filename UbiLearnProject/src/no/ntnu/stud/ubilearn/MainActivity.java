@@ -19,6 +19,7 @@ import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.handbook.CategoryFragment;
+import no.ntnu.stud.ubilearn.fragments.practise.PractiseFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
@@ -241,13 +242,13 @@ public class MainActivity extends Activity {
 		
 		//-----------------------------DATABASE TESTING--------------------------------------
 		
-		HandbookDAO hb = new HandbookDAO(this);
-		hb.open();
-		hb.printTable();
-		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
-		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
-		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
-		hb.printTable();
+//		HandbookDAO hb = new HandbookDAO(this);
+//		hb.open();
+//		hb.printTable();
+//		hb.insertCategory(new Category("abc123", "Tests", new Date(), null));
+//		hb.insertCategory(new Category("asd123", "subTests", new Date(), "abc123"));
+//		hb.insertArticle(new Article("qwe123", "testArtikkel", "detter er en test bla bla bla, massse kult innhold jippiii", new Date(), "asd123"));
+//		hb.printTable();
 //		
 //		
 ////		Log.d("MAIN",hb.getCategory("abc123").printContent());

@@ -1,6 +1,10 @@
-package no.ntnu.stud.ubilearn.fragments;
+package no.ntnu.stud.ubilearn.fragments.practise;
 
+import java.util.Date;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.models.BalanceSPPB;
+import no.ntnu.stud.ubilearn.models.Patient;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -15,14 +19,28 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+@SuppressLint("ValidFragment")
 public class PractiseBalanceFragment extends Fragment {
 	
-	int state = 0;
-	int score = 0;
+	private int state = 0;
+	private int timeLeft = 0;
+	//private int totalScore = 0;
+	private int pairedScore = 0;
+	private int semiTandemScore = 0;
+	private int tandemScore = 0;
+	private Patient patient;
 	
-	public int getScore() {
-		return score;
+	public PractiseBalanceFragment(Patient patient)
+	{
+		this.patient = patient;
 	}
+	
+	BalanceSPPB result = new BalanceSPPB("Balance", patient.getId() , new Date(), pairedScore, semiTandemScore, tandemScore);
+	
+	/*public int getScore() 
+	{
+		return totalScore;
+	}*/
 	
 	public OnClickListener start, stop;
 	
@@ -42,6 +60,9 @@ public class PractiseBalanceFragment extends Fragment {
 		final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 		final ImageView info = (ImageView)view.findViewById(R.id.balance_info);
 		
+		
+		next.setEnabled(false);
+		
 		info.setClickable(true);
 		info.setEnabled(true);
 		
@@ -53,6 +74,8 @@ public class PractiseBalanceFragment extends Fragment {
 			public void onTick(long millisUntilFinished)
 			{
 				progressBar.setProgress((int) (millisUntilFinished / 1000));
+				timeLeft = (int) millisUntilFinished / 1000;
+				Log.v("",""+(int) millisUntilFinished);
 			}
 			
 			public void onFinish()
@@ -61,7 +84,7 @@ public class PractiseBalanceFragment extends Fragment {
 				progressBar.setProgress(0);
 				startStopButton.setOnClickListener(start);
 				startStopButton.setText("Start");
-				score++;
+				//totalScore++;
 				
 				state = state + 1;
 				switch(state) {
@@ -70,23 +93,27 @@ public class PractiseBalanceFragment extends Fragment {
 						imageField.setImageResource(R.drawable.semi2);
 						score1.setText("1 poeng");
 						startStopButton.setEnabled(true);
+						result.setPairedScore(1);
 						break;
 					case 2:
 						titleField.setText("TANDEM");
 						imageField.setImageResource(R.drawable.tandem2);
 						score2.setText("1 poeng");
 						startStopButton.setEnabled(true);
+						result.setSemiTandemScore(1);
 						break;
 					case 3:
 						titleField.setText("TEST FULLFØRT");
 						imageField.setImageResource(R.drawable.balancecheck);
 						score3.setText("2 poeng");
-						score++;
+						//totalScore++;
 						startStopButton.setEnabled(false);
+						next.setEnabled(true);
+						result.setTandemScore(2);
 						break;
 				}
 				
-				score4.setText(getScore() + " poeng");
+				score4.setText(result.getScore() + " poeng");
 			}
 		};
 		
@@ -117,6 +144,7 @@ public class PractiseBalanceFragment extends Fragment {
 			{
 				startStopButton.setEnabled(false);
 				startStopButton.setOnClickListener(start);
+				int i = timeLeft;
 				timer.cancel();
 				startStopButton.setText("Start");
 				
@@ -135,15 +163,24 @@ public class PractiseBalanceFragment extends Fragment {
 					startStopButton.setEnabled(true);
 					break;
 				case 3:
-					titleField.setText("TEST FULLF�RT");
+					titleField.setText("TEST FULLFØRT");
 					imageField.setImageResource(R.drawable.balancecheck);
-					score3.setText("0 poeng");
-					score++;
+					if(i>7)
+					{
+						score3.setText("0 poeng");
+					}
+					else
+					{
+						score3.setText("1 poeng");
+						//totalScore++;
+						result.setTandemScore(1);
+					}
 					startStopButton.setEnabled(false);
+					next.setEnabled(true);
 					break;
 				}
 				
-				score4.setText(getScore() + " poeng");
+				score4.setText(result.getScore() + " poeng");
 			}
 		};
 		
