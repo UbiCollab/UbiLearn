@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
-
-
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import android.os.Bundle;
-
 import android.app.Dialog;
 import android.app.Fragment;
 import android.util.Log;
@@ -44,6 +42,13 @@ public class Training extends Fragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
+		
+//		TrainingDAO dao = new TrainingDAO(getActivity());
+//		dao.open();
+//		dao.printTables();
+//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(2));
+//		dao.close();
+		
 		patientList = User.getInstance().getPatientList();
 		if(patientList == null){
 			Toast.makeText(getActivity(), "lista er tom", Toast.LENGTH_SHORT).show();
