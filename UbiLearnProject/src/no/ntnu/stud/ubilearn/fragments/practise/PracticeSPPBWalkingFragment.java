@@ -34,7 +34,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 @SuppressLint("ValidFragment")
-public class Practice_SPPB_gangtestFragment extends Fragment{
+public class PracticeSPPBWalkingFragment extends Fragment{
 	private Timer t;
 	private int TimeCounter = 0;
 
@@ -61,7 +61,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
 	
-	public Practice_SPPB_gangtestFragment(Patient patient){
+	public PracticeSPPBWalkingFragment(Patient patient){
 		this.patient = patient;
 	}
 
@@ -97,7 +97,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 
 			@Override
 			public void onClick(View v) {
-				Fragment fragment = new gangTestResultatFragment(test1, test2);
+				Fragment fragment = new SPPBWalkingResultFragment(test1, test2);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("training").commit();
 
 			}

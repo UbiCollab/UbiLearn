@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 @SuppressLint("ValidFragment")
-public class gangTestResultatFragment extends Fragment{
+public class SPPBWalkingResultFragment extends Fragment{
 
 	private double[] results;
 	private TextView poeng1;
@@ -29,7 +29,7 @@ public class gangTestResultatFragment extends Fragment{
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
 
-	public gangTestResultatFragment(WalkingSPPB test1, WalkingSPPB test2) {
+	public SPPBWalkingResultFragment(WalkingSPPB test1, WalkingSPPB test2) {
 		this.test1 = test1;
 		this.test2 = test2;
 	}
