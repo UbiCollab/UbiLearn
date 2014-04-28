@@ -18,10 +18,13 @@ public class PractiseDAO extends DAO {
 	public PractiseDAO(Context context) {
 		super(context, "PractiseDAO");
 	}
-
-	public long insertPatient(Patient patient){
+	/**
+	 * inserts a patient to the database
+	 * @param patient the patient to be inserted
+	 * @return the id of the inserted patient
+	 */
+	public int insertPatient(Patient patient){
 		ContentValues values = new ContentValues();
-//		values.put(DatabaseHandler.KEY_OBJECT_ID, patient.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, patient.getName());
 		values.put(DatabaseHandler.KEY_AGE, patient.getAge());
 		values.put(DatabaseHandler.KEY_PROBLEMS, patient.getProblems());
@@ -30,12 +33,16 @@ public class PractiseDAO extends DAO {
 		
 		log(values.toString());
 		
-		long rowId;
-		if(!exists(DatabaseHandler.TABLE_PATIENT, patient.getId()))
-			rowId = database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
+		int rowId;
+		if(!exists(DatabaseHandler.TABLE_PATIENT, patient.getId())){
+			rowId = (int)database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
+			System.out.println(rowId);
+			Patient p = getPatient(rowId);
+			rowId = p.getId();
+			System.out.println(rowId);
+		}
 		else{
-			values.remove(DatabaseHandler.KEY_ID);
-			rowId = database.update(DatabaseHandler.TABLE_PATIENT,values,null,null);
+			rowId = database.update(DatabaseHandler.TABLE_PATIENT,values, DatabaseHandler.KEY_ID + "=?" , new String[]{""+patient.getId()});
 		}
 		return rowId;
 	}
@@ -72,9 +79,9 @@ public class PractiseDAO extends DAO {
 		tests.addAll(getBalanceSPPBs(patientId));
 		tests.addAll(getWalkingSPPBs(patientId));
 		
-		Patient patient = getPatient(patientId);
+//		Patient patient = getPatient(patientId);
 		for (SPPB sppb : tests) {
-			sppb.setPatient(patient);
+			sppb.setPatientId(patientId);
 		}
 		
 		return tests;
@@ -91,9 +98,9 @@ public class PractiseDAO extends DAO {
 		log(query);
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
-			tests.add(getStandupSPPB(result));
-		else
-			return null;
+			do{
+				tests.add(getStandupSPPB(result));
+			}while(result.moveToNext());
 		return tests;
 	}
 
@@ -119,15 +126,15 @@ public class PractiseDAO extends DAO {
 		log(query);
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
-			tests.add(getBalanceSPPB(result));
-		else
-			return null;
+			do{
+				tests.add(getBalanceSPPB(result));
+			}while(result.moveToNext());
 		return tests;
 	}
 
 	private BalanceSPPB getBalanceSPPB(Cursor result) {
 //		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
-		int objectId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
+		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
 		int pairedScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PAIRED_SCORE));
@@ -135,7 +142,7 @@ public class PractiseDAO extends DAO {
 		int tandemScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_TANDEM_SCORE));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new BalanceSPPB(objectId, name, patientId, stringToDate(createdAt), pairedScore, semiTandemScore, tandemScore);
+		return new BalanceSPPB(id, name, patientId, stringToDate(createdAt), pairedScore, semiTandemScore, tandemScore);
 	}
 	/**
 	 * 
@@ -148,14 +155,14 @@ public class PractiseDAO extends DAO {
 		log(query);
 		Cursor result = database.rawQuery(query, null);
 		if(result.moveToFirst())
-			tests.add(getWalkingSPPB(result));
-		else
-			return null;
+			do{
+				tests.add(getWalkingSPPB(result));
+			}while(result.moveToNext());
 		return tests;
 	}
 	
 	private WalkingSPPB getWalkingSPPB(Cursor result) {
-		int objectId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
+		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
@@ -165,12 +172,11 @@ public class PractiseDAO extends DAO {
 		String other = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OTHER));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new WalkingSPPB(objectId, name, patientId, stringToDate(createdAt), time, noAid, crutches, rollater, other);
+		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt), time, noAid, crutches, rollater, other);
 	}
 
 	public void insertSBBP(SPPB test){
 		ContentValues values = new ContentValues();
-//		values.put(DatabaseHandler.KEY_OBJECT_ID, test.getObjectId());
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
 		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
@@ -194,8 +200,7 @@ public class PractiseDAO extends DAO {
 		if(!exists(table, test.getId()))
 			rowId = database.insert(table,null,values);
 		else{
-			values.remove(DatabaseHandler.KEY_ID);
-			rowId = database.update(table,values,null,null);
+			rowId = database.update(table,values, DatabaseHandler.KEY_ID + "=?" , new String[]{""+test.getId()});
 		}
 	}
 	private void insertWalkingSPPB(WalkingSPPB test, ContentValues values){
@@ -213,5 +218,12 @@ public class PractiseDAO extends DAO {
 	}
 	private void insertStandUpSPPB(StandUpSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
+	}
+	
+	public void printTables(){
+		printTable(DatabaseHandler.TABLE_PATIENT);
+		printTable(DatabaseHandler.TABLE_BALANCE_SPPB);
+		printTable(DatabaseHandler.TABLE_STANDUP_SPPB);
+		printTable(DatabaseHandler.TABLE_WALKING_SPPB);
 	}
 }

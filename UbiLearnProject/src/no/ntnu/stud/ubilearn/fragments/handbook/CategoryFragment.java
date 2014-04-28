@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.wiki;
+package no.ntnu.stud.ubilearn.fragments.handbook;
 
 import java.util.ArrayList;
 
@@ -15,9 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
-public class WikiFragment extends Fragment {
+public class CategoryFragment extends Fragment {
 	private View root;
 	private ListView categoryListView;
 	private ArrayList<WikiItem> listItems;
@@ -26,13 +27,10 @@ public class WikiFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		generateTestData();
-		HandbookDAO dao = new HandbookDAO(getActivity());
-		dao.open();
-		//listItems = dao.getHandbook();
-		root = inflater.inflate(R.layout.fragment_wiki, null);
+		fetchDataFromDAO();
+		root = inflater.inflate(R.layout.fragment_handbook, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
-		categoryListView.setAdapter(new WikiItemAdapter(this.getActivity(), listItems));
+		categoryListView.setAdapter(new HandbookItemAdapter(this.getActivity(), listItems));
 		
 		categoryListView.setClickable(true);
 		categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -43,13 +41,16 @@ public class WikiFragment extends Fragment {
 				if (listItems.get(position) instanceof Category) {
 					Category cat = (Category) listItems.get(position);
 					if (cat.hasSubs()) {
-						WikiFragment handbook = new WikiFragment();
+						CategoryFragment handbook = new CategoryFragment();
 						handbook.setListItems(cat.getSub());
 						getFragmentManager().beginTransaction().replace(R.id.content_frame, handbook).addToBackStack(null).commit();
+					}else{
+						Toast.makeText(pointerHax.getActivity(), "This category is empty", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					Fragment article = new ArticleFragment();
-					getFragmentManager().beginTransaction().replace(R.id.content_frame, article).addToBackStack(null).commit();
+					ArticleFragment articleFragment = new ArticleFragment();
+					articleFragment.setArticle((Article) listItems.get(position));
+					getFragmentManager().beginTransaction().replace(R.id.content_frame, articleFragment).addToBackStack(null).commit();
 				}	
 			}	
 		});
@@ -61,7 +62,15 @@ public class WikiFragment extends Fragment {
 		this.listItems = listItems;
 	}
 
-
+	public void fetchDataFromDAO(){
+		if (listItems == null) {
+			HandbookDAO dao = new HandbookDAO(getActivity());
+			dao.open();
+			listItems = (ArrayList<WikiItem>) dao.getHandbook();
+			dao.close();
+		}
+	}
+	
 	public void generateTestData(){
 		if (listItems == null) {
 			ArrayList<WikiItem> sub = new ArrayList<WikiItem>();

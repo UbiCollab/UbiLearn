@@ -111,6 +111,7 @@ public class LoginActivity extends Activity {
 	
 	//used by skip button
 	public void skip(View view){
+		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
 		ParseUser.logInInBackground("test@test.com", "test", new LogInCallback() {
 			
 			@Override
@@ -126,6 +127,7 @@ public class LoginActivity extends Activity {
 		});
 		showProgress(true);
 	}
+	
 	public void startMain(View view) 
 	{
 	    Intent intent = new Intent(LoginActivity.this, MainActivity.class);

@@ -17,6 +17,7 @@ public class HomeAdapter extends ArrayAdapter<String>
 	private final List<String>	_levelNameValues;
 	private final List<String>	_levelScoreValues;
 	
+	
 	//#########################################################################
 	public HomeAdapter(
 			Context context,

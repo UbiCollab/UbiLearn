@@ -6,6 +6,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.*;
 
+
 public class User {
 	private ArrayList<CasePatient> patientList;
 	
@@ -128,6 +129,7 @@ public class User {
 	}
 	//pasient listen
 	public ArrayList<CasePatient> getPatientList() {
+		
 		return patientList;
 	}
 

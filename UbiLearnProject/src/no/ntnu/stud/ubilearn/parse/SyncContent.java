@@ -15,6 +15,7 @@ import no.ntnu.stud.ubilearn.models.Quiz;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.Parse;
@@ -40,21 +41,17 @@ public class SyncContent {
 		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
-//		fetchHandBookCategoryAfterUpdated(context);
-//		fetchHandBookArticleAfterUpdate(context);
-//		fetchQuizesAfterUpdate(context);
-//		fetchCasePatient(context);
+		fetchHandBookCategoryAfterUpdated(context);
+		fetchHandBookArticleAfterUpdate(context);
+		fetchQuizesAfterUpdate(context);
+		fetchCasePatient(context);
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
-		TrainingDAO trainingDAO = new TrainingDAO(context);
-		trainingDAO.open();
-		ArrayList<CasePatient> patientList = trainingDAO.getAllCasePatients();
-		User.getInstance().setPatientList(patientList);
-		trainingDAO.close();	
-		
 		isRetriving = false;
 		hasRetrived = true;
+		Log.v("Sync", "done");
+		Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 	
 	private static void fetchCasePatient(final Context context) {
@@ -73,7 +70,10 @@ public class SyncContent {
 					TrainingDAO dao = new TrainingDAO(context);
 					dao.open();
 					dao.insertCasePatients(list);
-					dao.close();
+					ArrayList<CasePatient> patientList = dao.getAllCasePatients();
+					User.getInstance().setPatientList(patientList);
+					dao.close();	
+					
 				}else{
 					Log.v("SyncContent", e.getMessage());
 				}
