@@ -30,7 +30,9 @@ public class Training extends Fragment {
 	private ScrollView sv;
 	private View root;
 	private View root2;
-
+	Button nextLevel;
+	Button backLevel;
+	
 
 	ArrayList<CasePatient> patientList;
 	int i;
@@ -48,19 +50,19 @@ public class Training extends Fragment {
 		}
 		//Log.v("TrainingPatient", ""+patientList.size());
 
-
+		nextLevel.setVisibility(0x00000004);
+		backLevel.setVisibility(0x00000004);
 
 		root = inflater.inflate(R.layout.fragment_training, null);
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 
-		if(User.getInstance().getPoints()>=10){
-			Toast.makeText(getActivity(), "Congratulations, you are now in level 2", Toast.LENGTH_SHORT).show();
-			root = inflater.inflate(R.layout.fragment_training_level2, null);
-			sv = (ScrollView) root.findViewById(R.id.training_scroll);
-			rl = (RelativeLayout) root.findViewById(R.id.training_rel);
-			return root;
-		}
+
+//			root = inflater.inflate(R.layout.fragment_training_level2, null);
+//			sv = (ScrollView) root.findViewById(R.id.training_scroll);
+//			rl = (RelativeLayout) root.findViewById(R.id.training_rel);
+//			return root;
+		
 
 
 
@@ -125,6 +127,20 @@ public class Training extends Fragment {
 			System.out.println("thats why");
 		}
 		car.setY(y);
+	}
+	public void setLevel(View v){
+		if(User.getInstance().getPoints()>=10){
+			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level 2", Toast.LENGTH_SHORT).show();
+			nextLevel = (Button)v.findViewById(R.id.enter_level2);
+			backLevel = (Button)v.findViewById(R.id.back_level1);
+			backLevel.setVisibility(0x00000000);
+			nextLevel.setVisibility(0x00000000);
+		}
+		else if(User.getInstance().getPoints()>=20){
+			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level 3", Toast.LENGTH_SHORT).show();
+			nextLevel = (Button)v.findViewById(R.id.enter_level3);
+			backLevel = (Button)v.findViewById(R.id.back_level2);
+		}
 	}
 
 }
