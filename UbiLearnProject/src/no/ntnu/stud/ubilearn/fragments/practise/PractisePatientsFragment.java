@@ -1,8 +1,10 @@
 package no.ntnu.stud.ubilearn.fragments.practise;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.models.Patient;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -33,6 +35,8 @@ public class PractisePatientsFragment extends Fragment
 	private ImageView editInfo;
 	private Button saveBtn;
 	Patient patient;
+	
+	
 	public PractisePatientsFragment(Patient patient){
 		this.patient = patient;
 	}
@@ -54,13 +58,30 @@ public class PractisePatientsFragment extends Fragment
 
 		patientProblems = (TextView)rootView.findViewById(R.id.practice_patient_problems);
 		patientProblems.setText("Problemområder: ");
-		patientProblemsEdit = patientNameEdit = (EditText)rootView.findViewById(R.id.practice_patient_problems_edit);
+		patientProblemsEdit = (EditText)rootView.findViewById(R.id.practice_patient_problems_edit);
 
 		patientOther = (TextView)rootView.findViewById(R.id.practice_patient_other);
 		patientOther.setText("Kommentar: ");
 		patientOtherEdit = (EditText)rootView.findViewById(R.id.practice_patient_other_edit);
 		saveBtn = (Button)rootView.findViewById(R.id.saveBtn);
+		saveBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				patient.setName(patientNameEdit.getText().toString());
+				patient.setAge(patientAgeEdit.getText().toString());
+				patient.setProblems(patientProblemsEdit.getText().toString());
+				patient.setComment(patientOtherEdit.getText().toString());
+				
+				PractiseDAO dao = new PractiseDAO(getActivity());
+				dao.open();
+				dao.insertPatient(patient);
+				dao.close();
+				setEnabled(false);
+			}
+		});
 		setEnabled(false);
+
 		
 		editInfo = (ImageView)rootView.findViewById(R.id.edit_info_button);
 		
@@ -70,7 +91,6 @@ public class PractisePatientsFragment extends Fragment
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Fragment fragment = new PracticeSPPBFragment(patient);
 
 				Bundle data = new Bundle();
@@ -102,7 +122,6 @@ public class PractisePatientsFragment extends Fragment
 //			}
 	//	patientNameEdit.setVisibility(v);
 		patientNameEdit.setEnabled(b);
-		patientNameEdit.setText(patient.getName());
 		patientNameEdit.setText(patient.getName());
 //		patientAgeEdit.setVisibility(v);
 		patientAgeEdit.setEnabled(b);

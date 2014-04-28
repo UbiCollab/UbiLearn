@@ -82,7 +82,7 @@ public class PractiseFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Fragment fragment = new AddPatientFragment();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("add patient").commit();
 
 			}
 		});
