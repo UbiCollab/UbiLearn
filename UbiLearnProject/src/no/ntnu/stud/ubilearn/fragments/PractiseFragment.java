@@ -8,6 +8,7 @@ import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.models.Patient;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +20,29 @@ import android.widget.Button;
 import android.widget.ListView;
 
 
-public class PractiseFragment extends Fragment
-{
+public class PractiseFragment extends Fragment {
 	private ArrayList<Patient> patientList;
 	private ListView listView;
 	PractiseDAO dao;
 	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		
+		
 		dao = new PractiseDAO(getActivity());
-		patientList = generatePatients();
+		dao.open();
+		dao.printTables();
+		patientList = dao.getPatients();
+		dao.close();
+		
+		//------------GENERATES PATIENTS IF DB IS EMPTY---------------------
+		if(patientList.isEmpty()){
+			generatePatients();
+			dao.open();
+			patientList = dao.getPatients();
+			dao.printTables();
+			dao.close();
+		}
+		//---------------------------------------------------------------------
 		
 		View view =  inflater.inflate(R.layout.fragment_practise, container, false);
 
@@ -71,21 +85,18 @@ public class PractiseFragment extends Fragment
 		ArrayAdapter<String> adaptor = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, nameList);
 		listView.setAdapter(adaptor);
 	}
-	public ArrayList<Patient> generatePatients(){
-		//TODO hent pasienter fra backend
+	public void generatePatients(){
 		
-		dao.open();
+		Log.i("PractiseFragment", "Generating patients");
+		
 		ArrayList<Patient> tempPatients = new ArrayList<Patient>();
 		
-		Patient p1 = new Patient("1", "Kristian", "23", "vondt i ryggen", "snuser mye", new Date());
-		dao.insertPatient(p1);
-		Patient p2 = new Patient("2", "Ingeborg", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p3 = new Patient("3", "Kyrre", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p4 = new Patient("4", "Espen", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p5 = new Patient("5", "Kua", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p6 = new Patient("6", "Grisen", "23", "vondt i ryggen", "snuser mye", new Date());
-		dao.close();
-		//(String objectId, String name, String age, String problems, String comment, Date createdAt)
+		Patient p1 = new Patient("Kristian", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p2 = new Patient("Ingeborg", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p3 = new Patient("Kyrre", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p4 = new Patient("Espen", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p5 = new Patient("Kua", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p6 = new Patient("Grisen", "23", "vondt i ryggen", "snuser mye", new Date());
 		
 		tempPatients.add(p1);
 		tempPatients.add(p2);
@@ -94,8 +105,9 @@ public class PractiseFragment extends Fragment
 		tempPatients.add(p5);
 		tempPatients.add(p6);
 		
-		return tempPatients;
-		
+		dao.open();
+		dao.insertPatients(tempPatients);
+		dao.close();		
 	}
 
 
