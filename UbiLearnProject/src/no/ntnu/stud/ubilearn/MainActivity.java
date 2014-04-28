@@ -21,6 +21,7 @@ import no.ntnu.stud.ubilearn.fragments.*;
 import no.ntnu.stud.ubilearn.fragments.handbook.CategoryFragment;
 import no.ntnu.stud.ubilearn.models.AdapterModel;
 import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -62,7 +63,12 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		SyncContent.retriveNewContent(this);
-
+		
+		Patient p = new Patient("Espen", "gammel", "mye rart", "drfg", new Date());
+		p.getTests().add(new BalanceSPPB("something", -1, new Date(), 23, 15, 17));
+		
+		SyncContent.savePatient(p);
+		
 		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerView = (ListView) findViewById(R.id.left_drawer);
 		
