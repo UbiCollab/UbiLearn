@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments;
+package no.ntnu.stud.ubilearn.fragments.practise;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.models.Patient;

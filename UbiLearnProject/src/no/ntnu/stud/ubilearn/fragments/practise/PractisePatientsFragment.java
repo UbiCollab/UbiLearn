@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments;
+package no.ntnu.stud.ubilearn.fragments.practise;
 
 import java.util.ArrayList;
 
