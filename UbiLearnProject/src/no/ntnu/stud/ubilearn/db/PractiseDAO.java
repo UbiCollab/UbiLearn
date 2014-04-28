@@ -2,9 +2,11 @@ package no.ntnu.stud.ubilearn.db;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.SPPB;
 import no.ntnu.stud.ubilearn.models.StandUpSPPB;
@@ -46,6 +48,11 @@ public class PractiseDAO extends DAO {
 		}
 		return rowId;
 	}
+	public void insertPatients(List<Patient> patients){
+		for (Patient patient : patients) {
+			insertPatient(patient);
+		}
+	}
 	
 	public Patient getPatient(int id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_PATIENT + " WHERE "
@@ -70,6 +77,18 @@ public class PractiseDAO extends DAO {
 		
 		return new Patient(id, name, age, problems, comment, getTests(id),stringToDate(createdAt));
 		
+	}
+	public ArrayList<Patient> getPatients() {
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_PATIENT;
+		log(query);
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			do{
+				Patient patient = getPatient(result);
+				patients.add(patient);
+			}while(result.moveToNext());
+		return patients;
 	}
 	
 	
