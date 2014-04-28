@@ -146,95 +146,53 @@
                     android:layout_height="wrap_content"
                     android:text="Hjelpemidler "
                     android:textStyle="bold" />
+                
+				<RadioGroup
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+					<RadioButton
+					    android:id="@+id/uten_hjelpemidler"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:text="uten" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1. " />
+				    <RadioButton
+				        android:id="@+id/krykker"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:text="krykke/stokk(er)" />
 
-                    <RadioButton
-                        android:id="@+id/uten_hjelpemidler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="uten" />
-                </LinearLayout>
+				    <RadioButton
+				        android:id="@+id/rollator"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:text="rollator" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+				    <RadioButton
+				        android:id="@+id/annet"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:text="annet" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2. " />
+				</RadioGroup>
 
-                    <RadioButton
-                        android:id="@+id/krykker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="krykke/stokk(er)" />
-                </LinearLayout>
+				<EditText
+				    android:id="@+id/annet_edit"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3. " />
-
-                    <RadioButton
-                        android:id="@+id/rollator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="rollator" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4. " />
-
-                    <RadioButton
-                        android:id="@+id/annet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="annet" />
-
-                    <EditText
-                        android:id="@+id/annet_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                         >
-
-                        <requestFocus />
-                    </EditText>
-
-                </LinearLayout>
+				    <requestFocus />
+				</EditText>
 
                 <Button
                     android:id="@+id/next_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Neste" />
+
             </LinearLayout>
 
             <RelativeLayout
