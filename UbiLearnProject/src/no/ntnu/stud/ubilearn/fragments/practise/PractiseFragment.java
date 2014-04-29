@@ -71,7 +71,7 @@ public class PractiseFragment extends Fragment {
 				
 				
 				Fragment fragment = new PractisePatientsFragment(patientList.get(arg2));
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("patient").commit();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "patient").addToBackStack("patient").commit();
 				
 			}
 		});

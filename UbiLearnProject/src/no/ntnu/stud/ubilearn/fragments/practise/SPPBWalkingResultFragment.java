@@ -6,6 +6,7 @@ import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.WalkingSPPB;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,9 +109,11 @@ public class SPPBWalkingResultFragment extends Fragment{
 				Patient patient = dao.getPatient(test1.getPatientId());
 				dao.close();
 				
+//				getFragmentManager().popBackStack(getFragmentManager().findFragmentByTag("patient").getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 				getFragmentManager().popBackStack();
 				getFragmentManager().popBackStack();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, new PractisePatientsFragment(patient)).commit();
+				getFragmentManager().popBackStack();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, getFragmentManager().findFragmentByTag("patient")).commit();
 			}
 		});
 
