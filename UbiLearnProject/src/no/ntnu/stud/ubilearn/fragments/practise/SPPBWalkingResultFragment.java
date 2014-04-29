@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -25,6 +27,7 @@ public class SPPBWalkingResultFragment extends Fragment{
 	private Spinner fail1;
 	private Spinner fail2;
 	private PractiseDAO dao;
+	private Button finishBtn;
 	
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
@@ -41,8 +44,7 @@ public class SPPBWalkingResultFragment extends Fragment{
 		poeng1= (TextView)view.findViewById(R.id.poeng1);
 		fail2 = (Spinner)view.findViewById(R.id.fail_chooser2);
 		poeng2= (TextView)view.findViewById(R.id.poeng2);
-		
-		
+		finishBtn = (Button)view.findViewById(R.id.finishBtn);
 		
 		dao = new PractiseDAO(getActivity());
 
@@ -87,6 +89,22 @@ public class SPPBWalkingResultFragment extends Fragment{
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
 
+			}
+		});
+		
+		finishBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(fail1.getSelectedItemPosition() != 0)
+					test1.failed(true);
+				if(fail2.getSelectedItemPosition() != 0)
+					test2.failed(true);
+				dao.open();
+				if(test1.compareTo(test2)>0)
+					dao.insertSBBP(test1);
+				else
+					dao.insertSBBP(test2);
+				dao.close();
 			}
 		});
 
