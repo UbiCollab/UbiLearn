@@ -98,10 +98,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		otherButton.setOnCheckedChangeListener(this);
 		radBtns.add(otherButton);
 		otherEdit=(EditText)rootView.findViewById(R.id.annet_edit);
-//		RadioGroup rg = (RadioGroup)rootView.findViewById(R.id.radioGroup);
-//		LinearLayout ll = (LinearLayout)rootView.findViewById(R.id.linearLayoutRadio);
-//		ll.removeView(otherButton);
-//		rg.addView(otherButton);
+		resetAids();
 
 		startTest.setText("Start test "+testCounter);
 		t = new Timer();
@@ -216,7 +213,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 				Date date = new Date();
 				
 			test1 = new WalkingSPPB(name,patientID , date, parsedTime, noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
-			
+			resetAids();
 			accept(resultAccept1);
 			TimeCounter = 0;
 			}
@@ -263,7 +260,10 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		else return "";
 	}
 	private void resetAids(){
-		
+		for (RadioButton radBtn : radBtns) {
+			radBtn.setChecked(false);
+		}
+		noAidButton.setChecked(true);
 	}
 
 	@Override
