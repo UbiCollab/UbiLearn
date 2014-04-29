@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn.fragments.practise;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
+import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.WalkingSPPB;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -104,7 +105,12 @@ public class SPPBWalkingResultFragment extends Fragment{
 					dao.insertSBBP(test1);
 				else
 					dao.insertSBBP(test2);
+				Patient patient = dao.getPatient(test1.getPatientId());
 				dao.close();
+				
+				getFragmentManager().popBackStack();
+				getFragmentManager().popBackStack();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, new PractisePatientsFragment(patient)).commit();
 			}
 		});
 
