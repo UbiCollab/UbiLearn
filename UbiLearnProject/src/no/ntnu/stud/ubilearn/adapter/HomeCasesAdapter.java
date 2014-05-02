@@ -12,18 +12,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * This class is part of the loading of data in the list that is constructed
- * when a user clicks on a specified level from the Home fragment. The new
- * fragment that is created contains the different houses/cases that is part of
- * the level selected and data for each case will be loaded into the list on this
- * page.
+ * This class defines an adapter which is adapted to the individual rows in
+ * the page which contain the different houses in a specific level. (Each row
+ * represent a house (case) in the Training part of the application).
  */
 public class HomeCasesAdapter extends ArrayAdapter<String>
 {
-	// This variable will hold the current Activity.
+	/**
+	 * Variable contains a reference to an Activity that the fragment creating
+	 * this adapter is associated with.
+	 */
 	private final Context 		_context;
+	
+	/**
+	 * This list contains the text representation of the different medals for
+	 * the different houses (cases).
+	 */
 	private final List<String>	_caseMedalValues;
+	
+	/**
+	 * This list contains the names for the different houses (cases).
+	 */
 	private final List<String>	_caseNameValues;
+	
+	/**
+	 * This list contains the scores for the different houses (cases).
+	 */
 	private final List<String>	_caseScoreValues;
 	
 	
@@ -35,9 +49,9 @@ public class HomeCasesAdapter extends ArrayAdapter<String>
 	 * @param caseMedalValues - A list of strings that represent the medals for
 	 * each case.
 	 * @param caseNameValues - A list of strings that represent the name for 
-	 * each case.
+	 * each house (case).
 	 * @param caseScoreValues - A list of strings that represent the score for
-	 * each case. The format is <scoreAchieved/maxScore>.
+	 * each house (case). The format is <scoreAchieved/maxScore>.
 	 */
 	public HomeCasesAdapter(Context context, 
 			List<String> caseMedalValues,

@@ -20,6 +20,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+/**
+ * This class handles the fragment for the Home page.
+ */
 public class HomeFragment extends Fragment 
 {
 	private int _userScore			= 0;

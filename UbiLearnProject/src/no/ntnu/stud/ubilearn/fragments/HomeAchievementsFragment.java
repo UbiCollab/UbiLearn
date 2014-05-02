@@ -1,7 +1,13 @@
 package no.ntnu.stud.ubilearn.fragments;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
+import no.ntnu.stud.ubilearn.adapter.HomeAchievementsAdapter;
+import no.ntnu.stud.ubilearn.models.TrainingLevel;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,20 +15,66 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 
 
+/**
+ * This class handles the fragment containing the achievements.
+ */
 public class HomeAchievementsFragment extends Fragment
 {
+	List<Boolean> _achievementStatus	= new ArrayList<Boolean>();
+	
+	List<String> _achievementTitles		= new ArrayList<String>();
+	List<String> _achievementTexts		= new ArrayList<String>();
+		
+	
+	//#########################################################################
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_achievements, container, false);
-				
+		
+		
+		// We retrieve the list of levels through the user
+		for(TrainingLevel level : User.getInstance().getLevels())
+		{
+			// If the user has a score that means he deserves an achievement
+			if(level.getUserScore() == level.getMaxScore())
+			{
+				// Indicate an achievement for this level
+				_achievementStatus.add(Boolean.valueOf(true));
+			}
+			else
+			{
+				_achievementStatus.add(Boolean.valueOf(false));
+			}	
+			
+			
+			_achievementTitles.add(level.getName() + " ekspert");
+			
+			_achievementTexts.add("Kjempebra jobb! Du har oppnådd " +
+					level.getMaxScore() + " av " +
+					level.getMaxScore() + " mulige poeng.");
+		}
+		
+		
+		// Now we want to fill the list in fragments_home_achievements.xml
+		ListView achievementsListView = 
+				(ListView)fragmentView.findViewById(R.id.homeAchievementsList);
+		
+		achievementsListView.setAdapter(new HomeAchievementsAdapter(
+				this.getActivity(),
+				_achievementStatus, _achievementTitles, _achievementTexts));
+		
+		achievementsListView.setClickable(false);
+		
 		
 		// We need the ability to return to the previous "Home" page
 		Button returnButton =
-				(Button)fragmentView.findViewById(R.id.homeAchievementsButtonBack);
+				(Button)fragmentView.findViewById(
+						R.id.homeAchievementsButtonBack);
 				
 		returnButton.setOnClickListener(new OnClickListener()
 		{

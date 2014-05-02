@@ -20,6 +20,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+/**
+ * This class handles the fragment for each of the levels. The page contains
+ * information about the level selected from the list in the Home page. 
+ */
 public class HomeCasesFragment extends Fragment 
 {
 	int _levelNo			= -1;
@@ -29,10 +33,7 @@ public class HomeCasesFragment extends Fragment
 	int _nLockedHouses	 	= 0;
 	int _nAchievements		= 0;
 	
-	// Variables to store input from textfile.
-	String _levelName 			= "";
-//	String _status 			= "";	//TODO: Delete this when you are
-									//certain it will not be used.
+	String _levelName 		= "";
 	String _totalScore		= "";
 	String _caseData		= "";
 	
@@ -49,12 +50,11 @@ public class HomeCasesFragment extends Fragment
 		
 	}
 	//-------------------------------------------------------------------------
-	public static HomeCasesFragment newInstance(/*String levelName, */int levelNo)
+	public static HomeCasesFragment newInstance(int levelNo)
 	{
 		HomeCasesFragment fragment = new HomeCasesFragment();
 		
 		Bundle bundle = new Bundle(1);
-//		bundle.putString("levelName", levelName);
 		bundle.putInt("levelNo", levelNo);
 		fragment.setArguments(bundle);
 		
@@ -66,19 +66,17 @@ public class HomeCasesFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
-		//_levelName 	= getArguments().getString("levelName");
 		_levelNo	= getArguments().getInt("levelNo");
 						
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_cases, container, false);
 					
-		
 		TrainingLevel level = User.getInstance().getLevelNo(_levelNo);
 		
 		_levelName = level.getName();
 		
 			
-		// We go through a list of cases and intialize relevant data
+		// We go through a list of cases and initializes relevant data.
 		for(TrainingHouse house : level.getHouseList())
 		{
 			if(house.isLocked() == true)
@@ -99,7 +97,9 @@ public class HomeCasesFragment extends Fragment
 				
 			
 			// We need to calculate the type of medal the user has retrieved in
-			// the specified house/case.
+			// the specified house/case. We calculate this a bit different
+			// if the maximum score for a house is greater than 5 than if the 
+			// score is 5 or less.
 			if(houseMaxScore > 5)
 			{
 				int score = (houseUserScore * 100) / houseMaxScore;
@@ -148,6 +148,9 @@ public class HomeCasesFragment extends Fragment
 		_levelMaxScore	= level.getMaxScore();
 		
 		
+		// We add the number of achievements with 1 if the condition for this
+		// is true. An achievement is achieved if the user has managed to get
+		// the maximum score possible for a level.
 		if(_levelScore == _levelMaxScore)
 		{
 			_nAchievements += 1;

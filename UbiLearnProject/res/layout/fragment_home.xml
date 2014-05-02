@@ -13,7 +13,7 @@
         android:layout_margin="8dp" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/achievementImage"
             android:layout_width="101dp"
             android:layout_height="101dp"
             android:src="@drawable/profilbilde" />
@@ -135,14 +135,14 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/achievementTitle"
             android:layout_width="192dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/home_level_name" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/achievementText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
