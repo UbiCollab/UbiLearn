@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments;
+package no.ntnu.stud.ubilearn.fragments.practise;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -44,7 +44,7 @@ public class PracticeSPPBFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-				Fragment fragment = new PractiseBalanceFragment();
+				Fragment fragment = new PractiseBalanceFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});
