@@ -1,7 +1,9 @@
 package no.ntnu.stud.ubilearn.fragments.practise;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,16 +27,20 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 @SuppressLint("ValidFragment")
-public class Practice_SPPB_gangtestFragment extends Fragment{
+public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedChangeListener{
 	private Timer t;
 	private int TimeCounter = 0;
 
@@ -52,22 +58,24 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 	private RadioButton crutchesButton;
 	private RadioButton rollatorButton;
 	private RadioButton otherButton;
+	private List<RadioButton> radBtns;
 	private EditText otherEdit;
 	private TextView time;
 	private TextView result1;
 	private TextView result2;
+	private ImageView circle;
 	//Model:
 	private Patient patient;
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
 	
-	public Practice_SPPB_gangtestFragment(Patient patient){
+	public PracticeSPPBWalkingFragment(Patient patient){
 		this.patient = patient;
 	}
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View rootView = inflater.inflate(R.layout.fragment_practice_gangtest, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_practice_walking, container, false);
 		next = (Button)rootView.findViewById(R.id.next_button);
 		time = (TextView)rootView.findViewById(R.id.gangtest_tid);
 		result1 = (TextView)rootView.findViewById(R.id.gangtest_result1);
@@ -75,16 +83,27 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 		resultAccept1 = (ImageView)rootView.findViewById(R.id.result1_accept);
 		resultAccept2 = (ImageView)rootView.findViewById(R.id.result2_accept);
 		startTest = (TextView)rootView.findViewById(R.id.start_test);
+		
+		radBtns = new ArrayList<RadioButton>();
 		noAidButton = (RadioButton)rootView.findViewById(R.id.uten_hjelpemidler);
+		noAidButton.setOnCheckedChangeListener(this);
+		radBtns.add(noAidButton);
 		crutchesButton = (RadioButton)rootView.findViewById(R.id.krykker);
+		crutchesButton.setOnCheckedChangeListener(this);
+		radBtns.add(crutchesButton);
 		rollatorButton = (RadioButton)rootView.findViewById(R.id.rollator);
+		rollatorButton.setOnCheckedChangeListener(this);
+		radBtns.add(rollatorButton);
 		otherButton = (RadioButton)rootView.findViewById(R.id.annet);
+		otherButton.setOnCheckedChangeListener(this);
+		radBtns.add(otherButton);
 		otherEdit=(EditText)rootView.findViewById(R.id.annet_edit);
+		resetAids();
 
 		startTest.setText("Start test "+testCounter);
 		t = new Timer();
 
-		final ImageView circle= (ImageView) rootView.findViewById(R.id.circle);
+		circle = (ImageView) rootView.findViewById(R.id.circle);
 
 		final TextView start = (TextView) rootView.findViewById(R.id.start);
 
@@ -93,11 +112,12 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 		info.setClickable(true);
 		info.setEnabled(true);
 
+		next.setEnabled(false);
 		next.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Fragment fragment = new gangTestResultatFragment(test1, test2);
+				Fragment fragment = new SPPBWalkingResultFragment(test1, test2);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("training").commit();
 
 			}
@@ -193,7 +213,7 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 				Date date = new Date();
 				
 			test1 = new WalkingSPPB(name,patientID , date, parsedTime, noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
-			
+			resetAids();
 			accept(resultAccept1);
 			TimeCounter = 0;
 			}
@@ -208,9 +228,13 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			
 			//time = Double.parseDouble(minSec.replace(":", "."));
 			
-			test2 = new WalkingSPPB("Gangtest", patient.getId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());
-					
+			test2 = new WalkingSPPB("Gangtest", patient.getId(), new Date(),Double.parseDouble(minSec.replace(":", ".")), noAidButton.isChecked(), crutchesButton.isChecked(), rollatorButton.isChecked(), getOtherText());		
 		}
+		if(testCounter>2){
+			circle.setEnabled(false);
+			next.setEnabled(true);
+		}
+			
 	}
 	public String aid(){
 		
@@ -234,6 +258,20 @@ public class Practice_SPPB_gangtestFragment extends Fragment{
 			return otherEdit.getText().toString();
 		}
 		else return "";
+	}
+	private void resetAids(){
+		for (RadioButton radBtn : radBtns) {
+			radBtn.setChecked(false);
+		}
+		noAidButton.setChecked(true);
+	}
+
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		for (RadioButton radBtn : radBtns) {
+			radBtn.setChecked(false);
+		}
+		buttonView.setChecked(isChecked);
 	}
 }
 
