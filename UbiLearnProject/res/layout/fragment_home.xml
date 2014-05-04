@@ -37,28 +37,61 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/articleText"
-                android:layout_width="144dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="@string/user_status"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/homeStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/home_info"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp" >
+
+        <TextView
+            android:id="@+id/articleText"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_status"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/homeStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_margin="0dp" >
+        android:layout_height="32dp" >
+
+        <!-- 
+		We have changed the format of "Locked levels" and no longer need this.  
+        
+        <TextView
+            android:id="@+id/homeCasesUnlockedCases"
+            android:layout_width="144dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/home_unlocked_levels"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/homeUnlockedLevels"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+-->
 
         <TextView
             android:id="@+id/textView4"
@@ -81,29 +114,9 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/home_button_achievements"
             android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="32dp" >
-
-        <TextView
-            android:id="@+id/homeCasesUnlockedCases"
-            android:layout_width="144dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/home_unlocked_levels"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/homeUnlockedLevels"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 
