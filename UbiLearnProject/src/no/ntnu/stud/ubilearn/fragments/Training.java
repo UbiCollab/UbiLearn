@@ -9,6 +9,7 @@ import no.ntnu.stud.ubilearn.models.CasePatient;
 import android.os.Bundle;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.support.v4.util.LogWriter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,12 +29,15 @@ public class Training extends Fragment {
 	private ScrollView sv;
 	private View root;
 	private View root2;
-	Button nextLevel;
-	Button backLevel;
-	
+	ImageView nextLevel;
+	ImageView backLevel;
+	TrainingDAO dao;
+	boolean levelComplete = false;
+
 
 	ArrayList<CasePatient> patientList;
-	int i;
+	private int i;
+	private int level = 1; //må endres til å bli hentet startlevelen fra databasen
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,42 +46,29 @@ public class Training extends Fragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
-		
-//		TrainingDAO dao = new TrainingDAO(getActivity());
-//		dao.open();
-//		dao.printTables();
-//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(2));
-//		dao.close();
-		
+
+		//		TrainingDAO dao = new TrainingDAO(getActivity());
+		//		dao.open();
+		//		dao.printTables();
+		//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(2));
+		//		dao.close();
+
 		patientList = User.getInstance().getPatientList();
 		if(patientList == null){
 			Toast.makeText(getActivity(), "lista er tom", Toast.LENGTH_SHORT).show();
 		}
-		//Log.v("TrainingPatient", ""+patientList.size());
-
-		nextLevel.setVisibility(0x00000004);
-		backLevel.setVisibility(0x00000004);
 
 		root = inflater.inflate(R.layout.fragment_training, null);
 		sv = (ScrollView) root.findViewById(R.id.training_scroll);
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 
+		backLevel = (ImageView)root.findViewById(R.id.back_level);
+		nextLevel = (ImageView)root.findViewById(R.id.enter_level);
 
-//			root = inflater.inflate(R.layout.fragment_training_level2, null);
-//			sv = (ScrollView) root.findViewById(R.id.training_scroll);
-//			rl = (RelativeLayout) root.findViewById(R.id.training_rel);
-//			return root;
-		
-
-
-
-
-		//	//	MainAcitivit.generatePatients();
+		levelController(root);
 
 		return root;
 	}
-
-
 
 	public void houseClick(View v){
 		final View house = v;
@@ -86,7 +77,7 @@ public class Training extends Fragment {
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
-			i = Integer.parseInt(house.getContentDescription().toString());
+			i = Integer.parseInt(house.getContentDescription().toString())+((level - 1)*11);
 		}
 
 		Button cancel = (Button) dialog.findViewById(R.id.training_popup_cancel);
@@ -133,18 +124,68 @@ public class Training extends Fragment {
 		}
 		car.setY(y);
 	}
-	public void setLevel(View v){
-		if(User.getInstance().getPoints()>=10){
-			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level 2", Toast.LENGTH_SHORT).show();
-			nextLevel = (Button)v.findViewById(R.id.enter_level2);
-			backLevel = (Button)v.findViewById(R.id.back_level1);
-			backLevel.setVisibility(0x00000000);
-			nextLevel.setVisibility(0x00000000);
+	public void levelController(View v){
+
+		Toast.makeText(getActivity(), "Level"+ level+ " " + "Poeng"  + User.getInstance().getPoints(), Toast.LENGTH_SHORT).show();
+		if(User.getInstance().getPoints()==5*level){
+			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.level+1), Toast.LENGTH_SHORT).show();
+
 		}
-		else if(User.getInstance().getPoints()>=20){
-			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level 3", Toast.LENGTH_SHORT).show();
-			nextLevel = (Button)v.findViewById(R.id.enter_level3);
-			backLevel = (Button)v.findViewById(R.id.back_level2);
+		nextLevel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				if(User.getInstance().getQuizLevel()>=level+1){
+					level++;
+					setLevelImage(level);
+					Toast.makeText(getActivity(), "Du er nå i level "+ level, Toast.LENGTH_SHORT).show();
+
+				}
+				else{
+					Log.v("CurrentLevel: ",level + "");
+					Log.v("User.getInstance level", User.getInstance().getQuizLevel() + "");
+					Log.v("i er :", i + "");
+					
+					Toast.makeText(getActivity(), "Du har ikke nok poeng til neste level", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		backLevel.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+					level--;
+					setLevelImage(level);
+					Toast.makeText(getActivity(), "Du er nå i level "+ level, Toast.LENGTH_SHORT).show();
+
+			}
+		});
+
+	}
+
+	public void setLevelImage(int level){
+		switch (level) {
+		case 1:
+			backLevel.setImageResource(R.drawable.tillevel1);
+			nextLevel.setImageResource(R.drawable.tillevel2);
+
+			break;
+		case 2:
+			backLevel.setImageResource(R.drawable.level1);
+			nextLevel.setImageResource(R.drawable.tillevel3);
+			break;
+		case 3:
+			backLevel.setImageResource(R.drawable.level2);
+			nextLevel.setImageResource(R.drawable.tillevel4);
+			break;
+		case 4:
+			backLevel.setImageResource(R.drawable.level3);
+			nextLevel.setImageResource(R.drawable.tillevel5);
+			break;
+
+		default:
+			break;
 		}
 	}
 

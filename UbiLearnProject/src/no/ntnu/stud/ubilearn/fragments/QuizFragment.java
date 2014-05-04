@@ -212,6 +212,10 @@ public class QuizFragment extends Fragment{
 				Bundle data = new Bundle();
 				Fragment fragment = new Training();
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Training").commit();
+				int temp = getFragmentManager().getBackStackEntryCount();
+				for(int i = 0; i < temp;i++){
+					getFragmentManager().popBackStack();
+				}
 				dialog.dismiss();
 			}
 		});
