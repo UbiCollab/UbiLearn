@@ -31,6 +31,7 @@ public class Training extends Fragment {
 	private View root2;
 	ImageView nextLevel;
 	ImageView backLevel;
+	
 	TrainingDAO dao;
 	boolean levelComplete = false;
 
@@ -52,6 +53,8 @@ public class Training extends Fragment {
 		//		dao.printTables();
 		//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(2));
 		//		dao.close();
+		
+
 
 		patientList = User.getInstance().getPatientList();
 		if(patientList == null){
@@ -63,10 +66,10 @@ public class Training extends Fragment {
 		rl = (RelativeLayout) root.findViewById(R.id.training_rel);
 
 		backLevel = (ImageView)root.findViewById(R.id.back_level);
+		backLevel.setVisibility(0x00000004);
 		nextLevel = (ImageView)root.findViewById(R.id.enter_level);
 
 		levelController(root);
-
 		return root;
 	}
 
@@ -165,7 +168,15 @@ public class Training extends Fragment {
 	}
 
 	public void setLevelImage(int level){
+		
+		if(level == 1){
+			backLevel.setVisibility(0x00000004);
+		}
+		else {
+			backLevel.setVisibility(0x00000000);
+		}
 		switch (level) {
+		
 		case 1:
 			backLevel.setImageResource(R.drawable.tillevel1);
 			nextLevel.setImageResource(R.drawable.tillevel2);
