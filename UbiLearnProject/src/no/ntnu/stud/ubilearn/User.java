@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.util.Log;
+
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
 
 
@@ -204,6 +207,13 @@ public class User {
 		// TODO Hent fra dao
 		//dao.getNofQuizzes(level);
 		//int mo = (int) (dao.getNofQuizzes(level)*0.75);
+		
+//		TrainingDAO dao = new TrainingDAO(Context context);
+//		dao.open();
+//		dao.printTables();
+//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(1));
+//		dao.close();
+		
 		if(this.points >= 5 && this.points < 10){ //disse nr skal byttes ut med prosentvis antall quizspm per level ish ting
 			level = 2;
 		}
