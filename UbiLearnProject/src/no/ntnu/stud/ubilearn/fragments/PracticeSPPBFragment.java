@@ -38,7 +38,7 @@ public class PracticeSPPBFragment extends Fragment {
 		});
 
 
-		Button balance = (Button) view.findViewById(R.id.register_button);
+		Button balance = (Button) view.findViewById(R.id.balance_button);
 
 		balance.setOnClickListener(new OnClickListener()
 		{
@@ -55,7 +55,7 @@ public class PracticeSPPBFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-				Fragment fragment = new PractiseStandupFragment();
+				Fragment fragment = new PractiseStandupFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});

@@ -18,5 +18,39 @@
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	</LinearLayout>
+	
+    <RelativeLayout
+    	android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
+      	<ImageView
+      		android:id="@+id/circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/circle2" />
+
+      	<TextView
+        	android:id="@+id/start"
+           	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Start"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+       	<TextView
+           	android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Stopp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    
+    </RelativeLayout>
+    
 </LinearLayout>
