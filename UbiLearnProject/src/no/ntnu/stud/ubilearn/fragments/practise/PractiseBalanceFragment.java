@@ -1,6 +1,7 @@
 package no.ntnu.stud.ubilearn.fragments.practise;
 
 import java.util.Date;
+
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -9,7 +10,6 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,23 +24,17 @@ public class PractiseBalanceFragment extends Fragment {
 	
 	private int state = 0;
 	private int timeLeft = 0;
-	//private int totalScore = 0;
 	private int pairedScore = 0;
 	private int semiTandemScore = 0;
 	private int tandemScore = 0;
 	private Patient patient;
+	private BalanceSPPB result;
 	
 	public PractiseBalanceFragment(Patient patient)
 	{
 		this.patient = patient;
+		result = new BalanceSPPB("Balance", this.patient.getId() , new Date(), pairedScore, semiTandemScore, tandemScore);	
 	}
-	
-	BalanceSPPB result = new BalanceSPPB("Balance", patient.getId() , new Date(), pairedScore, semiTandemScore, tandemScore);
-	
-	/*public int getScore() 
-	{
-		return totalScore;
-	}*/
 	
 	public OnClickListener start, stop;
 	
@@ -75,7 +69,6 @@ public class PractiseBalanceFragment extends Fragment {
 			{
 				progressBar.setProgress((int) (millisUntilFinished / 1000));
 				timeLeft = (int) millisUntilFinished / 1000;
-				Log.v("",""+(int) millisUntilFinished);
 			}
 			
 			public void onFinish()
@@ -84,7 +77,6 @@ public class PractiseBalanceFragment extends Fragment {
 				progressBar.setProgress(0);
 				startStopButton.setOnClickListener(start);
 				startStopButton.setText("Start");
-				//totalScore++;
 				
 				state = state + 1;
 				switch(state) {
@@ -106,7 +98,6 @@ public class PractiseBalanceFragment extends Fragment {
 						titleField.setText("TEST FULLFØRT");
 						imageField.setImageResource(R.drawable.balancecheck);
 						score3.setText("2 poeng");
-						//totalScore++;
 						startStopButton.setEnabled(false);
 						next.setEnabled(true);
 						result.setTandemScore(2);
@@ -172,7 +163,6 @@ public class PractiseBalanceFragment extends Fragment {
 					else
 					{
 						score3.setText("1 poeng");
-						//totalScore++;
 						result.setTandemScore(1);
 					}
 					startStopButton.setEnabled(false);
