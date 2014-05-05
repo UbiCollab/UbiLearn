@@ -17,6 +17,8 @@ public class User {
 	
 	// Delete when testing is done and data can be retrieved from database
 	private List<TrainingLevel> _levelList;
+
+	private int level = 1;
 	
 
 	//#########################################################################
@@ -161,16 +163,16 @@ public class User {
 	 * 
 	 * @return A list of the levels in the training part 
 	 */
-	/* Når det gjelder denne så er jeg usikker på hvordan det har blitt tenkt
-		med hensyn til å lagre nivå og hus. Men det jeg har gjort er å lage to
+	/* Nï¿½r det gjelder denne sï¿½ er jeg usikker pï¿½ hvordan det har blitt tenkt
+		med hensyn til ï¿½ lagre nivï¿½ og hus. Men det jeg har gjort er ï¿½ lage to
 		klasser; TrainingLevel og TrainingHouse som kan brukes. Slik at denne 
-		metoden kan returnere alle levels/nivå, hvor hvert nivå inneholder data
-		for det spesifikke nivå, samt en liste med objekter av type 
+		metoden kan returnere alle levels/nivï¿½, hvor hvert nivï¿½ inneholder data
+		for det spesifikke nivï¿½, samt en liste med objekter av type 
 		TrainingHouse. TrainingHouse inneholder data for det spesifikke huset.
 		Denne metoden vil da hente alle data med en gang og kanskje dette er
-		litt dumt, at det kan ta litt tid før data blir hentet. Kunne kanskje
-		ha gjort det sånn at man kaller en metode som henter data for et
-		spesifikt hus når man velger et nivå fra listen i "Home"-siden, men
+		litt dumt, at det kan ta litt tid fï¿½r data blir hentet. Kunne kanskje
+		ha gjort det sï¿½nn at man kaller en metode som henter data for et
+		spesifikt hus nï¿½r man velger et nivï¿½ fra listen i "Home"-siden, men
 		dette kan sikkert endres senere hvis det blir aktuelt.  
 	*/
 	public List<TrainingLevel> getLevels()
@@ -197,5 +199,30 @@ public class User {
 		{
 			return null;
 		}
+	}
+	public int getQuizLevel() {
+		// TODO Hent fra dao
+		//dao.getNofQuizzes(level);
+		//int mo = (int) (dao.getNofQuizzes(level)*0.75);
+		if(this.points >= 5 && this.points < 10){ //disse nr skal byttes ut med prosentvis antall quizspm per level ish ting
+			level = 2;
+		}
+		else if(this.points >=10 && this.points<15){
+			level = 3;
+		}
+		else if(this.points>=15 && this.points<20){
+			level = 4;
+		}
+		else if(this.points>=20 && this.points<25){
+			level = 5;
+		}
+		else if(this.points>=25 && this.points<30){
+			level = 6;
+		}
+		return this.level;
+	}
+	public void setQuizLevel(int level){
+		// TODO Skriv til dao
+		this.level = level;
 	}
 }

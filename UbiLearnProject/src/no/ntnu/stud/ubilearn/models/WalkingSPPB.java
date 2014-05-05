@@ -2,13 +2,14 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.util.Date;
 
-public class WalkingSPPB extends SPPB{
+public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 	private double time;
 	private boolean noAid;
 	private boolean crutches;
 	private boolean rollater;
 	private String other;
 	private String aid;
+	private boolean failed = false;
 
 	public WalkingSPPB(String name, int patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
 		super(name, patientId, createdAt);
@@ -38,6 +39,10 @@ public class WalkingSPPB extends SPPB{
 	
 	@Override
 	public int getScore() {
+		
+		if(failed)
+			return 0;
+		
 		if(time>8.7){
 			return 1;
 		}else if(time>6.21 && time<8.7){
@@ -84,6 +89,10 @@ public class WalkingSPPB extends SPPB{
 	public void setOther(String other) {
 		this.other = other;
 	}
+	
+	public void failed(boolean failed){
+		this.failed = failed;
+	}
 
 	@Override
 	public String toString() {
@@ -92,6 +101,13 @@ public class WalkingSPPB extends SPPB{
 				+ ", objectId=" + objectId + ", name=" + name + ", patient="
 				+ patient + ", patientId=" + patientId + ", createdAt="
 				+ createdAt + "]";
+	}
+	@Override
+	public int compareTo(WalkingSPPB another) {
+		if (this.getScore() - another.getScore() != 0)
+			return this.getScore() - another.getScore();
+		else
+			return (int)Math.signum(this.getTime()-another.getTime());
 	}
 
 }

@@ -9,10 +9,12 @@ import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
+import no.ntnu.stud.ubilearn.models.SPPB;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -175,10 +177,11 @@ public class SyncContent {
 		
 		ParseObject patient = new ParseObject("Patient");
 		patient.put("name", p.getName());
-		patient.put("id", p.getId());
+		patient.put("idSql", p.getId());
 		patient.put("problems", p.getProblems());
 		patient.put("age", p.getAge());
 		patient.put("comment", p.getComment());
+		patient.put("createdAtLocal", p.getCreatedAt());
 		
 		patient.saveInBackground(new SaveCallback() {
 			
@@ -192,8 +195,39 @@ public class SyncContent {
 				
 			}
 		});
+		
+		for (SPPB sppb : p.getTests()) {
+			saveSPPB(sppb, patient);
+		}
 	}
 	
+	private static void saveSPPB(SPPB sppb, ParseObject parent) {
+		if (sppb instanceof BalanceSPPB) {
+			ParseObject ob = new ParseObject("BalanceSPPB");
+			ob.put("name", sppb.getName());
+			ob.put("idSql", sppb.getId());
+			ob.put("patient", parent);
+			ob.put("name", sppb.getName());
+			ob.put("createdAtLocal", sppb.getCreatedAt());
+			
+			ob.put("pairedScore", ((BalanceSPPB) sppb).getPairedScore());
+			ob.put("semiTandemScore", ((BalanceSPPB) sppb).getSemiTandemScore());
+			ob.put("tandemScore", ((BalanceSPPB) sppb).getTandemScore());
+			ob.saveInBackground(new SaveCallback() {
+				
+				@Override
+				public void done(ParseException e) {
+					if (e == null) {
+						Log.v("Sync", "Saved BalanceSPPB");
+					}else {
+						Log.v("Sync", e.getMessage());
+					}
+					
+				}
+			});
+		}		
+	}
+
 	private static ArrayList<String> downcastListOfObjects(List<Object> objects){
 		ArrayList<String> stringList = new ArrayList<String>();
 		for (Object object : objects) {

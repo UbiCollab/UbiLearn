@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments;
+package no.ntnu.stud.ubilearn.fragments.practise;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +17,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class PractiseFragment extends Fragment {
@@ -69,14 +71,25 @@ public class PractiseFragment extends Fragment {
 				
 				
 				Fragment fragment = new PractisePatientsFragment(patientList.get(arg2));
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("patient").commit();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "patient").addToBackStack("patient").commit();
 				
 			}
 		});
 
 
+		Button addPatient = (Button) view.findViewById(R.id.addPatientBtn);
+		addPatient.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new AddPatientFragment();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("add patient").commit();
+
+			}
+		});
+		
 		return view;
 	}
+	
 	public void populateList(){
 		ArrayList<String> nameList = new ArrayList<String>();
 		for (Patient p : patientList) {

@@ -76,4 +76,26 @@
         android:layout_height="wrap_content"
         android:text="Poengsum:" />
 
+    <GridLayout
+        android:id="@+id/GridLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal" >
+
+        <Space
+            android:layout_column="1"
+            android:layout_gravity="fill_vertical"
+            android:layout_row="1" />
+
+        <Button
+            android:id="@+id/finishBtn"
+            android:layout_width="142dp"
+            android:layout_column="0"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_row="0"
+            android:text="Avslutt test" />
+
+    </GridLayout>
+
 </LinearLayout>
