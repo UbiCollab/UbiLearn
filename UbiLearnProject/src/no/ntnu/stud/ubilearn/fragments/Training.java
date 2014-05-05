@@ -38,7 +38,8 @@ public class Training extends Fragment {
 
 	ArrayList<CasePatient> patientList;
 	private int i;
-	private int level = 1; //må endres til å bli hentet startlevelen fra databasen
+	private int currentLevel = 1; //må endres til å bli hentet startlevelen fra databasen
+	private int level = 1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,6 @@ public class Training extends Fragment {
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
-
-		//		TrainingDAO dao = new TrainingDAO(getActivity());
-		//		dao.open();
-		//		dao.printTables();
-		//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(2));
-		//		dao.close();
-		
-
 
 		patientList = User.getInstance().getPatientList();
 		if(patientList == null){
@@ -80,7 +73,7 @@ public class Training extends Fragment {
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.training_popup);
 		if(house.getContentDescription().toString().length() > 0 ){
-			i = Integer.parseInt(house.getContentDescription().toString())+((level - 1)*11);
+			i = Integer.parseInt(house.getContentDescription().toString())+((currentLevel - 1)*11);
 		}
 
 		Button cancel = (Button) dialog.findViewById(R.id.training_popup_cancel);
@@ -128,26 +121,30 @@ public class Training extends Fragment {
 		car.setY(y);
 	}
 	public void levelController(View v){
+		
+		TrainingDAO dao = new TrainingDAO(getActivity());
+		
+		dao.open();
 
-		Toast.makeText(getActivity(), "Level"+ level+ " " + "Poeng"  + User.getInstance().getPoints(), Toast.LENGTH_SHORT).show();
-		if(User.getInstance().getPoints()==5*level){
-			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.level+1), Toast.LENGTH_SHORT).show();
-
+		Toast.makeText(getActivity(), "Level"+ currentLevel+ " " + "Poeng"  + User.getInstance().getPoints(), Toast.LENGTH_SHORT).show();
+		if(User.getInstance().getPoints()==dao.getNofQuizzes(currentLevel)){
+			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
+			dao.close();
 		}
 		nextLevel.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-				if(User.getInstance().getQuizLevel()>=level+1){
-					level++;
-					setLevelImage(level);
-					Toast.makeText(getActivity(), "Du er nå i level "+ level, Toast.LENGTH_SHORT).show();
+				if(levelAccess()>=currentLevel+1){
+					currentLevel++;
+					setLevelImage(currentLevel);
+					Toast.makeText(getActivity(), "Du er nå i level "+ currentLevel, Toast.LENGTH_SHORT).show();
 
 				}
 				else{
-					Log.v("CurrentLevel: ",level + "");
-					Log.v("User.getInstance level", User.getInstance().getQuizLevel() + "");
+					Log.v("CurrentLevel: ",currentLevel + "");
+					Log.v("LevelAccess:", levelAccess() + "");
 					Log.v("i er :", i + "");
 					
 					Toast.makeText(getActivity(), "Du har ikke nok poeng til neste level", Toast.LENGTH_SHORT).show();
@@ -158,9 +155,9 @@ public class Training extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-					level--;
-					setLevelImage(level);
-					Toast.makeText(getActivity(), "Du er nå i level "+ level, Toast.LENGTH_SHORT).show();
+					currentLevel--;
+					setLevelImage(currentLevel);
+					Toast.makeText(getActivity(), "Du er nå i level "+ currentLevel, Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -199,5 +196,21 @@ public class Training extends Fragment {
 			break;
 		}
 	}
+		public int levelAccess(){
+			TrainingDAO dao = new TrainingDAO(getActivity());
+			dao.open();
+			dao.printTables();
+			Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(currentLevel));
 
+			if(User.getInstance().getPoints()>=dao.getNofQuizzes(currentLevel)){
+				Log.v("Level1:", ""+level);
+				level++;
+				Log.v("Level: ", level + "");
+
+			}
+			dao.close();
+			
+			return level;
+		}
+	
 }
