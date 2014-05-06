@@ -247,7 +247,11 @@ public class PractiseDAO extends DAO {
 		printTable(DatabaseHandler.TABLE_WALKING_SPPB);
 	}
 	public HashMap<String, SPPB> getBestResults(int patientId) {
-		// TODO Auto-generated method stub
+		HashMap<String, SPPB> tests = new HashMap<String, SPPB>();
+		
+		ArrayList<SPPB> walkingTests = getWalkingSPPBs(patientId);
+		
+		
 		return null;
 	}
 }
