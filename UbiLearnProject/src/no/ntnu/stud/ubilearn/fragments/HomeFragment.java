@@ -137,13 +137,24 @@ public class HomeFragment extends Fragment
 				(TextView)fragmentView.findViewById(R.id.homeAchievement); 
 		userAchievement.setText(Integer.toString(_nAchievements));
 		
+		/*
+		 * We no longer need this because of the update to the TextView
+		 * userUnlockedLevels below.
 		TextView userUnlockedLevels =
 				(TextView)fragmentView.findViewById(R.id.homeUnlockedLevels);
 		userUnlockedLevels.setText(Integer.toString(_nUnlockedLevels));
+		*/
 		
+		/*
+		 * When we here set the TextView we set the text to also involve the
+		 * total number of levels. So the output format will now be for the
+		 * number of locked levels: 
+		 * number of locked levels / total number of levels.
+		 */
 		TextView userLockedLevels =
 				(TextView)fragmentView.findViewById(R.id.homeLockedLevels);
-		userLockedLevels.setText(Integer.toString(_nLockedLevels));		
+		userLockedLevels.setText(Integer.toString(_nLockedLevels) + "/" +
+				Integer.toString(_nLockedLevels + _nUnlockedLevels));		
 
 		// Now we want to fill the list in 'fragment_home.xml' with data 
 		_levelListView = 

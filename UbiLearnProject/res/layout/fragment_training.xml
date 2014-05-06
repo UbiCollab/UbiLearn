@@ -437,6 +437,26 @@
             android:src="@drawable/mystery_machine_front"
              />
 
+	<ImageView
+	    android:id="@+id/back_level"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginTop="14dp"
+	    android:layout_toRightOf="@+id/imageView20"
+	    android:src="@drawable/tillevel1"
+	    android:clickable="true" />
+
+	<ImageView
+	    android:id="@+id/enter_level"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/imageView25"
+	    android:layout_below="@+id/imageView18"
+	    android:src="@drawable/tillevel2"
+	    android:clickable="true" />
+
+
 
     </RelativeLayout>
 

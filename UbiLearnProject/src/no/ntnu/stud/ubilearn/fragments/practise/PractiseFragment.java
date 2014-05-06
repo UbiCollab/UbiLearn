@@ -108,8 +108,8 @@ public class PractiseFragment extends Fragment {
 		Patient p2 = new Patient("Ingeborg", "23", "vondt i ryggen", "snuser mye", new Date());
 		Patient p3 = new Patient("Kyrre", "23", "vondt i ryggen", "snuser mye", new Date());
 		Patient p4 = new Patient("Espen", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p5 = new Patient("Kua", "23", "vondt i ryggen", "snuser mye", new Date());
-		Patient p6 = new Patient("Grisen", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p5 = new Patient("Jørgen", "23", "vondt i ryggen", "snuser mye", new Date());
+		Patient p6 = new Patient("Arne", "23", "vondt i ryggen", "snuser mye", new Date());
 		
 		tempPatients.add(p1);
 		tempPatients.add(p2);

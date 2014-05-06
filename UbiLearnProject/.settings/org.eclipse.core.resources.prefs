@@ -1,8 +1,11 @@
 eclipse.preferences.version=1
+encoding//src/no/ntnu/stud/ubilearn/User.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/db/HandbookDAO.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/fragments/HomeFragment.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/fragments/PatientCaseFragment.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/fragments/QuizFragment.java=UTF-8
+encoding//src/no/ntnu/stud/ubilearn/fragments/Training.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/fragments/practise/PractiseBalanceFragment.java=UTF-8
+encoding//src/no/ntnu/stud/ubilearn/fragments/practise/PractiseFragment.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/fragments/practise/PractisePatientsFragment.java=UTF-8
 encoding//src/no/ntnu/stud/ubilearn/models/Quiz.java=UTF-8
