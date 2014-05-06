@@ -27,19 +27,30 @@ public class SPPBResultsFragment extends Fragment {
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_practise_sbbp_results, container, false);
-		patientId = savedInstanceState.getInt("id");
+		patientId = getArguments().getInt("id");
 		dao = new PractiseDAO(getActivity());
 		dao.open();
 		HashMap<String,SPPB> tests = dao.getBestResults(patientId);
 		dao.close();
-		walking = (WalkingSPPB) tests.get("WalkingTest");
+		walking = (WalkingSPPB) tests.get("Walking");
 		
+		TextView testName = (TextView) view.findViewById(R.id.testName);
+		TextView testDate = (TextView) view.findViewById(R.id.testDate);
+		TextView time = (TextView) view.findViewById(R.id.time1);
+		TextView score = (TextView) view.findViewById(R.id.score);
 		if (walking != null){
-			TextView testName = (TextView) view.findViewById(R.id.testName);
 			testName.setText(walking.getName());
-			TextView testDate = (TextView) view.findViewById(R.id.testDate);
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
+			time.setText("Time: " + walking.getTime());
+			score.setText("Score: " + walking.getScore());
 		}
+		else{
+			testName.setText("Gangtest");
+			testDate.setText("Ingen gangtester funnet");
+			time.setText("Time: ");
+			score.setText("Score: ");
+		}
+		
 	
 		return view;
 	}

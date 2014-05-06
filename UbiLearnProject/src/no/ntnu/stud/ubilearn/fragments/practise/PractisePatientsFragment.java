@@ -120,7 +120,7 @@ public class PractisePatientsFragment extends Fragment
 				dataArg.putInt("id", patient.getId());
 				fragment.setArguments(dataArg);
 				
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment);
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("results").commit();
 				
 			}
 		});
