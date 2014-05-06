@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn.db;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
@@ -244,5 +245,9 @@ public class PractiseDAO extends DAO {
 		printTable(DatabaseHandler.TABLE_BALANCE_SPPB);
 		printTable(DatabaseHandler.TABLE_STANDUP_SPPB);
 		printTable(DatabaseHandler.TABLE_WALKING_SPPB);
+	}
+	public HashMap<String, SPPB> getBestResults(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

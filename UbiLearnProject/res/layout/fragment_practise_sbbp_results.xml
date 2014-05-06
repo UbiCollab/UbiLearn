@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="false"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -11,18 +12,60 @@
         android:layout_weight="0.33"
         android:background="@drawable/border" >
 
-        <EditText
-            android:id="@+id/editText1"
+        <TextView
+            android:id="@+id/testName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="14dp"
-            android:ems="10" >
+            android:inputType="none"
+            android:text="Gangtest:" />
 
-            <requestFocus />
-        </EditText>
+        <TextView
+            android:id="@+id/testDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/testName"
+            android:inputType="none"
+            android:singleLine="true"
+            android:text="Dato: 22.05.1991" />
+        
+        	<TextView
+            android:id="@+id/resultsDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           	android:layout_alignParentLeft="true"
+            android:layout_below="@+id/testDate"
+            android:text="Resultat:"
+            android:textStyle="bold" />
+        	
+        	<TextView
+            android:id="@+id/time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           	android:layout_alignParentLeft="true"
+            android:layout_below="@+id/resultsDivider"
+            android:text="1. :"
+           />
+        	
+        	<TextView
+            android:id="@+id/time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           	android:layout_alignParentLeft="true"
+            android:layout_below="@+id/time1"
+            android:text="2.: "
+            />
+        	
+        	<TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           	android:layout_alignParentLeft="true"
+            android:layout_below="@+id/time2"
+            android:text="Score: "
+            />
 
     </RelativeLayout>
 
