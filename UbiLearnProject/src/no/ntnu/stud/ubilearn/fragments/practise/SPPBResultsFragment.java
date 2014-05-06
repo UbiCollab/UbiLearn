@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.SPPB;
 import no.ntnu.stud.ubilearn.models.StandUpSPPB;
@@ -33,10 +34,12 @@ public class SPPBResultsFragment extends Fragment {
 		dao.close();
 		walking = (WalkingSPPB) tests.get("WalkingTest");
 		
-		EditText testName = (EditText) view.findViewById(R.id.testName);
-		testName.setText(walking.getName());
-		EditText testDate = (EditText) view.findViewById(R.id.testDate);
-		testName.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
+		if (walking != null){
+			TextView testName = (TextView) view.findViewById(R.id.testName);
+			testName.setText(walking.getName());
+			TextView testDate = (TextView) view.findViewById(R.id.testDate);
+			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
+		}
 	
 		return view;
 	}
