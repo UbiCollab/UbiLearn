@@ -3,13 +3,16 @@ package no.ntnu.stud.ubilearn.fragments.handbook;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.WikiItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +30,10 @@ public class CategoryFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+		
+		User.getInstance().getMapCasePatientStatus().put("NVdtegLYz2", new CasePatientStatus(2, true));
+		SyncContent.saveTrainingProgress();
+		Log.v("Sync:", "not sync but what???");
 		fetchDataFromDAO();
 		root = inflater.inflate(R.layout.fragment_handbook, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);

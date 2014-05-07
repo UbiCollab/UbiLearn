@@ -2,8 +2,11 @@ package no.ntnu.stud.ubilearn.parse;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
@@ -48,18 +51,19 @@ public class SyncContent {
 		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
-		fetchTrainingProgress();
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
 		fetchQuizesAfterUpdate(context);
 		fetchCasePatient(context);
+		fetchTrainingProgress();
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
 		isRetriving = false;
 		hasRetrived = true;
 		Log.v("Sync", "done");
-		Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
+		//Fungerer ikke fordi metodene over kaller asyncrone metoder
+		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 	
 	private static void fetchCasePatient(final Context context) {
@@ -206,7 +210,9 @@ public class SyncContent {
 	}
 	
 	public static void fetchTrainingProgress(){
-		
+		if (User.getInstance() == null) {
+			return;
+		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCaseStatus");
 		query.whereEqualTo("user", ParseUser.getCurrentUser().getObjectId());
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -215,19 +221,44 @@ public class SyncContent {
 			public void done(List<ParseObject> objects, ParseException e) {
 				if (e == null) {
 					for (ParseObject o : objects) {
-						User.getInstance().getMapCasePatientStatus().put(o.getString("user"), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete")));						
+						User.getInstance().getMapCasePatientStatus().put(o.getString("patientCase"), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete")));						
 					}
-					
+					Log.v("Sync:", "done fetching training progress");
+				}else{
+					Log.v("Sync:", e.getMessage());
 				}
 			}
 		});
-//		if (ParseUser.getCurrentUser() != null) {
-//			ParseRelation<ParseObject> pCaseComplete = ParseUser.getCurrentUser().getRelation("PatientCaseComplete");
-//			Log.v("Sync", "Done fetching training progress");
-//		}else{
-//			Log.v("Sync", "Can't fetch Training Progress, user is not logget inn");
-//		}
+	}
+	
+	public static void saveTrainingProgress(){
+		HashMap<String, CasePatientStatus> map = User.getInstance().getMapCasePatientStatus();
 		
+		ArrayList<ParseObject> list = new ArrayList<ParseObject>();
+		
+		for (Map.Entry<String, CasePatientStatus> entry : map.entrySet()) {
+			CasePatientStatus value = entry.getValue();
+		    ParseObject o = new ParseObject("PatientCaseStatus");
+		    o.put("user", ParseUser.getCurrentUser());
+		    ParseObject patientPointer = new ParseObject("PatientCase");
+		    patientPointer.setObjectId(entry.getKey());
+		    o.put("patientCase", patientPointer);
+		    o.put("highScore", value.getHighScore());
+		    o.put("isComplete", value.isComplete());
+		    
+		    list.add(o);
+		}
+		ParseObject.saveAllInBackground(list, new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if (e == null) {
+					Log.v("Sync:", "Done saving training progress");					
+				}else{
+					Log.v("Sync:", e.getMessage());		
+				}
+			}
+		});
 	}
 
 	private static void saveSPPB(SPPB sppb, ParseObject parent) {
