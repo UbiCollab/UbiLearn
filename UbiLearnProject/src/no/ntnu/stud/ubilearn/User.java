@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
@@ -11,13 +12,22 @@ import no.ntnu.stud.ubilearn.models.*;
 
 
 public class User {
-	private ArrayList<CasePatient> patientList;
+	private ArrayList<CasePatient> casePatientList;
+	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
 	
 	private static User instance;
-	private int points;
+	private int _level = 1;
+
 	
 	private String _name;
 	
+	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
+		return mapCasePatientStatus;
+	}
+	public void setMapCasePatientStatus(
+			HashMap<String, CasePatientStatus> mapCasePatientStatus) {
+		this.mapCasePatientStatus = mapCasePatientStatus;
+	}
 	// Delete when testing is done and data can be retrieved from database
 	private List<TrainingLevel> _levelList;
 
@@ -133,21 +143,15 @@ public class User {
 		}
 	}
 	//pasient listen
-	public ArrayList<CasePatient> getPatientList() {
+	public ArrayList<CasePatient> getCasePatientList() {
 		
-		return patientList;
+		return casePatientList;
 	}
 
-	public void setPatientList(ArrayList<CasePatient> patientList) {
-		this.patientList = patientList;
+	public void setCasePatientList(ArrayList<CasePatient> patientList) {
+		this.casePatientList = patientList;
 	}
-	//poeng til quizen
-	public int addPoints(){
-		return points++;
-	}
-	public int getPoints(){
-		return points;
-	}
+
 	
 	//-------------------------------------------------------------------------
 	/**
@@ -204,35 +208,29 @@ public class User {
 		}
 	}
 	public int getQuizLevel() {
-		// TODO Hent fra dao
-		//dao.getNofQuizzes(level);
-		//int mo = (int) (dao.getNofQuizzes(level)*0.75);
-		
-//		TrainingDAO dao = new TrainingDAO(Context context);
-//		dao.open();
-//		dao.printTables();
-//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(1));
-//		dao.close();
-		
-		if(this.points >= 5 && this.points < 10){ //disse nr skal byttes ut med prosentvis antall quizspm per level ish ting
-			level = 2;
+		int counter = 0;
+		for(int i = 0+(11*(_level-1)); i<(11*_level);i++){
+			if(mapCasePatientStatus.get(casePatientList.get(i).getObjectId()).isComplete()){
+				counter++;
+			}
 		}
-		else if(this.points >=10 && this.points<15){
-			level = 3;
+		if(counter >= 7){
+			_level++;
+			return getQuizLevel();
+		}else {
+			return _level;
 		}
-		else if(this.points>=15 && this.points<20){
-			level = 4;
-		}
-		else if(this.points>=20 && this.points<25){
-			level = 5;
-		}
-		else if(this.points>=25 && this.points<30){
-			level = 6;
-		}
-		return this.level;
 	}
-	public void setQuizLevel(int level){
-		// TODO Skriv til dao
-		this.level = level;
+	public void setHousePoints(int housePoints, int houseNr){
+		CasePatientStatus temp = null;
+		if(mapCasePatientStatus.get(casePatientList.get(houseNr).getObjectId())!=null){
+			temp = mapCasePatientStatus.get(casePatientList.get(houseNr).getObjectId());
+			mapCasePatientStatus.remove(temp);
+			temp.setHighScore(housePoints);
+			mapCasePatientStatus.put(casePatientList.get(houseNr).getObjectId(), temp);
+		}else{
+		mapCasePatientStatus.put(casePatientList.get(houseNr).getObjectId(), new CasePatientStatus(housePoints, false));
+		}
+		
 	}
 }

@@ -49,7 +49,7 @@ public class Training extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
 
-		patientList = User.getInstance().getPatientList();
+		patientList = User.getInstance().getCasePatientList();
 		if(patientList == null){
 			Toast.makeText(getActivity(), "lista er tom", Toast.LENGTH_SHORT).show();
 		}
@@ -126,11 +126,11 @@ public class Training extends Fragment {
 		
 		dao.open();
 
-		Toast.makeText(getActivity(), "Level"+ currentLevel+ " " + "Poeng"  + User.getInstance().getPoints(), Toast.LENGTH_SHORT).show();
-		if(User.getInstance().getPoints()==dao.getNofQuizzes(currentLevel)){
-			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
-			dao.close();
-		}
+	//	Toast.makeText(getActivity(), "Level"+ currentLevel+ " " + "Poeng"  + User.getInstance().getPoints(), Toast.LENGTH_SHORT).show();
+//		if(User.getInstance().getPoints()==dao.getNofQuizzes(currentLevel)){
+//			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
+//			dao.close();
+//		}
 		nextLevel.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -202,12 +202,12 @@ public class Training extends Fragment {
 			dao.printTables();
 			Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(currentLevel));
 
-			if(User.getInstance().getPoints()>=dao.getNofQuizzes(currentLevel)){
-				Log.v("Level1:", ""+level);
-				level++;
-				Log.v("Level: ", level + "");
-
-			}
+//			if(User.getInstance().getPoints()>=dao.getNofQuizzes(currentLevel)){
+//				Log.v("Level1:", ""+level);
+//				level++;
+//				Log.v("Level: ", level + "");
+//
+//			}TODO 
 			dao.close();
 			
 			return level;

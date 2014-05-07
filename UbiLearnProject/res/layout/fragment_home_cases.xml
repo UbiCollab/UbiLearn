@@ -150,9 +150,12 @@
         android:id="@+id/view2"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_margin="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:background="#FF000000" />
 
+    <!-- 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -168,5 +171,6 @@
             android:text="@string/home_button_back" />
 
     </LinearLayout>
-
+	-->
+	
 </LinearLayout>

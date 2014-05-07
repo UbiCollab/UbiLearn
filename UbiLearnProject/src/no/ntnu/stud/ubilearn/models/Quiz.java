@@ -95,8 +95,8 @@ public class Quiz {
 		Log.v("ans", ans);
 		if(this.correct.equals(ans)){
 			//Log.v("ans på plass 3", answers.get(3));
-			User.getInstance().addPoints();
-			System.out.println("antall poeng: "+ User.getInstance().getPoints());
+		//	User.getInstance().addPoints();
+		
 			return true;
 		}
 		return false;
