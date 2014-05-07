@@ -8,7 +8,9 @@ import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import no.ntnu.stud.ubilearn.models.TrainingLevel;
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +51,11 @@ public class HomeFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
+		// We need to reset some data in case the call of this function is the
+		// result of clicking the "Back" button on the phone. This is to
+		// prevent that data is added to previously added data.
+		resetData();
+		
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home, container, false);
 		
@@ -179,9 +186,14 @@ public class HomeFragment extends Fragment
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();
+								
+			/*	getFragmentManager().beginTransaction().replace(
+						R.id.content_frame, fragment, "level").addToBackStack(
+								null).commit();
+			*/	
 			}
 		});
-			
+		//getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "patient").addToBackStack("patient").commit();	
 		
 		// We need to handle button clicks from the fragment_home.xml file. If
 		// the user clicks 'Opplæring' or 'Praksis' we should replace this
@@ -235,9 +247,27 @@ public class HomeFragment extends Fragment
 								null).commit();
 			}
 		});
-				
+					
 		
 		return fragmentView;
 		//return inflater.inflate(R.layout.fragment_home, container, false);
+	}
+	
+	//-------------------------------------------------------------------------
+	/*
+	 * This function resets variables that is part of the class. This is to
+	 * make sure that when the user enters other pages and then returns to this
+	 * page, data will not add to already existing data.
+	 */
+	private void resetData()
+	{
+		_userScore			= 0;
+		_maxScore			= 0;
+		_nAchievements		= 0;
+		_nUnlockedLevels	= 0;
+		_nLockedLevels		= 0;
+		
+		_listName.clear();
+		_listScore.clear();
 	}
 }

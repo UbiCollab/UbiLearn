@@ -35,7 +35,6 @@ public class HomeCasesFragment extends Fragment
 	
 	String _levelName 		= "";
 	String _totalScore		= "";
-	String _caseData		= "";
 	
 	List<String> _listName	= new ArrayList<String>();
 	List<String> _listMedal	= new ArrayList<String>();
@@ -66,6 +65,9 @@ public class HomeCasesFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
+		// We reset some data.
+		resetData();			
+		
 		_levelNo	= getArguments().getInt("levelNo");
 						
 		View fragmentView = inflater.inflate(
@@ -190,7 +192,10 @@ public class HomeCasesFragment extends Fragment
 		
 		caseListView.setClickable(false);
 		
-	
+		/*
+		 * We do not really need the 'Back' button considering that Android
+		 * phones has a 'Back' button.
+		 * 
 		// We need the ability to return to the previous "Home" page
 		Button returnButton =
 				(Button)fragmentView.findViewById(R.id.homeCasesButtonBack);
@@ -203,9 +208,33 @@ public class HomeCasesFragment extends Fragment
 				//getFragmentManager().popBackStack();
 			}
 		});
+		*/
 		
 		
 		return fragmentView;
 		//return inflater.inflate(R.layout.fragment_home, container, false);
+	}
+	
+	//-------------------------------------------------------------------------
+	/*
+	 * This function resets variables that is part of the class. This is to
+	 * make sure that when the user enters other pages and then returns to this
+	 * page, data will not add to already existing data.
+	 */
+	public void resetData()
+	{
+		_levelNo			= -1;
+		_levelScore			= 0;
+		_levelMaxScore		= 0;
+		_nUnlockedHouses 	= 0;
+		_nLockedHouses	 	= 0;
+		_nAchievements		= 0;
+		
+		//String _levelName 		= "";
+		//String _totalScore		= "";
+		
+		_listName.clear();
+		_listMedal.clear();
+		_listScore.clear();
 	}
 }
