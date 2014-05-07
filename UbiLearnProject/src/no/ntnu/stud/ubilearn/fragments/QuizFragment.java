@@ -120,46 +120,6 @@ public class QuizFragment extends Fragment{
 
 	}
 
-	private ArrayList<Quiz> generateQuiz(String name){
-
-		String json = null;
-		ArrayList<Quiz> finalQuiz = new ArrayList<Quiz>();
-		try {
-			InputStream is = getActivity().getAssets().open("quiz_questions.json");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-
-			json = new String(buffer, "UTF-8");
-
-		} catch (IOException ie) {
-			Log.e("ERROR I/O", "error reading quiz file");
-		}
-		try {
-			JSONObject jsonObj = new JSONObject(json);
-			JSONArray quizArray = jsonObj.getJSONArray("questions");
-			for (int i = 0; i < quizArray.length(); i++) {
-				JSONObject jo = (JSONObject) quizArray.get(i);
-				if(jo.getString("eier").equals(name)){
-					finalQuiz.add(new Quiz(
-							jo.getString("spm"),
-							jo.getString("svar1"),
-							jo.getString("svar2"),
-							jo.getString("svar3"),
-							jo.getString("riktigSvar")));
-				}
-			}
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-			Log.e("ERROR JSON", "error parsing json");
-		}
-		return finalQuiz;
-	}
-
-
-
 	@SuppressLint("NewApi")
 	public class CustomClick implements OnClickListener{
 
