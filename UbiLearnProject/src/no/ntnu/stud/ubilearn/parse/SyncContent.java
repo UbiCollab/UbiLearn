@@ -214,14 +214,14 @@ public class SyncContent {
 			return;
 		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCaseStatus");
-		query.whereEqualTo("user", ParseUser.getCurrentUser().getObjectId());
+		query.whereEqualTo("user", ParseUser.getCurrentUser());
 		query.findInBackground(new FindCallback<ParseObject>() {
 
 			@Override
 			public void done(List<ParseObject> objects, ParseException e) {
 				if (e == null) {
 					for (ParseObject o : objects) {
-						User.getInstance().getMapCasePatientStatus().put(o.getString("patientCase"), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete")));						
+						User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
 					}
 					Log.v("Sync:", "done fetching training progress");
 				}else{
@@ -239,6 +239,9 @@ public class SyncContent {
 		for (Map.Entry<String, CasePatientStatus> entry : map.entrySet()) {
 			CasePatientStatus value = entry.getValue();
 		    ParseObject o = new ParseObject("PatientCaseStatus");
+		    if (value.getObjectId() != null) {
+				o.setObjectId(value.getObjectId());
+			}
 		    o.put("user", ParseUser.getCurrentUser());
 		    ParseObject patientPointer = new ParseObject("PatientCase");
 		    patientPointer.setObjectId(entry.getKey());
@@ -253,7 +256,7 @@ public class SyncContent {
 			@Override
 			public void done(ParseException e) {
 				if (e == null) {
-					Log.v("Sync:", "Done saving training progress");					
+					Log.v("Sync:", "Done saving training progress");
 				}else{
 					Log.v("Sync:", e.getMessage());		
 				}

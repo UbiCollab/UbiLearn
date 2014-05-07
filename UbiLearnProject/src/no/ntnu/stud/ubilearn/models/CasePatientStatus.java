@@ -4,10 +4,18 @@ public class CasePatientStatus {
 
 	int highScore;
 	boolean isComplete;
+	String objectId;
 	
 	public CasePatientStatus(int highScore, boolean isComplete) {
 		this.highScore = highScore;
 		this.isComplete = isComplete;
+		objectId = null;
+	}
+	
+	public CasePatientStatus(int highScore, boolean isComplete, String objectId) {
+		this.highScore = highScore;
+		this.isComplete = isComplete;
+		this.objectId = objectId;
 	}
 
 	public int getHighScore() {
@@ -25,5 +33,10 @@ public class CasePatientStatus {
 	public void setComplete(boolean isComplete) {
 		this.isComplete = isComplete;
 	}
+
+	public String getObjectId() {
+		return objectId;
+	}
+	
 
 }

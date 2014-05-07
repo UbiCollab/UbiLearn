@@ -30,10 +30,7 @@ public class CategoryFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-		
-		User.getInstance().getMapCasePatientStatus().put("NVdtegLYz2", new CasePatientStatus(2, true));
-		SyncContent.saveTrainingProgress();
-		Log.v("Sync:", "not sync but what???");
+
 		fetchDataFromDAO();
 		root = inflater.inflate(R.layout.fragment_handbook, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
