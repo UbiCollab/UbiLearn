@@ -343,7 +343,7 @@ public class MainActivity extends Activity {
 						
 			}
 			
-			User.getInstance().setPatientList(temp);
+			User.getInstance().setCasePatientList(temp);
 			
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
@@ -11,13 +12,21 @@ import no.ntnu.stud.ubilearn.models.*;
 
 
 public class User {
-	private ArrayList<CasePatient> patientList;
+	private ArrayList<CasePatient> casePatientList;
+	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
 	
 	private static User instance;
 	private int points;
 	
 	private String _name;
 	
+	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
+		return mapCasePatientStatus;
+	}
+	public void setMapCasePatientStatus(
+			HashMap<String, CasePatientStatus> mapCasePatientStatus) {
+		this.mapCasePatientStatus = mapCasePatientStatus;
+	}
 	// Delete when testing is done and data can be retrieved from database
 	private List<TrainingLevel> _levelList;
 
@@ -133,13 +142,13 @@ public class User {
 		}
 	}
 	//pasient listen
-	public ArrayList<CasePatient> getPatientList() {
+	public ArrayList<CasePatient> getCasePatientList() {
 		
-		return patientList;
+		return casePatientList;
 	}
 
-	public void setPatientList(ArrayList<CasePatient> patientList) {
-		this.patientList = patientList;
+	public void setCasePatientList(ArrayList<CasePatient> patientList) {
+		this.casePatientList = patientList;
 	}
 	//poeng til quizen
 	public int addPoints(){

@@ -49,7 +49,7 @@ public class Training extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle b){
 
-		patientList = User.getInstance().getPatientList();
+		patientList = User.getInstance().getCasePatientList();
 		if(patientList == null){
 			Toast.makeText(getActivity(), "lista er tom", Toast.LENGTH_SHORT).show();
 		}
