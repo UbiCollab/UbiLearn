@@ -33,11 +33,42 @@ public class SPPBResultsFragment extends Fragment {
 		HashMap<String,SPPB> tests = dao.getBestResults(patientId);
 		dao.close();
 		walking = (WalkingSPPB) tests.get("Walking");
+		balance = (BalanceSPPB) tests.get("Balance");
+		standUp = (StandUpSPPB) tests.get("StandUp");
 		
-		TextView testName = (TextView) view.findViewById(R.id.testName);
-		TextView testDate = (TextView) view.findViewById(R.id.testDate);
+		fillWalkingFields(view);
+		
+		
+//		//fills in Walking test fields
+//		TextView testName = (TextView) view.findViewById(R.id.testName1);
+//		TextView testDate = (TextView) view.findViewById(R.id.testDate1);
+//		TextView time = (TextView) view.findViewById(R.id.time1);
+//		TextView score = (TextView) view.findViewById(R.id.total1);
+//		if (walking != null){
+//			testName.setText(walking.getName());
+//			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
+//			time.setText("Time: " + walking.getTime());
+//			score.setText("Score: " + walking.getScore());
+//		}
+//		else{
+//			testName.setText("Gangtest");
+//			testDate.setText("Ingen gangtester funnet");
+//			time.setText("Time: ");
+//			score.setText("Score: ");
+//		}
+		
+	
+		return view;
+	}
+	/**
+	 * Fills inn all the fields in the Walkingtest part of the screen
+	 * @param view the View that this fragment uses.
+	 */
+	private void fillWalkingFields(View view){
+		TextView testName = (TextView) view.findViewById(R.id.testName1);
+		TextView testDate = (TextView) view.findViewById(R.id.testDate1);
 		TextView time = (TextView) view.findViewById(R.id.time1);
-		TextView score = (TextView) view.findViewById(R.id.score);
+		TextView score = (TextView) view.findViewById(R.id.total1);
 		if (walking != null){
 			testName.setText(walking.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
@@ -50,8 +81,46 @@ public class SPPBResultsFragment extends Fragment {
 			time.setText("Time: ");
 			score.setText("Score: ");
 		}
+	}
+	private void fillBalanceFields(View view){
+		TextView testName = (TextView) view.findViewById(R.id.testName2);
+		TextView testDate = (TextView) view.findViewById(R.id.testDate2);
+		TextView score1 = (TextView) view.findViewById(R.id.score1);
+		TextView score2 = (TextView) view.findViewById(R.id.score2);
+		TextView score3 = (TextView) view.findViewById(R.id.score3);
+		TextView total = (TextView) view.findViewById(R.id.score4);
 		
-	
-		return view;
+		if (balance != null){
+			testName.setText(balance.getName());
+			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(balance.getCreatedAt()));
+			score1.setText(balance.getPairedScore());
+			score2.setText(balance.getSemiTandemScore());
+			score2.setText(balance.getTandemScore());
+			total.setText("Score: " + balance.getScore());
+		}
+		else{
+			testName.setText("Gangtest");
+			testDate.setText("Ingen gangtester funnet");
+			time.setText("Time: ");
+			total.setText("Score: ");
+		}
+	}
+	private void fillStandUpFields(View view){
+		TextView testName = (TextView) view.findViewById(R.id.testName1);
+		TextView testDate = (TextView) view.findViewById(R.id.testDate1);
+		TextView time = (TextView) view.findViewById(R.id.time1);
+		TextView score = (TextView) view.findViewById(R.id.total1);
+		if (walking != null){
+			testName.setText(walking.getName());
+			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
+			time.setText("Time: " + walking.getTime());
+			score.setText("Score: " + walking.getScore());
+		}
+		else{
+			testName.setText("Gangtest");
+			testDate.setText("Ingen gangtester funnet");
+			time.setText("Time: ");
+			score.setText("Score: ");
+		}
 	}
 }
