@@ -9,6 +9,7 @@ import android.util.Log;
 
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
+import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 
 public class User {
@@ -209,8 +210,18 @@ public class User {
 	}
 	public int getQuizLevel() {
 		int counter = 0;
+		
+		//START TESTING
+		for(int j = 0; j < 33;j++){
+			if(casePatientList.size()==j){
+				casePatientList.add(j, new CasePatient("Test", "54", "male", "Hei du", "1"));
+			}
+		}
+		//END TESTING
+		
 		for(int i = 0+(11*(_level-1)); i<(11*_level);i++){
-			if(mapCasePatientStatus.get(casePatientList.get(i).getObjectId()).isComplete()){
+			if(mapCasePatientStatus.get(casePatientList.get(i).getObjectId()) != null && 
+					mapCasePatientStatus.get(casePatientList.get(i).getObjectId()).isComplete()){
 				counter++;
 			}
 		}
@@ -221,16 +232,18 @@ public class User {
 			return _level;
 		}
 	}
-	public void setHousePoints(int housePoints, int houseNr){
+	public void setHouseStatus(int housePoints, boolean complete, String objectid){
 		CasePatientStatus temp = null;
-		if(mapCasePatientStatus.get(casePatientList.get(houseNr).getObjectId())!=null){
-			temp = mapCasePatientStatus.get(casePatientList.get(houseNr).getObjectId());
+		if(mapCasePatientStatus.get(objectid) != null){
+			temp = mapCasePatientStatus.get(objectid);
 			mapCasePatientStatus.remove(temp);
 			temp.setHighScore(housePoints);
-			mapCasePatientStatus.put(casePatientList.get(houseNr).getObjectId(), temp);
+			temp.setComplete(complete);
+			mapCasePatientStatus.put(objectid, temp);
 		}else{
-		mapCasePatientStatus.put(casePatientList.get(houseNr).getObjectId(), new CasePatientStatus(housePoints, false));
+		mapCasePatientStatus.put(objectid, new CasePatientStatus(housePoints, complete));
 		}
-		
+		Log.v("SyncContent", "Sync Training Progress");
+		SyncContent.saveTrainingProgress();
 	}
 }

@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Quiz;
@@ -164,6 +165,8 @@ public class QuizFragment extends Fragment{
 		Button ok = (Button) dialog.findViewById(R.id.finish_quiz_button);
 		TextView correctQ = (TextView)dialog.findViewById(R.id.quiz_spm_correct);
 		correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
+		//TODO oppdatere status på huset
+		User.getInstance().setHouseStatus(correctCounter, quizCleared(), patient.getObjectId());
 		ok.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -187,6 +190,13 @@ public class QuizFragment extends Fragment{
 		ans2.setEnabled(b);
 		ans3.setEnabled(b);
 		ans4.setEnabled(b);
+	}
+	private boolean quizCleared(){
+		if(correctCounter >= ((int)(quiz.size()*0.75))){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 }

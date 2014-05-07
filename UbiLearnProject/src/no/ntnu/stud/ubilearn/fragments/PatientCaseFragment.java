@@ -1,6 +1,7 @@
 package no.ntnu.stud.ubilearn.fragments;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
 public class PatientCaseFragment extends Fragment{
@@ -63,11 +65,18 @@ public class PatientCaseFragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 
-				//TODO: remove line
-				Log.v("Navnet til pasientet", "er: " + patient.getName());
+				TrainingDAO trainingDAO = new TrainingDAO(getActivity());
+				trainingDAO.open();
+				
+				if(trainingDAO.getPatientQuizzes(patient) != null){
 				Fragment fragment = new QuizFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
-
+				}else{
+					Toast.makeText(getActivity(), "No quiz avaliable", Toast.LENGTH_SHORT).show();
+				}
+				
+				trainingDAO.close();
+				
 			}
 		});
 		//tilbake knapp fra pasientcase
