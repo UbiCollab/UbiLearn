@@ -60,14 +60,31 @@ public class PatientCaseFragment extends Fragment{
 		gender.setText("Kjønn: " + _gender);
 		TextView pasientInfo = (TextView) rootView.findViewById(R.id.case_patientInfoField);
 		pasientInfo.setText(_pasientInfo);
-//		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
-//		level.setRating(_level);
-//		level.setEnabled(false);
+		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
+
 		TrainingDAO trainingDAO = new TrainingDAO(getActivity());
 		trainingDAO.open();
 		
+		
+		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() >= trainingDAO.getPatientQuizzes(patient).size()){
+			level.setRating(2);
+		}
+		else if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() ==(int) (trainingDAO.getPatientQuizzes(patient).size())*0.75){
+			level.setRating(1);
+		}
+
+		
+		level.setRating(_level);
+		level.setEnabled(false);
+		
 		statusText = (TextView)rootView.findViewById(R.id.training_status);
-		statusText.setText(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() > 0){
+		statusText.setText("Gratulerer, du har klart denne casen " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+		}
+		else{
+			statusText.setText("Du har ikke klart casen ennå " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+
+		}
 		trainingDAO.close();
 		
 		

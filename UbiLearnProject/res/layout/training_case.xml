@@ -80,7 +80,7 @@
         android:id="@+id/training_ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="3"
+        android:numStars="2"
         android:layout_margin="8dp"
           />
 
