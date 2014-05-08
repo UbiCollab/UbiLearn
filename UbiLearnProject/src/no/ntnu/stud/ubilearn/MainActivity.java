@@ -227,7 +227,7 @@ public class MainActivity extends Activity {
 	private void clearBackstack(){
 		FragmentManager manager = getFragmentManager();
 		//checks if there are older items in the backstack
-		if(manager.getBackStackEntryCount()>1)
+		if(manager.getBackStackEntryCount()>=1)
 			//clears the backstack
 			manager.popBackStack(manager.getBackStackEntryAt(0).getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 	}
