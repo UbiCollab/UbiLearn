@@ -93,6 +93,16 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 	public void failed(boolean failed){
 		this.failed = failed;
 	}
+	public String getAidsString(){
+		if(noAid)
+			return "Ingen";
+		else if(crutches)
+			return "Krykker";
+		else if(rollater)
+			return "Rullator";
+		else
+			return other;
+	}
 
 	@Override
 	public String toString() {

@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_weight="0.33"
-        android:background="@drawable/border" >
+        android:background="@drawable/border"
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/testName1"
@@ -41,13 +42,13 @@
         	    android:textStyle="bold" />
         	
         	<TextView
-            android:id="@+id/time1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-           	android:layout_alignParentLeft="true"
-            android:layout_below="@+id/resultsDivider1"
-            android:text="Time: "
-           />
+        	    android:id="@+id/time1"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:layout_alignParentLeft="true"
+        	    android:layout_below="@+id/resultsDivider1"
+        	    android:textAppearance="?android:attr/textAppearanceSmall"
+        	    android:text="Tid: " />
         	
         	<TextView
         	    android:id="@+id/total1"
@@ -55,7 +56,18 @@
         	    android:layout_height="wrap_content"
         	    android:layout_alignParentLeft="true"
         	    android:layout_below="@+id/time1"
-        	    android:text="Score: " />
+        	    android:text="Score: "
+				android:textAppearance="?android:attr/textAppearanceSmall"
+        	/>
+        	<TextView
+        	    android:id="@+id/aids1"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:layout_alignParentLeft="true"
+        	    android:layout_below="@+id/total1"
+        	    android:text="Hjelpemidler: "
+				android:textAppearance="?android:attr/textAppearanceSmall"
+        	/>
 
     </RelativeLayout>
 
@@ -64,7 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_weight="0.33"
-        android:background="@drawable/border" >
+        android:background="@drawable/border"
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/testName2"
@@ -80,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/TestName2"
+            android:layout_below="@+id/testName2"
             android:inputType="none"
             android:singleLine="true"
             android:text="Dato: 22.05.1991" />
@@ -100,7 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/resultsDivider2"
-            android:layout_margin="8dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -108,14 +120,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Samlede føtter:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/score1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,7 +136,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/pairLay"
-            android:layout_margin="8dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -132,14 +143,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Semi-tandem:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearance" />
 
             <TextView
                 android:id="@+id/score2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <LinearLayout
@@ -148,7 +159,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/semiLay"
-            android:layout_margin="8dp"
             android:orientation="horizontal" >
 
             <TextView
@@ -156,14 +166,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Tandem:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/score3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
         <LinearLayout
@@ -180,14 +190,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Totalt:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/total2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 poeng"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -196,7 +206,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:layout_weight="0.33"
-        android:background="@drawable/border" >
+        android:background="@drawable/border"
+        android:padding="10dp" >
 
         <TextView
             android:id="@+id/testName3"
@@ -232,7 +243,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/resultsDivider3"
-            android:text="Time: " />
+            android:text="Tid: "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/total3"
@@ -240,7 +252,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/time3"
-            android:text="Score: " />
+            android:text="Score: " 
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 
 </LinearLayout>

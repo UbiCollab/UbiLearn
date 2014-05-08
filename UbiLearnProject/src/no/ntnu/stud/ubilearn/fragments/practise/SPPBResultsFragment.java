@@ -71,17 +71,20 @@ public class SPPBResultsFragment extends Fragment {
 		TextView testDate = (TextView) view.findViewById(R.id.testDate1);
 		TextView time = (TextView) view.findViewById(R.id.time1);
 		TextView total = (TextView) view.findViewById(R.id.total1);
+		TextView aids = (TextView) view.findViewById(R.id.aids1);
 		if (walking != null){
 			testName.setText(walking.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
-			time.setText("Time: " + walking.getTime());
+			time.setText("Tid: " + walking.getTime());
 			total.setText("Score: " + walking.getScore());
+			aids.setText("Hjelpemidler: " + walking.getAidsString());
 		}
 		else{
 			testName.setText("Gangtest");
 			testDate.setText("Ingen gangtester funnet");
-			time.setText("Time: ");
+			time.setText("Tid: ");
 			total.setText("Score: 0");
+			aids.setText("Hjelpemidler: -");
 		}
 	}
 	/**
@@ -125,13 +128,13 @@ public class SPPBResultsFragment extends Fragment {
 		if (standUp != null){
 			testName.setText(standUp.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(standUp.getCreatedAt()));
-			time.setText("Time: " + standUp.getTime());
+			time.setText("Tid: " + standUp.getTime());
 			total.setText("Score: " + standUp.getScore());
 		}
 		else{
 			testName.setText("Opp-å-stå-test");
 			testDate.setText("Ingen Opp-å-stå-tester funnet");
-			time.setText("Time: ");
+			time.setText("Tid: ");
 			total.setText("Score: 0");
 		}
 	}
