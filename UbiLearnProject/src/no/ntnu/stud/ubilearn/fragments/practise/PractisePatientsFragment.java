@@ -34,6 +34,7 @@ public class PractisePatientsFragment extends Fragment
 	private TextView SPPBresult;
 	private ImageView editInfo;
 	private Button saveBtn;
+	private Button rsltBtn;
 	Patient patient;
 	
 	
@@ -105,6 +106,21 @@ public class PractisePatientsFragment extends Fragment
 			@Override
 			public void onClick(View v) {
 				setEnabled(true);
+				
+			}
+		});
+		
+		rsltBtn = (Button)rootView.findViewById(R.id.resultBtn);
+		rsltBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Fragment fragment = new SPPBResultsFragment();
+				Bundle dataArg = new Bundle();
+				dataArg.putInt("id", patient.getId());
+				fragment.setArguments(dataArg);
+				
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("results").commit();
 				
 			}
 		});

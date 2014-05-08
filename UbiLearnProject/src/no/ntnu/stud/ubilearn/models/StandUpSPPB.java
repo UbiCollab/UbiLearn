@@ -3,7 +3,7 @@ package no.ntnu.stud.ubilearn.models;
 import java.util.Date;
 
 
-public class StandUpSPPB extends SPPB{
+public class StandUpSPPB extends SPPB implements Comparable<StandUpSPPB>{
 	private double time;
 
 	public StandUpSPPB(String objectId, String name, String patientId, double time, Date createdAt) {
@@ -48,6 +48,13 @@ public class StandUpSPPB extends SPPB{
 		return "StandUpSPPB [time=" + time + ", objectId=" + objectId
 				+ ", name=" + name + ", patient=" + patient + ", patientId="
 				+ patientId + ", createdAt=" + createdAt + "]";
+	}
+	@Override
+	public int compareTo(StandUpSPPB another) {
+		if (this.getScore() - another.getScore() != 0)
+			return this.getScore() - another.getScore();
+		else
+			return (int)Math.signum(this.getTime() - another.getTime());
 	}
 	
 	

@@ -2,7 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.util.Date;
 
-public class BalanceSPPB extends SPPB{
+public class BalanceSPPB extends SPPB implements Comparable<BalanceSPPB>{
 	private int pairedScore;
 	private int semiTandemScore;
 	private int tandemScore;
@@ -58,6 +58,10 @@ public class BalanceSPPB extends SPPB{
 				+ ", objectId=" + objectId + ", name=" + name + ", patient="
 				+ patient + ", patientId=" + patientId + ", createdAt="
 				+ createdAt + "]";
+	}
+	@Override
+	public int compareTo(BalanceSPPB another) {
+		return this.getScore() - another.getScore();
 	}
 	
 
