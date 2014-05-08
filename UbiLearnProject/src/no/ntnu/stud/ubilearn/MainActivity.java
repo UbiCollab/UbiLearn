@@ -297,9 +297,8 @@ public class MainActivity extends Activity {
 		//---------------------------------------------------------------------------------
 	}
 	public void houseClick(View v){
-		if((visibleFrag instanceof Training)){
 			((Training) visibleFrag).houseClick(v);
-		}
+	
 		
 	}
 
