@@ -1,8 +1,12 @@
 package no.ntnu.stud.ubilearn.fragments;
 
+import java.util.HashMap;
+
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -22,6 +26,7 @@ public class PatientCaseFragment extends Fragment{
 	private String _name, _age, _gender, _pasientInfo;
 	private int _level;
 	private CasePatient patient;
+	private TextView statusText;
 	
 	//Empty constructor for validFragment
 	public PatientCaseFragment() {
@@ -55,9 +60,17 @@ public class PatientCaseFragment extends Fragment{
 		gender.setText("Kjønn: " + _gender);
 		TextView pasientInfo = (TextView) rootView.findViewById(R.id.case_patientInfoField);
 		pasientInfo.setText(_pasientInfo);
-		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
-		level.setRating(_level);
-		level.setEnabled(false);
+//		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
+//		level.setRating(_level);
+//		level.setEnabled(false);
+		TrainingDAO trainingDAO = new TrainingDAO(getActivity());
+		trainingDAO.open();
+		
+		statusText = (TextView)rootView.findViewById(R.id.training_status);
+		statusText.setText(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+		trainingDAO.close();
+		
+		
 		Button next = (Button)rootView.findViewById(R.id.training_case_next);
 		
 		next.setOnClickListener(new OnClickListener() {//neste knapp til Quiz fra pasientCase

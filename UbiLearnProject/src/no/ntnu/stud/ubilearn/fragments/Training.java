@@ -31,6 +31,7 @@ public class Training extends Fragment {
 	private View root2;
 	ImageView nextLevel;
 	ImageView backLevel;
+	private boolean showLevel = false;
 	
 	TrainingDAO dao;
 	boolean levelComplete = false;
@@ -79,6 +80,10 @@ public class Training extends Fragment {
 		if(house.getContentDescription().toString().length() > 0 ){
 			i = Integer.parseInt(house.getContentDescription().toString())+((currentLevel - 1)*11);
 		}
+		if(patientList.get(i).getName().equals("null")){
+			Toast.makeText(getActivity(), "Ingen hjemme", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		Button cancel = (Button) dialog.findViewById(R.id.training_popup_cancel);
 
@@ -125,11 +130,10 @@ public class Training extends Fragment {
 		car.setY(y);
 	}
 	public void levelController(View v){
-		
-//		if(User.getInstance().getQuizLevel()>currentLevel){
-//			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
-//			dao.close();
-//		}
+		if(User.getInstance().getQuizLevel()>currentLevel && showLevel == false){
+			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
+			showLevel = true;
+		}
 		nextLevel.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -137,6 +141,7 @@ public class Training extends Fragment {
 
 				if(User.getInstance().getQuizLevel()>=currentLevel+1){
 					currentLevel++;
+					showLevel = false;
 					setLevelImage(currentLevel);
 					Toast.makeText(getActivity(), "Du er nå i level "+ currentLevel, Toast.LENGTH_SHORT).show();
 
