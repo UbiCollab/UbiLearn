@@ -9,7 +9,7 @@ public class Exercise extends ListItem{
 	private String objectId;
 	private String name;
 	private String text;
-	
+	private ArrayList<byte[]> images;
 	
 	
 	public Exercise(String objectId, String name, String text) {
@@ -45,6 +45,12 @@ public class Exercise extends ListItem{
 	public String printContent() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public ArrayList<byte[]> getImages() {
+		return images;
+	}
+	public void setImages(ArrayList<byte[]> images){
+		this.images = images;
 	}
 
 }

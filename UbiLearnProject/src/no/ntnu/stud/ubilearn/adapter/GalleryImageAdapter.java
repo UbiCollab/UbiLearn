@@ -1,7 +1,13 @@
 package no.ntnu.stud.ubilearn.adapter;
 
+import java.util.ArrayList;
+
+import javax.security.auth.PrivateCredentialPermission;
+
 import no.ntnu.stud.ubilearn.R;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
@@ -21,10 +27,12 @@ public class GalleryImageAdapter extends BaseAdapter
             R.drawable.exercise3,
             R.drawable.exercise4
     };
+    private ArrayList<byte[]> images;
 
-    public GalleryImageAdapter(Context context) 
+    public GalleryImageAdapter(Context context, ArrayList<byte[]> images) 
     {
         mContext = context;
+        this.images = images;
     }
 
     public int getCount() {
@@ -45,6 +53,7 @@ public class GalleryImageAdapter extends BaseAdapter
     {
         // TODO Auto-generated method stub
         ImageView i = new ImageView(mContext);
+//        i.setImageBitmap(BitmapFactory.decodeByteArray(images.get(index), 0, images.get(index).length));
         i.setImageResource(mImageIds[index]);
         i.setLayoutParams(new Gallery.LayoutParams(200, 200));
         i.setPadding(10, 10, 10, 10);

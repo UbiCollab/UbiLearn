@@ -4,6 +4,7 @@ import no.ntnu.stud.ubilearn.ImageDialog;
 import no.ntnu.stud.ubilearn.MainActivity;
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.adapter.GalleryImageAdapter;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class ExcerciseFragment extends Fragment {
 	
 	ImageView selectedImage;
 	TextView description;
+	private Exercise excercise;
 	
     private Integer[] mImageIds = {
     		R.drawable.exercise1,
@@ -37,7 +39,7 @@ public class ExcerciseFragment extends Fragment {
 	        Gallery gallery = (Gallery) view.findViewById(R.id.gallery1);
 	        selectedImage = (ImageView) view.findViewById(R.id.imageView1);
 	        gallery.setSpacing(1);
-	        gallery.setAdapter(new GalleryImageAdapter(getActivity()));
+	        gallery.setAdapter(new GalleryImageAdapter(getActivity(),excercise.getImages()));
 
 	         // clicklistener for Gallery
 	        gallery.setOnItemClickListener(new OnItemClickListener() {
@@ -46,10 +48,10 @@ public class ExcerciseFragment extends Fragment {
 	            	
 	                Toast.makeText(getActivity(), "Your selected position = " + position, Toast.LENGTH_SHORT).show();
 	                // show the selected Image
-//	                selectedImage.setImageResource(mImageIds[position]);
 	                Intent myIntent = new Intent(getActivity(), ImageDialog.class);
 	                Bundle data = new Bundle();
 	                data.putInt("image", mImageIds[position]);
+//	                data.putByteArray("image", excercise.getImages().get(position));
 	                myIntent.putExtra("image", data);
 	                startActivity(myIntent);
 	            }
