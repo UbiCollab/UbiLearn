@@ -121,7 +121,7 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 		if (this.getScore() - another.getScore() != 0)
 			return this.getScore() - another.getScore();
 		else
-			return (int)Math.signum(this.getTime()-another.getTime());
+			return (int)Math.signum(another.getTime()-this.getTime());
 	}
 
 }

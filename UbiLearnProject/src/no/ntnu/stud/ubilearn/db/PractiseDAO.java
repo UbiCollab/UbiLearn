@@ -259,7 +259,7 @@ public class PractiseDAO extends DAO {
 		if(walkingTests.isEmpty())
 			tests.put("Walking", null);
 		else
-			tests.put("Walking", walkingTests.get(0));
+			tests.put("Walking", walkingTests.get(walkingTests.size()-1));
 		
 		ArrayList<BalanceSPPB> balanceTests = getBalanceSPPBs(patientId);
 		Collections.sort(balanceTests);
@@ -273,7 +273,7 @@ public class PractiseDAO extends DAO {
 		if(standUpTests.isEmpty())
 			tests.put("StandUp", null);
 		else
-			tests.put("StandUp", standUpTests.get(0));
+			tests.put("StandUp", standUpTests.get(standUpTests.size()-1));
 
 		return tests;
 	}

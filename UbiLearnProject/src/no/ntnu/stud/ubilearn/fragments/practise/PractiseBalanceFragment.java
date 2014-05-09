@@ -34,7 +34,7 @@ public class PractiseBalanceFragment extends Fragment {
 	public PractiseBalanceFragment(Patient patient)
 	{
 		this.patient = patient;
-		result = new BalanceSPPB("Balance", this.patient.getId() , new Date(), pairedScore, semiTandemScore, tandemScore);	
+		result = new BalanceSPPB("Balansetest", this.patient.getId() , new Date(), pairedScore, semiTandemScore, tandemScore);	
 	}
 	
 	public OnClickListener start, stop;
