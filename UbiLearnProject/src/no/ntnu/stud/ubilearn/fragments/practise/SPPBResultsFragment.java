@@ -102,10 +102,10 @@ public class SPPBResultsFragment extends Fragment {
 		if (balance != null){
 			testName.setText(balance.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(balance.getCreatedAt()));
-			score1.setText(balance.getPairedScore());
-			score2.setText(balance.getSemiTandemScore());
-			score2.setText(balance.getTandemScore());
-			total.setText(balance.getScore());
+			score1.setText(""+balance.getPairedScore());
+			score2.setText(""+balance.getSemiTandemScore());
+			score3.setText(""+balance.getTandemScore());
+			total.setText(""+balance.getScore());
 		}
 		else{
 			testName.setText("Balansetest");

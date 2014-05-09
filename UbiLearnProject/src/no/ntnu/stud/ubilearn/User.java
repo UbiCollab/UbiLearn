@@ -18,6 +18,7 @@ public class User {
 	private static User instance;
 	private int _level = 1;
 
+
 	
 	private String _name;
 	
@@ -215,7 +216,7 @@ public class User {
 		//START TESTING
 		for(int j = 0; j < 33;j++){
 			if(casePatientList.size()==j){
-				casePatientList.add(j, new CasePatient("Test", "54", "male", "Hei du", "1"));
+				casePatientList.add(j, new CasePatient("null", "0", "male", "0", "0"));
 			}
 		}
 		//END TESTING
@@ -226,7 +227,7 @@ public class User {
 				counter++;
 			}
 		}
-		if(counter >= 7){
+		if(counter >= 2){//TODO teller antall spm klart, ikke antall hus
 			_level++;
 			return getQuizLevel();
 		}else {
@@ -245,7 +246,15 @@ public class User {
 		mapCasePatientStatus.put(objectid, new CasePatientStatus(housePoints, complete));
 		}
 		Log.v("SyncContent", "Sync Training Progress");
-		SyncContent.saveTrainingProgress();
+		//SyncContent.saveTrainingProgress();
+	}
+
+	public CasePatientStatus getHouseStatus(String objectId){
+		if(mapCasePatientStatus.get(objectId) == null){
+			return new CasePatientStatus(0, false);
+		}else {
+			return mapCasePatientStatus.get(objectId);
+		}
 	}
 	public void setExerciseCategory(ArrayList<ListItem> list) {
 		this.exercises = list;
@@ -253,5 +262,5 @@ public class User {
 	public ArrayList<ListItem> getExercises() {
 		return exercises;
 	}
-	
+
 }

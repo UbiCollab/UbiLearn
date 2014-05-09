@@ -167,6 +167,7 @@ public class QuizFragment extends Fragment{
 		correctQ.setText("Du klarte "+correctCounter + " av " + quiz.size());
 		//TODO oppdatere status på huset
 		User.getInstance().setHouseStatus(correctCounter, quizCleared(), patient.getObjectId());
+		
 		ok.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -198,5 +199,5 @@ public class QuizFragment extends Fragment{
 			return false;
 		}
 	}
-
+	
 }

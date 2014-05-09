@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.fragments.practise;
 import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.Patient;
 import android.annotation.SuppressLint;
@@ -29,6 +30,7 @@ public class PractiseBalanceFragment extends Fragment {
 	private int tandemScore = 0;
 	private Patient patient;
 	private BalanceSPPB result;
+	private PractiseDAO dao;
 	
 	public PractiseBalanceFragment(Patient patient)
 	{
@@ -41,6 +43,7 @@ public class PractiseBalanceFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_practise_balance, container, false);
+		dao = new PractiseDAO(getActivity());
 		
 		final Button startStopButton = (Button) view.findViewById(R.id.startStopButton);
 		final Button next = (Button) view.findViewById(R.id.next_button);
@@ -187,6 +190,16 @@ public class PractiseBalanceFragment extends Fragment {
 		};
 		
 		startStopButton.setOnClickListener(start);
+		
+		next.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dao.open();
+				dao.insertSBBP(result);
+				dao.close();
+			}
+		});
 		
 		return view;
 	}
