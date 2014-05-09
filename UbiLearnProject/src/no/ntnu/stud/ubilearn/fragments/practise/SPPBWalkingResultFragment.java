@@ -41,7 +41,7 @@ public class SPPBWalkingResultFragment extends Fragment{
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		View view = inflater.inflate(R.layout.gangtest_resultat, container, false);
+		View view = inflater.inflate(R.layout.fragment_practise_walking_result, container, false);
 		fail1 = (Spinner)view.findViewById(R.id.fail_chooser);
 		poeng1= (TextView)view.findViewById(R.id.poeng1);
 		fail2 = (Spinner)view.findViewById(R.id.fail_chooser2);
