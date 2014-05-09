@@ -22,7 +22,8 @@ public class ExcerciseFragment extends Fragment {
 	
 	ImageView selectedImage;
 	TextView description;
-	private Exercise excercise;
+	TextView name;
+	private Exercise exercise;
 	
     private Integer[] mImageIds = {
     		R.drawable.exercise1,
@@ -39,7 +40,7 @@ public class ExcerciseFragment extends Fragment {
 	        Gallery gallery = (Gallery) view.findViewById(R.id.gallery1);
 	        selectedImage = (ImageView) view.findViewById(R.id.imageView1);
 	        gallery.setSpacing(1);
-	        gallery.setAdapter(new GalleryImageAdapter(getActivity(),excercise.getImages()));
+	        gallery.setAdapter(new GalleryImageAdapter(getActivity(),exercise.getImages()));
 
 	         // clicklistener for Gallery
 	        gallery.setOnItemClickListener(new OnItemClickListener() {
@@ -58,9 +59,17 @@ public class ExcerciseFragment extends Fragment {
 	        });
 	        
 	        description = (TextView) view.findViewById(R.id.description);
-	        description.setText(R.string.fillText);
+//	        description.setText(R.string.fillText);
+	        description.setText(exercise.getText());
+	        
+	        name = (TextView) view.findViewById(R.id.name);
+//	        name.setText("Lorem Ipsum");
+	        name.setText(exercise.getName());
 	        
 	        return view;
 	    }
+	 public void setExercise(Exercise exercise){
+		 this.exercise = exercise;
+	 }
 
 }
