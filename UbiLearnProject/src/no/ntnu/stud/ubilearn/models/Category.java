@@ -5,15 +5,15 @@ import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
 
-public class Category extends WikiItem{
-	private ArrayList<WikiItem> subItems;
+public class Category extends ListItem{
+	private ArrayList<ListItem> subItems;
 	private String objectId;
 	private Date createdAt;
 	private String name;
 	
 	
 
-	public Category(String name, ArrayList<WikiItem> sub){
+	public Category(String name, ArrayList<ListItem> sub){
 		this.name = name;
 		this.subItems = sub;
 	}
@@ -25,14 +25,14 @@ public class Category extends WikiItem{
 		this.objectId = objectId;
 		this.createdAt = createdAt;
 		this.parentId = parentId;
-		subItems = new ArrayList<WikiItem>();
+		subItems = new ArrayList<ListItem>();
 		this.name = name;
 
 	}
 
 
 
-	public ArrayList<WikiItem> getSub(){
+	public ArrayList<ListItem> getSub(){
 		return subItems;
 	}
 	
@@ -61,7 +61,7 @@ public class Category extends WikiItem{
 		this.icon = R.drawable.ic_navigation_next_item;
 	}
 
-	public void addSubItem(WikiItem item) {
+	public void addSubItem(ListItem item) {
 		subItems.add(item);
 	}
 	@Override

@@ -16,6 +16,8 @@ import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.ExerciseCategory;
+import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.models.SPPB;
@@ -56,6 +58,7 @@ public class SyncContent {
 		fetchQuizesAfterUpdate(context);
 		fetchCasePatient(context);
 		fetchTrainingProgress();
+		fetchExerciseCategories();
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
@@ -147,6 +150,79 @@ public class SyncContent {
 				}else{
 					Log.v("SyncContent", e.getMessage());
 				}
+			}
+		});
+	}
+	
+	public static void fetchExerciseCategories(){
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseCategory");
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+
+				if (e == null) {
+					ArrayList<ListItem> list = new ArrayList<ListItem>();
+					HashMap<String, ExerciseCategory> map = new HashMap<String, ExerciseCategory>();
+					for(ParseObject o : objects){						
+						ExerciseCategory ec;
+						if (o.getParseObject("parent") != null) {
+							ec = new ExerciseCategory(o.getString("name"), o.getObjectId(), o.getParseObject("parent").getObjectId());
+						}else{
+							ec = new ExerciseCategory(o.getString("name"), o.getObjectId(), null);
+						}
+						map.put(o.getObjectId(), ec);
+					}
+					
+					for (ExerciseCategory ec : map.values()) {
+						if (!ec.isTopLevel()) {
+							map.get(ec.getParentId()).getSubItems().add(ec);
+						}
+					}
+					for (ExerciseCategory ec : map.values()) {
+						if (ec.isTopLevel()) {
+							list.add(ec);
+						}
+					}
+					User.getInstance().setExerciseCategory(list);
+					Log.v("Sync", "done fetching exercise categories");
+				}else{
+					e.getMessage();
+				}
+				
+				
+				
+				
+				
+				
+//				Log.v("Sync:", "done fetching Exercise categories");
+//				if (e == null) {
+//					List<ExerciseCategory> list = new ArrayList<ExerciseCategory>();
+//					for (int i = 0; i < objects.size(); i++) {
+//						Log.v("Sync:", "Size: " + objects.size());
+//						if (objects.get(i).getParseObject("parent") == null) {
+//							ParseObject parseObj = objects.remove(i);
+//							list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
+//						}
+//					}	
+//					while (!objects.isEmpty()) {
+//						for (int i = 0; i < objects.size(); i++) {
+//							for (int j = 0; i < list.size(); j++) {
+//								if (objects.get(i).getParseObject("parent") != null){
+//									if (objects.get(i).getParseObject("parent").getObjectId().equals(list.get(j).getObjectId())) {
+//										ParseObject parseObj = objects.remove(i);
+//										list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
+//									}																	
+//								}else{
+//									Log.v("Sync: ", "Parent null, objectId: "+ objects.get(i).getObjectId());									
+//								}
+//							}
+//						}
+//					}
+//				}else{
+//					Log.v("Sync:", e.getMessage());
+//				}
+//				
 			}
 		});
 	}
