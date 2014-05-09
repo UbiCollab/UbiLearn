@@ -6,7 +6,7 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
-import no.ntnu.stud.ubilearn.models.WikiItem;
+import no.ntnu.stud.ubilearn.models.ListItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -73,9 +73,9 @@ public class HandbookDAO extends DAO {
 		return article;
 	}
 	
-	public List<WikiItem> getHandbook(){
+	public List<ListItem> getHandbook(){
 		HashMap<String,Category> categories = new HashMap<String, Category>();
-		List<WikiItem> topLevelItems = new ArrayList<WikiItem>();
+		List<ListItem> topLevelItems = new ArrayList<ListItem>();
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_CATEGORY;
 		log(query);
