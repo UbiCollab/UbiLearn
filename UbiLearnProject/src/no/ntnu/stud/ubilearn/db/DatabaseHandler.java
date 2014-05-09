@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 18;
+    static final int DATABASE_VERSION = 19;
 
 
     // Database Name
@@ -21,7 +21,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     // Table Names
     static final String TABLE_ARTICLE = "Article";
     static final String TABLE_CATEGORY = "Category";
-//    static final String TABLE_CATEGORY_ARTICLE_CATEGORY = "CategoryArticleCategory";
     static final String TABLE_QUIZ = "Quiz";
     static final String TABLE_CASE_PATIENT = "CasePatient";
     static final String TABLE_PATIENT = "Patient";
@@ -67,11 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_PAIRED_SCORE = "PairedScore";
     static final String KEY_SEMI_TANDEM_SCORE = "SemiTandemScore";
     static final String KEY_TANDEM_SCORE = "TandemScore";
-    
-    // CategoryArticleCategory Table - column names
-//    static final String KEY_PARENT_CATEGORY_ID = "parent_category_id";
-//    static final String KEY_CHILD_CATEGORY_ID = "child_cateory_id";
-//    static final String KEY_CHILD_ARTICLE_ID = "child_article_id";
+    static final String KEY_FAILED = "Failed";
 
     
 
@@ -101,16 +96,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 				+ KEY_AGE + " TEXT," + KEY_PROBLEMS + " TEXT," + KEY_COMMENT + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 
 		final String CREATE_BALANCE_SPPB_TABLE = "CREATE TABLE " + TABLE_BALANCE_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-				+ KEY_PATIENT_ID + " TEXT," + KEY_PAIRED_SCORE + " INTEGER," + KEY_SEMI_TANDEM_SCORE + " INTEGER, " + KEY_TANDEM_SCORE + " INTEGER, " + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_PAIRED_SCORE + " INTEGER," + KEY_SEMI_TANDEM_SCORE + " INTEGER, " + KEY_TANDEM_SCORE + " INTEGER, " + KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CREATE_WALKING_SPPB_TABLE = "CREATE TABLE " + TABLE_WALKING_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_NO_AID + " INTEGER," + KEY_CRUTCHES + " INTEGER," + KEY_ROLLATER + " INTEGER, " + KEY_OTHER + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_NO_AID + " INTEGER," + KEY_CRUTCHES + " INTEGER," + KEY_ROLLATER + " INTEGER, " + KEY_OTHER + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-				+ KEY_PATIENT_ID + " TEXT," + KEY_TIME + " REAL," + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_CREATED_AT + " DATETIME" + ")";
 		
-//		final String CREATE_CATEGORY_ARTICLE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY_ARTICLE_CATEGORY + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_OBJECT_ID + " TEXT," + KEY_PARENT_CATEGORY_ID + " INTEGER," + KEY_CHILD_ARTICLE_ID + " INTEGER, "
-//				+ KEY_CHILD_CATEGORY_ID + " INTEGER," + KEY_CREATED_AT + " DATETIME" + ")";
 
 		//invoking the method for creating the actual tables on the disk
 		Log.i(LOG, "Creating tables");

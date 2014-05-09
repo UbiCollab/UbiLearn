@@ -14,6 +14,10 @@ public class StandUpSPPB extends SPPB implements Comparable<StandUpSPPB>{
 		super(name, patientId, createdAt);
 		this.time = time;
 	}
+	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt, boolean failed) {
+		super(id,name, patientId, createdAt, failed);
+		this.time = time;
+	}
 	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt) {
 		super(id,name, patientId, createdAt);
 		this.time = time;

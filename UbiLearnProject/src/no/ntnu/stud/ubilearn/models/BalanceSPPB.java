@@ -20,6 +20,12 @@ public class BalanceSPPB extends SPPB implements Comparable<BalanceSPPB>{
 		this.semiTandemScore = semiTandemScore;
 		this.tandemScore = tandemScore;
 	}
+	public BalanceSPPB(int id, String name, int patientId,Date createdAt,boolean failed, int pairedScore, int semiTandemScore, int tandemScore) {
+		super(id, name, patientId, createdAt,failed);
+		this.pairedScore = pairedScore;
+		this.semiTandemScore = semiTandemScore;
+		this.tandemScore = tandemScore;
+	}
 	public BalanceSPPB(int id, String name, int patientId,Date createdAt, int pairedScore, int semiTandemScore, int tandemScore) {
 		super(id, name, patientId, createdAt);
 		this.pairedScore = pairedScore;

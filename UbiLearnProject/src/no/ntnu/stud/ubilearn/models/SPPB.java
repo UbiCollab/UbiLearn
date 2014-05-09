@@ -10,6 +10,8 @@ public abstract class SPPB {
 	protected Patient patient;
 	protected int patientId;
 	protected Date createdAt;
+	protected boolean failed = false;
+
 	
 	public SPPB(String objectId, String name, Patient patient, Date createdAt) {
 		super();
@@ -33,6 +35,14 @@ public abstract class SPPB {
 		this.name = name;
 		this.patientId = patientId;
 		this.createdAt = createdAt;
+	}
+	public SPPB(int id, String name, int patientId, Date createdAt, boolean failed) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.patientId = patientId;
+		this.createdAt = createdAt;
+		this.failed = failed;
 	}
 	public SPPB(String name, int patientId, Date createdAt) {
 		super();
@@ -87,6 +97,19 @@ public abstract class SPPB {
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;		
 	}
-	
+	/**
+	 * Sets wether the patient failed to complete this test or not
+	 * @param failed true if the patient failed the test
+	 */
+	public void failed(boolean failed){
+		this.failed = failed;
+	}
+	/**
+	 * Returns wether the patient failed to complete this test or not
+	 * @return true if the patient failed, false if he finished succesfully
+	 */
+	public boolean failed() {
+		return failed;
+	}
 	
 }

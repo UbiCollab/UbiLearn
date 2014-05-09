@@ -130,11 +130,12 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
 		
-		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt));
+		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed);
 	}
 	/**
 	 * 
@@ -158,12 +159,13 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		int pairedScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PAIRED_SCORE));
 		int semiTandemScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_SEMI_TANDEM_SCORE));
 		int tandemScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_TANDEM_SCORE));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new BalanceSPPB(id, name, patientId, stringToDate(createdAt), pairedScore, semiTandemScore, tandemScore);
+		return new BalanceSPPB(id, name, patientId, stringToDate(createdAt),failed, pairedScore, semiTandemScore, tandemScore);
 	}
 	/**
 	 * 
@@ -186,6 +188,7 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
 		boolean noAid = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_NO_AID)) == 1);
 		boolean crutches = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_CRUTCHES)) == 1);
@@ -193,7 +196,7 @@ public class PractiseDAO extends DAO {
 		String other = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OTHER));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt), time, noAid, crutches, rollater, other);
+		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt),failed, time, noAid, crutches, rollater, other);
 	}
 
 	public void insertSBBP(SPPB test){
@@ -201,6 +204,7 @@ public class PractiseDAO extends DAO {
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
 		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
+		values.put(DatabaseHandler.KEY_FAILED, test.failed());
 		String table = "";
 		if(test instanceof WalkingSPPB){
 			insertWalkingSPPB((WalkingSPPB)test, values);
@@ -262,7 +266,7 @@ public class PractiseDAO extends DAO {
 		if(balanceTests.isEmpty())
 			tests.put("Balance", null);
 		else
-			tests.put("Balance", balanceTests.get(0));
+			tests.put("Balance", balanceTests.get(balanceTests.size()-1));
 		
 		ArrayList<StandUpSPPB> standUpTests = getStandUpSPPBs(patientId);
 		Collections.sort(standUpTests);
