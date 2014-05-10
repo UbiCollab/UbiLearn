@@ -26,20 +26,62 @@ import android.widget.TextView;
  */
 public class HomeCasesFragment extends Fragment 
 {
+	/*
+	 * Indicate which element has been selected in the list of levels in the
+	 * Home page.
+	 */
 	int _levelNo			= -1;
+	
+	/*
+	 * This variable hold the the total score achieved for this level.
+	 */
 	int _levelScore			= 0;
+	
+	/*
+	 * This variable hold the total score possible for this level.
+	 */
 	int _levelMaxScore		= 0;
+	
+	/*
+	 * This variable hold the number of unlocked houses for this level.
+	 */
 	int _nUnlockedHouses 	= 0;
+	
+	/*
+	 * This variable hold the number of locked houses for this level.
+	 */
 	int _nLockedHouses	 	= 0;
+	
+	/*
+	 * This variable hold the number of locked houses for this level.
+	 */
 	int _nAchievements		= 0;
 	
+	/*
+	 * Variable used in relation to the output of the name of the level.
+	 */
 	String _levelName 		= "";
-	String _totalScore		= "";
 	
+	/*
+	 * This list contains the names of the different houses.
+	 */
 	List<String> _listName	= new ArrayList<String>();
+	
+	/*
+	 * This list contains medals the user has achieved for the different
+	 * houses. 
+	 */
 	List<String> _listMedal	= new ArrayList<String>();
+	
+	/*
+	 * This list contains the scores for the different houses.
+	 */
 	List<String> _listScore	= new ArrayList<String>();
-		
+	
+	/*
+	 * This variable holds an instance of a TrainingLevel that was selected in
+	 * the Home page.
+	 */
 	TrainingLevel _level = null;
 	
 	
@@ -81,6 +123,8 @@ public class HomeCasesFragment extends Fragment
 		// We go through a list of cases and initializes relevant data.
 		for(TrainingHouse house : level.getHouseList())
 		{
+			// Here we check whether each house is locked or not, and update
+			// the relevant variable accordingly.
 			if(house.isLocked() == true)
 			{
 				_nLockedHouses += 1;
@@ -230,8 +274,7 @@ public class HomeCasesFragment extends Fragment
 		_nLockedHouses	 	= 0;
 		_nAchievements		= 0;
 		
-		//String _levelName 		= "";
-		//String _totalScore		= "";
+		_levelName 		= "";
 		
 		_listName.clear();
 		_listMedal.clear();

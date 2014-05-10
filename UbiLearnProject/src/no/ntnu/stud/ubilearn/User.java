@@ -172,18 +172,7 @@ public class User {
 	 * 
 	 * @return A list of the levels in the training part 
 	 */
-	/* N�r det gjelder denne s� er jeg usikker p� hvordan det har blitt tenkt
-		med hensyn til � lagre niv� og hus. Men det jeg har gjort er � lage to
-		klasser; TrainingLevel og TrainingHouse som kan brukes. Slik at denne 
-		metoden kan returnere alle levels/niv�, hvor hvert niv� inneholder data
-		for det spesifikke niv�, samt en liste med objekter av type 
-		TrainingHouse. TrainingHouse inneholder data for det spesifikke huset.
-		Denne metoden vil da hente alle data med en gang og kanskje dette er
-		litt dumt, at det kan ta litt tid f�r data blir hentet. Kunne kanskje
-		ha gjort det s�nn at man kaller en metode som henter data for et
-		spesifikt hus n�r man velger et niv� fra listen i "Home"-siden, men
-		dette kan sikkert endres senere hvis det blir aktuelt.  
-	*/
+	
 	public List<TrainingLevel> getLevels()
 	{
 		return _levelList;	
@@ -209,6 +198,8 @@ public class User {
 			return null;
 		}
 	}
+	
+	//-------------------------------------------------------------------------
 	public int getQuizLevel() {
 		int counter = 0;
 		

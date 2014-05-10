@@ -23,9 +23,23 @@ import android.widget.ListView;
  */
 public class HomeAchievementsFragment extends Fragment
 {
+	/*
+	 * This list hold the status of each level in relation to whether it is
+	 * achieved or not. 
+	 * TRUE = achievement achieved, 
+	 * FALSE = achievement not achieved.
+	 */
 	List<Boolean> _achievementStatus	= new ArrayList<Boolean>();
 	
+	/*
+	 * This list contains text that represents the title for each achievement.
+	 */
 	List<String> _achievementTitles		= new ArrayList<String>();
+	
+	/*
+	 * This list contains a text that represent the description for each 
+	 * achievement.
+	 */
 	List<String> _achievementTexts		= new ArrayList<String>();
 		
 	

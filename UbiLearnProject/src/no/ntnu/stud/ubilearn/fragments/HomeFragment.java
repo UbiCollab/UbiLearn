@@ -27,22 +27,60 @@ import android.widget.TextView;
  */
 public class HomeFragment extends Fragment 
 {
+	/*
+	 * The score the user has achieved from each level will be added to this
+	 * variable and then it will be used to calculate the status of the user.
+	 */
 	private int _userScore			= 0;
+	
+	/*
+	 * The maximum score achievable for each level will be added to this 
+	 * variable and later this variable will be used to calculate the status
+	 * for the user.
+	 */
 	private int _maxScore			= 0;
+	
+	/*
+	 * This variable will the number of achievements the user has achieved.
+	 */
 	private int _nAchievements 		= 0;
+	
+	/*
+	 * This variable will hold the number of unlocked levels for the user.
+	 */
 	private int _nUnlockedLevels	= 0;
+	
+	/*
+	 * This variable will hold the number of locked levels for the user.
+	 */
 	private int _nLockedLevels		= 0;
 	
+	/*
+	 * This variable will hold the name for the user.
+	 */
 	private String _userName 		= "";
 	
+	/*
+	 * This list contains the name for the different levels.
+	 */
 	private List<String> _listName	= new ArrayList<String>();
+	
+	/*
+	 * This list contains the scores for the different levels. The format of 
+	 * the scores are XX/YY where XX = score achieved and YY = maximum possible
+	 * score.
+	 */
 	private List<String> _listScore	= new ArrayList<String>();	
 	
-	private ListView _levelListView	= null;
-	
+	/*
+	 * This variable hold an instance to the user.
+	 */
 	private User _user = null;
 	
-	//TODO: Only for testing. Delete afterwards.
+	/*
+	 * This variable hold a list of different levels of TrainingLevel. Each
+	 * TrainingLevel hold a list of instances of type TrainingHouse.
+	 */
 	private List<TrainingLevel> _levelList;
 	
 	
@@ -86,6 +124,10 @@ public class HomeFragment extends Fragment
 			_maxScore  += level.getMaxScore();
 			
 			
+			/*
+			 * Based on whether the level is locked or not, we update the
+			 * relevant variable.
+			 */
 			if(level.isLocked())
 			{
 				_nLockedLevels++; 
@@ -95,7 +137,11 @@ public class HomeFragment extends Fragment
 				_nUnlockedLevels++;
 			}
 			
-						
+			
+			/*
+			 * The user will unlock an achievement if the user has achieved
+			 * maximum score possible for that specific level.
+			 */
 			if(level.getUserScore() == level.getMaxScore())
 			{
 				_nAchievements++;
@@ -164,7 +210,7 @@ public class HomeFragment extends Fragment
 				Integer.toString(_nLockedLevels + _nUnlockedLevels));		
 
 		// Now we want to fill the list in 'fragment_home.xml' with data 
-		_levelListView = 
+		ListView _levelListView = 
 				(ListView)fragmentView.findViewById(R.id.homeListLevel);
 		
 		_levelListView.setAdapter(new HomeAdapter(
@@ -193,7 +239,7 @@ public class HomeFragment extends Fragment
 			*/	
 			}
 		});
-		//getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment, "patient").addToBackStack("patient").commit();	
+		
 		
 		// We need to handle button clicks from the fragment_home.xml file. If
 		// the user clicks 'Opplæring' or 'Praksis' we should replace this
