@@ -53,8 +53,8 @@ public class GalleryImageAdapter extends BaseAdapter
     {
         // TODO Auto-generated method stub
         ImageView i = new ImageView(mContext);
-//        i.setImageBitmap(BitmapFactory.decodeByteArray(images.get(index), 0, images.get(index).length));
-        i.setImageResource(mImageIds[index]);
+        i.setImageBitmap(BitmapFactory.decodeByteArray(images.get(index), 0, images.get(index).length));
+//        i.setImageResource(mImageIds[index]);
         i.setLayoutParams(new Gallery.LayoutParams(200, 200));
         i.setPadding(10, 10, 10, 10);
         i.setScaleType(ImageView.ScaleType.FIT_XY);
