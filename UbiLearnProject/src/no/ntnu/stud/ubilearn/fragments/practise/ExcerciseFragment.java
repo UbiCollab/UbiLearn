@@ -51,8 +51,8 @@ public class ExcerciseFragment extends Fragment {
 	                // show the selected Image
 	                Intent myIntent = new Intent(getActivity(), ImageDialog.class);
 	                Bundle data = new Bundle();
-	                data.putInt("image", mImageIds[position]);
-//	                data.putByteArray("image", excercise.getImages().get(position));
+//	                data.putInt("image", mImageIds[position]);
+	                data.putByteArray("image", exercise.getImages().get(position));
 	                myIntent.putExtra("image", data);
 	                startActivity(myIntent);
 	            }

@@ -7,6 +7,7 @@ import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.Patient;
+import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,7 +56,6 @@ public class PractiseFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-
 				Fragment fragment = new PractiseExercisesFragment();
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 //				Fragment fragment = new ExcerciseFragment();

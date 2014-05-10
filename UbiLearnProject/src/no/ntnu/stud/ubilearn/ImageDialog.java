@@ -21,8 +21,8 @@ public class ImageDialog extends Activity {
 
         Bundle data = this.getIntent().getBundleExtra("image");
         mDialog = (ImageView)findViewById(R.id.image);
-        mDialog.setImageResource(data.getInt("image"));
-//        mDialog.setImageBitmap(BitmapFactory.decodeByteArray(data.getByteArray("image"),0,data.getByteArray("image").length));
+//        mDialog.setImageResource(data.getInt("image"));
+        mDialog.setImageBitmap(BitmapFactory.decodeByteArray(data.getByteArray("image"),0,data.getByteArray("image").length));
         mDialog.setClickable(true);
 
 
