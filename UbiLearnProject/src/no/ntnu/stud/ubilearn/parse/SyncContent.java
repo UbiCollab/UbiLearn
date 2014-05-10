@@ -31,6 +31,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -155,6 +156,79 @@ public class SyncContent {
 		});
 	}
 	
+
+	private static void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map) {			
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
+		
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					for (ParseObject o : objects) {
+						if (o.getParseObject("parent") != null) {
+							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
+							ex.setImages(fetchImages(ex.getObjectId()));
+							map.get(o.getParseObject("parent").getObjectId()).getSubItems().add(ex);
+						}else{
+							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
+							ex.setImages(fetchImages(ex.getObjectId()));
+							list.add(ex);
+						}
+					}							
+				}else{
+					Log.v("Sync", e.getMessage());
+				}
+			}
+		});
+	}
+	
+	public static List<Exercise> fetchExercises(){
+		final List<Exercise> list= new ArrayList<Exercise>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+//					list = new ArrayList<Exercise>();
+					for (ParseObject object : objects) {
+						Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"));
+						ex.setImages(fetchImages(ex.getObjectId()));
+						list.add(ex);
+					}
+				}else{
+					Log.v("SyncContent", e.getMessage());
+				}
+			}
+		});
+		
+		return list;
+	}
+	
+	private static ArrayList<byte[]> fetchImages(String exerciseId){
+		final ArrayList<byte[]> images = new ArrayList<byte[]>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
+		query.whereEqualTo("exercise", exerciseId);
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					for (ParseObject object : objects) {
+						ParseFile file = object.getParseFile("image");
+						try {
+							images.add(file.getData());
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}else{
+					Log.v("SyncContent", e.getMessage());
+				}
+			}
+		});
+		return images;	
+	}
+	
 	public static void fetchExerciseCategories(){
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseCategory");
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -191,28 +265,6 @@ public class SyncContent {
 				}else{
 					e.getMessage();
 				}
-			}
-
-			private void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map) {			
-				ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
-				
-				query.findInBackground(new FindCallback<ParseObject>() {
-
-					@Override
-					public void done(List<ParseObject> objects, ParseException e) {
-						if (e == null) {
-							for (ParseObject o : objects) {
-								if (o.getParseObject("parent") != null) {
-									map.get(o.getParseObject("parent").getObjectId()).getSubItems().add(new Exercise(o.getObjectId(), o.getString("name"), o.getString("text")));
-								}else{
-									list.add(new Exercise(o.getObjectId(), o.getString("name"), o.getString("text")));
-								}
-							}							
-						}else{
-							Log.v("Sync", e.getMessage());
-						}
-					}
-				});
 			}
 		});
 	}
