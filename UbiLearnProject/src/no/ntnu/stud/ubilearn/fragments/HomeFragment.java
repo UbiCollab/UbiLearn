@@ -70,7 +70,14 @@ public class HomeFragment extends Fragment
 	 * the scores are XX/YY where XX = score achieved and YY = maximum possible
 	 * score.
 	 */
-	private List<String> _listScore	= new ArrayList<String>();	
+	private List<String> _listScore	= new ArrayList<String>();
+	
+	/*
+	 * This list contains the status of the lock for the different levels.
+	 * TRUE = level is locked
+	 * FALSE = level is not locked
+	 */
+	private List<Boolean> _listLockStatus = new ArrayList<Boolean>();
 	
 	/*
 	 * This variable hold an instance to the user.
@@ -130,10 +137,14 @@ public class HomeFragment extends Fragment
 			 */
 			if(level.isLocked())
 			{
+				_listLockStatus.add(Boolean.valueOf(true));
+				
 				_nLockedLevels++; 
 			}
 			else
 			{
+				_listLockStatus.add(Boolean.valueOf(false));
+				
 				_nUnlockedLevels++;
 			}
 			
@@ -214,7 +225,7 @@ public class HomeFragment extends Fragment
 				(ListView)fragmentView.findViewById(R.id.homeListLevel);
 		
 		_levelListView.setAdapter(new HomeAdapter(
-				this.getActivity(),	_listName, _listScore));
+				this.getActivity(),	_listName, _listScore, _listLockStatus));
 		
 		
 		_levelListView.setClickable(true);

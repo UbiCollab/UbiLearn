@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/singleLevelTableLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/singleLevelTableRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/levelName"
+            android:id="@+id/singleLevelName"
             android:layout_width="192dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
@@ -17,7 +18,7 @@
             android:textSize="@dimen/default_text_size" />
 
         <TextView
-            android:id="@+id/homeCasesLevelName"
+            android:id="@+id/singleLevelScore"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_gravity="right"

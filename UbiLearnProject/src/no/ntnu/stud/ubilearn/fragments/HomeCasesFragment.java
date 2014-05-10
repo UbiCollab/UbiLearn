@@ -206,7 +206,7 @@ public class HomeCasesFragment extends Fragment
 		// We set the different TextViews in fragment_home.xml based on the
 		// values read from file.
 		TextView levelName = 
-				(TextView)fragmentView.findViewById(R.id.homeCasesLevelName); 
+				(TextView)fragmentView.findViewById(R.id.singleLevelScore); 
 		levelName.setText(_levelName);
 		
 		TextView unlockedCases =

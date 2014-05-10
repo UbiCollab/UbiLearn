@@ -10,14 +10,14 @@
         android:layout_margin="4dp" >
 
         <TextView
-            android:id="@+id/levelName"
+            android:id="@+id/singleLevelName"
             android:layout_width="144dp"
             android:layout_height="wrap_content"
             android:text="@string/home_cases_level"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/homeCasesLevelName"
+            android:id="@+id/singleLevelScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -105,7 +105,7 @@
     </LinearLayout>
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/levelTableRow"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" >

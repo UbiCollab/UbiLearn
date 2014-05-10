@@ -4,10 +4,12 @@ import java.util.List;
 
 import no.ntnu.stud.ubilearn.R;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 /**
@@ -33,6 +35,12 @@ public class HomeAdapter extends ArrayAdapter<String>
 	 */
 	private final List<String>	_levelScoreValues;
 	
+	/*
+	 * This list contains the lock status for the different levels.
+	 * TRUE = level is locked
+	 * FALSE = level is not locked 
+	 */
+	private final List<Boolean> _levelLockStatus;
 	
 	//#########################################################################
 	/**
@@ -48,13 +56,15 @@ public class HomeAdapter extends ArrayAdapter<String>
 	public HomeAdapter(
 			Context context,
 			List<String> levelNameValues,
-			List<String> levelScoreValues)
+			List<String> levelScoreValues,
+			List<Boolean>levelLockStatus)
 	{
 		super(context, R.layout.home_list_single_level, levelNameValues);
 		
 		_context			= context;
 		_levelNameValues	= levelNameValues;
 		_levelScoreValues	= levelScoreValues;
+		_levelLockStatus	= levelLockStatus;
 	}
 
 	//-------------------------------------------------------------------------
@@ -69,12 +79,40 @@ public class HomeAdapter extends ArrayAdapter<String>
 		
 		
 		TextView nameView =
-				(TextView)rowView.findViewById(R.id.levelName);
+				(TextView)rowView.findViewById(R.id.singleLevelName);
 		nameView.setText(_levelNameValues.get(position));
 		
 		TextView scoreView =
-				(TextView)rowView.findViewById(R.id.homeCasesLevelName);
+				(TextView)rowView.findViewById(R.id.singleLevelScore);
 		scoreView.setText(_levelScoreValues.get(position));
+		
+		TableRow tableRow =
+				(TableRow)rowView.findViewById(R.id.singleLevelTableRow);
+		
+		
+		// If the level is locked we indicate this by a certain color on text
+		// and background.
+		if(_levelLockStatus.get(position) == true)
+		{
+			// We set the background color to indicate that the level is 
+			// locked.
+			// Here we set a grey background color
+			tableRow.setBackgroundColor(Color.LTGRAY);
+			
+			// Here we set a red background color
+			//tableRow.setBackgroundColor(0xFFFF0080);
+			
+			// We set the text color to a greyish color.
+			nameView.setTextColor(0xFFb1a3a3);
+			scoreView.setTextColor(0xFFb1a3a3);
+		}
+		// If the level is not locked we indicate this by a different color
+		// on background.
+		else
+		{
+			// Here we set the background to a greenish color.
+			tableRow.setBackgroundColor(0xFF00FF7F);
+		}
 		
 		
 		return rowView;
