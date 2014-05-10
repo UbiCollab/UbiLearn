@@ -7,7 +7,9 @@ import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.models.Patient;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +36,7 @@ public class PractisePatientsFragment extends Fragment
 	private TextView SPPBresult;
 	private ImageView editInfo;
 	private Button saveBtn;
+	private Button deleteBtn;
 	private Button rsltBtn;
 	Patient patient;
 	
@@ -81,8 +84,38 @@ public class PractisePatientsFragment extends Fragment
 				setEnabled(false);
 			}
 		});
-		setEnabled(false);
+		
+		deleteBtn = (Button)rootView.findViewById(R.id.deleteBtn);
+		deleteBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+				    @Override
+				    public void onClick(DialogInterface dialog, int which) {
+				        switch (which){
+				        case DialogInterface.BUTTON_POSITIVE:
+				        	PractiseDAO dao = new PractiseDAO(getActivity());
+							dao.open();
+							dao.deletePatientData(patient);
+							dao.close();
+							getFragmentManager().popBackStack();
+							getFragmentManager().beginTransaction().replace(R.id.content_frame, new PractiseFragment()).commit();
+//							getFragmentManager().beginTransaction().replace(R.id.content_frame, getFragmentManager().findFragmentByTag("Practise")).commit();
+				            break;
+				        case DialogInterface.BUTTON_NEGATIVE:
+				            break;
+				        }
+				    }
+				};
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				builder.setMessage("Are you sure you want to delete patient " + patient.getName() +"?").setPositiveButton("Yes", dialogClickListener)
+				    .setNegativeButton("No", dialogClickListener).show();
+				
+			}
+		});
 
+		setEnabled(false);
 		
 		editInfo = (ImageView)rootView.findViewById(R.id.edit_info_button);
 		
@@ -148,10 +181,14 @@ public class PractisePatientsFragment extends Fragment
 //		patientOtherEdit.setVisibility(v);
 		patientOtherEdit.setEnabled(b);
 		patientOtherEdit.setText(patient.getComment());
-		if(b)
+		if(b){
 			saveBtn.setVisibility(Button.VISIBLE);
-		else
+			deleteBtn.setVisibility(Button.VISIBLE);
+		}
+		else{
 			saveBtn.setVisibility(Button.INVISIBLE);
+			deleteBtn.setVisibility(Button.INVISIBLE);
+		}
 		}
 	}
 

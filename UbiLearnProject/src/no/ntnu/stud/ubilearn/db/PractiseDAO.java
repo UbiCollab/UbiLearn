@@ -187,7 +187,7 @@ public class PractiseDAO extends DAO {
 	private WalkingSPPB getWalkingSPPB(Cursor result) {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
-		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
+		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
 		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
 		boolean noAid = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_NO_AID)) == 1);
@@ -276,5 +276,29 @@ public class PractiseDAO extends DAO {
 			tests.put("StandUp", standUpTests.get(standUpTests.size()-1));
 
 		return tests;
+	}
+	/**
+	 * Deletes a patient and all his tests from the database
+	 * 
+	 * @param patient the patient that will be deleted
+	 */
+	public void deletePatientData(Patient patient){
+		String query = "DELETE from " + DatabaseHandler.TABLE_PATIENT + " WHERE "
+	            + DatabaseHandler.KEY_ID + " = '" + patient.getId() + "'";
+		log(query);
+		int rowsDeleted = database.delete(DatabaseHandler.TABLE_PATIENT, DatabaseHandler.KEY_ID + "=?" , new String[]{""+patient.getId()});
+		if(rowsDeleted == 0)
+			log("Patient " + patient.getName() + " was not found");
+		else
+			log(rowsDeleted + " patient " + patient.getName() + " was deleted");
+		
+		rowsDeleted = 0;
+		rowsDeleted += database.delete(DatabaseHandler.TABLE_BALANCE_SPPB, DatabaseHandler.KEY_PATIENT_ID + "=?" , new String[]{""+patient.getId()});
+		rowsDeleted += database.delete(DatabaseHandler.TABLE_STANDUP_SPPB, DatabaseHandler.KEY_PATIENT_ID + "=?" , new String[]{""+patient.getId()});
+		rowsDeleted += database.delete(DatabaseHandler.TABLE_WALKING_SPPB, DatabaseHandler.KEY_PATIENT_ID + "=?" , new String[]{""+patient.getId()});
+		if(rowsDeleted == 0)
+			log("No tests from patient " + patient.getName() + " was found");
+		else
+			log("Deleted " + rowsDeleted + " tests from patient " + patient.getName());	
 	}
 }

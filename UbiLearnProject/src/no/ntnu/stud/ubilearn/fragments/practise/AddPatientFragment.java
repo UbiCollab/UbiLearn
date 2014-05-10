@@ -53,7 +53,10 @@ public class AddPatientFragment extends Fragment {
 				dao.close();
 				
 				PractiseFragment fragment = new PractiseFragment();
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
+//				getFragmentManager().popBackStack();
+				getFragmentManager().popBackStack();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+				
 			}
 		});
 		
