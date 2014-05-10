@@ -1,8 +1,10 @@
 package no.ntnu.stud.ubilearn.models;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import no.ntnu.stud.ubilearn.R;
 
 public class Exercise extends ListItem{
@@ -51,6 +53,16 @@ public class Exercise extends ListItem{
 	}
 	public void setImages(ArrayList<byte[]> images){
 		this.images = images;
+	}
+
+	private byte[] pngToByteArray(String name){
+		
+			Bitmap bmp = BitmapFactory.decodeFile(name);
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+			byte[] byteArray = stream.toByteArray();
+			
+			return byteArray;
 	}
 
 }

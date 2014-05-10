@@ -16,6 +16,7 @@ import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.ExerciseCategory;
 import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -30,6 +31,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -152,6 +154,51 @@ public class SyncContent {
 				}
 			}
 		});
+	}
+	public static List<Exercise> fetchExercise(){
+		final List<Exercise> list= new ArrayList<Exercise>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+//					list = new ArrayList<Exercise>();
+					for (ParseObject object : objects) {
+						Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"));
+						ex.setImages(fetchImages(ex.getObjectId()));
+						list.add(ex);
+					}
+				}else{
+					Log.v("SyncContent", e.getMessage());
+				}
+			}
+		});
+		
+		return list;
+	}
+	
+	private static ArrayList<byte[]> fetchImages(String exerciseId){
+		final ArrayList<byte[]> images = new ArrayList<byte[]>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
+		query.whereEqualTo("exercise", exerciseId);
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					for (ParseObject object : objects) {
+						ParseFile file = object.getParseFile("image");
+						try {
+							images.add(file.getData());
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}else{
+					Log.v("SyncContent", e.getMessage());
+				}
+			}
+		});
+		return images;	
 	}
 	
 	public static void fetchExerciseCategories(){
