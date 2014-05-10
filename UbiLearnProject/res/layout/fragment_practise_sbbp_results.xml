@@ -1,322 +1,334 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="false"
-    android:orientation="vertical" >
+    android:fillViewport="true"
+    android:focusable="false" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:layout_weight="0.33"
-        android:background="@drawable/border"
-        android:padding="10dp" >
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/testName1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:inputType="none"
-            android:text="Gangtest:" />
-
-        <TextView
-            android:id="@+id/testDate1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/testName1"
-            android:inputType="none"
-            android:singleLine="true"
-            android:text="Dato: 22.05.1991" />
-        
-        	<TextView
-        	    android:id="@+id/resultsDivider1"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:layout_alignParentLeft="true"
-        	    android:layout_below="@+id/testDate1"
-        	    android:text="Resultat:"
-        	    android:textStyle="bold" />
-        	
-        	<LinearLayout
-            android:id="@+id/time1Lay"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-        	android:layout_below="@+id/resultsDivider1"
-            android:orientation="horizontal" >
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/border"
+            android:padding="10dp" >
 
             <TextView
-                android:id="@+id/timeLabel1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Tid:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        	<TextView
-        	    android:id="@+id/time1"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:text="-"
-        	    android:textAppearance="?android:attr/textAppearanceSmall"
-        	    />
-        	</LinearLayout>
-        	<LinearLayout
-            android:id="@+id/aids1Lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-        	android:layout_below="@+id/time1Lay"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/aidsLabel1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Hjelpemidler:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        	<TextView
-        	    android:id="@+id/aids1"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:text="-"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-        	/>
-        	</LinearLayout>
-        	<LinearLayout
-            android:id="@+id/total1Lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-        	android:layout_below="@+id/aids1Lay"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/total1Label1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Poeng:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        	
-        	<TextView
-        	    android:id="@+id/total1"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:text="-"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-        	/>
-        	</LinearLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:layout_weight="0.33"
-        android:background="@drawable/border"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/testName2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:inputType="none"
-            android:text="Balansetest:" />
-
-        <TextView
-            android:id="@+id/testDate2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/testName2"
-            android:inputType="none"
-            android:singleLine="true"
-            android:text="Dato: 22.05.1991" />
-
-        <TextView
-            android:id="@+id/resultsDivider2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/testDate2"
-            android:text="Resultat:"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:id="@+id/pairLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/resultsDivider2"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/scoreLabel1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Samlede føtter:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/score1"
+                android:id="@+id/testName1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/semiLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/pairLay"
-            android:orientation="horizontal" >
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:inputType="none"
+                android:text="Gangtest:" />
 
             <TextView
-                android:id="@+id/scoreLabel2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Semi-tandem:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/score2"
+                android:id="@+id/testDate1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/tandLay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/semiLay"
-            android:orientation="horizontal" >
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testName1"
+                android:inputType="none"
+                android:singleLine="true"
+                android:text="Dato: 22.05.1991" />
 
             <TextView
-                android:id="@+id/scoreLabel3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Tandem:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/score3"
+                android:id="@+id/resultsDivider1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testDate1"
+                android:text="Resultat:"
+                android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/totalLay"
+            <LinearLayout
+                android:id="@+id/time1Lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/resultsDivider1"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/timeLabel1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tid:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aids1Lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/time1Lay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/aidsLabel1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Hjelpemidler:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/aids1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/total1Lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/aids1Lay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/total1Label1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Poeng:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/total1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tandLay"
-            android:orientation="horizontal" >
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/border"
+            android:padding="10dp" >
 
             <TextView
-                android:id="@+id/scoreLabel4"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Poeng:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <TextView
-                android:id="@+id/total2"
+                android:id="@+id/testName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:layout_weight="0.33"
-        android:background="@drawable/border"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/testName3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:inputType="none"
-            android:text="Reise seg test:" />
-
-        <TextView
-            android:id="@+id/testDate3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/testName3"
-            android:inputType="none"
-            android:singleLine="true"
-            android:text="Dato: 22.05.1991" />
-
-        <TextView
-            android:id="@+id/resultsDivider3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/testDate3"
-            android:text="Resultat:"
-            android:textStyle="bold" />
-		<LinearLayout
-            android:id="@+id/time3Lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-        	android:layout_below="@+id/resultsDivider3"
-            android:orientation="horizontal" >
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:inputType="none"
+                android:text="Balansetest:" />
 
             <TextView
-                android:id="@+id/timeLabel3"
-                android:layout_width="150dp"
+                android:id="@+id/testDate2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tid:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:id="@+id/time3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-		<LinearLayout
-            android:id="@+id/total3Lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-        	android:layout_below="@+id/time3Lay"
-            android:orientation="horizontal" >
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testName2"
+                android:inputType="none"
+                android:singleLine="true"
+                android:text="Dato: 22.05.1991" />
 
             <TextView
-                android:id="@+id/total3Label"
-                android:layout_width="150dp"
+                android:id="@+id/resultsDivider2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Poeng:"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:id="@+id/total3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" 
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testDate2"
+                android:text="Resultat:"
+                android:textStyle="bold" />
 
-</LinearLayout>
+            <LinearLayout
+                android:id="@+id/pairLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/resultsDivider2"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/scoreLabel1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Samlede føtter:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/score1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/semiLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/pairLay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/scoreLabel2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Semi-tandem:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/score2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tandLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/semiLay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/scoreLabel3"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tandem:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/score3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/totalLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/tandLay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/scoreLabel4"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Poeng:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/total2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="0.33"
+            android:background="@drawable/border"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/testName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:inputType="none"
+                android:text="Reise seg test:" />
+
+            <TextView
+                android:id="@+id/testDate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testName3"
+                android:inputType="none"
+                android:singleLine="true"
+                android:text="Dato: 22.05.1991" />
+
+            <TextView
+                android:id="@+id/resultsDivider3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/testDate3"
+                android:text="Resultat:"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/time3Lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/resultsDivider3"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/timeLabel3"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tid:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/time3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/total3Lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/time3Lay"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/total3Label"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Poeng:"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/total3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
