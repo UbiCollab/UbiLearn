@@ -2,31 +2,44 @@ package no.ntnu.stud.ubilearn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
-
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
+import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 
 public class User {
-	private ArrayList<CasePatient> patientList;
+	private ArrayList<CasePatient> casePatientList;
+	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
 	
 	private static User instance;
-	private int points;
+	private int _level = 1;
+
+
 	
 	private String _name;
 	
+	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
+		return mapCasePatientStatus;
+	}
+	public void setMapCasePatientStatus(
+			HashMap<String, CasePatientStatus> mapCasePatientStatus) {
+		this.mapCasePatientStatus = mapCasePatientStatus;
+	}
 	// Delete when testing is done and data can be retrieved from database
 	private List<TrainingLevel> _levelList;
 
 	private int level = 1;
+	private ArrayList<ListItem> exercises;
 	
 
 	//#########################################################################
 	private User()
 	{
+		this.exercises = null;
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//Test using initialized objects of type TrainingHouse and 
 		// TrainingLevel. Delete this when actual data can be retrieved from
@@ -133,21 +146,15 @@ public class User {
 		}
 	}
 	//pasient listen
-	public ArrayList<CasePatient> getPatientList() {
+	public ArrayList<CasePatient> getCasePatientList() {
 		
-		return patientList;
+		return casePatientList;
 	}
 
-	public void setPatientList(ArrayList<CasePatient> patientList) {
-		this.patientList = patientList;
+	public void setCasePatientList(ArrayList<CasePatient> patientList) {
+		this.casePatientList = patientList;
 	}
-	//poeng til quizen
-	public int addPoints(){
-		return points++;
-	}
-	public int getPoints(){
-		return points;
-	}
+
 	
 	//-------------------------------------------------------------------------
 	/**
@@ -166,18 +173,7 @@ public class User {
 	 * 
 	 * @return A list of the levels in the training part 
 	 */
-	/* N�r det gjelder denne s� er jeg usikker p� hvordan det har blitt tenkt
-		med hensyn til � lagre niv� og hus. Men det jeg har gjort er � lage to
-		klasser; TrainingLevel og TrainingHouse som kan brukes. Slik at denne 
-		metoden kan returnere alle levels/niv�, hvor hvert niv� inneholder data
-		for det spesifikke niv�, samt en liste med objekter av type 
-		TrainingHouse. TrainingHouse inneholder data for det spesifikke huset.
-		Denne metoden vil da hente alle data med en gang og kanskje dette er
-		litt dumt, at det kan ta litt tid f�r data blir hentet. Kunne kanskje
-		ha gjort det s�nn at man kaller en metode som henter data for et
-		spesifikt hus n�r man velger et niv� fra listen i "Home"-siden, men
-		dette kan sikkert endres senere hvis det blir aktuelt.  
-	*/
+	
 	public List<TrainingLevel> getLevels()
 	{
 		return _levelList;	
@@ -203,36 +199,59 @@ public class User {
 			return null;
 		}
 	}
+	
+	//-------------------------------------------------------------------------
 	public int getQuizLevel() {
-		// TODO Hent fra dao
-		//dao.getNofQuizzes(level);
-		//int mo = (int) (dao.getNofQuizzes(level)*0.75);
+		int counter = 0;
 		
-//		TrainingDAO dao = new TrainingDAO(Context context);
-//		dao.open();
-//		dao.printTables();
-//		Log.d("Training Fragment", "Number of quizzes: "+dao.getNofQuizzes(1));
-//		dao.close();
+		//START TESTING
+		for(int j = 0; j < 33;j++){
+			if(casePatientList.size()==j){
+				casePatientList.add(j, new CasePatient("null", "0", "male", "0", "0"));
+			}
+		}
+		//END TESTING
 		
-		if(this.points >= 5 && this.points < 10){ //disse nr skal byttes ut med prosentvis antall quizspm per level ish ting
-			level = 2;
+		for(int i = 0+(11*(_level-1)); i<(11*_level);i++){
+			if(mapCasePatientStatus.get(casePatientList.get(i).getObjectId()) != null && 
+					mapCasePatientStatus.get(casePatientList.get(i).getObjectId()).isComplete()){
+				counter++;
+			}
 		}
-		else if(this.points >=10 && this.points<15){
-			level = 3;
+		if(counter >= 2){//TODO teller antall spm klart, ikke antall hus
+			_level++;
+			return getQuizLevel();
+		}else {
+			return _level;
 		}
-		else if(this.points>=15 && this.points<20){
-			level = 4;
-		}
-		else if(this.points>=20 && this.points<25){
-			level = 5;
-		}
-		else if(this.points>=25 && this.points<30){
-			level = 6;
-		}
-		return this.level;
 	}
-	public void setQuizLevel(int level){
-		// TODO Skriv til dao
-		this.level = level;
+	public void setHouseStatus(int housePoints, boolean complete, String objectid){
+		CasePatientStatus temp = null;
+		if(mapCasePatientStatus.get(objectid) != null){
+			temp = mapCasePatientStatus.get(objectid);
+			mapCasePatientStatus.remove(temp);
+			temp.setHighScore(housePoints);
+			temp.setComplete(complete);
+			mapCasePatientStatus.put(objectid, temp);
+		}else{
+		mapCasePatientStatus.put(objectid, new CasePatientStatus(housePoints, complete));
+		}
+		Log.v("SyncContent", "Sync Training Progress");
+		//SyncContent.saveTrainingProgress();
 	}
+
+	public CasePatientStatus getHouseStatus(String objectId){
+		if(mapCasePatientStatus.get(objectId) == null){
+			return new CasePatientStatus(0, false);
+		}else {
+			return mapCasePatientStatus.get(objectId);
+		}
+	}
+	public void setExerciseCategory(ArrayList<ListItem> list) {
+		this.exercises = list;
+	}
+	public ArrayList<ListItem> getExercises() {
+		return exercises;
+	}
+
 }

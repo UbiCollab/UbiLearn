@@ -3,13 +3,16 @@ package no.ntnu.stud.ubilearn.fragments.handbook;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.models.Article;
+import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
-import no.ntnu.stud.ubilearn.models.WikiItem;
+import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +24,13 @@ import android.widget.Toast;
 public class CategoryFragment extends Fragment {
 	private View root;
 	private ListView categoryListView;
-	private ArrayList<WikiItem> listItems;
+	private ArrayList<ListItem> listItems = null;
 	private Fragment pointerHax = this;
 	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
 		fetchDataFromDAO();
 		root = inflater.inflate(R.layout.fragment_handbook, null);
 		categoryListView = (ListView) root.findViewById(R.id.wikiListView);
@@ -58,7 +62,7 @@ public class CategoryFragment extends Fragment {
 	}
 	
 	
-	public void setListItems(ArrayList<WikiItem> listItems) {
+	public void setListItems(ArrayList<ListItem> listItems) {
 		this.listItems = listItems;
 	}
 
@@ -66,14 +70,14 @@ public class CategoryFragment extends Fragment {
 		if (listItems == null) {
 			HandbookDAO dao = new HandbookDAO(getActivity());
 			dao.open();
-			listItems = (ArrayList<WikiItem>) dao.getHandbook();
+			listItems = (ArrayList<ListItem>) dao.getHandbook();
 			dao.close();
 		}
 	}
 	
 	public void generateTestData(){
 		if (listItems == null) {
-			ArrayList<WikiItem> sub = new ArrayList<WikiItem>();
+			ArrayList<ListItem> sub = new ArrayList<ListItem>();
 //			sub.add(new Catagory("Sub-category 1", null));
 //			sub.add(new Catagory("Sub-category 2", null));
 //			sub.add(new Catagory("Sub-category 3", null));
@@ -84,7 +88,7 @@ public class CategoryFragment extends Fragment {
 					R.string.gibberish)));
 			sub.add(new Article("Article 3",
 					getResources().getString(R.string.gibberish)));
-			listItems = new ArrayList<WikiItem>();
+			listItems = new ArrayList<ListItem>();
 			listItems.add(new Category("Category 1", sub));
 			listItems.add(new Category("Category 2", sub));
 			listItems.add(new Category("Category 3", sub));

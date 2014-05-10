@@ -2,8 +2,11 @@ package no.ntnu.stud.ubilearn.parse;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
@@ -11,7 +14,10 @@ import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.ExerciseCategory;
+import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
 import no.ntnu.stud.ubilearn.models.SPPB;
@@ -21,10 +27,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -49,13 +57,16 @@ public class SyncContent {
 		fetchHandBookArticleAfterUpdate(context);
 		fetchQuizesAfterUpdate(context);
 		fetchCasePatient(context);
+		fetchTrainingProgress();
+		fetchExerciseCategories();
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
 		isRetriving = false;
 		hasRetrived = true;
 		Log.v("Sync", "done");
-		Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
+		//Fungerer ikke fordi metodene over kaller asyncrone metoder
+		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 	
 	private static void fetchCasePatient(final Context context) {
@@ -75,8 +86,8 @@ public class SyncContent {
 					dao.open();
 					dao.insertCasePatients(list);
 					ArrayList<CasePatient> patientList = dao.getAllCasePatients();
-					User.getInstance().setPatientList(patientList);
-					dao.close();	
+					User.getInstance().setCasePatientList(patientList);
+					dao.close();
 					
 				}else{
 					Log.v("SyncContent", e.getMessage());
@@ -101,7 +112,7 @@ public class SyncContent {
 						if (o.getParseObject("owner") != null) {
 							ownerId = o.getParseObject("owner").getObjectId();
 						}
-						list.add(new Quiz(o.getString("question"), downcastListOfObjects(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
+						list.add(new Quiz(o.getString("question"), downcastListOfObjectsToString(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
 					}
 					TrainingDAO dao = new TrainingDAO(context);
 					dao.open();
@@ -139,6 +150,79 @@ public class SyncContent {
 				}else{
 					Log.v("SyncContent", e.getMessage());
 				}
+			}
+		});
+	}
+	
+	public static void fetchExerciseCategories(){
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseCategory");
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+
+				if (e == null) {
+					ArrayList<ListItem> list = new ArrayList<ListItem>();
+					HashMap<String, ExerciseCategory> map = new HashMap<String, ExerciseCategory>();
+					for(ParseObject o : objects){						
+						ExerciseCategory ec;
+						if (o.getParseObject("parent") != null) {
+							ec = new ExerciseCategory(o.getString("name"), o.getObjectId(), o.getParseObject("parent").getObjectId());
+						}else{
+							ec = new ExerciseCategory(o.getString("name"), o.getObjectId(), null);
+						}
+						map.put(o.getObjectId(), ec);
+					}
+					
+					for (ExerciseCategory ec : map.values()) {
+						if (!ec.isTopLevel()) {
+							map.get(ec.getParentId()).getSubItems().add(ec);
+						}
+					}
+					for (ExerciseCategory ec : map.values()) {
+						if (ec.isTopLevel()) {
+							list.add(ec);
+						}
+					}
+					User.getInstance().setExerciseCategory(list);
+					Log.v("Sync", "done fetching exercise categories");
+				}else{
+					e.getMessage();
+				}
+				
+				
+				
+				
+				
+				
+//				Log.v("Sync:", "done fetching Exercise categories");
+//				if (e == null) {
+//					List<ExerciseCategory> list = new ArrayList<ExerciseCategory>();
+//					for (int i = 0; i < objects.size(); i++) {
+//						Log.v("Sync:", "Size: " + objects.size());
+//						if (objects.get(i).getParseObject("parent") == null) {
+//							ParseObject parseObj = objects.remove(i);
+//							list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
+//						}
+//					}	
+//					while (!objects.isEmpty()) {
+//						for (int i = 0; i < objects.size(); i++) {
+//							for (int j = 0; i < list.size(); j++) {
+//								if (objects.get(i).getParseObject("parent") != null){
+//									if (objects.get(i).getParseObject("parent").getObjectId().equals(list.get(j).getObjectId())) {
+//										ParseObject parseObj = objects.remove(i);
+//										list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
+//									}																	
+//								}else{
+//									Log.v("Sync: ", "Parent null, objectId: "+ objects.get(i).getObjectId());									
+//								}
+//							}
+//						}
+//					}
+//				}else{
+//					Log.v("Sync:", e.getMessage());
+//				}
+//				
 			}
 		});
 	}
@@ -201,6 +285,61 @@ public class SyncContent {
 		}
 	}
 	
+	public static void fetchTrainingProgress(){
+		if (User.getInstance() == null) {
+			return;
+		}
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCaseStatus");
+		query.whereEqualTo("user", ParseUser.getCurrentUser());
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					for (ParseObject o : objects) {
+						User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
+					}
+					Log.v("Sync:", "done fetching training progress");
+				}else{
+					Log.v("Sync:", e.getMessage());
+				}
+			}
+		});
+	}
+	
+	public static void saveTrainingProgress(){
+		HashMap<String, CasePatientStatus> map = User.getInstance().getMapCasePatientStatus();
+		
+		ArrayList<ParseObject> list = new ArrayList<ParseObject>();
+		
+		for (Map.Entry<String, CasePatientStatus> entry : map.entrySet()) {
+			CasePatientStatus value = entry.getValue();
+		    ParseObject o = new ParseObject("PatientCaseStatus");
+		    if (value.getObjectId() != null) {
+				o.setObjectId(value.getObjectId());
+			}
+		    o.put("user", ParseUser.getCurrentUser());
+		    ParseObject patientPointer = new ParseObject("PatientCase");
+		    patientPointer.setObjectId(entry.getKey());
+		    o.put("patientCase", patientPointer);
+		    o.put("highScore", value.getHighScore());
+		    o.put("isComplete", value.isComplete());
+		    
+		    list.add(o);
+		}
+		ParseObject.saveAllInBackground(list, new SaveCallback() {
+			
+			@Override
+			public void done(ParseException e) {
+				if (e == null) {
+					Log.v("Sync:", "Done saving training progress");
+				}else{
+					Log.v("Sync:", e.getMessage());		
+				}
+			}
+		});
+	}
+
 	private static void saveSPPB(SPPB sppb, ParseObject parent) {
 		if (sppb instanceof BalanceSPPB) {
 			ParseObject ob = new ParseObject("BalanceSPPB");
@@ -228,7 +367,7 @@ public class SyncContent {
 		}		
 	}
 
-	private static ArrayList<String> downcastListOfObjects(List<Object> objects){
+	private static ArrayList<String> downcastListOfObjectsToString(List<Object> objects){
 		ArrayList<String> stringList = new ArrayList<String>();
 		for (Object object : objects) {
 			if (object instanceof String) {

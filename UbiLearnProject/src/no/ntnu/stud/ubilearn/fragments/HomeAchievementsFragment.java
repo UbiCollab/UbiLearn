@@ -23,9 +23,23 @@ import android.widget.ListView;
  */
 public class HomeAchievementsFragment extends Fragment
 {
+	/*
+	 * This list hold the status of each level in relation to whether it is
+	 * achieved or not. 
+	 * TRUE = achievement achieved, 
+	 * FALSE = achievement not achieved.
+	 */
 	List<Boolean> _achievementStatus	= new ArrayList<Boolean>();
 	
+	/*
+	 * This list contains text that represents the title for each achievement.
+	 */
 	List<String> _achievementTitles		= new ArrayList<String>();
+	
+	/*
+	 * This list contains a text that represent the description for each 
+	 * achievement.
+	 */
 	List<String> _achievementTexts		= new ArrayList<String>();
 		
 	
@@ -33,6 +47,9 @@ public class HomeAchievementsFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
+		// We reset some of the data.
+		resetData();
+		
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_achievements, container, false);
 		
@@ -70,7 +87,10 @@ public class HomeAchievementsFragment extends Fragment
 		
 		achievementsListView.setClickable(false);
 		
-		
+		/*
+		 * We don't really need this button considering that all Android phones
+		 * has a "Back" button on the phone itself.
+		 * 
 		// We need the ability to return to the previous "Home" page
 		Button returnButton =
 				(Button)fragmentView.findViewById(
@@ -84,8 +104,22 @@ public class HomeAchievementsFragment extends Fragment
 				//getFragmentManager().popBackStack();
 			}
 		});
-		
+		*/
 		
 		return fragmentView;	
+	}
+	
+	//-------------------------------------------------------------------------
+	/*
+	 * This code is used to make sure that some of the data this fragment
+	 * contains, is reset for each call to it. This to prevent that data is
+	 * is added to already existing data when the user clicks the "Back" button
+	 * on the phone.
+	 */
+	public void resetData()
+	{
+		_achievementStatus.clear();
+		_achievementTitles.clear();
+		_achievementTexts.clear();
 	}
 }

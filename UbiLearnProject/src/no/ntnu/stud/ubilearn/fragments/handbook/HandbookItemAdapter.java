@@ -3,7 +3,7 @@ package no.ntnu.stud.ubilearn.fragments.handbook;
 import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
-import no.ntnu.stud.ubilearn.models.WikiItem;
+import no.ntnu.stud.ubilearn.models.ListItem;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,12 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HandbookItemAdapter extends ArrayAdapter<WikiItem>{
+public class HandbookItemAdapter extends ArrayAdapter<ListItem>{
 	Context context; 
     int resource;    
-    ArrayList<WikiItem> list;
+    ArrayList<ListItem> list;
 
-	public HandbookItemAdapter(Context context, ArrayList<WikiItem> list) {
+	public HandbookItemAdapter(Context context, ArrayList<ListItem> list) {
 		super(context, R.layout.wiki_list_item, list);
 		
 		this.context = context;

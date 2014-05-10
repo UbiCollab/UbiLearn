@@ -4,7 +4,7 @@ import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
 
-public class Article extends WikiItem{
+public class Article extends ListItem{
 	
 	private String objectId;
 	private String title;

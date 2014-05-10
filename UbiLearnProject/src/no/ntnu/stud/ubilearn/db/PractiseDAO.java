@@ -2,6 +2,8 @@ package no.ntnu.stud.ubilearn.db;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
@@ -111,8 +113,8 @@ public class PractiseDAO extends DAO {
 	 * @param id the id of the patient that theese tests are performed on
 	 * @return all tests of this type that this patient has performed
 	 */
-	public ArrayList<SPPB> getStandUpSPPBs(int id) {
-		ArrayList<SPPB> tests = new ArrayList<SPPB>();
+	public ArrayList<StandUpSPPB> getStandUpSPPBs(int id) {
+		ArrayList<StandUpSPPB> tests = new ArrayList<StandUpSPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_STANDUP_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
 		log(query);
 		Cursor result = database.rawQuery(query, null);
@@ -128,19 +130,20 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
 		
-		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt));
+		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed);
 	}
 	/**
 	 * 
 	 * @param id the id of the patient that theese tests are performed on
 	 * @return all tests of this type that this patient has performed
 	 */
-	public ArrayList<SPPB> getBalanceSPPBs(int id) {
-		ArrayList<SPPB> tests = new ArrayList<SPPB>();
+	public ArrayList<BalanceSPPB> getBalanceSPPBs(int id) {
+		ArrayList<BalanceSPPB> tests = new ArrayList<BalanceSPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_BALANCE_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
 		log(query);
 		Cursor result = database.rawQuery(query, null);
@@ -156,20 +159,21 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		int pairedScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PAIRED_SCORE));
 		int semiTandemScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_SEMI_TANDEM_SCORE));
 		int tandemScore = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_TANDEM_SCORE));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new BalanceSPPB(id, name, patientId, stringToDate(createdAt), pairedScore, semiTandemScore, tandemScore);
+		return new BalanceSPPB(id, name, patientId, stringToDate(createdAt),failed, pairedScore, semiTandemScore, tandemScore);
 	}
 	/**
 	 * 
 	 * @param id the id of the patient that theese tests are performed on
 	 * @return all tests of this type that this patient has performed
 	 */
-	public ArrayList<SPPB> getWalkingSPPBs(int id) {
-		ArrayList<SPPB> tests = new ArrayList<SPPB>();
+	public ArrayList<WalkingSPPB> getWalkingSPPBs(int id) {
+		ArrayList<WalkingSPPB> tests = new ArrayList<WalkingSPPB>();
 		String query = selectWhere(DatabaseHandler.TABLE_WALKING_SPPB, DatabaseHandler.KEY_PATIENT_ID, id);
 		log(query);
 		Cursor result = database.rawQuery(query, null);
@@ -184,6 +188,7 @@ public class PractiseDAO extends DAO {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
+		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
 		boolean noAid = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_NO_AID)) == 1);
 		boolean crutches = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_CRUTCHES)) == 1);
@@ -191,7 +196,7 @@ public class PractiseDAO extends DAO {
 		String other = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OTHER));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt), time, noAid, crutches, rollater, other);
+		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt),failed, time, noAid, crutches, rollater, other);
 	}
 
 	public void insertSBBP(SPPB test){
@@ -199,6 +204,7 @@ public class PractiseDAO extends DAO {
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
 		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(test.getCreatedAt()));
+		values.put(DatabaseHandler.KEY_FAILED, test.failed());
 		String table = "";
 		if(test instanceof WalkingSPPB){
 			insertWalkingSPPB((WalkingSPPB)test, values);
@@ -244,5 +250,31 @@ public class PractiseDAO extends DAO {
 		printTable(DatabaseHandler.TABLE_BALANCE_SPPB);
 		printTable(DatabaseHandler.TABLE_STANDUP_SPPB);
 		printTable(DatabaseHandler.TABLE_WALKING_SPPB);
+	}
+	public HashMap<String, SPPB> getBestResults(int patientId) {
+		HashMap<String, SPPB> tests = new HashMap<String, SPPB>();
+		
+		ArrayList<WalkingSPPB> walkingTests = getWalkingSPPBs(patientId);
+		Collections.sort(walkingTests);
+		if(walkingTests.isEmpty())
+			tests.put("Walking", null);
+		else
+			tests.put("Walking", walkingTests.get(walkingTests.size()-1));
+		
+		ArrayList<BalanceSPPB> balanceTests = getBalanceSPPBs(patientId);
+		Collections.sort(balanceTests);
+		if(balanceTests.isEmpty())
+			tests.put("Balance", null);
+		else
+			tests.put("Balance", balanceTests.get(balanceTests.size()-1));
+		
+		ArrayList<StandUpSPPB> standUpTests = getStandUpSPPBs(patientId);
+		Collections.sort(standUpTests);
+		if(standUpTests.isEmpty())
+			tests.put("StandUp", null);
+		else
+			tests.put("StandUp", standUpTests.get(standUpTests.size()-1));
+
+		return tests;
 	}
 }

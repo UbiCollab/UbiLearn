@@ -20,7 +20,7 @@
             android:name="no.ntnu.stud.ubilearn.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name" 
-            android:noHistory="true">
+            android:noHistory="false">
         </activity>
         <activity
             android:name="no.ntnu.stud.ubilearn.LoginActivity"
@@ -40,6 +40,10 @@
             android:name="no.ntnu.stud.ubilearn.fragments.handbook.ArticleFragment"
             android:label="@string/title_activity_article_fragment" >
         </activity>
+        <activity 
+            android:name="no.ntnu.stud.ubilearn.ImageDialog"
+            android:theme="@style/imageDialogTheme"
+            />
     </application>
 
 </manifest>

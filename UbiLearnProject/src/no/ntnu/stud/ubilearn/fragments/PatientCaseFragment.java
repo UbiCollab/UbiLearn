@@ -1,7 +1,12 @@
 package no.ntnu.stud.ubilearn.fragments;
 
+import java.util.HashMap;
+
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.User;
+import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.CasePatient;
+import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
 public class PatientCaseFragment extends Fragment{
@@ -20,6 +26,7 @@ public class PatientCaseFragment extends Fragment{
 	private String _name, _age, _gender, _pasientInfo;
 	private int _level;
 	private CasePatient patient;
+	private TextView statusText;
 	
 	//Empty constructor for validFragment
 	public PatientCaseFragment() {
@@ -54,8 +61,33 @@ public class PatientCaseFragment extends Fragment{
 		TextView pasientInfo = (TextView) rootView.findViewById(R.id.case_patientInfoField);
 		pasientInfo.setText(_pasientInfo);
 		RatingBar level = (RatingBar)rootView.findViewById(R.id.training_ratingBar);
+
+		TrainingDAO trainingDAO = new TrainingDAO(getActivity());
+		trainingDAO.open();
+		
+		
+		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() >= trainingDAO.getPatientQuizzes(patient).size()){
+			level.setRating(2);
+		}
+		else if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() ==(int) (trainingDAO.getPatientQuizzes(patient).size())*0.75){
+			level.setRating(1);
+		}
+
+		
 		level.setRating(_level);
 		level.setEnabled(false);
+		
+		statusText = (TextView)rootView.findViewById(R.id.training_status);
+		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() > 0){
+		statusText.setText("Gratulerer, du har klart denne casen " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+		}
+		else{
+			statusText.setText("Du har ikke klart casen ennå " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+
+		}
+		trainingDAO.close();
+		
+		
 		Button next = (Button)rootView.findViewById(R.id.training_case_next);
 		
 		next.setOnClickListener(new OnClickListener() {//neste knapp til Quiz fra pasientCase
@@ -63,11 +95,18 @@ public class PatientCaseFragment extends Fragment{
 			@Override
 			public void onClick(View v) {
 
-				//TODO: remove line
-				Log.v("Navnet til pasientet", "er: " + patient.getName());
+				TrainingDAO trainingDAO = new TrainingDAO(getActivity());
+				trainingDAO.open();
+				
+				if(trainingDAO.getPatientQuizzes(patient) != null){
 				Fragment fragment = new QuizFragment(patient);
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("quiz").commit();
-
+				}else{
+					Toast.makeText(getActivity(), "No quiz avaliable", Toast.LENGTH_SHORT).show();
+				}
+				
+				trainingDAO.close();
+				
 			}
 		});
 		//tilbake knapp fra pasientcase

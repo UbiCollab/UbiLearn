@@ -26,21 +26,62 @@ import android.widget.TextView;
  */
 public class HomeCasesFragment extends Fragment 
 {
+	/*
+	 * Indicate which element has been selected in the list of levels in the
+	 * Home page.
+	 */
 	int _levelNo			= -1;
+	
+	/*
+	 * This variable hold the the total score achieved for this level.
+	 */
 	int _levelScore			= 0;
+	
+	/*
+	 * This variable hold the total score possible for this level.
+	 */
 	int _levelMaxScore		= 0;
+	
+	/*
+	 * This variable hold the number of unlocked houses for this level.
+	 */
 	int _nUnlockedHouses 	= 0;
+	
+	/*
+	 * This variable hold the number of locked houses for this level.
+	 */
 	int _nLockedHouses	 	= 0;
+	
+	/*
+	 * This variable hold the number of locked houses for this level.
+	 */
 	int _nAchievements		= 0;
 	
+	/*
+	 * Variable used in relation to the output of the name of the level.
+	 */
 	String _levelName 		= "";
-	String _totalScore		= "";
-	String _caseData		= "";
 	
+	/*
+	 * This list contains the names of the different houses.
+	 */
 	List<String> _listName	= new ArrayList<String>();
+	
+	/*
+	 * This list contains medals the user has achieved for the different
+	 * houses. 
+	 */
 	List<String> _listMedal	= new ArrayList<String>();
+	
+	/*
+	 * This list contains the scores for the different houses.
+	 */
 	List<String> _listScore	= new ArrayList<String>();
-		
+	
+	/*
+	 * This variable holds an instance of a TrainingLevel that was selected in
+	 * the Home page.
+	 */
 	TrainingLevel _level = null;
 	
 	
@@ -66,6 +107,9 @@ public class HomeCasesFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
+		// We reset some data.
+		resetData();			
+		
 		_levelNo	= getArguments().getInt("levelNo");
 						
 		View fragmentView = inflater.inflate(
@@ -79,6 +123,8 @@ public class HomeCasesFragment extends Fragment
 		// We go through a list of cases and initializes relevant data.
 		for(TrainingHouse house : level.getHouseList())
 		{
+			// Here we check whether each house is locked or not, and update
+			// the relevant variable accordingly.
 			if(house.isLocked() == true)
 			{
 				_nLockedHouses += 1;
@@ -190,7 +236,10 @@ public class HomeCasesFragment extends Fragment
 		
 		caseListView.setClickable(false);
 		
-	
+		/*
+		 * We do not really need the 'Back' button considering that Android
+		 * phones has a 'Back' button.
+		 * 
 		// We need the ability to return to the previous "Home" page
 		Button returnButton =
 				(Button)fragmentView.findViewById(R.id.homeCasesButtonBack);
@@ -203,9 +252,32 @@ public class HomeCasesFragment extends Fragment
 				//getFragmentManager().popBackStack();
 			}
 		});
+		*/
 		
 		
 		return fragmentView;
 		//return inflater.inflate(R.layout.fragment_home, container, false);
+	}
+	
+	//-------------------------------------------------------------------------
+	/*
+	 * This function resets variables that is part of the class. This is to
+	 * make sure that when the user enters other pages and then returns to this
+	 * page, data will not add to already existing data.
+	 */
+	public void resetData()
+	{
+		_levelNo			= -1;
+		_levelScore			= 0;
+		_levelMaxScore		= 0;
+		_nUnlockedHouses 	= 0;
+		_nLockedHouses	 	= 0;
+		_nAchievements		= 0;
+		
+		_levelName 		= "";
+		
+		_listName.clear();
+		_listMedal.clear();
+		_listScore.clear();
 	}
 }
