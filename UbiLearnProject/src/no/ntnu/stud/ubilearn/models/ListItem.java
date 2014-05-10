@@ -1,19 +1,15 @@
 package no.ntnu.stud.ubilearn.models;
 
-public abstract class WikiItem {
+public abstract class ListItem {
 //	protected String name;
 	protected int icon;
 	protected String parentId;
 	
-	public WikiItem() {
+	public ListItem() {
 		setIcon();
 	}
 	
-
 	public abstract String getName();
-
-
-
 	public abstract void setName(String name);
 
 	

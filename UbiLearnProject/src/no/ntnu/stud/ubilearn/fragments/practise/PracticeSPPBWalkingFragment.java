@@ -118,7 +118,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 			@Override
 			public void onClick(View v) {
 				Fragment fragment = new SPPBWalkingResultFragment(test1, test2);
-				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("training").commit();
+				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("walking").commit();
 
 			}
 		});

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
-
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
@@ -34,11 +33,13 @@ public class User {
 	private List<TrainingLevel> _levelList;
 
 	private int level = 1;
+	private ArrayList<ListItem> exercises;
 	
 
 	//#########################################################################
 	private User()
 	{
+		this.exercises = null;
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		//Test using initialized objects of type TrainingHouse and 
 		// TrainingLevel. Delete this when actual data can be retrieved from
@@ -245,6 +246,12 @@ public class User {
 		}else {
 			return mapCasePatientStatus.get(objectId);
 		}
+	}
+	public void setExerciseCategory(ArrayList<ListItem> list) {
+		this.exercises = list;
+	}
+	public ArrayList<ListItem> getExercises() {
+		return exercises;
 	}
 
 }

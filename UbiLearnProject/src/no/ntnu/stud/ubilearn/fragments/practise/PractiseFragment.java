@@ -5,6 +5,7 @@ import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.Patient;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class PractiseFragment extends Fragment {
 //				Fragment fragment = new PractiseExercisesFragment();
 //				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 				Fragment fragment = new ExcerciseFragment();
+				((ExcerciseFragment)fragment).setExercise(new Exercise("dsfs", "Lorem Ipsum", getResources().getString(R.string.fillText)));
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});

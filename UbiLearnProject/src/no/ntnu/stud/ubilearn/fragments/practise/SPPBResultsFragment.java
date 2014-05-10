@@ -40,26 +40,6 @@ public class SPPBResultsFragment extends Fragment {
 		fillBalanceFields(view);
 		fillStandUpFields(view);
 		
-		
-//		//fills in Walking test fields
-//		TextView testName = (TextView) view.findViewById(R.id.testName1);
-//		TextView testDate = (TextView) view.findViewById(R.id.testDate1);
-//		TextView time = (TextView) view.findViewById(R.id.time1);
-//		TextView score = (TextView) view.findViewById(R.id.total1);
-//		if (walking != null){
-//			testName.setText(walking.getName());
-//			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
-//			time.setText("Time: " + walking.getTime());
-//			score.setText("Score: " + walking.getScore());
-//		}
-//		else{
-//			testName.setText("Gangtest");
-//			testDate.setText("Ingen gangtester funnet");
-//			time.setText("Time: ");
-//			score.setText("Score: ");
-//		}
-		
-	
 		return view;
 	}
 	/**
@@ -75,16 +55,16 @@ public class SPPBResultsFragment extends Fragment {
 		if (walking != null){
 			testName.setText(walking.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(walking.getCreatedAt()));
-			time.setText("Tid: " + walking.getTime());
-			total.setText("Score: " + walking.getScore());
-			aids.setText("Hjelpemidler: " + walking.getAidsString());
+			time.setText("" + walking.getTime());
+			aids.setText("" + walking.getAidsString());
+			total.setText("" + walking.getScore());
 		}
 		else{
 			testName.setText("Gangtest");
 			testDate.setText("Ingen gangtester funnet");
-			time.setText("Tid: ");
-			total.setText("Score: 0");
-			aids.setText("Hjelpemidler: -");
+			time.setText("-");
+			aids.setText("-");
+			total.setText("0");
 		}
 	}
 	/**
@@ -128,14 +108,14 @@ public class SPPBResultsFragment extends Fragment {
 		if (standUp != null){
 			testName.setText(standUp.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(standUp.getCreatedAt()));
-			time.setText("Tid: " + standUp.getTime());
-			total.setText("Score: " + standUp.getScore());
+			time.setText("" + standUp.getTime());
+			total.setText("" + standUp.getScore());
 		}
 		else{
-			testName.setText("Opp-å-stå-test");
-			testDate.setText("Ingen Opp-å-stå-tester funnet");
-			time.setText("Tid: ");
-			total.setText("Score: 0");
+			testName.setText("Reise seg test");
+			testDate.setText("Ingen Resise seg tester funnet");
+			time.setText("-");
+			total.setText("0");
 		}
 	}
 }

@@ -9,7 +9,6 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 	private boolean rollater;
 	private String other;
 	private String aid;
-	private boolean failed = false;
 
 	public WalkingSPPB(String name, int patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
 		super(name, patientId, createdAt);
@@ -21,6 +20,14 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 	}
 	public WalkingSPPB(int id, String name, int patientId, Date createdAt, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
 		super(id, name, patientId, createdAt);
+		this.time = time;
+		this.noAid = noAid;
+		this.crutches = crutches;
+		this.rollater = rollater;
+		this.other = other;
+	}
+	public WalkingSPPB(int id, String name, int patientId, Date createdAt,boolean failed, double time, boolean noAid, boolean crutches, boolean rollater, String other) {
+		super(id, name, patientId, createdAt, failed);
 		this.time = time;
 		this.noAid = noAid;
 		this.crutches = crutches;
@@ -90,9 +97,6 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 		this.other = other;
 	}
 	
-	public void failed(boolean failed){
-		this.failed = failed;
-	}
 	public String getAidsString(){
 		if(noAid)
 			return "Ingen";
@@ -117,7 +121,7 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 		if (this.getScore() - another.getScore() != 0)
 			return this.getScore() - another.getScore();
 		else
-			return (int)Math.signum(this.getTime()-another.getTime());
+			return (int)Math.signum(another.getTime()-this.getTime());
 	}
 
 }
