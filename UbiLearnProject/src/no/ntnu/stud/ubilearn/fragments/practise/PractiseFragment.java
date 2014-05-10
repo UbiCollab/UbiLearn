@@ -55,11 +55,11 @@ public class PractiseFragment extends Fragment {
 		{
 			public void onClick(View vi)
 			{
-//				Fragment fragment = new PractiseExercisesFragment();
-//				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
-				Fragment fragment = new ExcerciseFragment();
-				((ExcerciseFragment)fragment).setExercise(new Exercise("dsfs", "Lorem Ipsum", getResources().getString(R.string.fillText)));
+				Fragment fragment = new PractiseExercisesFragment();
 				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
+//				Fragment fragment = new ExcerciseFragment();
+//				((ExcerciseFragment)fragment).setExercise(new Exercise("dsfs", "Lorem Ipsum", getResources().getString(R.string.fillText)));
+//				getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 			}
 		});
 

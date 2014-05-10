@@ -16,6 +16,7 @@ import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.ExerciseCategory;
 import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -185,44 +186,33 @@ public class SyncContent {
 						}
 					}
 					User.getInstance().setExerciseCategory(list);
+					fetchExercises(list, map);
 					Log.v("Sync", "done fetching exercise categories");
 				}else{
 					e.getMessage();
 				}
+			}
+
+			private void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map) {			
+				ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
 				
-				
-				
-				
-				
-				
-//				Log.v("Sync:", "done fetching Exercise categories");
-//				if (e == null) {
-//					List<ExerciseCategory> list = new ArrayList<ExerciseCategory>();
-//					for (int i = 0; i < objects.size(); i++) {
-//						Log.v("Sync:", "Size: " + objects.size());
-//						if (objects.get(i).getParseObject("parent") == null) {
-//							ParseObject parseObj = objects.remove(i);
-//							list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
-//						}
-//					}	
-//					while (!objects.isEmpty()) {
-//						for (int i = 0; i < objects.size(); i++) {
-//							for (int j = 0; i < list.size(); j++) {
-//								if (objects.get(i).getParseObject("parent") != null){
-//									if (objects.get(i).getParseObject("parent").getObjectId().equals(list.get(j).getObjectId())) {
-//										ParseObject parseObj = objects.remove(i);
-//										list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
-//									}																	
-//								}else{
-//									Log.v("Sync: ", "Parent null, objectId: "+ objects.get(i).getObjectId());									
-//								}
-//							}
-//						}
-//					}
-//				}else{
-//					Log.v("Sync:", e.getMessage());
-//				}
-//				
+				query.findInBackground(new FindCallback<ParseObject>() {
+
+					@Override
+					public void done(List<ParseObject> objects, ParseException e) {
+						if (e == null) {
+							for (ParseObject o : objects) {
+								if (o.getParseObject("parent") != null) {
+									map.get(o.getParseObject("parent").getObjectId()).getSubItems().add(new Exercise(o.getObjectId(), o.getString("name"), o.getString("text")));
+								}else{
+									list.add(new Exercise(o.getObjectId(), o.getString("name"), o.getString("text")));
+								}
+							}							
+						}else{
+							Log.v("Sync", e.getMessage());
+						}
+					}
+				});
 			}
 		});
 	}
