@@ -105,17 +105,21 @@ public class SPPBResultsFragment extends Fragment {
 		TextView testDate = (TextView) view.findViewById(R.id.testDate3);
 		TextView time = (TextView) view.findViewById(R.id.time3);
 		TextView total = (TextView) view.findViewById(R.id.total3);
+		TextView seatHeight = (TextView) view.findViewById(R.id.seatHeight);
+		
 		if (standUp != null){
 			testName.setText(standUp.getName());
 			testDate.setText("Dato: " + new SimpleDateFormat( "dd.MM.yyyy", Locale.getDefault()).format(standUp.getCreatedAt()));
 			time.setText("" + standUp.getTime());
 			total.setText("" + standUp.getScore());
+			seatHeight.setText(standUp.getSeatHeight());
 		}
 		else{
 			testName.setText("Reise seg test");
 			testDate.setText("Ingen Resise seg tester funnet");
 			time.setText("-");
 			total.setText("0");
+			seatHeight.setText("-");
 		}
 	}
 }
