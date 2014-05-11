@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -109,9 +110,8 @@ public class HomeFragment extends Fragment
 		View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
 		_userName = _user.getName();
-		Log.v("Order", "3");
 		_levelList = _user.getLevels(this.getActivity());
-		Log.v("Order", "levelsize " + _levelList.size());
+//		_levelList = User.getInstance().getTestLevels();
 
 		/*
 		 * We go through the list of levels and retrieve data that will be used
@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment
 		for(TrainingLevel level : _levelList)
 		{
 			_listName.add(level.getName());
+			Log.v("Order", "level maxscore" + level.getMaxScore());
 			_listScore.add(level.getUserScore() + "/" + level.getMaxScore());
 			
 			_userScore += level.getUserScore();
@@ -219,7 +220,6 @@ public class HomeFragment extends Fragment
 		// Now we want to fill the list in 'fragment_home.xml' with data 
 		ListView _levelListView = 
 				(ListView)fragmentView.findViewById(R.id.homeListLevel);
-		
 		_levelListView.setAdapter(new HomeAdapter(
 				this.getActivity(),	_listName, _listScore, _listLockStatus));
 		

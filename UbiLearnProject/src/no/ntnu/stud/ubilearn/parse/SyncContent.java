@@ -54,11 +54,9 @@ public class SyncContent {
 		//Asynchronous
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
-		fetchQuizesAfterUpdate(context);
 		fetchExerciseCategories();
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
-		
 		isRetriving = false;
 		hasRetrived = true;
 		
@@ -97,28 +95,23 @@ public class SyncContent {
 		if (lastUpdate != null) {
 			query.whereGreaterThan("updatedAt", lastUpdate);			
 		}
-		query.findInBackground(new FindCallback<ParseObject>() {
-
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				List<Quiz> list = new ArrayList<Quiz>();
-				if (e == null) {
-					for (ParseObject o : objects) {
-						String ownerId = null;
-						if (o.getParseObject("owner") != null) {
-							ownerId = o.getParseObject("owner").getObjectId();
-						}
-						list.add(new Quiz(o.getString("question"), downcastListOfObjectsToString(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
-					}
-					TrainingDAO dao = new TrainingDAO(context);
-					dao.open();
-					dao.insertQuizzes(list);
-					dao.close();
-				}else {
-					Log.v("SyncContent", e.getMessage());
+		try {
+			List<ParseObject> objects = query.find();
+			List<Quiz> list = new ArrayList<Quiz>();
+			for (ParseObject o : objects) {
+				String ownerId = null;
+				if (o.getParseObject("owner") != null) {
+					ownerId = o.getParseObject("owner").getObjectId();
 				}
+				list.add(new Quiz(o.getString("question"), downcastListOfObjectsToString(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
 			}
-		});
+			TrainingDAO dao = new TrainingDAO(context);
+			dao.open();
+			dao.insertQuizzes(list);
+			dao.close();
+		} catch (ParseException e) {
+			Log.v("SyncContent", e.getMessage());
+		}
 	}
 	
 	public static void fetchHandBookArticleAfterUpdate(final Context context){
