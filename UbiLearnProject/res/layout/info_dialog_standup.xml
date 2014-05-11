@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reise seg fra stol én gang\n
+
+1. Dette er den siste øvelsen. Er det trygt for deg å reise deg opp fra stolen uten å bruke 
+
+armene?\n
+
+2. Den neste testen måler styrken i beina dine.\n
+
+3. (Demonstrer og forklar øvelsen.) Først, kryss armene over brystet, og sitt slik at føttene 
+
+er plassert på gulvet; så reiser du deg opp, behold armene i kryss over brystet. \n
+
+4. Nå vil jeg at du skal prøve å reise deg opp med armene i kryss over brystet. (Noter 
+
+resultatet). \n
+
+5. Hvis deltageren ikke klarer å reise seg uten å bruke armene, si ”OK, prøv å reise deg med 
+
+bruk av armene.” Dette avslutter testen. Noter resultatet og gå til scoringsarket. \n\n\n
+
+
+
+Reise/ sette seg x5  \n
+
+1. Tror du det vil være trygt for deg å reise deg opp fra stolen fem ganger uten å bruke 
+
+armene? \n
+
+2. (Demonstrer og forklar øvelsen.) Nå vil jeg at du skal reise deg helt opp så RASKT du kan 
+
+fem ganger, uten stopp.  Etter at du har reist deg hver gang, sett deg ned og reis deg 
+
+opp igjen. Behold armene i kryss over brystet. Jeg tar tiden med en stoppeklokke. \n
+
+3. Når deltageren sitter på riktig måte, si: ”Klar? Reis deg” og start tidtakingen. \n
+
+4. Tell høyt hver gang deltageren reiser seg, opp til fem ganger. \n
+
+5. Stopp om deltageren blir sliten eller tungpustet av å reise seg fra stolen flere ganger. \n
+
+6. Stopp stoppeklokka når han/hun har reist seg helt opp den femte gangen. \n
+
+7. Stopp også \n
+
+- Hvis deltageren bruker armene \n
+
+- Etter 1 minutt, hvis deltageren ikke har fullført 5 repetisjoner \n
+
+- Hvis du bekymrer deg for deltakerens sikkerhet \n
+
+8. Hvis deltageren er utslitt og stopper før fem repetisjoner, spør ”Kan du fortsette?” for å 
+
+bekrefte dette. \n
+
+9. Hvis deltageren sier ”Ja,” fortsett tidtakingen. Hvis deltageren sier ”Nei,” stopp og 
+
+nullstill stoppeklokken."/>
+
+    <Button 
+        android:id="@+id/info_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        />
+
+</LinearLayout>
+</ScrollView>
