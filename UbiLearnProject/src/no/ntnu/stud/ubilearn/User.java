@@ -192,7 +192,6 @@ public class User {
 		for (CasePatient caseP : casePatientList) {
 			if (caseP.getLevel() > topLevel) {
 				topLevel = caseP.getLevel();
-				Log.v("Sync", "top level: " + topLevel);
 			}
 		}
 		ArrayList<TrainingLevel> list = new ArrayList<TrainingLevel>();
@@ -202,10 +201,8 @@ public class User {
 			ArrayList<TrainingHouse> houses = new ArrayList<TrainingHouse>();
 			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i+1), houses);
 			int levelScore = 0;
-			Log.v("Sync", "casePatientList: " + casePatientList.size());
 			for (CasePatient caseP : casePatientList) {
 				if (caseP.getGender().equals("test")) {
-					Log.v("Sync", "test object");
 					continue;
 				}
 				if (caseP.getLevel() == i) {

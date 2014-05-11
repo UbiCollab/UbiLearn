@@ -55,12 +55,15 @@ public class SyncContent {
 		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
+		//Asynchronous
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
 		fetchQuizesAfterUpdate(context);
+		fetchExerciseCategories();
+		//Synchronized
 		fetchCasePatient(context);
 		fetchTrainingProgress();
-		fetchExerciseCategories();
+		
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
@@ -77,26 +80,22 @@ public class SyncContent {
 		if (lastUpdate != null) {
 			query.whereGreaterThan("updatedAt", lastUpdate);			
 		}
-		query.findInBackground(new FindCallback<ParseObject>() {
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				if (e == null) {
-					ArrayList<CasePatient> list = new ArrayList<CasePatient>();
-					for (ParseObject o : objects) {
-						list.add(new CasePatient(o.getObjectId(), o.getString("name"), o.getString("age"), o.getString("gender"), o.getString("info"), o.getInt("level"), o.getCreatedAt()));
-					}
-					TrainingDAO dao = new TrainingDAO(context);
-					dao.open();
-					dao.insertCasePatients(list);
-					ArrayList<CasePatient> patientList = dao.getAllCasePatients();
-					User.getInstance().setCasePatientList(patientList);
-					dao.close();
-					
-				}else{
-					Log.v("SyncContent", e.getMessage());
-				}
+		try {
+			List<ParseObject> objects = query.find();
+			ArrayList<CasePatient> list = new ArrayList<CasePatient>();
+			for (ParseObject o : objects) {
+				list.add(new CasePatient(o.getObjectId(), o.getString("name"), o.getString("age"), o.getString("gender"), o.getString("info"), o.getInt("level"), o.getCreatedAt()));
 			}
-		});
+			TrainingDAO dao = new TrainingDAO(context);
+			dao.open();
+			dao.insertCasePatients(list);
+			ArrayList<CasePatient> patientList = dao.getAllCasePatients();
+			User.getInstance().setCasePatientList(patientList);
+			dao.close();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public static void fetchQuizesAfterUpdate (final Context context){
@@ -365,20 +364,17 @@ public class SyncContent {
 		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCaseStatus");
 		query.whereEqualTo("user", ParseUser.getCurrentUser());
-		query.findInBackground(new FindCallback<ParseObject>() {
-
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				if (e == null) {
-					for (ParseObject o : objects) {
-						User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
-					}
-					Log.v("Sync:", "done fetching training progress");
-				}else{
-					Log.v("Sync:", e.getMessage());
-				}
+		
+		try {
+			List<ParseObject> objects = query.find();
+			for (ParseObject o : objects) {
+				User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
 			}
-		});
+			Log.v("Sync:", "done fetching training progress");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			Log.v("Sync:", e1.getMessage());
+		}
 	}
 	
 	public static void saveTrainingProgress(){
