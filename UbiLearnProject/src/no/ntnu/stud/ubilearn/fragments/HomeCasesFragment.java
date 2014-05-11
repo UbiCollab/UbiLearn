@@ -84,16 +84,19 @@ public class HomeCasesFragment extends Fragment
 	 */
 	TrainingLevel _level = null;
 	
-	
-	//#########################################################################
 	public HomeCasesFragment()
 	{
 		
 	}
-	//-------------------------------------------------------------------------
-	public static HomeCasesFragment newInstance(int levelNo)
+	//#########################################################################
+/*	public HomeCasesFragment(TrainingLevel level)
 	{
-		HomeCasesFragment fragment = new HomeCasesFragment();
+		//_level = level;
+	}
+*/	//-------------------------------------------------------------------------
+/*	public static HomeCasesFragment newInstance(int levelNo)
+	{
+		HomeCasesFragment fragment = new HomeCasesFragment(level);
 		
 		Bundle bundle = new Bundle(1);
 		bundle.putInt("levelNo", levelNo);
@@ -102,7 +105,12 @@ public class HomeCasesFragment extends Fragment
 		
 		return fragment;
 	}
-	//-------------------------------------------------------------------------
+*/	//-------------------------------------------------------------------------
+/*	public void onCreate(Bundle savedInstanceState)
+	{
+		super(savedInstanceState);
+	}
+*/	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
@@ -110,12 +118,14 @@ public class HomeCasesFragment extends Fragment
 		// We reset some data.
 		resetData();			
 		
-		_levelNo	= getArguments().getInt("levelNo");
-						
+		//_levelNo	= getArguments().getInt("levelNo");
+		//TrainingLevel level = getArguments().
+		
+		
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_cases, container, false);
 					
-		TrainingLevel level = User.getInstance().getLevelNo(_levelNo);
+		TrainingLevel level = _level;//User.getInstance().getLevelNo(_levelNo);
 		
 		_levelName = level.getName();
 		
@@ -168,7 +178,7 @@ public class HomeCasesFragment extends Fragment
 					_listMedal.add("None");
 				}
 			}
-			else
+			else if(houseMaxScore > 0)
 			{
 				if(houseUserScore == houseMaxScore)
 				{
@@ -186,6 +196,10 @@ public class HomeCasesFragment extends Fragment
 				{
 					_listMedal.add("None");
 				}
+			}
+			else
+			{
+				_listMedal.add("None");
 			}
 		}
 		
@@ -259,6 +273,11 @@ public class HomeCasesFragment extends Fragment
 		//return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 	
+	//-------------------------------------------------------------------------
+	public void setTrainingLevel(TrainingLevel level)
+	{
+		_level = level;
+	}
 	//-------------------------------------------------------------------------
 	/*
 	 * This function resets variables that is part of the class. This is to

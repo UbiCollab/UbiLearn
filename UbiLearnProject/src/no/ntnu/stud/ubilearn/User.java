@@ -138,6 +138,18 @@ public class User {
 		_levelList.add(level6);			
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	}
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * This method returns test data that has been initialized.
+	 * 
+	 * @return A list of instances of type TrainingLevel.
+	 */
+	public List<TrainingLevel> getTestLevels()
+	{
+		return _levelList;
+	}
+	
 	//-------------------------------------------------------------------------
 	public static User getInstance(){
 		if(instance != null){

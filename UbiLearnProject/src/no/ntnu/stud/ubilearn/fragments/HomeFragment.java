@@ -114,8 +114,8 @@ public class HomeFragment extends Fragment
 			// screen
 		}
 		
-		_userName = _user.getName();						 
-		_levelList = _user.getLevels(this.getActivity());
+		_userName 	= _user.getName();						 
+		_levelList	= _user.getLevels(this.getActivity());
 		
 		/*
 		 * We go through the list of levels and retrieve data that will be used
@@ -238,8 +238,11 @@ public class HomeFragment extends Fragment
 			{
 //				String levelName = (String)_listName.get(position);
 				
-				HomeCasesFragment fragment = 
-						HomeCasesFragment.newInstance(position);//position + 1);
+				HomeCasesFragment fragment = new HomeCasesFragment();
+						//HomeCasesFragment.newInstance(position);//position + 1);
+						//HomeCasesFragment.newInstance(_levelList.get(position));
+						//new HomeCasesFragment(_levelList.get(position));
+						fragment.setTrainingLevel(_levelList.get(position));
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();
