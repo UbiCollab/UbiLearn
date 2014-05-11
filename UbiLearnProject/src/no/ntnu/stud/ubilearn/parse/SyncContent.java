@@ -1,6 +1,8 @@
 package no.ntnu.stud.ubilearn.parse;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -80,6 +82,7 @@ public class SyncContent {
 			dao.open();
 			dao.insertCasePatients(list);
 			ArrayList<CasePatient> patientList = dao.getAllCasePatients();
+			Collections.sort(patientList);
 			User.getInstance().setCasePatientList(patientList);
 			dao.close();
 			Log.v("Order", "1");
