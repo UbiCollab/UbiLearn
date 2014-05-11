@@ -55,7 +55,7 @@ public class HomeAchievementsFragment extends Fragment
 		
 		
 		// We retrieve the list of levels through the user
-		for(TrainingLevel level : User.getInstance().getLevels())
+		for(TrainingLevel level : User.getInstance().getLevels(this.getActivity()))
 		{
 			// If the user has a score that means he deserves an achievement
 			if(level.getUserScore() == level.getMaxScore())

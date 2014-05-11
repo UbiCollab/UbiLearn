@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment
 		}
 		
 		_userName = _user.getName();						 
-		_levelList = _user.getLevels();
+		_levelList = _user.getLevels(this.getActivity());
 		
 		/*
 		 * We go through the list of levels and retrieve data that will be used

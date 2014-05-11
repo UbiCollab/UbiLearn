@@ -1,10 +1,12 @@
 package no.ntnu.stud.ubilearn;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import android.content.Context;
 import android.util.Log;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
@@ -12,7 +14,7 @@ import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 
 public class User {
-	private ArrayList<CasePatient> casePatientList;
+	private ArrayList<CasePatient> casePatientList = new ArrayList<CasePatient>();
 	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
 	
 	private static User instance;
@@ -184,9 +186,47 @@ public class User {
 	 * @return A list of the levels in the training part 
 	 */
 	
-	public List<TrainingLevel> getLevels()
+	public List<TrainingLevel> getLevels(Context context)
 	{
-		return _levelList;	
+		int topLevel = 0;
+		for (CasePatient caseP : casePatientList) {
+			if (caseP.getLevel() > topLevel) {
+				topLevel = caseP.getLevel();
+				Log.v("Sync", "top level: " + topLevel);
+			}
+		}
+		ArrayList<TrainingLevel> list = new ArrayList<TrainingLevel>();
+		TrainingDAO dao = new TrainingDAO(context);
+		dao.open();
+		for (int i = 0; i < topLevel; i++) {
+			ArrayList<TrainingHouse> houses = new ArrayList<TrainingHouse>();
+			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i+1), houses);
+			int levelScore = 0;
+			Log.v("Sync", "casePatientList: " + casePatientList.size());
+			for (CasePatient caseP : casePatientList) {
+				if (caseP.getGender().equals("test")) {
+					Log.v("Sync", "test object");
+					continue;
+				}
+				if (caseP.getLevel() == i) {
+					CasePatientStatus cps = mapCasePatientStatus.get(caseP.getObjectId());
+					if (cps == null) {
+						if (dao.getPatientQuizzes(caseP) == null) {
+							houses.add(new TrainingHouse(caseP.getName(), false, 0, 0));
+						}else{
+							houses.add(new TrainingHouse(caseP.getName(), false, 0, dao.getPatientQuizzes(caseP).size()));							
+						}
+					}else{
+						levelScore += cps.getHighScore();
+						houses.add(new TrainingHouse(caseP.getName(), cps.isComplete(), cps.getHighScore(), dao.getPatientQuizzes(caseP).size()));						
+					}
+				}
+			}
+			lv.setUserScore(levelScore);
+			list.add(lv);
+		}
+		dao.close();
+		return list;	
 	}
 	//-------------------------------------------------------------------------
 	/**
