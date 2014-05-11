@@ -16,6 +16,7 @@ import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.ExerciseCategory;
 import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
@@ -30,6 +31,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -135,6 +137,7 @@ public class SyncContent {
 			@Override
 			public void done(List<ParseObject> objects, ParseException e) {
 				if (e == null) {
+					
 					List<Article> list = new ArrayList<Article>();
 					for (ParseObject object : objects) {
 						String parentId = null;
@@ -152,6 +155,109 @@ public class SyncContent {
 				}
 			}
 		});
+	}
+	
+
+	private static void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map) {			
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
+		
+		query.findInBackground(new FindCallback<ParseObject>() {
+
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					for (ParseObject o : objects) {
+						if (o.getParseObject("parent") != null) {
+							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
+							ex.setImages(fetchImages(ex.getObjectId()));
+							map.get(o.getParseObject("parent").getObjectId()).getSubItems().add(ex);
+						}else{
+							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
+							ex.setImages(fetchImages(ex.getObjectId()));
+							list.add(ex);
+						}
+					}							
+				}else{
+					Log.v("Sync", e.getMessage());
+				}
+			}
+		});
+	}
+	
+	public static List<Exercise> fetchExercises(){
+		final List<Exercise> list= new ArrayList<Exercise>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
+//		query.findInBackground(new FindCallback<ParseObject>() {
+//			@Override
+//			public void done(List<ParseObject> objects, ParseException e) {
+//				if (e == null) {
+//					System.out.println(objects.size());
+//					for (ParseObject object : objects) {
+//						Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"));
+//						ex.setImages(fetchImages(ex.getObjectId()));
+//						list.add(ex);
+//					}
+//				}else{
+//					Log.v("SyncContent", e.getMessage());
+//				}
+//			}
+//		});
+		
+		try {
+			List<ParseObject> objects = query.find();
+			for (ParseObject object : objects) {
+				Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"));
+				ex.setImages(fetchImages(ex.getObjectId()));
+				list.add(ex);
+			}
+		} catch (ParseException e1) {
+			Log.v("SyncContent", e1.getMessage());
+		}
+		
+		return list;
+	}
+	
+	private static ArrayList<byte[]> fetchImages(String exerciseId){
+		final ArrayList<byte[]> images = new ArrayList<byte[]>();
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
+		//where statement fungerer ikke
+//		query.whereEqualTo("exercise", exerciseId);
+//		query.findInBackground(new FindCallback<ParseObject>() {
+//			@Override
+//			public void done(List<ParseObject> objects, ParseException e) {
+//				if (e == null) {
+//					for (ParseObject object : objects) {
+//						ParseFile file = object.getParseFile("image");
+//						try {
+//							images.add(file.getData());
+//						} catch (ParseException e1) {
+//							e1.printStackTrace();
+//						}
+//					}
+//				}else{
+//					Log.v("SyncContent", e.getMessage());
+//				}
+//			}
+//		});
+		
+		try {
+			List<ParseObject> objects = query.find();
+			System.out.println(objects.size());
+			for (ParseObject object : objects) {
+				ParseFile file = object.getParseFile("image");
+				try {
+					images.add(file.getData());
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} catch (ParseException e1) {
+			Log.v("SyncContent", e1.getMessage());
+
+		}
+
+		
+		return images;	
 	}
 	
 	public static void fetchExerciseCategories(){
@@ -185,44 +291,11 @@ public class SyncContent {
 						}
 					}
 					User.getInstance().setExerciseCategory(list);
+					fetchExercises(list, map);
 					Log.v("Sync", "done fetching exercise categories");
 				}else{
 					e.getMessage();
 				}
-				
-				
-				
-				
-				
-				
-//				Log.v("Sync:", "done fetching Exercise categories");
-//				if (e == null) {
-//					List<ExerciseCategory> list = new ArrayList<ExerciseCategory>();
-//					for (int i = 0; i < objects.size(); i++) {
-//						Log.v("Sync:", "Size: " + objects.size());
-//						if (objects.get(i).getParseObject("parent") == null) {
-//							ParseObject parseObj = objects.remove(i);
-//							list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
-//						}
-//					}	
-//					while (!objects.isEmpty()) {
-//						for (int i = 0; i < objects.size(); i++) {
-//							for (int j = 0; i < list.size(); j++) {
-//								if (objects.get(i).getParseObject("parent") != null){
-//									if (objects.get(i).getParseObject("parent").getObjectId().equals(list.get(j).getObjectId())) {
-//										ParseObject parseObj = objects.remove(i);
-//										list.add(new ExerciseCategory(parseObj.getString("name"), parseObj.getObjectId()));
-//									}																	
-//								}else{
-//									Log.v("Sync: ", "Parent null, objectId: "+ objects.get(i).getObjectId());									
-//								}
-//							}
-//						}
-//					}
-//				}else{
-//					Log.v("Sync:", e.getMessage());
-//				}
-//				
 			}
 		});
 	}

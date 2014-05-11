@@ -184,16 +184,21 @@ public class MainActivity extends Activity {
 		AdapterModel selected = drawerModels.get(position);
 
 		Fragment fragment;
+		String transName = "";
 
 		switch (position) {
 		case 1: fragment = new HomeFragment();
+			transName = "Home";
 		break;
 		case 3: fragment = new Training();
+			transName = "Training";
 		break;
 		case 4: fragment = new PractiseFragment();
+				transName = "Practise";
 		break;
 		case 6: {
 			fragment = new CategoryFragment();
+			transName = "Handbook";
 		}
 		break;
 		case 7: fragment = new DummyFragment();
@@ -208,9 +213,9 @@ public class MainActivity extends Activity {
 		FragmentManager manager = getFragmentManager();
 
 		//sets the homefragment to the only fragment in the backstack
-		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("Home").commit();
 		//changes to the new fragment
-		manager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+		manager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(transName).commit();
 		visibleFrag = fragment;
 
 		drawerView.setItemChecked(position, true);

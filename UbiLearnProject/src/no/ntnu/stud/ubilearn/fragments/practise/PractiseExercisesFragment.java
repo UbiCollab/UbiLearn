@@ -9,6 +9,7 @@ import no.ntnu.stud.ubilearn.fragments.handbook.CategoryFragment;
 import no.ntnu.stud.ubilearn.fragments.handbook.HandbookItemAdapter;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.ExerciseCategory;
 import no.ntnu.stud.ubilearn.models.ListItem;
 import android.app.Fragment;
@@ -44,7 +45,6 @@ public class PractiseExercisesFragment extends Fragment
 			
 				if (listItems.get(position) instanceof ExerciseCategory) {
 					ExerciseCategory cat = (ExerciseCategory) listItems.get(position);
-					Log.v("CatFrag", "sub size: "+ cat.getSubItems().size());
 					if (cat.hasSubs()) {
 						PractiseExercisesFragment peFragment = new PractiseExercisesFragment();
 						peFragment.setListItems(cat.getSubItems());
@@ -53,9 +53,9 @@ public class PractiseExercisesFragment extends Fragment
 						Toast.makeText(pointerHax.getActivity(), "This category is empty", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					ArticleFragment articleFragment = new ArticleFragment();
-					articleFragment.setArticle((Article) listItems.get(position));
-					getFragmentManager().beginTransaction().replace(R.id.content_frame, articleFragment).addToBackStack(null).commit();
+					Fragment fragment = new ExcerciseFragment();
+					((ExcerciseFragment)fragment).setExercise((Exercise) listItems.get(position));
+					getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("practise").commit();
 				}	
 			}	
 		});
