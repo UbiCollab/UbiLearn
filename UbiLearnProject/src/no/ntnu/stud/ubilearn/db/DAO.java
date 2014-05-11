@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 public abstract class DAO {
@@ -81,12 +82,15 @@ public abstract class DAO {
 			for (int i = 0; i < columns.length; i++) {
 				output.append(columns[i] + " | ");
 			}
-			
 			do{
 				output.append("\n | ");
 				int n = result.getColumnCount();
 				for (int i = 0; i < n; i++) {
+					try{
 					output.append(result.getString(i) + " | ");	
+					}catch(SQLiteException e){
+						output.append("BLOB" + " | ");
+					}
 				}
 			}while(result.moveToNext());
 		}else

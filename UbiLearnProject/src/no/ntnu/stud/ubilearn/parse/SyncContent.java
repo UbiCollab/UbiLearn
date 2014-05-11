@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
@@ -18,6 +19,7 @@ import no.ntnu.stud.ubilearn.models.CasePatientStatus;
 import no.ntnu.stud.ubilearn.models.Category;
 import no.ntnu.stud.ubilearn.models.Exercise;
 import no.ntnu.stud.ubilearn.models.ExerciseCategory;
+import no.ntnu.stud.ubilearn.models.ExerciseImage;
 import no.ntnu.stud.ubilearn.models.ListItem;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.Quiz;
@@ -60,7 +62,8 @@ public class SyncContent {
 		fetchQuizesAfterUpdate(context);
 		fetchCasePatient(context);
 		fetchTrainingProgress();
-		fetchExerciseCategories();
+		updateExerciseImages(context);
+		fetchExerciseCategories(context);
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
@@ -71,7 +74,8 @@ public class SyncContent {
 		//Fungerer ikke fordi metodene over kaller asyncrone metoder
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
-	
+
+
 	private static void fetchCasePatient(final Context context) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCase");
 		if (lastUpdate != null) {
@@ -159,7 +163,8 @@ public class SyncContent {
 	}
 	
 
-	private static void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map) {			
+	private static void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map, Context context) {
+		final PractiseDAO dao = new PractiseDAO(context);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
 		
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -168,13 +173,13 @@ public class SyncContent {
 			public void done(List<ParseObject> objects, ParseException e) {
 				if (e == null) {
 					for (ParseObject o : objects) {
+						Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"),o.getCreatedAt());
+						dao.open();
+						ex.setImages(dao.getExerciseImages(o.getObjectId()));
+						dao.close();
 						if (o.getParseObject("parent") != null) {
-							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
-							ex.setImages(fetchImages(ex.getObjectId()));
 							map.get(o.getParseObject("parent").getObjectId()).getSubItems().add(ex);
 						}else{
-							Exercise ex = new Exercise(o.getObjectId(), o.getString("name"), o.getString("text"));
-							ex.setImages(fetchImages(ex.getObjectId()));
 							list.add(ex);
 						}
 					}							
@@ -207,8 +212,8 @@ public class SyncContent {
 		try {
 			List<ParseObject> objects = query.find();
 			for (ParseObject object : objects) {
-				Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"));
-				ex.setImages(fetchImages(ex.getObjectId()));
+				Exercise ex = new Exercise(object.getObjectId(), object.getString("name"), object.getString("text"),object.getCreatedAt());
+				ex.setImages(fetchImages(object));
 				list.add(ex);
 			}
 		} catch (ParseException e1) {
@@ -218,11 +223,14 @@ public class SyncContent {
 		return list;
 	}
 	
-	private static ArrayList<byte[]> fetchImages(String exerciseId){
-		final ArrayList<byte[]> images = new ArrayList<byte[]>();
+	private static ArrayList<ExerciseImage> fetchImages(ParseObject exercise){
+		final ArrayList<ExerciseImage> images = new ArrayList<ExerciseImage>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
-		//where statement fungerer ikke
-//		query.whereEqualTo("exercise", exerciseId);
+		
+//		ParseObject po = new ParseObject("Exercises");
+//		po.setObjectId(exerciseId);
+		query.whereEqualTo("exercise", exercise);
+
 //		query.findInBackground(new FindCallback<ParseObject>() {
 //			@Override
 //			public void done(List<ParseObject> objects, ParseException e) {
@@ -247,9 +255,10 @@ public class SyncContent {
 			for (ParseObject object : objects) {
 				ParseFile file = object.getParseFile("image");
 				try {
-					images.add(file.getData());
+					images.add(new ExerciseImage(object.getObjectId(),file.getData(),exercise.getObjectId(),object.getCreatedAt()));
 				} catch (ParseException e1) {
 					e1.printStackTrace();
+					Log.v("SyncContent", e1.getMessage());
 				}
 			}
 		} catch (ParseException e1) {
@@ -261,7 +270,36 @@ public class SyncContent {
 		return images;	
 	}
 	
-	public static void fetchExerciseCategories(){
+	private static void updateExerciseImages(Context context) {
+		final PractiseDAO dao = new PractiseDAO(context);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
+		if (lastUpdate != null) {
+			query.whereGreaterThan("updatedAt", lastUpdate);			
+		}
+		query.findInBackground(new FindCallback<ParseObject>() {
+			@Override
+			public void done(List<ParseObject> objects, ParseException e) {
+				if (e == null) {
+					dao.open();
+					System.out.println(objects.size());
+					for (ParseObject object : objects) {
+						ParseFile file = object.getParseFile("image");
+						try {
+							dao.insertImage(new ExerciseImage(object.getObjectId(),file.getData(),object.getParseObject("exercise").getObjectId(),object.getCreatedAt()));
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
+					}
+					dao.close();
+				}else{
+					Log.v("SyncContent", e.getMessage());
+				}
+			}
+		});
+		
+	}
+	
+	public static void fetchExerciseCategories(final Context context){
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseCategory");
 		query.findInBackground(new FindCallback<ParseObject>() {
 
@@ -292,7 +330,7 @@ public class SyncContent {
 						}
 					}
 					User.getInstance().setExerciseCategory(list);
-					fetchExercises(list, map);
+					fetchExercises(list, map, context);
 					Log.v("Sync", "done fetching exercise categories");
 				}else{
 					e.getMessage();

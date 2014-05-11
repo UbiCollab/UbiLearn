@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
+import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.fragments.handbook.ArticleFragment;
 import no.ntnu.stud.ubilearn.fragments.handbook.CategoryFragment;
 import no.ntnu.stud.ubilearn.fragments.handbook.HandbookItemAdapter;

@@ -26,8 +26,6 @@ public class TrainingDAO extends DAO{
 		values.put(DatabaseHandler.KEY_CORRECT, quiz.getCorrect());
 		values.put(DatabaseHandler.KEY_OWNER_ID, quiz.getOwnerId());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(quiz.getCreatedAt()));
-
-		log(values.toString());
 		
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_QUIZ, quiz.getObjectId()))
@@ -158,9 +156,7 @@ public class TrainingDAO extends DAO{
 		values.put(DatabaseHandler.KEY_INFO, patient.getInfo());
 		values.put(DatabaseHandler.KEY_LEVEL, patient.getLevel());
 		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(patient.getCreatedAt()));
-		
-		log(values.toString());
-		
+				
 		long rowId;
 		if(!exists(DatabaseHandler.TABLE_CASE_PATIENT, patient.getObjectId()))
 			rowId = database.insert(DatabaseHandler.TABLE_CASE_PATIENT,null,values);

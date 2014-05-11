@@ -21,12 +21,12 @@ public class GalleryImageAdapter extends BaseAdapter
 {
     private Context mContext;
 
-    private Integer[] mImageIds = {
-            R.drawable.exercise1,
-            R.drawable.exercise2,
-            R.drawable.exercise3,
-            R.drawable.exercise4
-    };
+//    private Integer[] mImageIds = {
+//            R.drawable.exercise1,
+//            R.drawable.exercise2,
+//            R.drawable.exercise3,
+//            R.drawable.exercise4
+//    };
     private ArrayList<byte[]> images;
 
     public GalleryImageAdapter(Context context, ArrayList<byte[]> images) 
@@ -36,7 +36,8 @@ public class GalleryImageAdapter extends BaseAdapter
     }
 
     public int getCount() {
-        return mImageIds.length;
+//        return mImageIds.length;
+    	return images.size();
     }
 
     public Object getItem(int position) {

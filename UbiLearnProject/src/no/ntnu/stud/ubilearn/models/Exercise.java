@@ -2,6 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,14 +12,19 @@ public class Exercise extends ListItem{
 	private String objectId;
 	private String name;
 	private String text;
-	private ArrayList<byte[]> images;
+	private ArrayList<ExerciseImage> images;
+	private Date createdAt;
 	
 	
-	public Exercise(String objectId, String name, String text) {
+	public Exercise(String objectId, String name, String text,Date createdAt) {
 		super();
 		this.objectId = objectId;
 		this.name = name;
 		this.text = text;
+		this.createdAt = createdAt;
+	}
+	public Date getCreatedAt(){
+		return createdAt;
 	}
 	public String getText() {
 		return text;
@@ -48,11 +54,18 @@ public class Exercise extends ListItem{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public ArrayList<byte[]> getImages() {
+	public ArrayList<ExerciseImage> getImages() {
 		return images;
 	}
-	public void setImages(ArrayList<byte[]> images){
+	public void setImages(ArrayList<ExerciseImage> images){
 		this.images = images;
+	}
+	public ArrayList<byte[]> getImagesAsBytes() {
+		ArrayList<byte[]> imagesAsBytes = new ArrayList<byte[]>();
+		for (ExerciseImage image : images) {
+			imagesAsBytes.add(image.getBytes());
+		}
+		return imagesAsBytes;
 	}
 
 	private byte[] pngToByteArray(String name){

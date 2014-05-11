@@ -40,7 +40,7 @@ public class ExcerciseFragment extends Fragment {
 	        Gallery gallery = (Gallery) view.findViewById(R.id.gallery1);
 	        selectedImage = (ImageView) view.findViewById(R.id.imageView1);
 	        gallery.setSpacing(1);
-	        gallery.setAdapter(new GalleryImageAdapter(getActivity(),exercise.getImages()));
+	        gallery.setAdapter(new GalleryImageAdapter(getActivity(),exercise.getImagesAsBytes()));
 
 	         // clicklistener for Gallery
 	        gallery.setOnItemClickListener(new OnItemClickListener() {
@@ -52,7 +52,7 @@ public class ExcerciseFragment extends Fragment {
 	                Intent myIntent = new Intent(getActivity(), ImageDialog.class);
 	                Bundle data = new Bundle();
 //	                data.putInt("image", mImageIds[position]);
-	                data.putByteArray("image", exercise.getImages().get(position));
+	                data.putByteArray("image", exercise.getImagesAsBytes().get(position));
 	                myIntent.putExtra("image", data);
 	                startActivity(myIntent);
 	            }
