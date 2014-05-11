@@ -169,6 +169,16 @@ public class User {
 	}
 	//-------------------------------------------------------------------------
 	/**
+	 * Set the name of the user.
+	 * 
+	 * @param name - The name of the user.
+	 */
+	public void setName(String name)
+	{
+		_name = name;
+	}
+	//-------------------------------------------------------------------------
+	/**
 	 * Retrieves a list of all the levels in the training part.
 	 * 
 	 * @return A list of the levels in the training part 
