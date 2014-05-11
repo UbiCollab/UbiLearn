@@ -59,11 +59,28 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		SyncContent.retriveNewContent(this);
+		
+		Thread t = new Thread(new Runnable() {	
+			@Override
+			public void run() {
+				Log.v("Thread", "test");
+				while (!SyncContent.hasRetrived) {
+					try {
+						 Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		t.run();
 
 		activityView = (DrawerLayout) findViewById(R.id.drawer_layout);
 		drawerView = (ListView) findViewById(R.id.left_drawer);

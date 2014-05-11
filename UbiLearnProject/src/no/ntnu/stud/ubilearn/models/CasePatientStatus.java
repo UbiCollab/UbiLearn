@@ -2,7 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 public class CasePatientStatus {
 
-	int highScore;
+	int highScore = 0;
 	boolean isComplete;
 	String objectId;
 	

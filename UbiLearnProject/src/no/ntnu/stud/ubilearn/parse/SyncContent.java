@@ -66,6 +66,7 @@ public class SyncContent {
 		
 		isRetriving = false;
 		hasRetrived = true;
+		
 		Log.v("Sync", "done");
 		//Fungerer ikke fordi metodene over kaller asyncrone metoder
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
