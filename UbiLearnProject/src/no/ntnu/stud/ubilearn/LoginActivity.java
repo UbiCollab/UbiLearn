@@ -1,5 +1,7 @@
 package no.ntnu.stud.ubilearn;
 
+import java.util.Date;
+
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 import com.parse.LogInCallback;
@@ -111,21 +113,26 @@ public class LoginActivity extends Activity {
 	
 	//used by skip button
 	public void skip(View view){
-		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-		ParseUser.logInInBackground("test@test.com", "test", new LogInCallback() {
-			
-			@Override
-			public void done(ParseUser user, ParseException e) {
-				if (e == null) {
-					Log.v("Login", "skip with user");
-					startMain(null);
-				}else{
-					showProgress(false);
-					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
-				}
-			}
-		});
+		mEmail = "test@test.com";
+		mPassword = "test";
+		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 		showProgress(true);
+		attemptLogin();
+//		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+//		ParseUser.logInInBackground("test@test.com", "test", new LogInCallback() {
+//			
+//			@Override
+//			public void done(ParseUser user, ParseException e) {
+//				if (e == null) {
+//					Log.v("Login", "skip with user");
+//					startMain(null);
+//				}else{
+//					showProgress(false);
+//					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
+//				}
+//			}
+//		});
+//		showProgress(true);
 	}
 	
 	public void startMain(View view) 
@@ -205,6 +212,8 @@ public class LoginActivity extends Activity {
 			@Override
 			public void done(ParseUser user, ParseException e) {
 				if (e == null) {
+					SyncContent.fetchCasePatient(pointerHax);
+					SyncContent.fetchTrainingProgress();
 					startMain(null);
 				}else{
 					showProgress(false);

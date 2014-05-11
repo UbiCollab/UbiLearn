@@ -48,22 +48,12 @@ public class SyncContent {
 	
 	public static void retriveNewContent(Context context){
 		isRetriving = true;
-		//checks if user is logged in
-		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
-			return;
-		}
-		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
-			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
-		}
+		calculateLastUpdate();
 		//Asynchronous
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
 		fetchQuizesAfterUpdate(context);
 		fetchExerciseCategories();
-		//Synchronized
-		fetchCasePatient(context);
-		fetchTrainingProgress();
-		
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
 		
@@ -75,7 +65,7 @@ public class SyncContent {
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 	
-	private static void fetchCasePatient(final Context context) {
+	public static void fetchCasePatient(final Context context) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCase");
 		if (lastUpdate != null) {
 			query.whereGreaterThan("updatedAt", lastUpdate);			
@@ -447,7 +437,15 @@ public class SyncContent {
 		return stringList;
 	}
 	
-	
+	public static void calculateLastUpdate(){
+		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
+			return;
+		}
+		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
+			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
+		}
+	}
 }
+
 
 
