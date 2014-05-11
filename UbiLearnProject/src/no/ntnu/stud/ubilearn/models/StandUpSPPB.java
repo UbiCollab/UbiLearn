@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class StandUpSPPB extends SPPB implements Comparable<StandUpSPPB>{
 	private double time;
+	private String seatHeight;
 
 	public StandUpSPPB(String objectId, String name, String patientId, double time, Date createdAt) {
 		super(objectId, name, patientId, createdAt);
@@ -13,10 +14,12 @@ public class StandUpSPPB extends SPPB implements Comparable<StandUpSPPB>{
 	public StandUpSPPB(String name, int patientId, double time, Date createdAt) {
 		super(name, patientId, createdAt);
 		this.time = time;
+		this.seatHeight = "";
 	}
-	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt, boolean failed) {
+	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt, boolean failed, String seatHeight) {
 		super(id,name, patientId, createdAt, failed);
 		this.time = time;
+		this.seatHeight = seatHeight;		
 	}
 	public StandUpSPPB(int id, String name, int patientId, double time, Date createdAt) {
 		super(id,name, patientId, createdAt);
@@ -45,6 +48,12 @@ public class StandUpSPPB extends SPPB implements Comparable<StandUpSPPB>{
 
 	public void setTime(double time) {
 		this.time = time;
+	}
+	public String getSeatHeight() {
+		return seatHeight;
+	}
+	public void setSeatHeight(String seatHeight) {
+		this.seatHeight = seatHeight;
 	}
 
 	@Override

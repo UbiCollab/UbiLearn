@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import no.ntnu.stud.ubilearn.fragments.practise.SPPBTestComparator;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Category;
@@ -132,10 +133,10 @@ public class PractiseDAO extends DAO {
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
 		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
+		String seatHeight = result.getString(result.getColumnIndex(DatabaseHandler.KEY_SEAT_HEIGHT));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		
-		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed);
+		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed, seatHeight);
 	}
 	/**
 	 * 
@@ -243,6 +244,7 @@ public class PractiseDAO extends DAO {
 	}
 	private void insertStandUpSPPB(StandUpSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
+		values.put(DatabaseHandler.KEY_SEAT_HEIGHT, test.getSeatHeight());
 	}
 	
 	public void printTables(){
@@ -255,21 +257,21 @@ public class PractiseDAO extends DAO {
 		HashMap<String, SPPB> tests = new HashMap<String, SPPB>();
 		
 		ArrayList<WalkingSPPB> walkingTests = getWalkingSPPBs(patientId);
-		Collections.sort(walkingTests);
+		Collections.sort(walkingTests,new SPPBTestComparator());
 		if(walkingTests.isEmpty())
 			tests.put("Walking", null);
 		else
 			tests.put("Walking", walkingTests.get(walkingTests.size()-1));
 		
 		ArrayList<BalanceSPPB> balanceTests = getBalanceSPPBs(patientId);
-		Collections.sort(balanceTests);
+		Collections.sort(balanceTests,new SPPBTestComparator());
 		if(balanceTests.isEmpty())
 			tests.put("Balance", null);
 		else
 			tests.put("Balance", balanceTests.get(balanceTests.size()-1));
 		
 		ArrayList<StandUpSPPB> standUpTests = getStandUpSPPBs(patientId);
-		Collections.sort(standUpTests);
+		Collections.sort(standUpTests,new SPPBTestComparator());
 		if(standUpTests.isEmpty())
 			tests.put("StandUp", null);
 		else

@@ -1,5 +1,7 @@
 package no.ntnu.stud.ubilearn.models;
 
+import com.parse.ParseUser;
+
 
 /**
  * This class represents a house in the training part of the application.
@@ -9,7 +11,7 @@ public class TrainingHouse
 	/**
 	 * Indicates whether a house is locked or not.
 	 */
-	boolean _isLocked;
+	boolean _isComplete;
 	
 	/**
 	 * The score the user has achieved for this house.
@@ -33,7 +35,7 @@ public class TrainingHouse
 	 */
 	public TrainingHouse()
 	{
-		_isLocked	= true;
+		_isComplete	= true;
 		
 		_userScore	= 0;
 		_maxScore	= 0;
@@ -49,10 +51,10 @@ public class TrainingHouse
 	 * @param userScore - The score the user has achieved for this house.
 	 * @param maxScore - The maximum score possible for this house.
 	 */
-	public TrainingHouse(String name, boolean isLocked, 
+	public TrainingHouse(String name, boolean isComplete, 
 			int userScore, int maxScore)
 	{
-		_isLocked	= isLocked;
+		_isComplete	= isComplete;
 		
 		_userScore	= userScore;
 		_maxScore	= maxScore;
@@ -67,7 +69,7 @@ public class TrainingHouse
 	 */
 	public boolean isLocked()
 	{
-		return _isLocked;
+		return _isComplete;
 	}
 	//-------------------------------------------------------------------------
 	/**
@@ -107,7 +109,7 @@ public class TrainingHouse
 	 */
 	public void setLockStatus(boolean isLocked)
 	{
-		_isLocked = isLocked;
+		_isComplete = isLocked;
 	}
 	//-------------------------------------------------------------------------
 	/**

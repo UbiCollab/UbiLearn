@@ -102,7 +102,7 @@ public class SPPBWalkingResultFragment extends Fragment{
 				if(fail2.getSelectedItemPosition() != 0)
 					test2.failed(true);
 				dao.open();
-				if(test1.compareTo(test2)<0)
+				if(test1.compareTo(test2)>0)
 					dao.insertSBBP(test1);
 				else
 					dao.insertSBBP(test2);

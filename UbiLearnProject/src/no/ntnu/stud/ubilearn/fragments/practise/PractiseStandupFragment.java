@@ -20,6 +20,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class PractiseStandupFragment extends Fragment
 	String minSec;
 	int reps = 0;
 	
+	private EditText heightField;
+	
 	public PractiseStandupFragment(Patient patient)
 	{
 		this.patient = patient;
@@ -52,6 +55,7 @@ public class PractiseStandupFragment extends Fragment
 		final TextView titleField = (TextView) view.findViewById(R.id.titleField);
 		final TextView timeField = (TextView) view.findViewById(R.id.timeField);
 		final TextView repsField = (TextView) view.findViewById(R.id.repsField);
+		heightField = (EditText) view.findViewById(R.id.cmField);
 		final Button next = (Button)view.findViewById(R.id.next_button);
 		next.setEnabled(false);
 		
@@ -120,7 +124,9 @@ public class PractiseStandupFragment extends Fragment
 						mainButton.clearAnimation();
 						time = Double.parseDouble(minSec.replace(":", "."));
 						result.setTime(time);
-						start.setText("Start");
+						start.setText("Fullført");
+						result.setSeatHeight(heightField.getText().toString());
+
 						try 
 						{
 							t.cancel();

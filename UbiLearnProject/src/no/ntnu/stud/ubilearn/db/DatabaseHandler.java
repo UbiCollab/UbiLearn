@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 19;
+    static final int DATABASE_VERSION = 20;
 
 
     // Database Name
@@ -67,6 +67,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_SEMI_TANDEM_SCORE = "SemiTandemScore";
     static final String KEY_TANDEM_SCORE = "TandemScore";
     static final String KEY_FAILED = "Failed";
+    static final String KEY_SEAT_HEIGHT = "SeatHeight";
 
     
 
@@ -102,7 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_NO_AID + " INTEGER," + KEY_CRUTCHES + " INTEGER," + KEY_ROLLATER + " INTEGER, " + KEY_OTHER + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
-				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_CREATED_AT + " DATETIME" + ")";
+				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_SEAT_HEIGHT + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
 		
 
 		//invoking the method for creating the actual tables on the disk
