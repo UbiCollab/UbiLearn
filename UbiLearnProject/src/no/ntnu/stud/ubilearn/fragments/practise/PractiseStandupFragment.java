@@ -124,8 +124,9 @@ public class PractiseStandupFragment extends Fragment
 						mainButton.clearAnimation();
 						time = Double.parseDouble(minSec.replace(":", "."));
 						result.setTime(time);
+						start.setText("Fullført");
 						result.setSeatHeight(heightField.getText().toString());
-						start.setText("Start");
+
 						try 
 						{
 							t.cancel();

@@ -17,21 +17,32 @@
         android:layout_margin="8dp"  >
     </TextView>
 
-    <TextView
-        android:id="@+id/case_patientAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alder: 50"
-        android:textSize="20dp"
-        android:layout_margin="8dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/case_patientGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kjønn: Mann"
-        android:textSize="20dp"
-        android:layout_margin="8dp" />
+        <TextView
+            android:id="@+id/case_patientAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Alder: 50"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/case_patientGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Kjønn: Mann"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </LinearLayout>
 
     <TextView
         android:id="@+id/case_patientInfo"
@@ -57,13 +68,17 @@
             android:layout_margin="0.5dp"
             android:background="@android:color/white"
             android:layout_marginBottom="150dp" >
+            
+                <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
             <TextView
                 android:id="@+id/case_patientInfoField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. " />
-
+</ScrollView>
         </FrameLayout>
 
     </FrameLayout>
@@ -72,17 +87,16 @@
         android:id="@+id/training_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vanskelighetsgrad: " 
-        android:textSize="20dp"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:text="Vanskelighetsgrad: "
+        android:textSize="20dp" />
 
     <RatingBar
         android:id="@+id/training_ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="2"
         android:layout_margin="8dp"
-          />
+        android:numStars="2" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -64,6 +64,8 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 	private TextView result1;
 	private TextView result2;
 	private ImageView circle;
+	private TextView start;
+	private TextView stop;
 	//Model:
 	private Patient patient;
 	private WalkingSPPB test1;
@@ -99,13 +101,15 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		radBtns.add(otherButton);
 		otherEdit=(EditText)rootView.findViewById(R.id.annet_edit);
 		resetAids();
+		start = (TextView) rootView.findViewById(R.id.start);
+		stop = (TextView) rootView.findViewById(R.id.stop);
 
 		startTest.setText("Start test "+testCounter);
 		t = new Timer();
 
 		circle = (ImageView) rootView.findViewById(R.id.circle);
 
-		final TextView start = (TextView) rootView.findViewById(R.id.start);
+		
 
 
 		ImageView info = (ImageView)rootView.findViewById(R.id.gangtest_info);
@@ -178,8 +182,8 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 					isTime = true;
 				}else if(isTime){
 					circle.clearAnimation();
-					results();
 					start.setText("Start");
+					results();
 					try {
 						t.cancel();
 
@@ -232,6 +236,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		}
 		if(testCounter>2){
 			circle.setEnabled(false);
+			start.setText("Fullført");
 			next.setEnabled(true);
 		}
 			
