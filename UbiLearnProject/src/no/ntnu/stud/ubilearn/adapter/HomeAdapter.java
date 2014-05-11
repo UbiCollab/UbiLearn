@@ -89,7 +89,7 @@ public class HomeAdapter extends ArrayAdapter<String>
 		TableRow tableRow =
 				(TableRow)rowView.findViewById(R.id.singleLevelTableRow);
 		
-		
+		/* We choose not to use this now.
 		// If the level is locked we indicate this by a certain color on text
 		// and background.
 		if(_levelLockStatus.get(position) == true)
@@ -113,7 +113,7 @@ public class HomeAdapter extends ArrayAdapter<String>
 			// Here we set the background to a greenish color.
 			tableRow.setBackgroundColor(0xFF00FF7F);
 		}
-		
+		*/
 		
 		return rowView;
 	}
