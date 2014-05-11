@@ -132,10 +132,10 @@ public class PractiseDAO extends DAO {
 		int patientId = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_PATIENT_ID));
 		boolean failed = (result.getInt(result.getColumnIndex(DatabaseHandler.KEY_FAILED))==1);
 		Double time = result.getDouble(result.getColumnIndex(DatabaseHandler.KEY_TIME));
+		String seatHeight = result.getString(result.getColumnIndex(DatabaseHandler.KEY_SEAT_HEIGHT));
 		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
 		
-		
-		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed);
+		return new StandUpSPPB(id, name, patientId, time, stringToDate(createdAt),failed, seatHeight);
 	}
 	/**
 	 * 
@@ -243,6 +243,7 @@ public class PractiseDAO extends DAO {
 	}
 	private void insertStandUpSPPB(StandUpSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
+		values.put(DatabaseHandler.KEY_SEAT_HEIGHT, test.getSeatHeight());
 	}
 	
 	public void printTables(){
