@@ -202,9 +202,9 @@ public class User {
 		ArrayList<TrainingLevel> list = new ArrayList<TrainingLevel>();
 		TrainingDAO dao = new TrainingDAO(context);
 		dao.open();
-		for (int i = 0; i < topLevel; i++) {
+		for (int i = 1; i <= topLevel; i++) {
 			ArrayList<TrainingHouse> houses = new ArrayList<TrainingHouse>();
-			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i+1), houses);
+			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i), houses);
 			int levelScore = 0;
 			for (CasePatient caseP : casePatientList) {
 				if (caseP.getGender().equals("test")) {

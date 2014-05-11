@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -106,11 +107,12 @@ public class HomeFragment extends Fragment {
 		resetData();
 		_user = User.getInstance();
 		
-		final View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
+		View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
 		_userName = _user.getName();
-		_levelList = _user.getLevels(pointerHax.getActivity());
-
+		Log.v("Order", "3");
+		_levelList = _user.getLevels(this.getActivity());
+		Log.v("Order", "levelsize " + _levelList.size());
 		/*
 		 * We go through the list of levels and retrieve data that will be used
 		 * to fill the level list in the "Home"-page as well as other

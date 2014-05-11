@@ -82,6 +82,7 @@ public class SyncContent {
 			ArrayList<CasePatient> patientList = dao.getAllCasePatients();
 			User.getInstance().setCasePatientList(patientList);
 			dao.close();
+			Log.v("Order", "1");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -361,6 +362,7 @@ public class SyncContent {
 				User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
 			}
 			Log.v("Sync:", "done fetching training progress");
+			Log.v("Order", "2");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			Log.v("Sync:", e1.getMessage());
