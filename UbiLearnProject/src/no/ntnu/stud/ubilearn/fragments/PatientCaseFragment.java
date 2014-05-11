@@ -65,21 +65,17 @@ public class PatientCaseFragment extends Fragment{
 		TrainingDAO trainingDAO = new TrainingDAO(getActivity());
 		trainingDAO.open();
 		
-		
-		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() >= trainingDAO.getPatientQuizzes(patient).size()){
-			level.setRating(2);
-		}
-		else if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() ==(int) (trainingDAO.getPatientQuizzes(patient).size())*0.75){
-			level.setRating(1);
-		}
-
-		
-		level.setRating(_level);
 		level.setEnabled(false);
 		
 		statusText = (TextView)rootView.findViewById(R.id.training_status);
 		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() > 0){
 		statusText.setText("Gratulerer, du har klart denne casen " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
+		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() < trainingDAO.getPatientQuizzes(patient).size()){
+			level.setRating(1);
+		}
+		else{
+			level.setRating(2);
+		}
 		}
 		else{
 			statusText.setText("Du har ikke klart casen ennå " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
