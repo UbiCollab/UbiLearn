@@ -120,7 +120,7 @@ public class PractiseStandupFragment extends Fragment
 						mainButton.clearAnimation();
 						time = Double.parseDouble(minSec.replace(":", "."));
 						result.setTime(time);
-						start.setText("Start");
+						start.setText("Fullført");
 						try 
 						{
 							t.cancel();
