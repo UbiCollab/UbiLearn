@@ -11,7 +11,10 @@ import no.ntnu.stud.ubilearn.models.TrainingLevel;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -100,23 +103,16 @@ public class HomeFragment extends Fragment
 		// result of clicking the "Back" button on the phone. This is to
 		// prevent that data is added to previously added data.
 		resetData();
-		
-		View fragmentView = inflater.inflate(
-				R.layout.fragment_home, container, false);
-		
+
 		// We retrieve the data that is relevant for the user
 		_user = User.getInstance();
+
+		View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
-		
-		if(_user == null)
-		{
-			//TODO: Output that an error occured and return to the login 
-			// screen
-		}
-		
-		_userName = _user.getName();						 
+		_userName = _user.getName();
 		_levelList = _user.getLevels(this.getActivity());
-		
+//		_levelList = User.getInstance().getTestLevels();
+
 		/*
 		 * We go through the list of levels and retrieve data that will be used
 		 * to fill the level list in the "Home"-page as well as other
@@ -125,6 +121,7 @@ public class HomeFragment extends Fragment
 		for(TrainingLevel level : _levelList)
 		{
 			_listName.add(level.getName());
+			Log.v("Order", "level maxscore" + level.getMaxScore());
 			_listScore.add(level.getUserScore() + "/" + level.getMaxScore());
 			
 			_userScore += level.getUserScore();
@@ -223,7 +220,6 @@ public class HomeFragment extends Fragment
 		// Now we want to fill the list in 'fragment_home.xml' with data 
 		ListView _levelListView = 
 				(ListView)fragmentView.findViewById(R.id.homeListLevel);
-		
 		_levelListView.setAdapter(new HomeAdapter(
 				this.getActivity(),	_listName, _listScore, _listLockStatus));
 		
@@ -238,8 +234,11 @@ public class HomeFragment extends Fragment
 			{
 //				String levelName = (String)_listName.get(position);
 				
-				HomeCasesFragment fragment = 
-						HomeCasesFragment.newInstance(position);//position + 1);
+				HomeCasesFragment fragment = new HomeCasesFragment();
+						//HomeCasesFragment.newInstance(position);//position + 1);
+						//HomeCasesFragment.newInstance(_levelList.get(position));
+						//new HomeCasesFragment(_levelList.get(position));
+						fragment.setTrainingLevel(_levelList.get(position));
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();

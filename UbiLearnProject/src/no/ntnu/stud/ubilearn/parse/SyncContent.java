@@ -1,6 +1,8 @@
 package no.ntnu.stud.ubilearn.parse;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,23 +52,15 @@ public class SyncContent {
 	
 	public static void retriveNewContent(Context context){
 		isRetriving = true;
-		//checks if user is logged in
-		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
-			return;
-		}
-		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
-			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
-		}
+		calculateLastUpdate();
+		//Asynchronous
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
-		fetchQuizesAfterUpdate(context);
-		fetchCasePatient(context);
-		fetchTrainingProgress();
 		updateExerciseImages(context);
 		fetchExerciseCategories(context);
+
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
 //		ParseUser.getCurrentUser().saveInBackground();
-		
 		isRetriving = false;
 		hasRetrived = true;
 		
@@ -75,32 +69,30 @@ public class SyncContent {
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 
-
-	private static void fetchCasePatient(final Context context) {
+	
+	public static void fetchCasePatient(final Context context) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCase");
 		if (lastUpdate != null) {
 			query.whereGreaterThan("updatedAt", lastUpdate);			
 		}
-		query.findInBackground(new FindCallback<ParseObject>() {
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				if (e == null) {
-					ArrayList<CasePatient> list = new ArrayList<CasePatient>();
-					for (ParseObject o : objects) {
-						list.add(new CasePatient(o.getObjectId(), o.getString("name"), o.getString("age"), o.getString("gender"), o.getString("info"), o.getInt("level"), o.getCreatedAt()));
-					}
-					TrainingDAO dao = new TrainingDAO(context);
-					dao.open();
-					dao.insertCasePatients(list);
-					ArrayList<CasePatient> patientList = dao.getAllCasePatients();
-					User.getInstance().setCasePatientList(patientList);
-					dao.close();
-					
-				}else{
-					Log.v("SyncContent", e.getMessage());
-				}
+		try {
+			List<ParseObject> objects = query.find();
+			ArrayList<CasePatient> list = new ArrayList<CasePatient>();
+			for (ParseObject o : objects) {
+				list.add(new CasePatient(o.getObjectId(), o.getString("name"), o.getString("age"), o.getString("gender"), o.getString("info"), o.getInt("level"), o.getCreatedAt()));
 			}
-		});
+			TrainingDAO dao = new TrainingDAO(context);
+			dao.open();
+			dao.insertCasePatients(list);
+			ArrayList<CasePatient> patientList = dao.getAllCasePatients();
+			Collections.sort(patientList);
+			User.getInstance().setCasePatientList(patientList);
+			dao.close();
+			Log.v("Order", "1");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	public static void fetchQuizesAfterUpdate (final Context context){
@@ -108,28 +100,23 @@ public class SyncContent {
 		if (lastUpdate != null) {
 			query.whereGreaterThan("updatedAt", lastUpdate);			
 		}
-		query.findInBackground(new FindCallback<ParseObject>() {
-
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				List<Quiz> list = new ArrayList<Quiz>();
-				if (e == null) {
-					for (ParseObject o : objects) {
-						String ownerId = null;
-						if (o.getParseObject("owner") != null) {
-							ownerId = o.getParseObject("owner").getObjectId();
-						}
-						list.add(new Quiz(o.getString("question"), downcastListOfObjectsToString(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
-					}
-					TrainingDAO dao = new TrainingDAO(context);
-					dao.open();
-					dao.insertQuizzes(list);
-					dao.close();
-				}else {
-					Log.v("SyncContent", e.getMessage());
+		try {
+			List<ParseObject> objects = query.find();
+			List<Quiz> list = new ArrayList<Quiz>();
+			for (ParseObject o : objects) {
+				String ownerId = null;
+				if (o.getParseObject("owner") != null) {
+					ownerId = o.getParseObject("owner").getObjectId();
 				}
+				list.add(new Quiz(o.getString("question"), downcastListOfObjectsToString(o.getList("answers")), o.getString("correct"), o.getObjectId(), ownerId, o.getCreatedAt()));
 			}
-		});
+			TrainingDAO dao = new TrainingDAO(context);
+			dao.open();
+			dao.insertQuizzes(list);
+			dao.close();
+		} catch (ParseException e) {
+			Log.v("SyncContent", e.getMessage());
+		}
 	}
 	
 	public static void fetchHandBookArticleAfterUpdate(final Context context){
@@ -403,20 +390,18 @@ public class SyncContent {
 		}
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCaseStatus");
 		query.whereEqualTo("user", ParseUser.getCurrentUser());
-		query.findInBackground(new FindCallback<ParseObject>() {
-
-			@Override
-			public void done(List<ParseObject> objects, ParseException e) {
-				if (e == null) {
-					for (ParseObject o : objects) {
-						User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
-					}
-					Log.v("Sync:", "done fetching training progress");
-				}else{
-					Log.v("Sync:", e.getMessage());
-				}
+		
+		try {
+			List<ParseObject> objects = query.find();
+			for (ParseObject o : objects) {
+				User.getInstance().getMapCasePatientStatus().put(o.getParseObject("patientCase").getObjectId(), new CasePatientStatus(o.getInt("highScore"), o.getBoolean("isComplete"), o.getObjectId()));						
 			}
-		});
+			Log.v("Sync:", "done fetching training progress");
+			Log.v("Order", "2");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			Log.v("Sync:", e1.getMessage());
+		}
 	}
 	
 	public static void saveTrainingProgress(){
@@ -489,7 +474,15 @@ public class SyncContent {
 		return stringList;
 	}
 	
-	
+	public static void calculateLastUpdate(){
+		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
+			return;
+		}
+		if (ParseUser.getCurrentUser().getDate("lastUpdate") != null) {
+			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
+		}
+	}
 }
+
 
 

@@ -141,6 +141,7 @@ public class Training extends Fragment {
 
 				if(User.getInstance().getQuizLevel()>=currentLevel+1){
 					currentLevel++;
+					User.getInstance().setCurrentLevel(currentLevel);
 					showLevel = false;
 					setLevelImage(currentLevel);
 					Toast.makeText(getActivity(), "Du er nå i level "+ currentLevel, Toast.LENGTH_SHORT).show();

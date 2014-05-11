@@ -16,14 +16,16 @@ import no.ntnu.stud.ubilearn.parse.SyncContent;
 public class User {
 	private ArrayList<CasePatient> casePatientList = new ArrayList<CasePatient>();
 	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
-	
+
 	private static User instance;
 	private int _level = 1;
+	ArrayList<CasePatient> temp = new ArrayList<CasePatient>();
+	private int patientLevel;
 
 
-	
+
 	private String _name;
-	
+
 	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
 		return mapCasePatientStatus;
 	}
@@ -36,7 +38,8 @@ public class User {
 
 	private int level = 1;
 	private ArrayList<ListItem> exercises;
-	
+	private int currentLevel;
+
 
 	//#########################################################################
 	private User()
@@ -47,16 +50,16 @@ public class User {
 		// TrainingLevel. Delete this when actual data can be retrieved from
 		// database.
 		_name = "Ola Nordman";	// Test data.
-		
+
 		_levelList = new ArrayList<TrainingLevel>();		
-				
-		
+
+
 		List<TrainingHouse> houseListLevel1	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
-						new TrainingHouse("Dagmar", false, 5, 11), 
-						new TrainingHouse("Hallvard", false, 9, 12),
-						new TrainingHouse("Fredrik", false, 8, 10),
-						new TrainingHouse("Ragnhild", false, 2, 10),
+						new TrainingHouse("Dagmar", false, 0, 0), 
+						new TrainingHouse("Hallvard", false, 0, 0),
+						new TrainingHouse("Fredrik", false, 0, 0),
+						new TrainingHouse("Ragnhild", false, 0, 0),
 						new TrainingHouse("Kyrre", false, 11, 11),
 						new TrainingHouse("Espen", false, 13, 15),
 						new TrainingHouse("Ingeborg", false, 2, 4),
@@ -64,7 +67,7 @@ public class User {
 						new TrainingHouse("Haldis", false, 0, 11),
 						new TrainingHouse("Alfredo", true, 0, 9),
 						new TrainingHouse("Kristian", true, 0, 15))); 
-				
+
 		List<TrainingHouse> houseListLevel2	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
 						new TrainingHouse("House 1", false, 10, 10),
@@ -73,7 +76,7 @@ public class User {
 						new TrainingHouse("House 4", false, 10, 10),
 						new TrainingHouse("House 5", false, 10, 10)
 						));
-		
+
 		List<TrainingHouse> houseListLevel3	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
 						new TrainingHouse("House 1", false, 3, 10),
@@ -82,7 +85,7 @@ public class User {
 						new TrainingHouse("House 4", true, 0, 10),
 						new TrainingHouse("House 5", true, 0, 10)
 						));
-			
+
 		List<TrainingHouse> houseListLevel4	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
 						new TrainingHouse("House 1", true, 0, 10),
@@ -91,7 +94,7 @@ public class User {
 						new TrainingHouse("House 4", true, 0, 10),
 						new TrainingHouse("House 5", true, 0, 10)
 						));
-		
+
 		List<TrainingHouse> houseListLevel5	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
 						new TrainingHouse("House 1", true, 0, 10),
@@ -100,7 +103,7 @@ public class User {
 						new TrainingHouse("House 4", true, 0, 10),
 						new TrainingHouse("House 5", true, 0, 10)
 						));
-		
+
 		List<TrainingHouse> houseListLevel6	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
 						new TrainingHouse("House 1", true, 0, 10),
@@ -109,27 +112,27 @@ public class User {
 						new TrainingHouse("House 4", true, 0, 10),
 						new TrainingHouse("House 5", true, 0, 10)
 						));		
-		
-		
+
+
 		TrainingLevel level1 = new TrainingLevel("Level 1", false, 50, 117,
 				houseListLevel1);
-		
+
 		TrainingLevel level2 = new TrainingLevel("Fall", false, 50, 50,
 				houseListLevel2);
-		
+
 		TrainingLevel level3 = new TrainingLevel("Level 3", false, 3, 50,
 				houseListLevel3);
-		
+
 		TrainingLevel level4 = new TrainingLevel("Level 4", true, 0, 50,
 				houseListLevel4);
-		
+
 		TrainingLevel level5 = new TrainingLevel("Level 5", true, 0, 50,
 				houseListLevel5);
-		
+
 		TrainingLevel level6 = new TrainingLevel("Level 6", true, 0, 50,
 				houseListLevel6);
-		
-		
+
+
 		_levelList.add(level1);
 		_levelList.add(level2);
 		_levelList.add(level3);
@@ -138,6 +141,18 @@ public class User {
 		_levelList.add(level6);			
 		//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	}
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * This method returns test data that has been initialized.
+	 * 
+	 * @return A list of instances of type TrainingLevel.
+	 */
+	public List<TrainingLevel> getTestLevels()
+	{
+		return _levelList;
+	}
+	
 	//-------------------------------------------------------------------------
 	public static User getInstance(){
 		if(instance != null){
@@ -149,7 +164,7 @@ public class User {
 	}
 	//pasient listen
 	public ArrayList<CasePatient> getCasePatientList() {
-		
+
 		return casePatientList;
 	}
 
@@ -157,7 +172,7 @@ public class User {
 		this.casePatientList = patientList;
 	}
 
-	
+
 	//-------------------------------------------------------------------------
 	/**
 	 * Retrieves the name of the user that is currently logged in the
@@ -185,27 +200,26 @@ public class User {
 	 * 
 	 * @return A list of the levels in the training part 
 	 */
+
 	
 	public List<TrainingLevel> getLevels(Context context)
+
 	{
 		int topLevel = 0;
 		for (CasePatient caseP : casePatientList) {
 			if (caseP.getLevel() > topLevel) {
 				topLevel = caseP.getLevel();
-				Log.v("Sync", "top level: " + topLevel);
 			}
 		}
 		ArrayList<TrainingLevel> list = new ArrayList<TrainingLevel>();
 		TrainingDAO dao = new TrainingDAO(context);
 		dao.open();
-		for (int i = 0; i < topLevel; i++) {
+		for (int i = 1; i <= topLevel; i++) {
 			ArrayList<TrainingHouse> houses = new ArrayList<TrainingHouse>();
-			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i+1), houses);
+			TrainingLevel lv = new TrainingLevel("Level " + i, (getQuizLevel()<i), -1, dao.getNofQuizzes(i), houses);
 			int levelScore = 0;
-			Log.v("Sync", "casePatientList: " + casePatientList.size());
 			for (CasePatient caseP : casePatientList) {
 				if (caseP.getGender().equals("test")) {
-					Log.v("Sync", "test object");
 					continue;
 				}
 				if (caseP.getLevel() == i) {
@@ -241,7 +255,7 @@ public class User {
 	{   
 		try{
 			TrainingLevel level = _levelList.get(position);
-			
+
 			return level;
 		}
 		catch(IndexOutOfBoundsException exception)
@@ -249,26 +263,34 @@ public class User {
 			return null;
 		}
 	}
-	
+
 	//-------------------------------------------------------------------------
 	public int getQuizLevel() {
 		int counter = 0;
 		
+
+
 		//START TESTING
 		for(int j = 0; j < 33;j++){
 			if(casePatientList.size()==j){
-				casePatientList.add(j, new CasePatient("null", "0", "male", "0", "0"));
+				casePatientList.add(j, new CasePatient("null", "0", "test", "0", "0"));
 			}
+
+
 		}
 		//END TESTING
-		
+		Log.v("Real patients: ", getAllPatients(getCurrentLevel()).size() + "");
 		for(int i = 0+(11*(_level-1)); i<(11*_level);i++){
 			if(mapCasePatientStatus.get(casePatientList.get(i).getObjectId()) != null && 
 					mapCasePatientStatus.get(casePatientList.get(i).getObjectId()).isComplete()){
 				counter++;
+				Log.v("Du må klare: ", (int) (getAllPatients(getCurrentLevel()).size()*0.75) + " hus, for å komme videre til neste level");
+			//	Log.v("Antall pasienter: ", getAllPatients(getCurrentLevel()).size() + "");
+
 			}
 		}
-		if(counter >= 2){//TODO teller antall spm klart, ikke antall hus
+		if(counter >= (int) (getAllPatients(getCurrentLevel()).size()*0.75)){
+			Log.v("Du har nå klart", counter + " hus, og er på neste level");
 			_level++;
 			return getQuizLevel();
 		}else {
@@ -284,7 +306,7 @@ public class User {
 			temp.setComplete(complete);
 			mapCasePatientStatus.put(objectid, temp);
 		}else{
-		mapCasePatientStatus.put(objectid, new CasePatientStatus(housePoints, complete));
+			mapCasePatientStatus.put(objectid, new CasePatientStatus(housePoints, complete));
 		}
 		Log.v("SyncContent", "Sync Training Progress");
 		//SyncContent.saveTrainingProgress();
@@ -303,5 +325,20 @@ public class User {
 	public ArrayList<ListItem> getExercises() {
 		return exercises;
 	}
+	public ArrayList<CasePatient> getAllPatients(int level) { //<-- level kan du sende med fra Training?
+		ArrayList<CasePatient> realPatients = new ArrayList<CasePatient>();
+		for(int i = 0+(11*(_level-1)); i<(11*_level);i++){ // samme som i den hat metoden din
+			if(casePatientList.get(i) != null && !casePatientList.get(i).getGender().equals("test")){ 
+				realPatients.add(casePatientList.get(i));
+			}
+		}
+		return realPatients;
 
+	}
+	public void setCurrentLevel(int level){
+		this.currentLevel = currentLevel;
+	}
+	public int getCurrentLevel(){
+		return currentLevel;
+	}
 }

@@ -7,7 +7,7 @@ import java.util.Date;
 import no.ntnu.stud.ubilearn.User;
 import android.util.Log;
 
-public class Quiz {
+public class Quiz{
 	private String question;
 	private ArrayList<String> answers; //answers[3] er riktig svar
 	private String correct;

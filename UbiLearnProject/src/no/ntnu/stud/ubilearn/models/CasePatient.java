@@ -2,7 +2,7 @@ package no.ntnu.stud.ubilearn.models;
 
 import java.util.Date;
 
-public class CasePatient {
+public class CasePatient implements Comparable<CasePatient> {
 	
 	private String objectId;
 	private String name;
@@ -77,6 +77,16 @@ public class CasePatient {
 	}
 	public Date getCreatedAt(){
 		return createdAt;
+	}
+	@Override
+	public int compareTo(CasePatient another) {
+		if (this.level < another.getLevel()) {
+			return -1;
+		}
+		if (this.level > another.getLevel()) {
+			return 1;
+		}
+		return 0;
 	}
 
 }
