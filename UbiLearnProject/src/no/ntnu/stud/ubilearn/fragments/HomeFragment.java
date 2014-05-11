@@ -8,13 +8,10 @@ import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.adapter.HomeAdapter;
 import no.ntnu.stud.ubilearn.models.TrainingLevel;
-import no.ntnu.stud.ubilearn.parse.SyncContent;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,9 +25,8 @@ import android.widget.TextView;
 /**
  * This class handles the fragment for the Home page.
  */
-public class HomeFragment extends Fragment {
-	
-	private Fragment pointerHax = this;
+public class HomeFragment extends Fragment 
+{
 	/*
 	 * The score the user has achieved from each level will be added to this
 	 * variable and then it will be used to calculate the status of the user.
@@ -104,13 +100,23 @@ public class HomeFragment extends Fragment {
 		// result of clicking the "Back" button on the phone. This is to
 		// prevent that data is added to previously added data.
 		resetData();
+		
+		View fragmentView = inflater.inflate(
+				R.layout.fragment_home, container, false);
+		
+		// We retrieve the data that is relevant for the user
 		_user = User.getInstance();
 		
-		final View fragmentView = inflater.inflate(R.layout.fragment_home, container, false);
 		
-		_userName = _user.getName();
-		_levelList = _user.getLevels(pointerHax.getActivity());
-
+		if(_user == null)
+		{
+			//TODO: Output that an error occured and return to the login 
+			// screen
+		}
+		
+		_userName 	= _user.getName();						 
+		_levelList	= _user.getLevels(this.getActivity());
+		
 		/*
 		 * We go through the list of levels and retrieve data that will be used
 		 * to fill the level list in the "Home"-page as well as other
@@ -232,8 +238,11 @@ public class HomeFragment extends Fragment {
 			{
 //				String levelName = (String)_listName.get(position);
 				
-				HomeCasesFragment fragment = 
-						HomeCasesFragment.newInstance(position);//position + 1);
+				HomeCasesFragment fragment = new HomeCasesFragment();
+						//HomeCasesFragment.newInstance(position);//position + 1);
+						//HomeCasesFragment.newInstance(_levelList.get(position));
+						//new HomeCasesFragment(_levelList.get(position));
+						fragment.setTrainingLevel(_levelList.get(position));
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();
@@ -298,6 +307,8 @@ public class HomeFragment extends Fragment {
 								null).commit();
 			}
 		});
+					
+		
 		return fragmentView;
 		//return inflater.inflate(R.layout.fragment_home, container, false);
 	}
@@ -308,10 +319,6 @@ public class HomeFragment extends Fragment {
 	 * make sure that when the user enters other pages and then returns to this
 	 * page, data will not add to already existing data.
 	 */
-	
-	private void doStuff(View fragmentView){
-		
-	}
 	private void resetData()
 	{
 		_userScore			= 0;
