@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import com.parse.Parse;
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.util.Log;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
@@ -182,7 +185,7 @@ public class User {
 	 */
 	public String getName()
 	{
-		return _name;
+		return ParseUser.getCurrentUser().getUsername();
 	}
 	//-------------------------------------------------------------------------
 	/**

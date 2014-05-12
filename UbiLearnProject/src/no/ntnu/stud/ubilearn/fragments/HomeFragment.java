@@ -149,7 +149,8 @@ public class HomeFragment extends Fragment
 			 * The user will unlock an achievement if the user has achieved
 			 * maximum score possible for that specific level.
 			 */
-			if(level.getUserScore() == level.getMaxScore())
+			if((level.getUserScore() == level.getMaxScore()) &&
+					(level.getMaxScore() != 0))
 			{
 				_nAchievements++;
 			}

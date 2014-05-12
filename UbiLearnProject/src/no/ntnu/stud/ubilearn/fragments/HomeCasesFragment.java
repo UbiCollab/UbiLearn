@@ -43,14 +43,14 @@ public class HomeCasesFragment extends Fragment
 	int _levelMaxScore		= 0;
 	
 	/*
-	 * This variable hold the number of unlocked houses for this level.
+	 * This variable hold the number of completed houses for this level.
 	 */
-	int _nUnlockedHouses 	= 0;
+	int _nCompletedHouses 	= 0;
 	
 	/*
-	 * This variable hold the number of locked houses for this level.
+	 * This variable hold the number of not completed houses for this level.
 	 */
-	int _nLockedHouses	 	= 0;
+	int _nUncompletedHouses	= 0;
 	
 	/*
 	 * This variable hold the number of locked houses for this level.
@@ -84,16 +84,13 @@ public class HomeCasesFragment extends Fragment
 	 */
 	TrainingLevel _level = null;
 	
+	
+	//#########################################################################
 	public HomeCasesFragment()
 	{
 		
 	}
-	//#########################################################################
-/*	public HomeCasesFragment(TrainingLevel level)
-	{
-		//_level = level;
-	}
-*/	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
 /*	public static HomeCasesFragment newInstance(int levelNo)
 	{
 		HomeCasesFragment fragment = new HomeCasesFragment(level);
@@ -106,11 +103,6 @@ public class HomeCasesFragment extends Fragment
 		return fragment;
 	}
 */	//-------------------------------------------------------------------------
-/*	public void onCreate(Bundle savedInstanceState)
-	{
-		super(savedInstanceState);
-	}
-*/	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
@@ -133,15 +125,15 @@ public class HomeCasesFragment extends Fragment
 		// We go through a list of cases and initializes relevant data.
 		for(TrainingHouse house : level.getHouseList())
 		{
-			// Here we check whether each house is locked or not, and update
+			// Here we check whether each house is completed or not, and update
 			// the relevant variable accordingly.
-			if(house.isLocked() == true)
+			if(house.isCompleted() == true)
 			{
-				_nLockedHouses += 1;
+				_nCompletedHouses += 1;
 			}
 			else
 			{
-				_nUnlockedHouses += 1;
+				_nUncompletedHouses += 1;
 			}
 			
 			
@@ -156,46 +148,49 @@ public class HomeCasesFragment extends Fragment
 			// the specified house/case. We calculate this a bit different
 			// if the maximum score for a house is greater than 5 than if the 
 			// score is 5 or less.
-			if(houseMaxScore > 5)
+			if(houseUserScore > 0 && houseMaxScore > 0)
 			{
-				int score = (houseUserScore * 100) / houseMaxScore;
+				if(houseMaxScore > 5)
+				{
+					int score = (houseUserScore * 100) / houseMaxScore;
 				
 				
-				if(score >= 89)
-				{
-					_listMedal.add("Gold");
+					if(score >= 89)
+					{
+						_listMedal.add("Gold");
+					}
+					else if(score >= 77)
+					{
+						_listMedal.add("Silver");
+					}
+					else if(score >= 65)
+					{
+						_listMedal.add("Bronze");
+					}
+					else
+					{
+						_listMedal.add("None");
+					}
 				}
-				else if(score >= 77)
+				else// if(houseMaxScore > 0)
 				{
-					_listMedal.add("Silver");
-				}
-				else if(score >= 65)
-				{
-					_listMedal.add("Bronze");
-				}
-				else
-				{
-					_listMedal.add("None");
-				}
-			}
-			else if(houseMaxScore > 0)
-			{
-				if(houseUserScore == houseMaxScore)
-				{
-					_listMedal.add("Gold");
-				}
-				else if(houseUserScore == (houseMaxScore - 1))
-				{
-					_listMedal.add("Silver");
-				}
-				else if(houseUserScore == (houseMaxScore - 2))
-				{
-					_listMedal.add("Bronze");
-				}
-				else
-				{
-					_listMedal.add("None");
-				}
+					if(houseUserScore == houseMaxScore)
+					{
+						_listMedal.add("Gold");
+					}
+					else if(houseUserScore == (houseMaxScore - 1))
+					{
+						_listMedal.add("Silver");
+					}
+					else if(houseUserScore == (houseMaxScore - 2))
+					{
+						_listMedal.add("Bronze");
+					}
+					else
+					{
+						_listMedal.add("None");
+					}
+				}	
 			}
 			else
 			{
@@ -211,7 +206,7 @@ public class HomeCasesFragment extends Fragment
 		// We add the number of achievements with 1 if the condition for this
 		// is true. An achievement is achieved if the user has managed to get
 		// the maximum score possible for a level.
-		if(_levelScore == _levelMaxScore)
+		if((_levelScore == _levelMaxScore) && (_levelScore != 0))
 		{
 			_nAchievements += 1;
 		}
@@ -223,13 +218,13 @@ public class HomeCasesFragment extends Fragment
 				(TextView)fragmentView.findViewById(R.id.singleLevelScore); 
 		levelName.setText(_levelName);
 		
-		TextView unlockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeCasesUnlockedCases); 
-		unlockedCases.setText(Integer.toString(_nUnlockedHouses));
+		TextView completedCases =
+				(TextView)fragmentView.findViewById(R.id.homeCasesCompletedCases); 
+		completedCases.setText(Integer.toString(_nCompletedHouses));
 		
-		TextView lockedCases =
-				(TextView)fragmentView.findViewById(R.id.homeCasesLockedCases);
-		lockedCases.setText(Integer.toString(_nLockedHouses));
+		TextView uncompletedCases =
+				(TextView)fragmentView.findViewById(R.id.homeCasesUncompletedCases);
+		uncompletedCases.setText(Integer.toString(_nUncompletedHouses));
 		
 		TextView totalScore =
 				(TextView)fragmentView.findViewById(R.id.homeCasesTotalScore);
@@ -289,8 +284,8 @@ public class HomeCasesFragment extends Fragment
 		_levelNo			= -1;
 		_levelScore			= 0;
 		_levelMaxScore		= 0;
-		_nUnlockedHouses 	= 0;
-		_nLockedHouses	 	= 0;
+		_nCompletedHouses 	= 0;
+		_nUncompletedHouses	= 0;
 		_nAchievements		= 0;
 		
 		_levelName 		= "";

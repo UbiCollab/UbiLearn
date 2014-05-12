@@ -9,7 +9,7 @@ import com.parse.ParseUser;
 public class TrainingHouse
 {
 	/**
-	 * Indicates whether a house is locked or not.
+	 * Indicates whether a house is completed or not.
 	 */
 	boolean _isComplete;
 	
@@ -47,7 +47,9 @@ public class TrainingHouse
 	 * Creates an instance of this class. 
 	 * 
 	 * @param name - The name of this house.
-	 * @param isLocked - Indicates whether this house is locked or not.
+	 * @param isCompleted - Indicates whether this house is Completed or not.
+	 * A house is "Completed" when the user has managed 75% or more of the
+	 * questions for the house.
 	 * @param userScore - The score the user has achieved for this house.
 	 * @param maxScore - The maximum score possible for this house.
 	 */
@@ -63,11 +65,11 @@ public class TrainingHouse
 	}
 	//-------------------------------------------------------------------------
 	/**
-	 * Returns the lock status for this house.
+	 * Returns the "Completed" status for this house.
 	 * 
-	 * @return True if this house is locked or false if it is not locked.
+	 * @return True if this house is completed or false if it is not completed.
 	 */
-	public boolean isLocked()
+	public boolean isCompleted()
 	{
 		return _isComplete;
 	}
@@ -107,9 +109,9 @@ public class TrainingHouse
 	 * 
 	 * @param isLocked - The status of the lock.
 	 */
-	public void setLockStatus(boolean isLocked)
+	public void setLockStatus(boolean isCompleted)
 	{
-		_isComplete = isLocked;
+		_isComplete = isCompleted;
 	}
 	//-------------------------------------------------------------------------
 	/**
