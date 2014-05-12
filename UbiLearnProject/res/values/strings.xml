@@ -65,6 +65,8 @@
     <string name="register">Register</string>
     <string name="home_info">Statistikk for opplæringsdel</string>
     <string name="home_cases_level">Nivå:</string>
+    <string name="home_cases_houses_completed">Hus klart:</string>
+    <string name="home_cases_houses_notCompleted">Hus ikke klart:</string>
     <string name="home_cases_unlocked_cases">Ulåste case:</string>
     <string name="home_cases_locked_cases">Låste case:</string>
     <string name="home_cases_total_score">Total poengsum:</string>
