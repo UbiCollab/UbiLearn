@@ -66,7 +66,6 @@ public class SyncContent {
 		hasRetrived = true;
 		
 		Log.v("Sync", "done");
-		//Fungerer ikke fordi metodene over kaller asyncrone metoder
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 
@@ -509,7 +508,7 @@ public class SyncContent {
 	}
 
 
-	public static void fetchDataBeforeLogin(final Context context, final CallbackTest callback) {
+	public static void fetchDataBeforeLogin(final Context context, final SyncCallback callback) {
 		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {

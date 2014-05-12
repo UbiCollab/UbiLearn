@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutorService;
 
 import javax.security.auth.callback.Callback;
 
-import no.ntnu.stud.ubilearn.parse.CallbackTest;
+import no.ntnu.stud.ubilearn.parse.SyncCallback;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 import com.parse.LogInCallback;
@@ -220,7 +220,7 @@ public class LoginActivity extends Activity {
 					showProgress(false);
 					mLoginStatusMessageView.setText(R.string.newContent);
 					showProgress(true);
-					SyncContent.fetchDataBeforeLogin(pointerHax, new CallbackTest() {
+					SyncContent.fetchDataBeforeLogin(pointerHax, new SyncCallback() {
 						
 						@Override
 						public void done(Exception e) {
