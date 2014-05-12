@@ -3,6 +3,7 @@ package no.ntnu.stud.ubilearn.db;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import no.ntnu.stud.ubilearn.fragments.practise.SPPBTestComparator;
 import no.ntnu.stud.ubilearn.models.BalanceSPPB;
 import no.ntnu.stud.ubilearn.models.CasePatient;
 import no.ntnu.stud.ubilearn.models.Category;
+import no.ntnu.stud.ubilearn.models.Exercise;
+import no.ntnu.stud.ubilearn.models.ExerciseImage;
 import no.ntnu.stud.ubilearn.models.Patient;
 import no.ntnu.stud.ubilearn.models.SPPB;
 import no.ntnu.stud.ubilearn.models.StandUpSPPB;
@@ -41,10 +44,8 @@ public class PractiseDAO extends DAO {
 		int rowId;
 		if(!exists(DatabaseHandler.TABLE_PATIENT, patient.getId())){
 			rowId = (int)database.insert(DatabaseHandler.TABLE_PATIENT,null,values);
-			System.out.println(rowId);
 			Patient p = getPatient(rowId);
 			rowId = p.getId();
-			System.out.println(rowId);
 		}
 		else{
 			rowId = database.update(DatabaseHandler.TABLE_PATIENT,values, DatabaseHandler.KEY_ID + "=?" , new String[]{""+patient.getId()});
@@ -302,5 +303,94 @@ public class PractiseDAO extends DAO {
 			log("No tests from patient " + patient.getName() + " was found");
 		else
 			log("Deleted " + rowsDeleted + " tests from patient " + patient.getName());	
+	}
+	
+	
+	
+	//-----------------EXERCISES--------------------
+	
+	
+	public void insertExercise(Exercise exercise){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHandler.KEY_OBJECT_ID, exercise.getObjectId());
+		values.put(DatabaseHandler.KEY_NAME, exercise.getName());
+		values.put(DatabaseHandler.KEY_TEXT, exercise.getText());
+		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(exercise.getCreatedAt()));
+		
+		log(values.toString());
+		
+		if(!exists(DatabaseHandler.TABLE_EXERCISE, exercise.getObjectId())){
+			database.insert(DatabaseHandler.TABLE_EXERCISE,null,values);
+		}
+		else{
+			database.update(DatabaseHandler.TABLE_EXERCISE,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{exercise.getObjectId()});
+		}
+		if(!exercise.getImages().isEmpty())
+			insertImages(exercise.getImages());
+	}
+
+	public Exercise getExercise(String objectId){
+		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_EXERCISE + " WHERE "
+	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + objectId + "'";
+		log(query);
+		
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			return getExercise(result);
+		else 
+			return null;
+	}
+	private Exercise getExercise(Cursor result){
+		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
+		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
+		String text = result.getString(result.getColumnIndex(DatabaseHandler.KEY_TEXT));
+		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
+		
+		Exercise ex = new Exercise(objectId, name, text,stringToDate(createdAt));
+		ex.setImages(getExerciseImages(objectId));
+		return ex;
+	}
+
+	public ArrayList<ExerciseImage> getExerciseImages(String exerciseId) {
+		ArrayList<ExerciseImage> images = new ArrayList<ExerciseImage>();
+		String query = "SELECT * FROM " + DatabaseHandler.TABLE_EXERCISE_IMAGE + " WHERE "
+	            + DatabaseHandler.KEY_OWNER_ID + " = '" + exerciseId + "'";
+		log(query);
+		
+		Cursor result = database.rawQuery(query, null);
+		if(result.moveToFirst())
+			do{
+				images.add(getExerciseImage(result));
+			}while(result.moveToNext());
+		return images;
+	}
+	private ExerciseImage getExerciseImage(Cursor result) {
+		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
+		byte[] bytes = result.getBlob(result.getColumnIndex(DatabaseHandler.KEY_IMAGE));
+		String ownerId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OWNER_ID));
+		String createdAt = result.getString(result.getColumnIndex(DatabaseHandler.KEY_CREATED_AT));
+		
+		return new ExerciseImage(objectId, bytes, ownerId, stringToDate(createdAt));
+	}
+	public void insertImage(ExerciseImage image){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHandler.KEY_OBJECT_ID, image.getObjectId());
+		values.put(DatabaseHandler.KEY_IMAGE, image.getBytes());
+		values.put(DatabaseHandler.KEY_OWNER_ID, image.getOwnerId());
+		values.put(DatabaseHandler.KEY_CREATED_AT, dateToString(image.getCreatedAt()));
+		
+		log(values.toString());
+		
+		if(!exists(DatabaseHandler.TABLE_EXERCISE_IMAGE, image.getObjectId())){
+			database.insert(DatabaseHandler.TABLE_EXERCISE_IMAGE,null,values);
+		}
+		else{
+			database.update(DatabaseHandler.TABLE_EXERCISE_IMAGE,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{image.getObjectId()});
+		}
+	}
+	private void insertImages(ArrayList<ExerciseImage> images) {
+		for (ExerciseImage exerciseImage : images) {
+			insertImage(exerciseImage);
+		}
 	}
 }

@@ -59,10 +59,10 @@ public class User {
 
 		List<TrainingHouse> houseListLevel1	= 
 				new ArrayList<TrainingHouse>(Arrays.asList(
-						new TrainingHouse("Dagmar", false, 5, 11), 
-						new TrainingHouse("Hallvard", false, 9, 12),
-						new TrainingHouse("Fredrik", false, 8, 10),
-						new TrainingHouse("Ragnhild", false, 2, 10),
+						new TrainingHouse("Dagmar", false, 0, 0), 
+						new TrainingHouse("Hallvard", false, 0, 0),
+						new TrainingHouse("Fredrik", false, 0, 0),
+						new TrainingHouse("Ragnhild", false, 0, 0),
 						new TrainingHouse("Kyrre", false, 11, 11),
 						new TrainingHouse("Espen", false, 13, 15),
 						new TrainingHouse("Ingeborg", false, 2, 4),

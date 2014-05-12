@@ -34,7 +34,6 @@ public class PractiseFragment extends Fragment {
 		
 		dao = new PractiseDAO(getActivity());
 		dao.open();
-		dao.printTables();
 		patientList = dao.getPatients();
 		dao.close();
 		

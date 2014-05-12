@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String LOG = "DatabaseHandler";
  
     // Database Version
-    static final int DATABASE_VERSION = 20;
+    static final int DATABASE_VERSION = 21;
 
 
     // Database Name
@@ -27,6 +27,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String TABLE_STANDUP_SPPB = "StandUpSPPB";
     static final String TABLE_BALANCE_SPPB = "BalanceSPPB";
     static final String TABLE_WALKING_SPPB = "WalkingSPPB";
+    static final String TABLE_EXERCISE = "Exercise";
+    static final String TABLE_EXERCISE_IMAGE = "ExerciseImage";
     
     // Common column names
     static final String KEY_OBJECT_ID = "objectId";
@@ -34,13 +36,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_NAME = "name";
     static final String KEY_CREATED_AT = "createdAt";
     static final String KEY_PARENT_ID = "parentId";
+    static final String KEY_OWNER_ID = "ownerId";
 
 
     // Article Table - column names
     static final String KEY_TITLE = "title";
     static final String KEY_CONTENT = "content";
  
-    // Category Table - column names
  
     // Patient Table - column names
     static final String KEY_AGE = "age";
@@ -54,7 +56,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_QUESTION = "question";
     static final String KEY_ANSWERS = "answer";
     static final String KEY_CORRECT = "correct";
-    static final String KEY_OWNER_ID = "ownerId";
     
     // tests Table - column names
     static final String KEY_PATIENT_ID = "patientId";
@@ -68,8 +69,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     static final String KEY_TANDEM_SCORE = "TandemScore";
     static final String KEY_FAILED = "Failed";
     static final String KEY_SEAT_HEIGHT = "SeatHeight";
-
     
+    //exercise - column names
+    static final String  KEY_TEXT = "Text";
+
+    //exerciseImage - column names
+    static final String KEY_IMAGE = "Image";
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -104,7 +109,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		
 		final String CREATE_STANDUP_SPPB_TABLE = "CREATE TABLE " + TABLE_STANDUP_SPPB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NAME + " TEXT,"
 				+ KEY_PATIENT_ID + " TEXT," + KEY_FAILED + " INTEGER," + KEY_TIME + " REAL," + KEY_SEAT_HEIGHT + " TEXT," + KEY_CREATED_AT + " DATETIME" + ")";
-		
+		final String CREATE_EXERCISE_TABLE = "CREATE TABLE " + TABLE_EXERCISE + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_TEXT + " TEXT, "
+				+ KEY_CREATED_AT + " DATETIME" + ")";
+		final String CREATE_EXERCISE_IMAGE_TABLE = "CREATE TABLE " + TABLE_EXERCISE_IMAGE + "(" + KEY_OBJECT_ID + " TEXT PRIMARY KEY," + KEY_IMAGE + " BLOB, "
+				+ KEY_CREATED_AT + " DATETIME," + KEY_OWNER_ID + " TEXT" + ")";
 
 		//invoking the method for creating the actual tables on the disk
 		Log.i(LOG, "Creating tables");
@@ -131,6 +139,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			
 		db.execSQL(CREATE_BALANCE_SPPB_TABLE);
 		logColumns(db,TABLE_BALANCE_SPPB);
+		
+		db.execSQL(CREATE_EXERCISE_TABLE);
+		logColumns(db,TABLE_EXERCISE);
+		
+		db.execSQL(CREATE_EXERCISE_IMAGE_TABLE);
+		logColumns(db,TABLE_EXERCISE_IMAGE);
 
 	}
 
@@ -147,6 +161,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			    drop(db, TABLE_BALANCE_SPPB);
 			    drop(db, TABLE_WALKING_SPPB);
 			    drop(db, TABLE_STANDUP_SPPB);
+			    drop(db, TABLE_EXERCISE);
+			    drop(db,TABLE_EXERCISE_IMAGE);
 			    onCreate(db);		
 	}
 	

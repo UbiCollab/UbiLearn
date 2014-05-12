@@ -214,6 +214,7 @@ public class LoginActivity extends Activity {
 				if (e == null) {
 					SyncContent.fetchCasePatient(pointerHax);
 					SyncContent.fetchTrainingProgress();
+					SyncContent.fetchQuizesAfterUpdate(pointerHax);
 					startMain(null);
 				}else{
 					showProgress(false);
