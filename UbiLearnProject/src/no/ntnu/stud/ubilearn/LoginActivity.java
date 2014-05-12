@@ -120,7 +120,7 @@ public class LoginActivity extends Activity {
 	public void skip(View view){
 		mEmail = "test@test.com";
 		mPassword = "test";
-		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+		mLoginStatusMessageView.setText(R.string.loggInn);
 		showProgress(true);
 		attemptLogin();
 //		((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
@@ -210,7 +210,7 @@ public class LoginActivity extends Activity {
 
 	private void attemptLogin() {
 		
-		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+		mLoginStatusMessageView.setText(R.string.loggInn);
 		showProgress(true);
 		ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
 			
@@ -218,7 +218,7 @@ public class LoginActivity extends Activity {
 			public void done(ParseUser user, ParseException e) {
 				if (e == null) {
 					showProgress(false);
-					mLoginStatusMessageView.setText(R.string.login_progress_downloading_content);
+					mLoginStatusMessageView.setText(R.string.newContent);
 					showProgress(true);
 					SyncContent.fetchDataBeforeLogin(pointerHax, new CallbackTest() {
 						
@@ -239,14 +239,14 @@ public class LoginActivity extends Activity {
 //					startMain(null);
 				}else{
 					showProgress(false);
-					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
+					Toast.makeText(pointerHax, "Kunne ikke logge inn", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
 	}
 
 	private void attemptSignup() {
-		mLoginStatusMessageView.setText(R.string.login_progress_registering);
+		mLoginStatusMessageView.setText(R.string.registering);
 		showProgress(true);
 		user.setUsername(mEmail);
 		user.setEmail(mEmail);
@@ -257,11 +257,11 @@ public class LoginActivity extends Activity {
 			public void done(ParseException e) {
 				if (e == null) {
 					showProgress(false);
-					Toast.makeText(pointerHax, "Registration successful", Toast.LENGTH_LONG).show();
+					Toast.makeText(pointerHax, "Registrasjon velykket", Toast.LENGTH_LONG).show();
 					//startMain(null);
 				}else{
 					showProgress(false);
-					Toast.makeText(pointerHax, "Registration unsuccessful", Toast.LENGTH_LONG).show();
+					Toast.makeText(pointerHax, "Registrasjon mislykket", Toast.LENGTH_LONG).show();
 				}
 			}
 		});
