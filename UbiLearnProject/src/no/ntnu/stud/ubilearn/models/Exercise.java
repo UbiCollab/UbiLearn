@@ -46,7 +46,7 @@ public class Exercise extends ListItem{
 	}
 	@Override
 	protected void setIcon() {
-		this.icon = R.drawable.ic_navigation_next_item;
+		this.icon = R.drawable.ic_handbook_black;
 		
 	}
 	@Override

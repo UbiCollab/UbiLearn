@@ -1,7 +1,12 @@
 package no.ntnu.stud.ubilearn;
 
 import java.util.Date;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
+import javax.security.auth.callback.Callback;
+
+import no.ntnu.stud.ubilearn.parse.CallbackTest;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
 
 import com.parse.LogInCallback;
@@ -200,22 +205,38 @@ public class LoginActivity extends Activity {
 			}else {
 				attemptSignup();
 			}
-			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-			showProgress(true);
 		}
 	}
 
 	private void attemptLogin() {
 		
+		mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+		showProgress(true);
 		ParseUser.logInInBackground(mEmail, mPassword, new LogInCallback() {
 			
 			@Override
 			public void done(ParseUser user, ParseException e) {
 				if (e == null) {
-					SyncContent.fetchCasePatient(pointerHax);
-					SyncContent.fetchTrainingProgress();
-					SyncContent.fetchQuizesAfterUpdate(pointerHax);
-					startMain(null);
+					showProgress(false);
+					mLoginStatusMessageView.setText(R.string.login_progress_downloading_content);
+					showProgress(true);
+					SyncContent.fetchDataBeforeLogin(pointerHax, new CallbackTest() {
+						
+						@Override
+						public void done(Exception e) {
+							if (e == null) {
+								startMain(null);								
+							}else{
+								Log.v("Login", e.getMessage());
+							}
+						}
+					});
+//					SyncContent.calculateLastUpdate();
+//					SyncContent.fetchCasePatient(pointerHax);
+//					SyncContent.fetchTrainingProgress();
+//					SyncContent.fetchQuizesAfterUpdate(pointerHax);
+//					SyncContent.updateExerciseImages(pointerHax);
+//					startMain(null);
 				}else{
 					showProgress(false);
 					Toast.makeText(pointerHax, "Could not login", Toast.LENGTH_LONG).show();
@@ -225,6 +246,8 @@ public class LoginActivity extends Activity {
 	}
 
 	private void attemptSignup() {
+		mLoginStatusMessageView.setText(R.string.login_progress_registering);
+		showProgress(true);
 		user.setUsername(mEmail);
 		user.setEmail(mEmail);
 		user.setPassword(mPassword);
@@ -233,8 +256,9 @@ public class LoginActivity extends Activity {
 			@Override
 			public void done(ParseException e) {
 				if (e == null) {
+					showProgress(false);
 					Toast.makeText(pointerHax, "Registration successful", Toast.LENGTH_LONG).show();
-					startMain(null);
+					//startMain(null);
 				}else{
 					showProgress(false);
 					Toast.makeText(pointerHax, "Registration unsuccessful", Toast.LENGTH_LONG).show();

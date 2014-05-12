@@ -47,7 +47,7 @@ public class ExcerciseFragment extends Fragment {
 	        	
 	            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            	
-	                Toast.makeText(getActivity(), "Your selected position = " + position, Toast.LENGTH_SHORT).show();
+	                //Toast.makeText(getActivity(), "Your selected position = " + position, Toast.LENGTH_SHORT).show();
 	                // show the selected Image
 	                Intent myIntent = new Intent(getActivity(), ImageDialog.class);
 	                Bundle data = new Bundle();

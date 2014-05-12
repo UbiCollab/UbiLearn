@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.security.auth.callback.Callback;
+
 import no.ntnu.stud.ubilearn.User;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
@@ -52,11 +54,10 @@ public class SyncContent {
 	
 	public static void retriveNewContent(Context context){
 		isRetriving = true;
-		calculateLastUpdate();
 		//Asynchronous
 		fetchHandBookCategoryAfterUpdated(context);
 		fetchHandBookArticleAfterUpdate(context);
-		updateExerciseImages(context);
+		//updateExerciseImages(context);
 		fetchExerciseCategories(context);
 
 //		ParseUser.getCurrentUser().put("lastUpdate", new Date());
@@ -257,7 +258,31 @@ public class SyncContent {
 		return images;	
 	}
 	
-	private static void updateExerciseImages(Context context) {
+	public static void updateExerciseImages(Context context){
+		final PractiseDAO dao = new PractiseDAO(context);
+		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
+		if (lastUpdate != null) {
+			query.whereGreaterThan("updatedAt", lastUpdate);			
+		}
+		try {
+			List<ParseObject> objects = query.find();
+			dao.open();
+			System.out.println(objects.size());
+			for (ParseObject object : objects) {
+				ParseFile file = object.getParseFile("image");
+				try {
+					dao.insertImage(new ExerciseImage(object.getObjectId(),file.getData(),object.getParseObject("exercise").getObjectId(),object.getCreatedAt()));
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+			}
+			dao.close();
+		} catch (ParseException e) {
+			Log.v("Sync", e.getMessage());
+		}
+	}
+	
+	public static void updateExerciseImagesInBackground(Context context) {
 		final PractiseDAO dao = new PractiseDAO(context);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
 		if (lastUpdate != null) {
@@ -482,7 +507,24 @@ public class SyncContent {
 			lastUpdate = ParseUser.getCurrentUser().getDate("lastUpdate");			
 		}
 	}
+
+
+	public static void fetchDataBeforeLogin(final Context context, final CallbackTest callback) {
+		Thread t = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				calculateLastUpdate();
+				fetchCasePatient(context);
+				fetchTrainingProgress();
+				fetchQuizesAfterUpdate(context);
+				updateExerciseImages(context);
+				callback.done(null);
+			}
+		});
+		t.start();
+	}
 }
+
 
 
 
