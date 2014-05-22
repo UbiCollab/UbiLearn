@@ -54,52 +54,52 @@ public class User {
 		_levelList = new ArrayList<TrainingLevel>();
 
 		List<TrainingHouse> houseListLevel1 = new ArrayList<TrainingHouse>(
-				Arrays.asList(new TrainingHouse("Dagmar", false, 0, 0),
-						new TrainingHouse("Hallvard", false, 0, 0),
-						new TrainingHouse("Fredrik", false, 0, 0),
-						new TrainingHouse("Ragnhild", false, 0, 0),
-						new TrainingHouse("Kyrre", false, 11, 11),
-						new TrainingHouse("Espen", false, 13, 15),
+				Arrays.asList(new TrainingHouse("Dagmar", true, 6, 8),
+						new TrainingHouse("Hallvard", false, 4, 12),
+						new TrainingHouse("Fredrik", false, 10, 14),
+						new TrainingHouse("Ragnhild", false, 4, 9),
+						new TrainingHouse("Kyrre", true, 11, 11),
+						new TrainingHouse("Espen", true, 13, 15),
 						new TrainingHouse("Ingeborg", false, 2, 4),
 						new TrainingHouse("Vegard", false, 0, 9),
 						new TrainingHouse("Haldis", false, 0, 11),
-						new TrainingHouse("Alfredo", true, 0, 9),
-						new TrainingHouse("Kristian", true, 0, 15)));
+						new TrainingHouse("Alfredo", false, 0, 9),
+						new TrainingHouse("Kristian", false, 0, 15)));
 
 		List<TrainingHouse> houseListLevel2 = new ArrayList<TrainingHouse>(
-				Arrays.asList(new TrainingHouse("House 1", false, 10, 10),
-						new TrainingHouse("House 2", false, 10, 10),
-						new TrainingHouse("House 3", false, 10, 10),
-						new TrainingHouse("House 4", false, 10, 10),
-						new TrainingHouse("House 5", false, 10, 10)));
+				Arrays.asList(new TrainingHouse("House 1", true, 10, 10),
+						new TrainingHouse("House 2", true, 10, 10),
+						new TrainingHouse("House 3", true, 10, 10),
+						new TrainingHouse("House 4", true, 10, 10),
+						new TrainingHouse("House 5", true, 10, 10)));
 
 		List<TrainingHouse> houseListLevel3 = new ArrayList<TrainingHouse>(
 				Arrays.asList(new TrainingHouse("House 1", false, 3, 10),
 						new TrainingHouse("House 2", false, 0, 10),
-						new TrainingHouse("House 3", true, 0, 10),
-						new TrainingHouse("House 4", true, 0, 10),
-						new TrainingHouse("House 5", true, 0, 10)));
+						new TrainingHouse("House 3", false, 0, 10),
+						new TrainingHouse("House 4", false, 0, 10),
+						new TrainingHouse("House 5", false, 0, 10)));
 
 		List<TrainingHouse> houseListLevel4 = new ArrayList<TrainingHouse>(
-				Arrays.asList(new TrainingHouse("House 1", true, 0, 10),
-						new TrainingHouse("House 2", true, 0, 10),
-						new TrainingHouse("House 3", true, 0, 10),
-						new TrainingHouse("House 4", true, 0, 10),
-						new TrainingHouse("House 5", true, 0, 10)));
+				Arrays.asList(new TrainingHouse("House 1", false, 0, 10),
+						new TrainingHouse("House 2", false, 0, 10),
+						new TrainingHouse("House 3", false, 0, 10),
+						new TrainingHouse("House 4", false, 0, 10),
+						new TrainingHouse("House 5", false, 0, 10)));
 
 		List<TrainingHouse> houseListLevel5 = new ArrayList<TrainingHouse>(
-				Arrays.asList(new TrainingHouse("House 1", true, 0, 10),
-						new TrainingHouse("House 2", true, 0, 10),
-						new TrainingHouse("House 3", true, 0, 10),
-						new TrainingHouse("House 4", true, 0, 10),
-						new TrainingHouse("House 5", true, 0, 10)));
+				Arrays.asList(new TrainingHouse("House 1", false, 0, 10),
+						new TrainingHouse("House 2", false, 0, 10),
+						new TrainingHouse("House 3", false, 0, 10),
+						new TrainingHouse("House 4", false, 0, 10),
+						new TrainingHouse("House 5", false, 0, 10)));
 
 		List<TrainingHouse> houseListLevel6 = new ArrayList<TrainingHouse>(
-				Arrays.asList(new TrainingHouse("House 1", true, 0, 10),
-						new TrainingHouse("House 2", true, 0, 10),
-						new TrainingHouse("House 3", true, 0, 10),
-						new TrainingHouse("House 4", true, 0, 10),
-						new TrainingHouse("House 5", true, 0, 10)));
+				Arrays.asList(new TrainingHouse("House 1", false, 0, 10),
+						new TrainingHouse("House 2", false, 0, 10),
+						new TrainingHouse("House 3", false, 0, 10),
+						new TrainingHouse("House 4", false, 0, 10),
+						new TrainingHouse("House 5", false, 0, 10)));
 
 		TrainingLevel level1 = new TrainingLevel("Level 1", false, 50, 117,
 				houseListLevel1);
