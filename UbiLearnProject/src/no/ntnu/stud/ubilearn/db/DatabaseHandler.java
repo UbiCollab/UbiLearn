@@ -80,7 +80,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 	
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		
@@ -165,7 +164,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 			    drop(db,TABLE_EXERCISE_IMAGE);
 			    onCreate(db);		
 	}
-	
+	/**
+	 * Logs the names of the columns in a table
+	 * @param db the database to look for the table
+	 * @param table the table to be logged
+	 */
 	private void logColumns(SQLiteDatabase db, String table){
 		Cursor result = db.rawQuery("PRAGMA table_info(" + table + ")", null);
 		Log.i(LOG,"Successfully created table " + table);
@@ -175,6 +178,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	        } while (result.moveToNext());
 	    }
 	}
+	/**
+	 * Deletes the whole table from the database
+	 * @param db the database where the table will be deleted from
+	 * @param table the name of the table to be deleted
+	 */
 	private void drop(SQLiteDatabase db, String table){
  		db.execSQL("DROP TABLE IF EXISTS " + table);
  		Log.i(LOG, "Dropping " + table);

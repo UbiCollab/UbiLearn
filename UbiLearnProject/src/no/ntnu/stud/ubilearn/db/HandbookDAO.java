@@ -17,7 +17,11 @@ public class HandbookDAO extends DAO {
 	public HandbookDAO(Context context) {
 		super(context, "HandbookDAO");
 	}
-	
+	/**
+	 * inserts an article into the database
+	 * @param article the article to be inserted
+	 * @return id of the newly inserted field
+	 */
 	public long insertArticle(Article article){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, article.getObjectId());
@@ -39,12 +43,20 @@ public class HandbookDAO extends DAO {
 		}
 		return rowId;
 	}
+	/**
+	 * inserts list of articles
+	 * @param articles a List of articles
+	 */
 	public void insertArticles(List<Article> articles){	
 		for (Article article : articles) {
 			insertArticle(article);
 		}	
 	}
-	
+	/**
+	 * selects the article from the database with the corresponding id
+	 * @param id the id of the article to be returned
+	 * @return a article initialized with attributes from the database
+	 */
 	public Article getArticle(String id){
 		
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_ARTICLE + " WHERE "
@@ -60,7 +72,11 @@ public class HandbookDAO extends DAO {
 			return null;
 		
 	}
-	
+	/**
+	 * initilizes an article by using the result from a database query
+	 * @param result the result after conducted a select query
+	 * @return article
+	 */
 	private Article getArticle(Cursor result){
 		
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
@@ -72,7 +88,10 @@ public class HandbookDAO extends DAO {
 		Article article = new Article(objectId, title, content, stringToDate(createdAt), parentId);
 		return article;
 	}
-	
+	/**
+	 * Retreives a whole handbook, containing both articles and categories. Only top-level items are returned. Other items are initilized and refered to from top-level categories or sub categories.
+	 * @return a list containing top-level items.
+	 */
 	public List<ListItem> getHandbook(){
 		HashMap<String,Category> categories = new HashMap<String, Category>();
 		List<ListItem> topLevelItems = new ArrayList<ListItem>();
@@ -126,7 +145,11 @@ public class HandbookDAO extends DAO {
 		return topLevelItems;
 	}
 	
-	
+	/**
+	 * inserts a category to the database
+	 * @param category the category to be inserted
+	 * @return the row id of the newly inserted category
+	 */
 	public long insertCategory(Category category){
 //		System.out.println(category);
 		ContentValues values = new ContentValues();
@@ -145,11 +168,20 @@ public class HandbookDAO extends DAO {
 		}
 		return rowId;
 	}
+	/**
+	 * Inserts a list of categories into the database
+	 * @param categories list containing the categories to be inserted
+	 */
 	public void insertCategories(List<Category> categories){
 		for (Category category : categories) {
 			insertCategory(category);
 		}
 	}
+	/**
+	 * Selects a category row from the datbase with the corresponding id
+	 * @param id the id of the category to be retreived
+	 * @return a category initialized with the attributes of the row
+	 */
 	public Category getCategory(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CATEGORY + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
@@ -161,7 +193,11 @@ public class HandbookDAO extends DAO {
 		else 
 			return null;
 	}
-	
+	/**
+	 * Uses the result from a select query to initilize a new category
+	 * @param result the result of an select query
+	 * @return a initilized category with the attributes of the row
+	 */
 	private Category getCategory(Cursor result){
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -171,6 +207,9 @@ public class HandbookDAO extends DAO {
 		Category category = new Category(objectId, name, stringToDate(createdAt), parentId);
 		return category;
 	}
+	/**
+	 * prints the tables and its content of the related to the handbook
+	 */
 	public void printTable(){
 		printTable(DatabaseHandler.TABLE_ARTICLE);
 		printTable(DatabaseHandler.TABLE_CATEGORY);
