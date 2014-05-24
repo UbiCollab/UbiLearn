@@ -29,7 +29,7 @@ public class PractiseDAO extends DAO {
 	/**
 	 * inserts a patient to the database
 	 * @param patient the patient to be inserted
-	 * @return the id of the inserted patient
+	 * @return the rownumber of the inserted patient
 	 */
 	public int insertPatient(Patient patient){
 		ContentValues values = new ContentValues();
@@ -52,12 +52,21 @@ public class PractiseDAO extends DAO {
 		}
 		return rowId;
 	}
+	/**
+	 * inserts a list of patients into the database
+	 * 
+	 * @param patients the list of patients to be inserted
+	 */
 	public void insertPatients(List<Patient> patients){
 		for (Patient patient : patients) {
 			insertPatient(patient);
 		}
 	}
-	
+	/**
+	 * Selects a patient from the database with the given id
+	 * @param id the id of the patient
+	 * @return the patient
+	 */
 	public Patient getPatient(int id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_PATIENT + " WHERE "
 	            + DatabaseHandler.KEY_ID + " = '" + id + "'";
@@ -69,7 +78,11 @@ public class PractiseDAO extends DAO {
 		else 
 			return null;
 	}
-	
+	/**
+	 * uses a query result to initialize a patient
+	 * @param result the result of a select query
+	 * @return a final initilized patient object
+	 */
 	private Patient getPatient(Cursor result){
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -82,6 +95,10 @@ public class PractiseDAO extends DAO {
 		return new Patient(id, name, age, problems, comment, getTests(id),stringToDate(createdAt));
 		
 	}
+	/**
+	 * retreives all the patients from the patient table
+	 * @return a list of patient objects
+	 */
 	public ArrayList<Patient> getPatients() {
 		ArrayList<Patient> patients = new ArrayList<Patient>();
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_PATIENT;
@@ -95,7 +112,11 @@ public class PractiseDAO extends DAO {
 		return patients;
 	}
 	
-	
+	/**
+	 * Selects all the tests in the three test tables the is performed by the specified patient
+	 * @param patientId the id of the patient, who has performed the tests
+	 * @return a list of tests
+	 */
 	private ArrayList<SPPB> getTests(int patientId) {
 		ArrayList<SPPB> tests = new ArrayList<SPPB>();
 		tests.addAll(getStandUpSPPBs(patientId));
@@ -126,7 +147,11 @@ public class PractiseDAO extends DAO {
 			}while(result.moveToNext());
 		return tests;
 	}
-
+	/**
+	 * uses a curor result to initilize the test
+	 * @param result result of a select query
+	 * @return an completely initilized test
+	 */
 	private StandUpSPPB getStandupSPPB(Cursor result) {
 //		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
@@ -155,7 +180,11 @@ public class PractiseDAO extends DAO {
 			}while(result.moveToNext());
 		return tests;
 	}
-
+	/**
+	 * uses a curor result to initilize the test
+	 * @param result result of a select query
+	 * @return an completely initilized test
+	 */
 	private BalanceSPPB getBalanceSPPB(Cursor result) {
 //		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
@@ -185,7 +214,11 @@ public class PractiseDAO extends DAO {
 			}while(result.moveToNext());
 		return tests;
 	}
-	
+	/**
+	 * uses a curor result to initilize the test
+	 * @param result result of a select query
+	 * @return an completely initilized test
+	 */
 	private WalkingSPPB getWalkingSPPB(Cursor result) {
 		int id = result.getInt(result.getColumnIndex(DatabaseHandler.KEY_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -201,7 +234,11 @@ public class PractiseDAO extends DAO {
 		return new WalkingSPPB(id, name, patientId, stringToDate(createdAt),failed, time, noAid, crutches, rollater, other);
 	}
 
-	public void insertSBBP(SPPB test){
+	/**
+	 * inserts a SPPB test into the database
+	 * @param test the test to be inserted
+	 */
+	public void insertSPPB(SPPB test){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_NAME, test.getName());
 		values.put(DatabaseHandler.KEY_PATIENT_ID, test.getPatientId());
@@ -230,6 +267,11 @@ public class PractiseDAO extends DAO {
 			rowId = database.update(table,values, DatabaseHandler.KEY_ID + "=?" , new String[]{""+test.getId()});
 		}
 	}
+	/**
+	 * puts the walkingtest specific values to the contentvalues
+	 * @param test the test to be inserted
+	 * @param values the values that will be used to perform the insert query
+	 */
 	private void insertWalkingSPPB(WalkingSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
 		values.put(DatabaseHandler.KEY_NO_AID, test.isNoAid());
@@ -238,23 +280,40 @@ public class PractiseDAO extends DAO {
 		values.put(DatabaseHandler.KEY_OTHER, test.getOther());
 		
 	}
+	/**
+	 * puts the balancetest specific values to the contentvalues
+	 * @param test the test to be inserted
+	 * @param values the values that will be used to perform the insert query
+	 */
 	private void insertBalanceSPPB(BalanceSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_PAIRED_SCORE, test.getPairedScore());
 		values.put(DatabaseHandler.KEY_SEMI_TANDEM_SCORE, test.getSemiTandemScore());
 		values.put(DatabaseHandler.KEY_TANDEM_SCORE, test.getTandemScore());
 	}
+	/**
+	 * puts the standuptest specific values to the contentvalues
+	 * @param test the test to be inserted
+	 * @param values the values that will be used to perform the insert query
+	 */
 	private void insertStandUpSPPB(StandUpSPPB test, ContentValues values){
 		values.put(DatabaseHandler.KEY_TIME, test.getTime());
 		values.put(DatabaseHandler.KEY_SEAT_HEIGHT, test.getSeatHeight());
 	}
-	
+	/**
+	 * prints the tables adn its content that are related to the practise fragment
+	 */
 	public void printTables(){
 		printTable(DatabaseHandler.TABLE_PATIENT);
 		printTable(DatabaseHandler.TABLE_BALANCE_SPPB);
 		printTable(DatabaseHandler.TABLE_STANDUP_SPPB);
 		printTable(DatabaseHandler.TABLE_WALKING_SPPB);
 	}
-	public HashMap<String, SPPB> getBestResults(int patientId) {
+	/**
+	 * Retreives all tests for a patient, and picks the newest test of each type
+	 * @param patientId the id of the patient
+	 * @return returns a hashmap, where the key is a string identifying the test, which is a value.
+	 */
+	public HashMap<String, SPPB> getNewestResults(int patientId) {
 		HashMap<String, SPPB> tests = new HashMap<String, SPPB>();
 		
 		ArrayList<WalkingSPPB> walkingTests = getWalkingSPPBs(patientId);
@@ -309,7 +368,10 @@ public class PractiseDAO extends DAO {
 	
 	//-----------------EXERCISES--------------------
 	
-	
+	/**
+	 * inserts a exercise into the database
+	 * @param exercise the exercise to be inserted
+	 */
 	public void insertExercise(Exercise exercise){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, exercise.getObjectId());
@@ -328,7 +390,11 @@ public class PractiseDAO extends DAO {
 		if(!exercise.getImages().isEmpty())
 			insertImages(exercise.getImages());
 	}
-
+	/**
+	 * gets an exercise from the database
+	 * @param objectId the id of the exercise to be retreived
+	 * @return the exercise
+	 */
 	public Exercise getExercise(String objectId){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_EXERCISE + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + objectId + "'";
@@ -340,6 +406,11 @@ public class PractiseDAO extends DAO {
 		else 
 			return null;
 	}
+	/**
+	 * uses the result of a query to initilaize an xercise
+	 * @param result the result of an select query
+	 * @return a initlized exercise object
+	 */
 	private Exercise getExercise(Cursor result){
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -350,7 +421,11 @@ public class PractiseDAO extends DAO {
 		ex.setImages(getExerciseImages(objectId));
 		return ex;
 	}
-
+	/**
+	 * gets an exercise image related to a exercise
+	 * @param exerciseId the id of the exercise using this image
+	 * @return an object containng the image as bytes and reference to the exercise
+	 */
 	public ArrayList<ExerciseImage> getExerciseImages(String exerciseId) {
 		ArrayList<ExerciseImage> images = new ArrayList<ExerciseImage>();
 		String query = "SELECT * FROM " + DatabaseHandler.TABLE_EXERCISE_IMAGE + " WHERE "
@@ -364,6 +439,11 @@ public class PractiseDAO extends DAO {
 			}while(result.moveToNext());
 		return images;
 	}
+	/**
+	 * uses the result of a query to initialize a image object
+	 * @param result the result of an select query
+	 * @return an initialize image object
+	 */
 	private ExerciseImage getExerciseImage(Cursor result) {
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		byte[] bytes = result.getBlob(result.getColumnIndex(DatabaseHandler.KEY_IMAGE));
@@ -372,6 +452,10 @@ public class PractiseDAO extends DAO {
 		
 		return new ExerciseImage(objectId, bytes, ownerId, stringToDate(createdAt));
 	}
+	/**
+	 * inserts an image into the database
+	 * @param image the image to be inserted
+	 */
 	public void insertImage(ExerciseImage image){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, image.getObjectId());
@@ -388,6 +472,10 @@ public class PractiseDAO extends DAO {
 			database.update(DatabaseHandler.TABLE_EXERCISE_IMAGE,values, DatabaseHandler.KEY_OBJECT_ID + "=?" , new String[]{image.getObjectId()});
 		}
 	}
+	/**
+	 * inserts a list of images into the database
+	 * @param images a list of images to be inserted
+	 */
 	private void insertImages(ArrayList<ExerciseImage> images) {
 		for (ExerciseImage exerciseImage : images) {
 			insertImage(exerciseImage);

@@ -21,12 +21,6 @@ public class GalleryImageAdapter extends BaseAdapter
 {
     private Context mContext;
 
-//    private Integer[] mImageIds = {
-//            R.drawable.exercise1,
-//            R.drawable.exercise2,
-//            R.drawable.exercise3,
-//            R.drawable.exercise4
-//    };
     private ArrayList<byte[]> images;
 
     public GalleryImageAdapter(Context context, ArrayList<byte[]> images) 
@@ -34,28 +28,25 @@ public class GalleryImageAdapter extends BaseAdapter
         mContext = context;
         this.images = images;
     }
-
+    @Override
     public int getCount() {
-//        return mImageIds.length;
     	return images.size();
     }
-
+    @Override
     public Object getItem(int position) {
         return position;
     }
 
+    @Override
     public long getItemId(int position) {
         return position;
     }
 
-
-    // Override this method according to your need
+    @Override
     public View getView(int index, View view, ViewGroup viewGroup) 
     {
-        // TODO Auto-generated method stub
         ImageView i = new ImageView(mContext);
         i.setImageBitmap(BitmapFactory.decodeByteArray(images.get(index), 0, images.get(index).length));
-//        i.setImageResource(mImageIds[index]);
         i.setLayoutParams(new Gallery.LayoutParams(200, 200));
         i.setPadding(10, 10, 10, 10);
         i.setScaleType(ImageView.ScaleType.FIT_XY);

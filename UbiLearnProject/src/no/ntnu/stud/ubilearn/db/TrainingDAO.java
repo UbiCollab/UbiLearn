@@ -17,7 +17,11 @@ public class TrainingDAO extends DAO{
 	public TrainingDAO(Context context) {
 		super(context, "TrainingDAO");
 	}
-	
+	/**
+	 * inserts a quiz into the database
+	 * @param quiz the quiz to be inserted
+	 * @return the row of the newly inserted quiz
+	 */
 	public long insertQuiz(Quiz quiz){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, quiz.getObjectId());
@@ -42,7 +46,11 @@ public class TrainingDAO extends DAO{
 		}	
 	}
 	
-
+	/**
+	 * gets a quiz from the database
+	 * @param id the id of the quiz to be retreived
+	 * @return the requeste quiz
+	 */
 	public Quiz getQuiz(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_QUIZ + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
@@ -54,7 +62,11 @@ public class TrainingDAO extends DAO{
 		else 
 			return null;
 	}
-	
+	/**
+	 * uses the result of a query to initilize a quiz
+	 * @param result the result of a select query
+	 * @return a initlizied quiz object
+	 */
 	private Quiz getQuiz(Cursor result){
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String question = result.getString(result.getColumnIndex(DatabaseHandler.KEY_QUESTION));
@@ -68,7 +80,11 @@ public class TrainingDAO extends DAO{
 		return new Quiz(question, answers, correct, objectId, ownerId, stringToDate(createdAt));
 		
 	}
-	
+	/**
+	 * gets all quizzes related to this CasePatient using its id
+	 * @param patient the CasePatient who has the quizzes
+	 * @return a list of quizzes
+	 */
 	public ArrayList<Quiz> getPatientQuizzes(CasePatient patient) {
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		
@@ -99,30 +115,21 @@ public class TrainingDAO extends DAO{
 		
 		log(query);
 		Cursor result = database.rawQuery(query, null);
-//		StringBuilder output = new StringBuilder();
-		if(result.moveToFirst()){
-//			String[] columns = result.getColumnNames();
-//			output.append(" | ");
-//			for (int i = 0; i < columns.length; i++) {
-//				output.append(columns[i] + " | ");
-//			}
-			
+		if(result.moveToFirst()){		
 			do{
-//				output.append("\n | ");
-//				int n = result.getColumnCount();
-//				for (int i = 0; i < n; i++) {
-//					output.append(result.getString(i) + " | ");	
-//				}
 				nofQuizzes++;
 			}while(result.moveToNext());
 		}else
-			return 0;
-//		log(output.toString());
-		
+			return 0;		
 		
 		return nofQuizzes;
 	}
 	
+	/**
+	 * Takes in an array of answers and parse to a string format that can be inserted to the database
+	 * @param answers an array of the answers
+	 * @return a string formatted for the database
+	 */
 	private String parseAnswersToString(ArrayList<String> answers) {
 		
 		StringBuilder output = new StringBuilder();
@@ -135,7 +142,11 @@ public class TrainingDAO extends DAO{
 		}
 		return output.toString();
 	}
-
+	/**
+	 * takes in a string which were formatted for the database and parses it to seperate answers and puts them in an array
+	 * @param answers the string containing all the answers
+	 * @return a list of all the answers in the string
+	 */
 	private ArrayList<String> parseAnswersToArray(String answers) {
 		
 		String[] answersArray = answers.split("\\|");
@@ -146,7 +157,11 @@ public class TrainingDAO extends DAO{
 		
 		return answersList;
 	}
-	
+	/**
+	 * inserts a case patient into the database
+	 * @param patientthe patient to be inserted
+	 * @return the row id of the newly inserted case patient
+	 */
 	public long insertCasePatient(CasePatient patient){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHandler.KEY_OBJECT_ID, patient.getObjectId());
@@ -166,13 +181,21 @@ public class TrainingDAO extends DAO{
 		}
 		return rowId;
 	}
+	/**
+	 * inserts a list of case patients into the database
+	 * @param patients the list of all case pateints to be inserted
+	 */
 	public void insertCasePatients(List<CasePatient> patients){	
 		for (CasePatient patient : patients) {
 			insertCasePatient(patient);
 		}	
 	}
 	
-
+	/**
+	 * retrevies a case patient from the database that has this id
+	 * @param id the id of the case patient
+	 * @return a case patient object
+	 */
 	public CasePatient getCasePatient(String id){
 		String query = "SELECT  * FROM " + DatabaseHandler.TABLE_CASE_PATIENT + " WHERE "
 	            + DatabaseHandler.KEY_OBJECT_ID + " = '" + id + "'";
@@ -184,7 +207,11 @@ public class TrainingDAO extends DAO{
 		else 
 			return null;
 	}
-	
+	/**
+	 * uses the result of a query to initilize a CasePAtient abject
+	 * @param result the result of a select query
+	 * @return a initlized CasePatient
+	 */
 	private CasePatient getCasePatient(Cursor result){
 		String objectId = result.getString(result.getColumnIndex(DatabaseHandler.KEY_OBJECT_ID));
 		String name = result.getString(result.getColumnIndex(DatabaseHandler.KEY_NAME));
@@ -197,7 +224,10 @@ public class TrainingDAO extends DAO{
 		return new CasePatient(objectId, name, age, gender, info, level, stringToDate(createdAt));
 		
 	}
-
+	/**
+	 * gets all the CasePatients in the database
+	 * @return
+	 */
 	public ArrayList<CasePatient> getAllCasePatients() {
 		
 		ArrayList<CasePatient> patients = new ArrayList<CasePatient>();
@@ -217,7 +247,9 @@ public class TrainingDAO extends DAO{
 		
 		return patients;
 	}
-
+	/**
+	 * prints all the tables and its content related to the training fragment.
+	 */
 	public void printTables(){
 		printTable(DatabaseHandler.TABLE_CASE_PATIENT);
 		printTable(DatabaseHandler.TABLE_QUIZ);

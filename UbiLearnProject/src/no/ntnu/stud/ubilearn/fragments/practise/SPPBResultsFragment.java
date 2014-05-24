@@ -30,7 +30,7 @@ public class SPPBResultsFragment extends Fragment {
 		patientId = getArguments().getInt("id");
 		dao = new PractiseDAO(getActivity());
 		dao.open();
-		HashMap<String,SPPB> tests = dao.getBestResults(patientId);
+		HashMap<String,SPPB> tests = dao.getNewestResults(patientId);
 		dao.close();
 		walking = (WalkingSPPB) tests.get("Walking");
 		balance = (BalanceSPPB) tests.get("Balance");

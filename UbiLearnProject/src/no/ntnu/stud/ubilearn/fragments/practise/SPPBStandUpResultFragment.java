@@ -72,7 +72,7 @@ public class SPPBStandUpResultFragment extends Fragment
 				if(fail.getSelectedItemPosition() != 0)
 					test.failed(true);
 				dao.open();
-				dao.insertSBBP(test);
+				dao.insertSPPB(test);
 				Patient patient = dao.getPatient(test.getPatientId());
 				dao.close();
 				

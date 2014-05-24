@@ -74,7 +74,7 @@ public class SPPBBalanceResultFragment extends Fragment{
 				if(fail1.getSelectedItemPosition() != 0)
 					test1.failed(true);
 				dao.open();
-				dao.insertSBBP(test1);
+				dao.insertSPPB(test1);
 				Patient patient = dao.getPatient(test1.getPatientId());
 				dao.close();
 				

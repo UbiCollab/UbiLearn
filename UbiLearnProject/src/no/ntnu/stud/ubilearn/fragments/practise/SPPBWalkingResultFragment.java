@@ -103,9 +103,9 @@ public class SPPBWalkingResultFragment extends Fragment{
 					test2.failed(true);
 				dao.open();
 				if(test1.compareTo(test2)>0)
-					dao.insertSBBP(test1);
+					dao.insertSPPB(test1);
 				else
-					dao.insertSBBP(test2);
+					dao.insertSPPB(test2);
 				Patient patient = dao.getPatient(test1.getPatientId());
 				dao.close();
 				
