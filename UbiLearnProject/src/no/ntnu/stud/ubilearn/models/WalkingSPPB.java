@@ -44,6 +44,9 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 		this.other = other;
 	}
 	
+	/**
+	 * calculates the score based on the time
+	 */
 	@Override
 	public int getScore() {
 		
@@ -116,6 +119,9 @@ public class WalkingSPPB extends SPPB implements Comparable<WalkingSPPB>{
 				+ patient + ", patientId=" + patientId + ", createdAt="
 				+ createdAt + "]";
 	}
+	/**
+	 * sorting based on the score
+	 */
 	@Override
 	public int compareTo(WalkingSPPB another) {
 		if (this.getScore() - another.getScore() != 0)

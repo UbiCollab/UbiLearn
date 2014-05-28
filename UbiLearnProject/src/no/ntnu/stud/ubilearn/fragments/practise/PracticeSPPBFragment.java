@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * class for the practice fragment
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class PracticeSPPBFragment extends Fragment {
 	

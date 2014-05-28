@@ -39,6 +39,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+/**
+ * class for the walking test
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedChangeListener{
 	private Timer t;
@@ -117,6 +122,10 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		info.setEnabled(true);
 
 		next.setEnabled(false);
+		
+		/**
+		 * clickListener to navigate the user to the next fragment
+		 */
 		next.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -126,9 +135,11 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 
 			}
 		});
+		
+		/**
+		 * clickListener on the info button. When pressed information about the test will show in a dialog
+		 */
 		info.setOnClickListener(new OnClickListener() {
-
-
 
 			@Override
 			public void onClick(View v) {
@@ -149,7 +160,13 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 			}
 		});
 
-
+		/**
+		 * clickListener on the start button.
+		 * The start button is circle, which is an imageview. 
+		 * Anim is an animation on circle, and when its pressed it goes in circles.
+		 * The timer starts as well when circle is pressed the first time. The second time the timer and animation stops,
+		 * and the textView at the circle button will be set. This happens for both of the tests.
+		 */
 		circle.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -199,6 +216,11 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 
 		return rootView;
 	}
+	
+	/**
+	 * shows the image if the test is accepted
+	 * @param acceptImage accept imageview
+	 */
 	public void accept(ImageView acceptImage){
 		if(TimeCounter/10>10){
 			acceptImage.setVisibility(0x00000004);
@@ -206,6 +228,10 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		else{
 			acceptImage.setVisibility(0x00000000);
 		}}
+	
+	/**
+	 * method for checking which test the patient is currently on, and then sets the right time, text and imageview
+	 */
 	public void results(){
 		if(testCounter==2){
 			result1.setText("1. "+minSec);
@@ -236,11 +262,16 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		}
 		if(testCounter>2){
 			circle.setEnabled(false);
-			start.setText("Fullført");
+			start.setText("Fullfï¿½rt");
 			next.setEnabled(true);
 		}
 			
 	}
+	
+	/**
+	 * method for checking what kind of aid the patient used during the test
+	 * @return the aid or null
+	 */
 	public String aid(){
 		
 		if(noAidButton.isChecked()){
@@ -258,19 +289,31 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		}
 		return null;
 	}
+	
+	/**
+	 * if the patient used another aid then the ones specified, the user has to write it
+	 * @return aid the user has written
+	 */
 	private String getOtherText(){
 		if(otherButton.isChecked()){
 			return otherEdit.getText().toString();
 		}
 		else return "";
 	}
+	
+	/**
+	 * sets the aid to null and resets all the radio buttons
+	 */
 	private void resetAids(){
 		for (RadioButton radBtn : radBtns) {
 			radBtn.setChecked(false);
 		}
 		noAidButton.setChecked(true);
 	}
-
+	
+	/**
+	 * sets all radio buttons to unchecked, and the buttonView to isChecked
+	 */
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		for (RadioButton radBtn : radBtns) {
