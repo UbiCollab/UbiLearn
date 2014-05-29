@@ -107,9 +107,14 @@ public class SPPBWalkingResultFragment extends Fragment{
 			}
 		});
 		
+<<<<<<< HEAD
 		
 		/**
 		 * når ferdig knappen er trykket, lagres resultatet og man blir navigert til pasient fragmentet
+=======
+		/**
+		 * onClick for the finish button: save results to dao
+>>>>>>> 78370a1e573f69f6ab3a931d8e4c752e0b3d724c
 		 */
 		finishBtn.setOnClickListener(new OnClickListener() {
 			@Override

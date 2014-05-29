@@ -76,6 +76,10 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 	private WalkingSPPB test1;
 	private WalkingSPPB test2;
 	
+	/**
+	 * constructor
+	 * @param object of the type Patient
+	 */
 	public PracticeSPPBWalkingFragment(Patient patient){
 		this.patient = patient;
 	}

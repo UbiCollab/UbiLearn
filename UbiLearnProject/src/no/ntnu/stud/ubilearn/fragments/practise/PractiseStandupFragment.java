@@ -40,6 +40,10 @@ public class PractiseStandupFragment extends Fragment
 	
 	private EditText heightField;
 	
+	/**
+	 * constructor
+	 * @param object of the type Patient
+	 */
 	public PractiseStandupFragment(Patient patient)
 	{
 		this.patient = patient;
@@ -48,6 +52,9 @@ public class PractiseStandupFragment extends Fragment
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
+		/**
+		 * creates a new view, defines the onClickListeners and the functionality of the test
+		 */
 		View view =  inflater.inflate(R.layout.fragment_practise_standup, container, false);
 		
 		final ImageView mainButton = (ImageView) view.findViewById(R.id.circle);
@@ -63,6 +70,9 @@ public class PractiseStandupFragment extends Fragment
 		info.setClickable(true);
 		info.setEnabled(true);
 		
+		/**
+		 * onClick for the info button: open the info dialog window
+		 */
 		info.setOnClickListener(new OnClickListener() 
 		{
 			@Override
@@ -84,6 +94,10 @@ public class PractiseStandupFragment extends Fragment
 			}
 		});
 		
+		/**
+		 * onClick for the start button: start the timer and stop it after 5 new clicks
+		 * when the timer is finished: compute score
+		 */
 		mainButton.setOnClickListener(new OnClickListener() 
 		{
 			@Override
@@ -143,6 +157,9 @@ public class PractiseStandupFragment extends Fragment
 			}
 		});
 		
+		/**
+		 * onClick for the next button: go to the result fragment
+		 */
 		next.setOnClickListener(new OnClickListener() 
 		{	
 			@Override

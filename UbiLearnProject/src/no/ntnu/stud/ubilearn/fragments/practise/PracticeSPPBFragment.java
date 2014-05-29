@@ -21,10 +21,17 @@ public class PracticeSPPBFragment extends Fragment {
 	
 	Patient patient;
 	
+	/**
+	 * constructor
+	 * @param object of the type Patient
+	 */
 	public PracticeSPPBFragment(Patient patient){
 		this.patient = patient;
 	}
 	
+	/**
+	 * creates a new view, defines the onClickListeners who redirects to the three tests
+	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 
