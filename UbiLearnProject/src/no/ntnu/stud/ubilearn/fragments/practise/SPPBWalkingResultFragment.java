@@ -94,6 +94,9 @@ public class SPPBWalkingResultFragment extends Fragment{
 			}
 		});
 		
+		/**
+		 * onClick for the finish button: save results to dao
+		 */
 		finishBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

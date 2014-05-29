@@ -65,6 +65,9 @@ public class SPPBStandUpResultFragment extends Fragment
 			}
 		});
 		
+		/**
+		 * onClick for the finish button: save results to dao
+		 */
 		finishBtn.setOnClickListener(new OnClickListener() 
 		{
 			@Override
