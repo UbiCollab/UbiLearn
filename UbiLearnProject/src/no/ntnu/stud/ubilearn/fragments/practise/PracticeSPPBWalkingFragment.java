@@ -124,7 +124,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		next.setEnabled(false);
 		
 		/**
-		 * clickListener to navigate the user to the next fragment
+		 * clickListener to navigate the user to the result fragment, with the results from the test
 		 */
 		next.setOnClickListener(new OnClickListener() {
 

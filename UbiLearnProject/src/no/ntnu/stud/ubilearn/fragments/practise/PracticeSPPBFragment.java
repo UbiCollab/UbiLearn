@@ -32,7 +32,10 @@ public class PracticeSPPBFragment extends Fragment {
 		View view =  inflater.inflate(R.layout.fragment_practice_sppb, container, false);
 		
 		Button enterGangtest = (Button) view.findViewById(R.id.gangtest_button);
-
+		
+		/**
+		 * clicklistener to navigate to the gangtest
+		 */
 		enterGangtest.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View vi)
@@ -42,7 +45,10 @@ public class PracticeSPPBFragment extends Fragment {
 			}
 		});
 
-
+		
+		/**
+		 * clicklistener to navigate to the balance test
+		 */
 		Button balance = (Button) view.findViewById(R.id.balance_button);
 
 		balance.setOnClickListener(new OnClickListener()
@@ -54,6 +60,9 @@ public class PracticeSPPBFragment extends Fragment {
 			}
 		});
 		
+		/**
+		 * clicklistener to navigate to the stand up test
+		 */
 		Button standup = (Button) view.findViewById(R.id.standup_button);
 
 		standup.setOnClickListener(new OnClickListener()
