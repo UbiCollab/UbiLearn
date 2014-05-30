@@ -28,6 +28,9 @@ public class User {
 	ArrayList<CasePatient> temp = new ArrayList<CasePatient>();
 	private int patientLevel;
 
+	/*
+	 * This is used to hold testdata representing the name of the user.
+	 */
 	private String _name;
 
 	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
@@ -39,7 +42,10 @@ public class User {
 		this.mapCasePatientStatus = mapCasePatientStatus;
 	}
 
-	// Delete when testing is done and data can be retrieved from database
+	/*
+	 * This is used to hold testdata representing different levels containing
+	 * different houses.
+	 */
 	private List<TrainingLevel> _levelList;
 
 	private int level = 1;
@@ -49,11 +55,12 @@ public class User {
 	// #########################################################################
 	private User() {
 		this.exercises = null;
+		
+		
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Test using initialized objects of type TrainingHouse and
-		// TrainingLevel. Delete this when actual data can be retrieved from
-		// database.
-		_name = "Ola Nordman"; // Test data.
+		// TrainingLevel.
+		_name = "Ola Nordman"; // Test name.
 
 		_levelList = new ArrayList<TrainingLevel>();
 
@@ -234,7 +241,7 @@ public class User {
 	// -------------------------------------------------------------------------
 	/**
 	 * Function returns a TrainingLevel object specified by the position in the
-	 * list of levels.
+	 * list of levels. This is based on testdata.
 	 * 
 	 * @param position
 	 *            - The position in the list of levels.
