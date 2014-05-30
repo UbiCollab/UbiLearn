@@ -43,6 +43,11 @@ public class SPPBStandUpResultFragment extends Fragment
 		
 		dao = new PractiseDAO(getActivity());
 
+		/**
+		 * set score to 0, if test is not completed,
+		 *  else set the correct score
+		 * 
+		 */
 		fail.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
