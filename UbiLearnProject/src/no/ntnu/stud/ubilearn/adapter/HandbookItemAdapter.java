@@ -1,4 +1,4 @@
-package no.ntnu.stud.ubilearn.fragments.handbook;
+package no.ntnu.stud.ubilearn.adapter;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Adapter to represent a ArrayList of ListItem in a ListView
+ * @see ListItem
+ */
 public class HandbookItemAdapter extends ArrayAdapter<ListItem>{
 	Context context; 
     int resource;    
     ArrayList<ListItem> list;
 
+    /**
+     * 
+     * @param Context context
+     * @param ArrayList<ListItem> list
+     * @see ListItem
+     * @see Context
+     */
 	public HandbookItemAdapter(Context context, ArrayList<ListItem> list) {
 		super(context, R.layout.wiki_list_item, list);
 		
