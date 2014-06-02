@@ -4,10 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.R.integer;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.fragments.practise.ExcerciseFragment;
 
+/**
+ * Simple model containing data for exercises used in {@link ExcerciseFragment}.
+ *
+ */
 public class Exercise extends ListItem{
 	private String objectId;
 	private String name;

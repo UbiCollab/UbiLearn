@@ -1,5 +1,12 @@
 package no.ntnu.stud.ubilearn.models;
 
+import android.widget.ListView;
+
+/**
+ * An abstract model containing commend properties for models
+ * that are represented in a {@link ListView}.
+ *
+ */
 public abstract class ListItem {
 //	protected String name;
 	protected int icon;

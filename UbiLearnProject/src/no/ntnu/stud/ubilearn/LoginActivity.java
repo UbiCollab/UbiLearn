@@ -116,7 +116,11 @@ public class LoginActivity extends Activity {
 		});
 	}
 	
-	//used by skip button
+	/**
+	 * Skips the entire login process by logging in with a
+	 * test user. 
+	 * @param view
+	 */
 	public void skip(View view){
 		mEmail = "test@test.com";
 		mPassword = "test";
@@ -139,7 +143,10 @@ public class LoginActivity extends Activity {
 //		});
 //		showProgress(true);
 	}
-	
+	/**
+	 * Starts a {@link MainActivity} and gives it focus.
+	 * @param view
+	 */
 	public void startMain(View view) 
 	{
 	    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -208,6 +215,11 @@ public class LoginActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Tires an actual login call. This is done in a background thread.
+	 * If login fails it returns {@link LoginActivity} to its initial state,
+	 * and shows a {@link Toast} explaining what went wrong.
+	 */
 	private void attemptLogin() {
 		
 		mLoginStatusMessageView.setText(R.string.loggInn);
@@ -244,7 +256,11 @@ public class LoginActivity extends Activity {
 			}
 		});
 	}
-
+	/**
+	 * Tires an actual signup call. This is done in a background thread.
+	 * If login fails it returns {@link LoginActivity} to its initial state,
+	 * and shows a {@link Toast} explaining what went wrong.
+	 */
 	private void attemptSignup() {
 		mLoginStatusMessageView.setText(R.string.registering);
 		showProgress(true);

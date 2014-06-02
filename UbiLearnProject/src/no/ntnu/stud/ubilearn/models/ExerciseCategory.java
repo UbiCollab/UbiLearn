@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
-
+/**
+ * Model containing a list of children. Children should either be
+ * other {@link ExerciseCategory}'s or {@link Exercise}'s.
+ *
+ */
 public class ExerciseCategory  extends ListItem{
 
 	private String name;

@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.fragments.handbook.CategoryFragment;
 
+/**
+ *Simple model containing data used by {@link CategoryFragment}.
+ *This model contains a list of children. All children must extend
+ *{@link ListItem}.
+ *
+ */
 public class Category extends ListItem{
 	private ArrayList<ListItem> subItems;
 	private String objectId;
