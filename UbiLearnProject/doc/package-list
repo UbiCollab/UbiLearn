@@ -1,1 +1,9 @@
 no.ntnu.stud.ubilearn
+no.ntnu.stud.ubilearn.adapter
+no.ntnu.stud.ubilearn.db
+no.ntnu.stud.ubilearn.fragments
+no.ntnu.stud.ubilearn.fragments.handbook
+no.ntnu.stud.ubilearn.fragments.practise
+no.ntnu.stud.ubilearn.models
+no.ntnu.stud.ubilearn.parse
+no.ntnu.stud.ubilearn.patientcase
