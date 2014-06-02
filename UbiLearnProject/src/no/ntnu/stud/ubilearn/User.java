@@ -28,7 +28,7 @@ public class User {
 	ArrayList<CasePatient> temp = new ArrayList<CasePatient>();
 	private int patientLevel;
 
-	/*
+	/**
 	 * This is used to hold testdata representing the name of the user.
 	 */
 	private String _name;
@@ -42,7 +42,7 @@ public class User {
 		this.mapCasePatientStatus = mapCasePatientStatus;
 	}
 
-	/*
+	/**
 	 * This is used to hold testdata representing different levels containing
 	 * different houses.
 	 */
@@ -284,16 +284,10 @@ public class User {
 					&& mapCasePatientStatus.get(
 							casePatientList.get(i).getObjectId()).isComplete()) {
 				counter++;
-				Log.v("Du må klare: ", (int) (getAllPatients(getCurrentLevel())
-						.size() * 0.75)
-						+ " hus, for å komme videre til neste level");
-				// Log.v("Antall pasienter: ",
-				// getAllPatients(getCurrentLevel()).size() + "");
 
 			}
 		}
 		if (counter >= (int) (getAllPatients(getCurrentLevel()).size() * 0.75)) {
-			Log.v("Du har nå klart", counter + " hus, og er på neste level");
 			_level++;
 			return getQuizLevel();
 		} else {

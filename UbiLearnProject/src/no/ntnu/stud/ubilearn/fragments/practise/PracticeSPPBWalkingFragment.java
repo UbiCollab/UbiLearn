@@ -266,7 +266,7 @@ public class PracticeSPPBWalkingFragment extends Fragment implements OnCheckedCh
 		}
 		if(testCounter>2){
 			circle.setEnabled(false);
-			start.setText("Fullf�rt");
+			start.setText("Fullført");
 			next.setEnabled(true);
 		}
 			
