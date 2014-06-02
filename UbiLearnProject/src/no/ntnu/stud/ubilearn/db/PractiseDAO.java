@@ -20,7 +20,10 @@ import no.ntnu.stud.ubilearn.models.WalkingSPPB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-
+/**
+ * This class acts as a interface between the database and the practise fragment, by using practise related models.
+ *
+ */
 public class PractiseDAO extends DAO {
 
 	public PractiseDAO(Context context) {

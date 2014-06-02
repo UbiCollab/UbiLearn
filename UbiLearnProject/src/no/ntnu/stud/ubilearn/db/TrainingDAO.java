@@ -11,7 +11,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-
+/**
+ * This class acts as a interface between the database and the training fragment, by using training related models.
+ *
+ */
 public class TrainingDAO extends DAO{
 
 	public TrainingDAO(Context context) {

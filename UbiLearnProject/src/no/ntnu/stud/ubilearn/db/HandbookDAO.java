@@ -11,7 +11,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
-
+/**
+ * This class acts as a interface between the database and the handbook fragment, by using handbook related models.
+ *
+ */
 public class HandbookDAO extends DAO {
 
 	public HandbookDAO(Context context) {

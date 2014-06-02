@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
-import no.ntnu.stud.ubilearn.adapter.HeaderAdapter;
+import no.ntnu.stud.ubilearn.adapter.NavigationDrawerAdapter;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.db.PractiseDAO;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
@@ -46,6 +46,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+/**
+ * This is the main class and activity. This activty will be in the background and contain all the other fragments. It will handle changing of fragments
+ * 
+ */
 public class MainActivity extends Activity {
 
 	private ArrayList<AdapterModel> drawerModels;
@@ -72,7 +76,7 @@ public class MainActivity extends Activity {
 		generateModels(getResources().getStringArray(R.array.menu_options));
 
 		// set the adapter for the listview
-		HeaderAdapter adapter = new HeaderAdapter(this, drawerModels);
+		NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(this, drawerModels);
 		drawerView.setAdapter(adapter);
 
 		//---------GSON------------------

@@ -11,14 +11,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-public class HeaderAdapter extends ArrayAdapter<AdapterModel>{
+/**
+ * This adapter is used in the navigation drawer. It separates titles and fragment links and how they are displayed, and adds icons.
+ *
+ */
+public class NavigationDrawerAdapter extends ArrayAdapter<AdapterModel>{
 
 	
 	private final Context context;
 	private final ArrayList<AdapterModel> modelsArrayList;
 
-	public HeaderAdapter(Context context, ArrayList<AdapterModel> modelsArrayList){
+	public NavigationDrawerAdapter(Context context, ArrayList<AdapterModel> modelsArrayList){
 		super(context, R.layout.drawer_text_item, modelsArrayList);
 		 
         this.context = context;

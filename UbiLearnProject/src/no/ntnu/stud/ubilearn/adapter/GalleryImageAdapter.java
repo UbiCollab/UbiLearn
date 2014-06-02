@@ -16,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
-
+/**
+ * this is an adapter that handles the showing of imagethumbs in a listview. The litview will use this adaper to display the images.
+ *
+ */
 public class GalleryImageAdapter extends BaseAdapter 
 {
     private Context mContext;

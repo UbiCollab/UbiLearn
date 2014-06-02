@@ -11,7 +11,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
-
+/**
+ * This is a Data Access Object. It is used to connect to a database, and insert and select objects by using spesific models
+ *
+ */
 public abstract class DAO {
 
 	// database management

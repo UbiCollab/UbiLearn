@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+/**
+ * This class handles the creation and deleteion of the database. Whenever the database structur is updated, it will create a new database.
+ *
+ */
 public class DatabaseHandler extends SQLiteOpenHelper{
 
 	// Logcat tag

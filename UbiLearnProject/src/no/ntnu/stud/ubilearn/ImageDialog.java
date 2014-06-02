@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-
+/**
+ * This activity only shows a picture. It acts as dialog, and removes all visual items around the image
+ *
+ */
 public class ImageDialog extends Activity {
 
     private ImageView mDialog;
