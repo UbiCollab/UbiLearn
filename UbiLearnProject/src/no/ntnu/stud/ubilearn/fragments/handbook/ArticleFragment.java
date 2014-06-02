@@ -11,7 +11,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-
+/**
+ * This class is used to represent a {@link Article} thru a view.
+ *@see View
+ *@see TextView
+ *@see Article
+ */
 public class ArticleFragment extends Fragment {
 	
 	View root;
@@ -35,7 +40,13 @@ public class ArticleFragment extends Fragment {
 
 		return root;
 	}
-
+	
+	/**
+	 * Sets the Article to be used. This article is used in onCreateView(),
+	 * and should therefore be called before onCreateView().
+	 * @param article
+	 * @see Article
+	 */
 	public void setArticle(Article article){
 		this.article = article;
 	}

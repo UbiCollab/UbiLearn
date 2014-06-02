@@ -27,6 +27,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * class for the quiz
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class QuizFragment extends Fragment{
 	private ArrayList<Quiz> quiz = new ArrayList<Quiz>();
@@ -100,7 +105,9 @@ public class QuizFragment extends Fragment{
 		return rootView;
 	}
 
-
+	/**
+	 * sets the quiz that belongs to the case patient 
+	 */
 	private void setQuiz(){
 		enableButtons(true);
 		String[] qtn = quiz.get(i).getAlternatives();
@@ -120,7 +127,12 @@ public class QuizFragment extends Fragment{
 
 
 	}
-
+	
+	/**
+	 * checks if the answer is correct or wrong, and shows the animation and the correct color
+	 * @author ingeborgoftedal
+	 *
+	 */
 	@SuppressLint("NewApi")
 	public class CustomClick implements OnClickListener{
 
@@ -157,6 +169,10 @@ public class QuizFragment extends Fragment{
 		}
 
 	}
+	
+	/**
+	 * sets the dialog to show how many questions was answered correct, and how many that was wrong
+	 */
 	public void setDialog(){
 		final Dialog dialog = new Dialog(getActivity());
 		dialog.setContentView(R.layout.fragment_finish_quiz);
@@ -168,6 +184,11 @@ public class QuizFragment extends Fragment{
 		//TODO oppdatere status på huset
 		User.getInstance().setHouseStatus(correctCounter, quizCleared(), patient.getObjectId());
 		
+		
+		/**
+		 * ok button from the dialog
+		 * deletes the backstack after a Case is finish
+		 */
 		ok.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -192,6 +213,11 @@ public class QuizFragment extends Fragment{
 		ans3.setEnabled(b);
 		ans4.setEnabled(b);
 	}
+	
+	/**
+	 * checks if the user got enough points to complete the house
+	 * @return
+	 */
 	private boolean quizCleared(){
 		if(correctCounter >= ((int)(quiz.size()*0.75))){
 			return true;

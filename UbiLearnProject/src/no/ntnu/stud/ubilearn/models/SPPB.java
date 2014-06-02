@@ -98,14 +98,14 @@ public abstract class SPPB {
 		this.patientId = patientId;		
 	}
 	/**
-	 * Sets wether the patient failed to complete this test or not
+	 * Sets whether the patient failed to complete this test or not
 	 * @param failed true if the patient failed the test
 	 */
 	public void failed(boolean failed){
 		this.failed = failed;
 	}
 	/**
-	 * Returns wether the patient failed to complete this test or not
+	 * Returns whether the patient failed to complete this test or not
 	 * @return true if the patient failed, false if he finished succesfully
 	 */
 	public boolean failed() {

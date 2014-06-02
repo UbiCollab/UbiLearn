@@ -19,7 +19,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-
+/**
+ * class for the walking test result
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class SPPBWalkingResultFragment extends Fragment{
 
@@ -49,7 +53,11 @@ public class SPPBWalkingResultFragment extends Fragment{
 		finishBtn = (Button)view.findViewById(R.id.finishBtn);
 		
 		dao = new PractiseDAO(getActivity());
-
+		/**
+		 * set score to 0, if test 1 is not completed,
+		 *  else set the correct score
+		 * 
+		 */
 		fail1.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -71,6 +79,11 @@ public class SPPBWalkingResultFragment extends Fragment{
 
 			}
 		});
+		
+		/**
+		 * set score to 0, if  test 2 test is not completed
+		 * else set the correct score
+		 */
 		fail2.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -94,6 +107,12 @@ public class SPPBWalkingResultFragment extends Fragment{
 			}
 		});
 		
+
+		
+		/**
+		 * når ferdig knappen er trykket, lagres resultatet og man blir navigert til pasient fragmentet
+		 * onClick for the finish button: save results to dao
+		 */
 		finishBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

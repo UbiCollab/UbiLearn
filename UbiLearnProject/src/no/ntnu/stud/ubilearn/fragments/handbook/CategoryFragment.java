@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import no.ntnu.stud.ubilearn.R;
 import no.ntnu.stud.ubilearn.User;
+import no.ntnu.stud.ubilearn.adapter.HandbookItemAdapter;
 import no.ntnu.stud.ubilearn.db.HandbookDAO;
 import no.ntnu.stud.ubilearn.models.Article;
 import no.ntnu.stud.ubilearn.models.CasePatientStatus;
@@ -18,9 +19,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * This class is used to represent {@link ListItem} thru a View, using a {@link ListView}, which again uses a custom adapter.
+ * Each item in the ListView has a onItemClick() method which either brings you to a new {@link CategoryFragment}, or
+ * a {@link ArticleFragment}. The class first fetches a {@link ArrayList} of {@link ListItem} from a {@link HandbookDAO}.
+ * It will then, either call itself recursively or instantiate a {@link ArticleFragment}, depending on what type of {@link ListItem}
+ * that has been selected.
+ *@see View
+ *@see TextView
+ *@see ListView
+ *@see ListItem
+ *@see HandbookItemAdapter
+ */
 public class CategoryFragment extends Fragment {
 	private View root;
 	private ListView categoryListView;
@@ -28,6 +41,9 @@ public class CategoryFragment extends Fragment {
 	private Fragment pointerHax = this;
 	
 
+	/**
+	 * @see CategoryFragment
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -61,12 +77,18 @@ public class CategoryFragment extends Fragment {
 		return root;
 	}
 	
-	
+	/**
+	 * This method should be called before onCreatView() if {@link CategoryFragment} has instantiated an instance of itself.
+	 * @param listItems
+	 */
 	public void setListItems(ArrayList<ListItem> listItems) {
 		this.listItems = listItems;
 	}
-
-	public void fetchDataFromDAO(){
+	
+	/**
+	 * fetches data from {@link HandbookDAO}
+	 */
+	private void fetchDataFromDAO(){
 		if (listItems == null) {
 			HandbookDAO dao = new HandbookDAO(getActivity());
 			dao.open();
@@ -74,7 +96,9 @@ public class CategoryFragment extends Fragment {
 			dao.close();
 		}
 	}
-	
+	/**
+	 *Simple method for generating test data.
+	 */
 	public void generateTestData(){
 		if (listItems == null) {
 			ArrayList<ListItem> sub = new ArrayList<ListItem>();

@@ -14,7 +14,11 @@ import android.util.Log;
 import no.ntnu.stud.ubilearn.db.TrainingDAO;
 import no.ntnu.stud.ubilearn.models.*;
 import no.ntnu.stud.ubilearn.parse.SyncContent;
-
+/**
+ * singleton class for storing application data
+ * @author ingeborgoftedal
+ *
+ */
 public class User {
 	private ArrayList<CasePatient> casePatientList = new ArrayList<CasePatient>();
 	private HashMap<String, CasePatientStatus> mapCasePatientStatus = new HashMap<String, CasePatientStatus>();
@@ -24,6 +28,9 @@ public class User {
 	ArrayList<CasePatient> temp = new ArrayList<CasePatient>();
 	private int patientLevel;
 
+	/*
+	 * This is used to hold testdata representing the name of the user.
+	 */
 	private String _name;
 
 	public HashMap<String, CasePatientStatus> getMapCasePatientStatus() {
@@ -35,7 +42,10 @@ public class User {
 		this.mapCasePatientStatus = mapCasePatientStatus;
 	}
 
-	// Delete when testing is done and data can be retrieved from database
+	/*
+	 * This is used to hold testdata representing different levels containing
+	 * different houses.
+	 */
 	private List<TrainingLevel> _levelList;
 
 	private int level = 1;
@@ -45,11 +55,12 @@ public class User {
 	// #########################################################################
 	private User() {
 		this.exercises = null;
+		
+		
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Test using initialized objects of type TrainingHouse and
-		// TrainingLevel. Delete this when actual data can be retrieved from
-		// database.
-		_name = "Ola Nordman"; // Test data.
+		// TrainingLevel.
+		_name = "Ola Nordman"; // Test name.
 
 		_levelList = new ArrayList<TrainingLevel>();
 
@@ -210,7 +221,7 @@ public class User {
 						} else {
 							houses.add(new TrainingHouse(caseP.getName(),
 									false, 0, dao.getPatientQuizzes(caseP)
-											.size()));
+									.size()));
 						}
 					} else {
 						levelScore += cps.getHighScore();
@@ -230,7 +241,7 @@ public class User {
 	// -------------------------------------------------------------------------
 	/**
 	 * Function returns a TrainingLevel object specified by the position in the
-	 * list of levels.
+	 * list of levels. This is based on testdata.
 	 * 
 	 * @param position
 	 *            - The position in the list of levels.
@@ -248,6 +259,13 @@ public class User {
 	}
 
 	// -------------------------------------------------------------------------
+
+	/**
+	 * sets the correct level according to how many houses that is finished in a level
+	 * fills empty houses with test to avoid error
+	 * 
+	 * @return
+	 */
 	public int getQuizLevel() {
 		int counter = 0;
 
@@ -282,7 +300,12 @@ public class User {
 			return _level;
 		}
 	}
-
+	/**Sets the status of the house, if it is complete and how many point scored
+	 * 
+	 * @param housePoints questions answers
+	 * @param complete booleans status housecomplete
+	 * @param objectid the id of the quiz
+	 */
 	public void setHouseStatus(int housePoints, boolean complete,
 			String objectid) {
 		CasePatientStatus temp = null;
@@ -299,7 +322,12 @@ public class User {
 		Log.v("SyncContent", "Sync Training Progress");
 		// SyncContent.saveTrainingProgress();
 	}
-
+	
+	/** Method for getting the status of a house 
+	 * 
+	 * @param objectId the id of the house in question
+	 * @return the current status of the house with objectid
+	 */
 	public CasePatientStatus getHouseStatus(String objectId) {
 		if (mapCasePatientStatus.get(objectId) == null) {
 			return new CasePatientStatus(0, false);
@@ -316,16 +344,16 @@ public class User {
 		return exercises;
 	}
 
-	public ArrayList<CasePatient> getAllPatients(int level) { // <-- level kan
-																// du sende med
-																// fra Training?
+	/**
+	 * Method for getting all patients for the current level
+	 * @param level the current level
+	 * @return ArrayList with patient for the current level
+	 */
+	public ArrayList<CasePatient> getAllPatients(int level) {
+
 		ArrayList<CasePatient> realPatients = new ArrayList<CasePatient>();
-		for (int i = 0 + (11 * (_level - 1)); i < (11 * _level); i++) { // samme
-																		// som i
-																		// den
-																		// hat
-																		// metoden
-																		// din
+		for (int i = 0 + (11 * (_level - 1)); i < (11 * _level); i++) {
+
 			if (casePatientList.get(i) != null
 					&& !casePatientList.get(i).getGender().equals("test")) {
 				realPatients.add(casePatientList.get(i));

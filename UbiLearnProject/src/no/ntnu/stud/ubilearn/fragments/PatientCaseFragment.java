@@ -20,6 +20,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * class for the patient case
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class PatientCaseFragment extends Fragment{
 	
@@ -67,7 +72,12 @@ public class PatientCaseFragment extends Fragment{
 		
 		level.setEnabled(false);
 		
+		
 		statusText = (TextView)rootView.findViewById(R.id.training_status);
+		
+		/**
+		 * sjekker om casen er klart eller ikke og setter rating etter hvor mange spm som er klart
+		 */
 		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() > 0){
 		statusText.setText("Gratulerer, du har klart denne casen " + "\n" +User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() + "/" + (trainingDAO.getPatientQuizzes(patient)).size());
 		if(User.getInstance().getHouseStatus(patient.getObjectId()).getHighScore() < trainingDAO.getPatientQuizzes(patient).size()){

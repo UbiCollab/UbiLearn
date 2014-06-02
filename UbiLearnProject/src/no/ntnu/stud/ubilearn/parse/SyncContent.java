@@ -43,15 +43,24 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
+/**
+ * {@link SyncContent} is the applications access point to Parse (our BaaS).
+ * It only contains static methods, and as such it is not intended to be
+ * initialised. Because of a-sync calls and data dependencies throughout the system,
+ * it is not recommended to change call sequence of the different methods.
+ *
+ */
 public class SyncContent {
-	
-	//test date, until it is stored in LightSQL
-	//public static Date lastUpdate = ParseUser.getCurrentUser().getCreatedAt();
+
 	static Date lastUpdate;
 	public static boolean isRetriving = false;
 	public static boolean hasRetrived = false;
 	
+	/**
+	 * This is {@link SyncContent} main method for retrieving new content.
+	 * This method is intended for retrieving all content that is not needed befor,
+	 * or during login.
+	 */
 	public static void retriveNewContent(Context context){
 		isRetriving = true;
 		//Asynchronous
@@ -69,7 +78,10 @@ public class SyncContent {
 		//Toast.makeText(context, "Done syncing content", Toast.LENGTH_LONG).show();
 	}
 
-	
+	/**
+	 * Fetches {@link CasePatient}'s from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link TrainingDAO}.
+	 */
 	public static void fetchCasePatient(final Context context) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("PatientCase");
 		if (lastUpdate != null) {
@@ -94,7 +106,10 @@ public class SyncContent {
 			e1.printStackTrace();
 		}
 	}
-
+	/**
+	 * Fetches {@link Quiz} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link TrainingDAO}.
+	 */
 	public static void fetchQuizesAfterUpdate (final Context context){
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Quiz");
 		if (lastUpdate != null) {
@@ -118,7 +133,10 @@ public class SyncContent {
 			Log.v("SyncContent", e.getMessage());
 		}
 	}
-	
+	/**
+	 * Fetches {@link CasePatient} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link HandbookDAO}.
+	 */
 	public static void fetchHandBookArticleAfterUpdate(final Context context){
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Article");
 		if (lastUpdate != null) {
@@ -149,7 +167,11 @@ public class SyncContent {
 		});
 	}
 	
-
+	/**
+	 * Fetches {@link Exercise} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link PractiseDAO}s. It
+	 * also populates the {@link ArrayList} of {@link ListItem}, with {@link Exercise}.
+	 */
 	private static void fetchExercises(final ArrayList<ListItem> list, final HashMap<String, ExerciseCategory> map, Context context) {
 		final PractiseDAO dao = new PractiseDAO(context);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
@@ -176,7 +198,9 @@ public class SyncContent {
 			}
 		});
 	}
-	
+	/**
+	 * @deprecated
+	 */
 	public static List<Exercise> fetchExercises(){
 		final List<Exercise> list= new ArrayList<Exercise>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Exercises");
@@ -209,7 +233,9 @@ public class SyncContent {
 		
 		return list;
 	}
-	
+	/**
+	 * @deprecated
+	 */
 	private static ArrayList<ExerciseImage> fetchImages(ParseObject exercise){
 		final ArrayList<ExerciseImage> images = new ArrayList<ExerciseImage>();
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
@@ -256,7 +282,10 @@ public class SyncContent {
 		
 		return images;	
 	}
-	
+	/**
+	 * Fetches {@link ExerciseImage} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link PractiseDAO}}.
+	 */
 	public static void updateExerciseImages(Context context){
 		final PractiseDAO dao = new PractiseDAO(context);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
@@ -280,7 +309,12 @@ public class SyncContent {
 			Log.v("Sync", e.getMessage());
 		}
 	}
-	
+	/**
+	 * Fetches {@link CasePatient} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link TrainingDAO}.
+	 * This method calls methods that are run on there own threads, and is therefor
+	 * run async.
+	 */
 	public static void updateExerciseImagesInBackground(Context context) {
 		final PractiseDAO dao = new PractiseDAO(context);
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseImages");
@@ -309,7 +343,9 @@ public class SyncContent {
 		});
 		
 	}
-	
+	/**
+	 * Fetches {@link ExerciseCategory} from Parse, and ads them to the {@link User} singleton.
+	 */
 	public static void fetchExerciseCategories(final Context context){
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("ExerciseCategory");
 		query.findInBackground(new FindCallback<ParseObject>() {
@@ -349,7 +385,10 @@ public class SyncContent {
 			}
 		});
 	}
-	
+	/**
+	 * Fetches {@link Category} from Parse, after lastUpdate, and tries to
+	 * put them in to the local database, using {@link HandbookDAO}.
+	 */
 	public static void fetchHandBookCategoryAfterUpdated(final Context context){
 
 		ParseQuery<ParseObject> query = ParseQuery.getQuery("Category");
@@ -379,8 +418,12 @@ public class SyncContent {
 			}
 		});
 	}
-
-	public static void savePatient(Patient p){
+	/**
+	 * Used for storing {@link Patient} to Parse.
+	 * This is done in a background thread.
+	 * @param p
+	 */
+	public static void savePatientInBackgroud(Patient p){
 		
 		ParseObject patient = new ParseObject("Patient");
 		patient.put("name", p.getName());
@@ -407,7 +450,10 @@ public class SyncContent {
 			saveSPPB(sppb, patient);
 		}
 	}
-	
+	/**
+	 * Fetches {@link CasePatientStatus} from Parse. It puts this objects
+	 * in a {@link HashMap} in {@link User}, for further use.s
+	 */
 	public static void fetchTrainingProgress(){
 		if (User.getInstance() == null) {
 			return;
@@ -427,7 +473,9 @@ public class SyncContent {
 			Log.v("Sync:", e1.getMessage());
 		}
 	}
-	
+	/**
+	 * Saves the users progress in the training part of the application, to Parse.
+	 */
 	public static void saveTrainingProgress(){
 		HashMap<String, CasePatientStatus> map = User.getInstance().getMapCasePatientStatus();
 		
@@ -460,7 +508,11 @@ public class SyncContent {
 			}
 		});
 	}
-
+	/**
+	 * Saves {@link SPPB} to Parse.
+	 * @param sppb
+	 * @param parent
+	 */
 	private static void saveSPPB(SPPB sppb, ParseObject parent) {
 		if (sppb instanceof BalanceSPPB) {
 			ParseObject ob = new ParseObject("BalanceSPPB");
@@ -487,7 +539,10 @@ public class SyncContent {
 			});
 		}		
 	}
-
+	/**
+	 * @param objects
+	 * @return
+	 */
 	private static ArrayList<String> downcastListOfObjectsToString(List<Object> objects){
 		ArrayList<String> stringList = new ArrayList<String>();
 		for (Object object : objects) {
@@ -497,7 +552,7 @@ public class SyncContent {
 		}
 		return stringList;
 	}
-	
+
 	public static void calculateLastUpdate(){
 		if (ParseUser.getCurrentUser() == null  || hasRetrived) {
 			return;
@@ -507,7 +562,13 @@ public class SyncContent {
 		}
 	}
 
-
+	/**
+	 * Calls all methods that need to be called prior to login. This is done in a
+	 * background thread. When the tread is done it calls {@link SyncContent}s done
+	 * method. 
+	 * @param context
+	 * @param callback
+	 */
 	public static void fetchDataBeforeLogin(final Context context, final SyncCallback callback) {
 		Thread t = new Thread(new Runnable() {
 			@Override

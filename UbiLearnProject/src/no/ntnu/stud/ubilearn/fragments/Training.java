@@ -70,7 +70,12 @@ public class Training extends Fragment {
 		levelController(root);
 		return root;
 	}
-
+	
+	/**
+	 * method for clicking a house 
+	 * and connect a patient to a house
+	 * @param v
+	 */
 	public void houseClick(View v){
 		final View house = v;
 		Log.v("husnummer: "+house.getContentDescription(), "");
@@ -129,6 +134,11 @@ public class Training extends Fragment {
 		}
 		car.setY(y);
 	}
+	
+	/**
+	 * controls which level the user is in, and which the user is allowed in
+	 * @param v
+	 */
 	public void levelController(View v){
 		if(User.getInstance().getQuizLevel()>currentLevel && showLevel == false){
 			Toast.makeText(getActivity(), "Congratulations, you are now allowed access to level "+(this.currentLevel+1), Toast.LENGTH_SHORT).show();
@@ -168,7 +178,10 @@ public class Training extends Fragment {
 		});
 
 	}
-
+	/**
+	 * sets the correct pictures to the buttons that navigates through the levels
+	 * @param level
+	 */
 	public void setLevelImage(int level){
 		
 		if(level == 1){

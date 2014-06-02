@@ -3,7 +3,11 @@ package no.ntnu.stud.ubilearn.models;
 import java.util.Date;
 
 import no.ntnu.stud.ubilearn.R;
+import no.ntnu.stud.ubilearn.fragments.handbook.ArticleFragment;
 
+/**
+ * Simple model containing data for Articles used in {@link ArticleFragment}.
+ */
 public class Article extends ListItem{
 	
 	private String objectId;

@@ -111,7 +111,12 @@ public class HomeFragment extends Fragment
 		
 		_userName = _user.getName();
 		_levelList = _user.getLevels(this.getActivity());
-//		_levelList = User.getInstance().getTestLevels();
+		
+		/*
+		 * Uncomment the following codeline and comment the previous codeline
+		 * if testdata is to be used.
+		 */
+		//_levelList = User.getInstance().getTestLevels();
 
 		/*
 		 * We go through the list of levels and retrieve data that will be used
@@ -232,22 +237,14 @@ public class HomeFragment extends Fragment
 			public void onItemClick(
 					AdapterView<?> parent, View view,
 					int position, long id)
-			{
-//				String levelName = (String)_listName.get(position);
-				
+			{			
 				HomeCasesFragment fragment = new HomeCasesFragment();
-						//HomeCasesFragment.newInstance(position);//position + 1);
-						//HomeCasesFragment.newInstance(_levelList.get(position));
-						//new HomeCasesFragment(_levelList.get(position));
-						fragment.setTrainingLevel(_levelList.get(position));
+				
+				fragment.setTrainingLevel(_levelList.get(position));
+				
 				getFragmentManager().beginTransaction().replace(
 						R.id.content_frame, fragment).addToBackStack(
 								null).commit();
-								
-			/*	getFragmentManager().beginTransaction().replace(
-						R.id.content_frame, fragment, "level").addToBackStack(
-								null).commit();
-			*/	
 			}
 		});
 		
@@ -307,7 +304,6 @@ public class HomeFragment extends Fragment
 					
 		
 		return fragmentView;
-		//return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 	
 	//-------------------------------------------------------------------------

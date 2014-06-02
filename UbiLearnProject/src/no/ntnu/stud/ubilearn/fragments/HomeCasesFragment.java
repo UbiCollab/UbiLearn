@@ -91,33 +91,18 @@ public class HomeCasesFragment extends Fragment
 		
 	}
 	//-------------------------------------------------------------------------
-/*	public static HomeCasesFragment newInstance(int levelNo)
-	{
-		HomeCasesFragment fragment = new HomeCasesFragment(level);
-		
-		Bundle bundle = new Bundle(1);
-		bundle.putInt("levelNo", levelNo);
-		fragment.setArguments(bundle);
-		
-		
-		return fragment;
-	}
-*/	//-------------------------------------------------------------------------
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 					Bundle savedInstanceState)
 	{
 		// We reset some data.
 		resetData();			
-		
-		//_levelNo	= getArguments().getInt("levelNo");
-		//TrainingLevel level = getArguments().
-		
+				
 		
 		View fragmentView = inflater.inflate(
 				R.layout.fragment_home_cases, container, false);
 					
-		TrainingLevel level = _level;//User.getInstance().getLevelNo(_levelNo);
+		TrainingLevel level = _level;
 		
 		_levelName = level.getName();
 		
@@ -265,10 +250,14 @@ public class HomeCasesFragment extends Fragment
 		
 		
 		return fragmentView;
-		//return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 	
 	//-------------------------------------------------------------------------
+	/**
+	 * Here we set the training level.
+	 * 
+	 * @param level - This is the training level to set.
+	 */
 	public void setTrainingLevel(TrainingLevel level)
 	{
 		_level = level;

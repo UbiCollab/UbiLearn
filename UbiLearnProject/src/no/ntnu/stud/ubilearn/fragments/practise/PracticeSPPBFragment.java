@@ -11,15 +11,27 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * class for the practice fragment
+ * @author ingeborgoftedal
+ *
+ */
 @SuppressLint("ValidFragment")
 public class PracticeSPPBFragment extends Fragment {
 	
 	Patient patient;
 	
+	/**
+	 * constructor
+	 * @param object of the type Patient
+	 */
 	public PracticeSPPBFragment(Patient patient){
 		this.patient = patient;
 	}
 	
+	/**
+	 * creates a new view, defines the onClickListeners who redirects to the three tests
+	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 
@@ -27,7 +39,10 @@ public class PracticeSPPBFragment extends Fragment {
 		View view =  inflater.inflate(R.layout.fragment_practice_sppb, container, false);
 		
 		Button enterGangtest = (Button) view.findViewById(R.id.gangtest_button);
-
+		
+		/**
+		 * clicklistener to navigate to the gangtest
+		 */
 		enterGangtest.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View vi)
@@ -37,7 +52,10 @@ public class PracticeSPPBFragment extends Fragment {
 			}
 		});
 
-
+		
+		/**
+		 * clicklistener to navigate to the balance test
+		 */
 		Button balance = (Button) view.findViewById(R.id.balance_button);
 
 		balance.setOnClickListener(new OnClickListener()
@@ -49,6 +67,9 @@ public class PracticeSPPBFragment extends Fragment {
 			}
 		});
 		
+		/**
+		 * clicklistener to navigate to the stand up test
+		 */
 		Button standup = (Button) view.findViewById(R.id.standup_button);
 
 		standup.setOnClickListener(new OnClickListener()

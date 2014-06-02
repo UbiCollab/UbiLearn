@@ -31,6 +31,10 @@ public class PractiseBalanceFragment extends Fragment {
 	private Patient patient;
 	private BalanceSPPB result;
 	
+	/**
+	 * constructor
+	 * @param object of the type Patient
+	 */
 	public PractiseBalanceFragment(Patient patient)
 	{
 		this.patient = patient;
@@ -39,6 +43,9 @@ public class PractiseBalanceFragment extends Fragment {
 	
 	public OnClickListener start, stop;
 	
+	/**
+	 * creates a new view, defines the onClickListeners and the functionality of the test
+	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.fragment_practise_balance, container, false);
@@ -64,6 +71,9 @@ public class PractiseBalanceFragment extends Fragment {
 		progressBar.setMax(10);
 		progressBar.setProgress(10);
 		
+		/**
+		 * counts down 10 seconds. when finished: compute score and go to next part of test
+		 */
 		final CountDownTimer timer = new CountDownTimer(10000, 1000)
 		{
 			public void onTick(long millisUntilFinished)
@@ -109,6 +119,9 @@ public class PractiseBalanceFragment extends Fragment {
 			}
 		};
 		
+		/**
+		 * onClick for the info button: open the info dialog window
+		 */
 		info.setOnClickListener(new OnClickListener() 
 		{	
 			@Override
@@ -130,6 +143,9 @@ public class PractiseBalanceFragment extends Fragment {
 			}
 		});
 		
+		/**
+		 * onClick for the stop button: compute score and go to next part of test
+		 */
 		stop = new OnClickListener()
 		{
 			public void onClick(View vi)
@@ -175,6 +191,9 @@ public class PractiseBalanceFragment extends Fragment {
 			}
 		};
 		
+		/**
+		 * onClick for the start button: start the timer
+		 */
 		start = new OnClickListener()
 		{
 			public void onClick(View vi)
@@ -189,6 +208,9 @@ public class PractiseBalanceFragment extends Fragment {
 		
 		startStopButton.setOnClickListener(start);
 		
+		/**
+		 * onClick for the next button: go to the result fragment
+		 */
 		next.setOnClickListener(new OnClickListener() {
 			
 			@Override
